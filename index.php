@@ -97,24 +97,29 @@ if (isset($_POST['submit'])) {
 ?>
 
     <form method="post" action="">
-        voornaam: <input type="text" name="voornaam" value="<?php
+        voornaam:
+        <input type="text" name="voornaam" value="<?php
             echo htmlspecialchars($voornaam);
         ?>" autofocus="autofocus"><br>
 
-        achternaam: <input type="text" name="achternaam" value="<?php
+        achternaam:
+        <input type="text" name="achternaam" value="<?php
         echo htmlspecialchars($achternaam);
         ?>"><br>
 
-        Datum: <input type="date" name="datum" value="<?php
+        Datum:
+        <input type="date" name="datum" value="<?php
         echo htmlspecialchars($datum);
         ?>"><br>
 
-        Tijd: <input type="time" name="tijd" value="<?php
+        Tijd:
+        <input type="time" name="tijd" value="<?php
         echo htmlspecialchars($tijd);
         ?>"><br>
 
         Baard doen?
         <select name="baard">
+            <option value="">Kies</option>
             <option value="nee" <?php
             if ($baard === 'nee') {
                 echo ' selected';
@@ -128,12 +133,8 @@ if (isset($_POST['submit'])) {
         </select><br>
 
         Bij wie?
-        <select name="baard">
-            <option value="" <?php
-            if ($kapper === '') {
-                echo ' selected';
-            }
-            ?>>Kies kapper</option>
+        <select name="kapper">
+            <option value="">Kies kapper</option>
             <option value="Jeroen" <?php
             if ($kapper === 'Jeroen') {
                 echo ' selected';
