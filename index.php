@@ -31,8 +31,8 @@ if (isset($_POST['submit'])) {
     }
 
     $sql = sprintf("SELECT * FROM afspraken WHERE (datum='%s' AND tijd='%s')",
-        $_POST['datum'],
-        $_POST['tijd']);
+        mysqli_real_escape_string($db, $_POST['datum']),
+        mysqli_real_escape_string($db, $_POST['tijd']));
 
     $result = mysqli_query($db, $sql);
     if (mysqli_num_rows($result) > 0) {
