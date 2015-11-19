@@ -16,3 +16,11 @@ select {
 textarea:focus, input:focus {
     border: 2px solid #900;
 }
+
+table {
+    border: 0px;
+}
+
+th {
+    margin-right: 15px;
+}
