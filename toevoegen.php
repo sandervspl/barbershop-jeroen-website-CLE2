@@ -15,6 +15,14 @@ $tijd = '';
 $baard = '';
 $kapper = '';
 
+if (isset($_GET["datum"])) {
+    $datum = $_GET["datum"];
+}
+
+if (isset($_GET["tijd"])) {
+    $tijd = $_GET["tijd"];
+}
+
 if (isset($_POST['submit'])) {
     $ok = true;
     $error_msg = 'ERROR: Er is een veld verkeerd ingevuld.';
