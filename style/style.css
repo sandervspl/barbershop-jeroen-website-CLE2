@@ -42,3 +42,8 @@ td {
     background-color: #13cb00;
     color: white;
 }
+
+.disabled {
+    color: black;
+    background-color: #cbcbcb;
+}

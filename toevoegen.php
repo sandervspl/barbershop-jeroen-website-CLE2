@@ -16,11 +16,14 @@ $baard = '';
 $kapper = '';
 
 if (isset($_GET["datum"])) {
-    $datum = $_GET["datum"];
+    $newstr = substr_replace($_GET["datum"], "/", 4, 0);
+    $newstr = substr_replace($newstr, "/", 7, 0);
+    $datum = $newstr;
 }
 
 if (isset($_GET["tijd"])) {
-    $tijd = $_GET["tijd"];
+    $newstr = substr_replace($_GET["tijd"], ":", 2, 0);
+    $tijd = $newstr;
 }
 
 if (isset($_POST['submit'])) {
@@ -118,14 +121,14 @@ if (isset($_POST['submit'])) {
         ?>"><br>
 
         <label>Datum:</label>
-        <input type="date" name="datum"  value="<?php
+        <input type="date" class="disabled" name="datum" value="<?php
         echo htmlspecialchars($datum);
-        ?>"><br>
+        ?>" disabled><br>
 
         <label>Tijd:</label>
-        <input type="time" name="tijd" value="<?php
+        <input type="time" class="disabled" name="tijd" value="<?php
         echo htmlspecialchars($tijd);
-        ?>"><br>
+        ?>" disabled><br>
 
         <label>Baard doen?</label>
         <select name="baard">
