@@ -91,9 +91,9 @@ if (isset($_POST['submit'])) {
         );
         mysqli_query($db, $sql);
         mysqli_close($db);
-        echo '<p>Afspraak toegevoegd.</p>';
+        echo '<p>Succes! Afspraak toegevoegd.</p>';
     } else {
-        echo $error_msg;
+        echo "<p>$error_msg</p>";
     }
 }
 ?>
