@@ -14,6 +14,8 @@ $datum = 'YYYY/MM/DD';
 $tijd = '';
 $baard = '';
 $kapper = '';
+$ok = true;
+$error_msg = 'ERROR: Er is een veld verkeerd ingevuld.';
 
 if (isset($_GET["datum"])) {
     $newstr = substr_replace($_GET["datum"], "/", 4, 0);
@@ -22,14 +24,20 @@ if (isset($_GET["datum"])) {
 }
 
 if (isset($_GET["tijd"])) {
+    $pattern = '/((09)|(1[0-8]))((30)|(00))/';
+    $match = 0;
+    preg_match($pattern, $_GET["tijd"], $match);
+
+    if (empty($match)) {
+        $ok = false;
+        $error_msg = "ERROR: Tijd klopt niet. Kan alleen :30 of :00 zijn en tussen 09:00 en 18:00.";
+    }
+
     $newstr = substr_replace($_GET["tijd"], ":", 2, 0);
     $tijd = $newstr;
 }
 
 if (isset($_POST['submit'])) {
-    $ok = true;
-    $error_msg = 'ERROR: Er is een veld verkeerd ingevuld.';
-
     $db = mysqli_connect('localhost', 'root', '', 'website');
     $sql = sprintf("SELECT * FROM afspraken WHERE (voornaam='%s' AND achternaam='%s')",
         mysqli_real_escape_string($db, $_POST['voornaam']),
@@ -42,8 +50,8 @@ if (isset($_POST['submit'])) {
     }
 
     $sql = sprintf("SELECT * FROM afspraken WHERE (datum='%s' AND tijd='%s')",
-        mysqli_real_escape_string($db, $_POST['datum']),
-        mysqli_real_escape_string($db, $_POST['tijd']));
+        mysqli_real_escape_string($db, $datum),
+        mysqli_real_escape_string($db, $tijd));
 
     $result = mysqli_query($db, $sql);
     if (mysqli_num_rows($result) > 0) {
@@ -67,17 +75,13 @@ if (isset($_POST['submit'])) {
     // i.e. 2015-10-09 or 20151009
     $pattern = '/20([1-9][5-9]|[2-9][0-9])[-\/][0-1][0-9][-\/][0-3][0-9]|20([1-9][5-9]|[2-9][0-9])[0-1][0-9][0-3][0-9]/';
     $match = 0;
-    preg_match($pattern, $_POST['datum'], $match);
+    preg_match($pattern, $datum, $match);
 
-    if (!isset($_POST['datum']) || $_POST['datum'] === '' || $_POST['datum'] === 'YYYY/MM/DD' || empty($match)) {
+    if (!isset($datum) || $datum === '' || empty($match)) {
         $ok = false;
-    } else {
-        $datum = $_POST['datum'];
     }
-    if (!isset($_POST['tijd']) || $_POST['tijd'] === '') {
+    if (!isset($tijd) || $tijd === '') {
         $ok = false;
-    } else {
-        $tijd = $_POST['tijd'];
     }
     if (!isset($_POST['baard']) || $_POST['baard'] === '') {
         $ok = false;
