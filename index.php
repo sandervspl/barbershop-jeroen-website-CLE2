@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>Afspraak Toevoegen</title>
+
+    <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
 
@@ -52,7 +54,7 @@ if (isset($_POST['submit'])) {
     }
 
     // i.e. 2015-10-09 or 20151009
-    $pattern = '/20([1-9][5-9]|[2-9][0-9])-[0-1][0-9]-[0-3][0-9]|20([1-9][5-9]|[2-9][0-9])[0-1][0-9][0-3][0-9]/';
+    $pattern = '/20([1-9][5-9]|[2-9][0-9])[-\/][0-1][0-9][-\/][0-3][0-9]|20([1-9][5-9]|[2-9][0-9])[0-1][0-9][0-3][0-9]/';
     $match = 0;
     preg_match($pattern, $_POST['datum'], $match);
 
@@ -97,27 +99,27 @@ if (isset($_POST['submit'])) {
 ?>
 
     <form method="post" action="">
-        voornaam:
+        <label>voornaam:</label>
         <input type="text" name="voornaam" value="<?php
             echo htmlspecialchars($voornaam);
         ?>" autofocus="autofocus"><br>
 
-        achternaam:
+        <label>achternaam:</label>
         <input type="text" name="achternaam" value="<?php
         echo htmlspecialchars($achternaam);
         ?>"><br>
 
-        Datum:
-        <input type="date" name="datum" value="<?php
+        <label>Datum:</label>
+        <input type="date" name="datum"  value="<?php
         echo htmlspecialchars($datum);
         ?>"><br>
 
-        Tijd:
+        <label>Tijd:</label>
         <input type="time" name="tijd" value="<?php
         echo htmlspecialchars($tijd);
         ?>"><br>
 
-        Baard doen?
+        <label>Baard doen?</label>
         <select name="baard">
             <option value="">Kies</option>
             <option value="nee" <?php
@@ -132,7 +134,7 @@ if (isset($_POST['submit'])) {
             ?>>ja</option>
         </select><br>
 
-        Bij wie?
+        <label>Bij wie?</label>
         <select name="kapper">
             <option value="">Kies kapper</option>
             <option value="Jeroen" <?php
@@ -147,7 +149,7 @@ if (isset($_POST['submit'])) {
             ?>>Juno</option>
         </select><br><br>
 
-        <input type="submit" name="submit" value="submit">
+        <label><input type="submit" name="submit" value="submit"></label>
     </form>
 </body>
 </html>

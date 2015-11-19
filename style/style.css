@@ -1,0 +1,18 @@
+label {
+    float: left;
+    text-align: right;
+    margin-right: 15px;
+    width: 100px;
+}
+
+input {
+    width: 150px;
+}
+
+select {
+    width: 150px;
+}
+
+textarea:focus, input:focus {
+    border: 2px solid #900;
+}
