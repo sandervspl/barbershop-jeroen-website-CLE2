@@ -79,6 +79,7 @@ if (isset($_POST['submit'])) {
 
     if (!isset($datum) || $datum === '' || empty($match)) {
         $ok = false;
+        $error_msg = "ERROR: Datum kan alleen vandaag of na vandaag geplaatst worden.";
     }
     if (!isset($tijd) || $tijd === '') {
         $ok = false;

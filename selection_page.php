@@ -28,7 +28,7 @@ if (isset($_GET['jaar'])) {
     $jaar = 2015;
 }
 
-if (isset($_POST['submit'])) {
+if (isset($_POST['nextday'])) {
     $dag = $dag + 1;
 
     if ($dag > 31) {
@@ -38,6 +38,32 @@ if (isset($_POST['submit'])) {
         if ($maand > 12) {
             $maand = 1;
             $jaar = $jaar + 1;
+        }
+    }
+
+    if ($dag < 10) {
+        $dag = "0".$dag;
+    }
+
+    if ($maand < 10) {
+        $str = substr($maand, 0, 1);
+        if ($str !== '0') {
+            $maand = "0".$maand;
+        }
+    }
+
+    header("Location: ?dag=$dag&maand=$maand&jaar=$jaar");
+}
+if (isset($_POST['prevday'])) {
+    $dag = $dag - 1;
+
+    if ($dag < 1) {
+        $dag = 31;
+        $maand = $maand - 1;
+
+        if ($maand < 1) {
+            $maand = 12;
+            $jaar = $jaar - 1;
         }
     }
 
@@ -99,7 +125,8 @@ if (isset($_POST['submit'])) {
 ?>
 
 <form method="post" action="">
-    <input type="submit" name="submit" value="Volgende Dag >">
+    <input type="submit" name="prevday" value="< Vorige Dag">
+    <input type="submit" name="nextday" value="Volgende Dag >">
 </form>
 
 <script src="scripts/Nextday.js"></script>
