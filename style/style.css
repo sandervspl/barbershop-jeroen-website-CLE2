@@ -47,3 +47,30 @@ td {
     color: black;
     background-color: #cbcbcb;
 }
+
+.NextDay {
+    color: black;
+
+    cursor: pointer;
+    padding: 4px 25px;
+    background: #ffffff;
+    border: 1px solid #000000;
+
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+
+    -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0 0 4px rgba(0,0,0 .75);
+    box-shadow: 0 0 4px rgba(0,0,0, .75);
+
+    font-size: 0.8em;
+    width: 90px;
+}
+
+.NextDay:hover, NextDay:focus {
+    background-color: #d1d1d1;
+    -webkit-box-shadow: 0 0 1px rgba(0,0,0, .75);
+    -moz-box-shadow: 0 0 1px rgba(0,0,0, .75);
+    box-shadow: 0 0 1px rgba(0,0,0, .75);
+}

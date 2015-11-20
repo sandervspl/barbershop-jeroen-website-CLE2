@@ -1,7 +1,4 @@
 <?php
-    $dag = 19;
-    $maand = 11;
-    $jaar = 2015;
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -15,8 +12,47 @@
 <body>
 <?php
 
+if (isset($_GET['dag'])) {
+    $dag = $_GET['dag'];
+} else {
+    $dag = 19;
+}
+if (isset($_GET['maand'])) {
+    $maand = $_GET['maand'];
+} else {
+    $maand = 11;
+}
+if (isset($_GET['jaar'])) {
+    $jaar = $_GET['jaar'];
+} else {
+    $jaar = 2015;
+}
+
 if (isset($_POST['submit'])) {
     $dag = $dag + 1;
+
+    if ($dag > 31) {
+        $dag = 1;
+        $maand = $maand + 1;
+
+        if ($maand > 12) {
+            $maand = 1;
+            $jaar = $jaar + 1;
+        }
+    }
+
+    if ($dag < 10) {
+        $dag = "0".$dag;
+    }
+
+    if ($maand < 10) {
+        $str = substr($maand, 0, 1);
+        if ($str !== '0') {
+            $maand = "0".$maand;
+        }
+    }
+
+    header("Location: ?dag=$dag&maand=$maand&jaar=$jaar");
 }
 
     $uur = 9;
@@ -65,5 +101,7 @@ if (isset($_POST['submit'])) {
 <form method="post" action="">
     <input type="submit" name="submit" value="Volgende Dag >">
 </form>
+
+<script src="scripts/Nextday.js"></script>
 </body>
 </html>
