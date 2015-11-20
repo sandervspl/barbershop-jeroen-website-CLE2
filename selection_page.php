@@ -1,4 +1,7 @@
 <?php
+    $dag = 19;
+    $maand = 11;
+    $jaar = 2015;
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -13,15 +16,13 @@
 <?php
 
 if (isset($_POST['submit'])) {
-
-} else {
+    $dag = $dag + 1;
+}
 
     $uur = 9;
     $m = '';
     $u = '';
-    $dag = 19;
-    $maand = 11;
-    $jaar = 2015;
+
     $bezet = "nee";
 
     echo "<table>";
@@ -59,7 +60,10 @@ if (isset($_POST['submit'])) {
         $tt = str_replace(':', '', $tijd);
         echo "<td><a href='toevoegen.php?datum=$dd&tijd=$tt'>Reserveer </a></td> </tr>";
     }
-}
 ?>
+
+<form method="post" action="">
+    <input type="submit" name="submit" value="Volgende Dag >">
+</form>
 </body>
 </html>
