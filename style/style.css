@@ -33,8 +33,36 @@ td {
     width: 100px;
 }
 
+.kalenderdag {
+    background-color: #bdbdbd;
+    height: 50px;
+}
+/*
+.kalenderdatum {
+    float: left;
+    background-color: #eaeaea;
+    width: 150px;
+    height: 100px;
+} */
+
+.kalenderdag > th {
+    text-align: left;
+}
+
+.kalenderdatum {
+    width: inherit;
+    height: 100px;
+    background-color: #dedede;
+    text-align: left;
+}
+
+    .kalenderdatum > label {
+        float: left;
+        text-align: left;
+    }
+
 .bezet {
-    background-color: #cb0000;
+    background-color: #ffffff;
     color: white;
 }
 
@@ -68,9 +96,9 @@ td {
     width: 90px;
 }
 
-.NextDay:hover, NextDay:focus {
-    background-color: #d1d1d1;
-    -webkit-box-shadow: 0 0 1px rgba(0,0,0, .75);
-    -moz-box-shadow: 0 0 1px rgba(0,0,0, .75);
-    box-shadow: 0 0 1px rgba(0,0,0, .75);
-}
+    .NextDay:hover, NextDay:focus {
+        background-color: #d1d1d1;
+        -webkit-box-shadow: 0 0 1px rgba(0,0,0, .75);
+        -moz-box-shadow: 0 0 1px rgba(0,0,0, .75);
+        box-shadow: 0 0 1px rgba(0,0,0, .75);
+    }

@@ -15,14 +15,6 @@ $db = mysqli_connect('localhost', 'root', '', 'website');
 $sql = sprintf("SELECT * FROM afspraken");
 $result = mysqli_query($db, $sql);
 
-foreach ($result as $row) {
-    $v = $row['voornaam'];
-    $a = $row['achternaam'];
-    $d = $row['datum'];
-    $t = $row['tijd'];
-    $b = $row['baard'];
-    $j = $row['kapper'];
-
     echo "<table>";
     echo "<tr> <th>Voornaam</th>";
     echo "<th>Achternaam</th>";
@@ -31,6 +23,14 @@ foreach ($result as $row) {
     echo "<th>Baard</th>";
     echo "<th>Bij wie</th> </tr>";
 
+foreach ($result as $row) {
+    $v = $row['voornaam'];
+    $a = $row['achternaam'];
+    $d = $row['datum'];
+    $t = $row['tijd'];
+    $b = $row['baard'];
+    $j = $row['kapper'];
+
     echo "<tr> <td>$v</td>";
     echo "<td>$a</td>";
     echo "<td>$d</td>";
@@ -38,6 +38,7 @@ foreach ($result as $row) {
     echo "<td>$b</td>";
     echo "<td>$j</td> </tr>";
 }
+    echo "</table>";
 ?>
 
 </body>
