@@ -15,18 +15,18 @@
 </head>
 <body>
 <?php
-if (isset($_GET['month'])) {
+if (isset($_GET['month']) && isset($_GET['year'])) {
     $m = $_GET['month'];
-    $starting_day = "2015-".$m."-1";
+    $y = $_GET['year'];
+    $starting_day = "$y-$m-1";
     $time = strtotime($starting_day);
-
-    $maand = date("m", $time);
 } else {
-    $starting_day = "2015-11-1";
+    $starting_day = "2020-11-1";
     $time = strtotime($starting_day);
-
-    $maand = date("m", $time);
 }
+
+$maand = date("m", $time);
+$year = date("Y", $time);
 
 $prevMonth = date("M", mktime(0,0,0, $maand-1, date("d",$time), date("y",$time)));
 $nextMonth = date("M", mktime(0,0,0, $maand+1, date("d",$time), date("y",$time)));
@@ -34,9 +34,12 @@ $nextMonth = date("M", mktime(0,0,0, $maand+1, date("d",$time), date("y",$time))
 $prevMonthNr = date("m", mktime(0,0,0, $maand-1, date("d",$time), date("y",$time)));
 $nextMonthNr = date("m", mktime(0,0,0, $maand+1, date("d",$time), date("y",$time)));
 
-echo "<label class='monthlabel'><a href='kalender.php?month=$prevMonthNr'> < $prevMonth </a></label>";
-echo "<label class='monthlabel'>   ", date("F Y", mktime(0,0,0, $maand, date("d",$time), date("y",$time))), "   </label>";
-echo "<label class='monthlabel'><a href='kalender.php?month=$nextMonthNr'> $nextMonth > </a></label><br>";
+$prevYearNr = date("Y", mktime(0,0,0, $maand-1, date("d",$time), date("y",$time)));
+$nextYearNr = date("Y", mktime(0,0,0, $maand+1, date("d",$time), date("y",$time)));
+
+echo "<label class='monthlabel'><a href='kalender.php?month=$prevMonthNr&year=$prevYearNr'> < $prevMonth </a></label>";
+echo "<label class='monthlabel'>   ", date("F Y", mktime(0,0,0, $maand, date("d",$time), $year)), "   </label>";
+echo "<label class='monthlabel'><a href='kalender.php?month=$nextMonthNr&year=$nextYearNr'> $nextMonth > </a></label><br>";
 ?>
 
 <table>

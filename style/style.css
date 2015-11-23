@@ -28,7 +28,6 @@ table {
     /* don't allow browser text-selection */
     -webkit-touch-callout: none;
     -webkit-user-select: none;
-    -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
@@ -47,8 +46,9 @@ td {
 }
 
 .calendarday {
-    background-color: #bdbdbd;
+    width: inherit;
     height: 25px;
+    background-color: #bdbdbd;
 }
 
     .calendarday > th {
@@ -60,7 +60,6 @@ td {
     width: inherit;
     height: 95px;
     background-color: #dedede;
-    text-align: left;
 }
 
     .calendardate:hover {
@@ -72,18 +71,19 @@ td {
         float: left;
         text-align: left;
     }
-    
-    .calendardate,
-    .kalenderdateblocked {
+
+.kalenderdateblocked {
+    width: inherit;
+    height: 95px;
+    background-color: #fafafa;
+    color: #dedede;
+}
+
+.calendardate,
+.kalenderdateblocked {
         padding: 5px;
         vertical-align: top;
         text-align: left;
-    }
-
-.kalenderdateblocked {
-    background-color: #fafafa;
-    color: #dedede;
-    height: 95px;
 }
 
 .bezet {
