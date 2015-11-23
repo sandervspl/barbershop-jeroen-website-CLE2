@@ -33,36 +33,36 @@ td {
     width: 100px;
 }
 
-.kalenderdag {
+.calendarday {
     background-color: #bdbdbd;
     height: 25px;
 }
 
-    .kalenderdag > th {
+    .calendarday > th {
         color: white;
         text-align: center;
     }
     
-.kalenderdatum {
+.calendardate {
     width: inherit;
-    height: 100px;
+    height: 95px;
     background-color: #dedede;
     text-align: left;
 }
 
-    .kalenderdatum > label {
+    .calendardate > label {
         float: left;
         text-align: left;
     }
     
-    .kalenderdatum,
-    .kalendernotthismonth {
+    .calendardate,
+    .kalenderdateblocked {
         padding: 5px;
         vertical-align: top;
         text-align: left;
     }
 
-.kalendernotthismonth {
+.kalenderdateblocked {
     background-color: #fafafa;
     color: #dedede;
     height: 95px;

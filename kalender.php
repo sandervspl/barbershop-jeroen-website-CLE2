@@ -1,7 +1,7 @@
 <?php
     // y-m-d
 //    $starting_day = date("y-m-d");
-    $starting_day = "2015-10-1";
+    $starting_day = "2015-11-1";
     $time = strtotime($starting_day);
 //$time = time();
 //$time = date("M", time() -  3600 );
@@ -16,21 +16,21 @@
 </head>
 <body>
 <?php
-if (isset($_GET['maand'])) {
-    $maand = date("m",$_GET['maand']);
+if (isset($_GET['month'])) {
+    $maand = date("m",$_GET['month']);
 } else {
     $maand = date("m",$time);
 }
 
 $prevMonth = date("m", mktime(0,0,0, $maand-1, date("d",$time), date("y",$time)));
 $nextMonth = date("m", mktime(0,0,0, $maand+1, date("d",$time), date("y",$time)));
-echo "<a href='kalender.php?maand=$prevMonth'>< $prevMonth</a>";
+echo "<a href='kalender.php?month=$prevMonth'>< $prevMonth</a>";
 echo "   ", date("m", mktime(0,0,0, $maand, date("d",$time), date("y",$time))), "   ";
-echo "<a href='kalender.php?maand=$nextMonth'>$nextMonth ></a>";
+echo "<a href='kalender.php?month=$nextMonth'>$nextMonth ></a>";
 ?>
 
 <table>
-    <tr class="kalenderdag">
+    <tr class="calendarday">
         <th>Mon</th>
         <th>Tue</th>
         <th>Wed</th>
@@ -45,11 +45,9 @@ echo "<a href='kalender.php?maand=$nextMonth'>$nextMonth ></a>";
     <?php
     $endMonth = false;
     $endNotThisMonth = false;
-    $doFillWithCurrentMonthDays = false;
     $notThisMonthArray = array();
     $prevDay = -1;
     $counter = 0;
-    $pweekdayadd = 0;
     $loops = 0;
     do {
         $day = date("d", mktime(0,0,0, date("m",$time), date("d",$time)+$counter, date("y",$time)));
@@ -61,52 +59,51 @@ echo "<a href='kalender.php?maand=$nextMonth'>$nextMonth ></a>";
             $i = 1;
 
             do {
-                $pday = date("d", mktime(0,0,0, date("m",$time), date("d",$time)-$i, date("y",$time)));
-                $pweekday = date("D", mktime(0,0,0, date("m",$time), date("d",$time)-$i, date("y",$time)));
-                $notThisMonthArray[] = $pday;
+                $prevMonthDay = date("d", mktime(0,0,0, date("m",$time), date("d",$time)-$i, date("y",$time)));
+                $prevMonthWeekDay = date("D", mktime(0,0,0, date("m",$time), date("d",$time)-$i, date("y",$time)));
+                $notThisMonthArray[] = $prevMonthDay;
 
                 $i++;
-                if ($i > 7 || $pweekday === "Mon") {
+                if ($i > 7 || $prevMonthWeekDay === "Mon") {
                     $endNotThisMonth = true;
                 }
             }while(!$endNotThisMonth);
 
-            $pdays = count($notThisMonthArray) - 1;
-            for ($j = $pdays; $j >= 0; $j--) {
-                echo "<td class=\"kalendernotthismonth\"> $notThisMonthArray[$j] </td>";
+            $prevMonthDays = count($notThisMonthArray) - 1;
+            for ($j = $prevMonthDays; $j >= 0; $j--) {
+                echo "<td class=\"kalenderdateblocked\"> $notThisMonthArray[$j] </td>";
             }
 
-            if ($pweekday !== "Sun") {
-//                $doFillWithCurrentMonthDays = true;
-
-                if ($weekday !== "Sun") {
-                    echo "<td class=\"kalenderdatum\"> $day </td>";
-                } else {
-                    $doFillWithCurrentMonthDays = false;
-                }
+            if ($prevMonthWeekDay !== "Sun") {
+                echo "<td class=\"calendardate\"> $day </td>";
             }
+
             // current month days
         } else {
-            if ($doFillWithCurrentMonthDays) {
+            if (!$endNotThisMonth) {
+                $endNotThisMonth = true;
+            };
 
-            } else {
+
                 if ($weekday === "Mon") {
                     echo "</tr><tr>";
                 }
 
-                if ($day === "01" && ($prevDay === "31" || $prevDay === "30" || $prevDay === "29")) {
+                if ($day === "01" && ($prevDay === "31" || $prevDay === "30" || $prevDay === "29" || $prevDay === "28")) {
                     $endMonth = true;
                 } else {
-                    echo "<td class=\"kalenderdatum\"> $day </td>";
+                    echo "<td class=\"calendardate\"> $day </td>";
 
                     if ($counter > 100) {
                         $endMonth = true;
                     }
                 }
-            }
+//            }
+        }
 
-            $counter++;
+        if ($endNotThisMonth) {
             $prevDay = $day;
+            $counter++;
         }
 
         $loops++;
