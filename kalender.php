@@ -61,7 +61,7 @@ echo "<a href='kalender.php?month=$nextMonth'>$nextMonth ></a>";
             do {
                 $prevMonthDay = date("d", mktime(0,0,0, date("m",$time), date("d",$time)-$i, date("y",$time)));
                 $prevMonthWeekDay = date("D", mktime(0,0,0, date("m",$time), date("d",$time)-$i, date("y",$time)));
-                $notThisMonthArray[] = $prevMonthDay;
+                $prevMonthDayArray[] = $prevMonthDay;
 
                 $i++;
                 if ($i > 7 || $prevMonthWeekDay === "Mon") {
@@ -69,9 +69,9 @@ echo "<a href='kalender.php?month=$nextMonth'>$nextMonth ></a>";
                 }
             }while(!$endNotThisMonth);
 
-            $prevMonthDays = count($notThisMonthArray) - 1;
+            $prevMonthDays = count($prevMonthDayArray) - 1;
             for ($j = $prevMonthDays; $j >= 0; $j--) {
-                echo "<td class=\"kalenderdateblocked\"> $notThisMonthArray[$j] </td>";
+                echo "<td class=\"kalenderdateblocked\"> $prevMonthDayArray[$j] </td>";
             }
 
             if ($prevMonthWeekDay !== "Sun") {
