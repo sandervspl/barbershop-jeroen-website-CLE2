@@ -1,8 +1,10 @@
 <?php
     // y-m-d
 //    $starting_day = date("y-m-d");
-    $starting_day = "2015-11-1";
+    $starting_day = "2015-10-1";
     $time = strtotime($starting_day);
+//$time = time();
+//$time = date("M", time() -  3600 );
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -64,7 +66,7 @@ echo "<a href='kalender.php?maand=$nextMonth'>$nextMonth ></a>";
                 $notThisMonthArray[] = $pday;
 
                 $i++;
-                if ($i > 7 || $pweekday === "Sun") {
+                if ($i > 7 || $pweekday === "Mon") {
                     $endNotThisMonth = true;
                 }
             }while(!$endNotThisMonth);
@@ -75,26 +77,20 @@ echo "<a href='kalender.php?maand=$nextMonth'>$nextMonth ></a>";
             }
 
             if ($pweekday !== "Sun") {
-                $doFillWithCurrentMonthDays = true;
+//                $doFillWithCurrentMonthDays = true;
+
+                if ($weekday !== "Sun") {
+                    echo "<td class=\"kalenderdatum\"> $day </td>";
+                } else {
+                    $doFillWithCurrentMonthDays = false;
+                }
             }
             // current month days
         } else {
             if ($doFillWithCurrentMonthDays) {
-                $x = 0;
-                while ($weekday !== "Sun") {
-                    echo "<td class=\"kalenderdatum\"> $day </td>";
 
-                    $x++;
-                    if ($x > 100) {
-                        echo "ERROR: loop escaped.";
-                        $weekday = "Sun";
-                    }
-                }
-                echo "</tr>";
-
-                $doFillWithCurrentMonthDays = false;
             } else {
-                if ($weekday === "Sun") {
+                if ($weekday === "Mon") {
                     echo "</tr><tr>";
                 }
 
