@@ -43,15 +43,16 @@ echo "<a href='kalender.php?maand=$nextMonth'>$nextMonth ></a>";
     <?php
     $endMonth = false;
     $endNotThisMonth = false;
+    $doFillWithCurrentMonthDays = false;
     $notThisMonthArray = array();
-    $hasPrevMonthDays = false;
     $prevDay = -1;
-    $daynr = 0;
+    $counter = 0;
+    $pweekdayadd = 0;
     $loops = 0;
     do {
-        $day = date("d", mktime(0,0,0, date("m",$time), date("d",$time)+$daynr, date("y",$time)));
-        $weekday = date("D", mktime(0,0,0, date("m",$time), date("d",$time)+$daynr, date("y",$time)));
-        $pweekday = date("D", mktime(0,0,0, date("m",$time), date("d",$time)-$daynr, date("y",$time)));
+        $day = date("d", mktime(0,0,0, date("m",$time), date("d",$time)+$counter, date("y",$time)));
+        $weekday = date("D", mktime(0,0,0, date("m",$time), date("d",$time)+$counter, date("y",$time)));
+        $pweekday = date("D", mktime(0,0,0, date("m",$time), date("d",$time)-$counter, date("y",$time)));
 
         // not current month days
         if ($day === "01" && $weekday !== "Mon" && !$endNotThisMonth) {
@@ -63,49 +64,53 @@ echo "<a href='kalender.php?maand=$nextMonth'>$nextMonth ></a>";
                 $notThisMonthArray[] = $pday;
 
                 $i++;
-                if ($i > 7 || $pweekday === "Mon") {
-                    $days = count($notThisMonthArray) - 1;
-                    for ($j = $days; $j >= 0; $j--) {
-                        echo "<td class=\"kalendernotthismonth\"> $notThisMonthArray[$j] </td>";
-                    }
-
-                    $starting_day = "2015-11-1";
-                    $time = strtotime($starting_day);
-
+                if ($i > 7 || $pweekday === "Sun") {
                     $endNotThisMonth = true;
                 }
-
-                $prevDay = $pday;
             }while(!$endNotThisMonth);
 
-            $hasPrevMonthDays = true;
+            $pdays = count($notThisMonthArray) - 1;
+            for ($j = $pdays; $j >= 0; $j--) {
+                echo "<td class=\"kalendernotthismonth\"> $notThisMonthArray[$j] </td>";
+            }
 
+            if ($pweekday !== "Sun") {
+                $doFillWithCurrentMonthDays = true;
+            }
             // current month days
         } else {
-            if (($prevDay === "31" || $prevDay === "30" || $prevDay === "29") && $hasPrevMonthDays) {
-                $pweekdaynr = date("N",strtotime($pweekday));
-
-                for ($pweekdaynr; $pweekdaynr < 7; $pweekdaynr++) {
+            if ($doFillWithCurrentMonthDays) {
+                $x = 0;
+                while ($weekday !== "Sun") {
                     echo "<td class=\"kalenderdatum\"> $day </td>";
+
+                    $x++;
+                    if ($x > 100) {
+                        echo "ERROR: loop escaped.";
+                        $weekday = "Sun";
+                    }
                 }
+                echo "</tr>";
+
+                $doFillWithCurrentMonthDays = false;
             } else {
-                if ($daynr % 7 == 0) {
-                    echo '</tr><tr>';
+                if ($weekday === "Sun") {
+                    echo "</tr><tr>";
                 }
 
                 if ($day === "01" && ($prevDay === "31" || $prevDay === "30" || $prevDay === "29")) {
                     $endMonth = true;
                 } else {
                     echo "<td class=\"kalenderdatum\"> $day </td>";
-                    $daynr++;
 
-                    if ($i > 100) {
+                    if ($counter > 100) {
                         $endMonth = true;
                     }
-
-                    $prevDay = $day;
                 }
             }
+
+            $counter++;
+            $prevDay = $day;
         }
 
         $loops++;
