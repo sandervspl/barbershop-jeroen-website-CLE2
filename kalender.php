@@ -44,20 +44,20 @@ echo "<a href='kalender.php?month=$nextMonth'>$nextMonth ></a>";
 
     <?php
     $endMonth = false;
-    $endNotThisMonth = false;
+    $endPrevMonth = false;
     $notThisMonthArray = array();
     $prevDay = -1;
     $counter = 0;
     $loops = 0;
     do {
-        $day = date("d", mktime(0,0,0, date("m",$time), date("d",$time)+$counter, date("y",$time)));
-        $weekday = date("D", mktime(0,0,0, date("m",$time), date("d",$time)+$counter, date("y",$time)));
-        $pweekday = date("D", mktime(0,0,0, date("m",$time), date("d",$time)-$counter, date("y",$time)));
+        $day = date("d", mktime(0,0,0, date("m",$time), date("d",$time)+$counter, date("y",$time)));        // 01-31
+        $weekday = date("D", mktime(0,0,0, date("m",$time), date("d",$time)+$counter, date("y",$time)));    // Mon-Sun
 
         // not current month days
-        if ($day === "01" && $weekday !== "Mon" && !$endNotThisMonth) {
+        if ($day === "01" && $weekday !== "Mon" && !$endPrevMonth) {
             $i = 1;
 
+            // count backwards until we have a day that is a monday
             do {
                 $prevMonthDay = date("d", mktime(0,0,0, date("m",$time), date("d",$time)-$i, date("y",$time)));
                 $prevMonthWeekDay = date("D", mktime(0,0,0, date("m",$time), date("d",$time)-$i, date("y",$time)));
@@ -65,47 +65,55 @@ echo "<a href='kalender.php?month=$nextMonth'>$nextMonth ></a>";
 
                 $i++;
                 if ($i > 7 || $prevMonthWeekDay === "Mon") {
-                    $endNotThisMonth = true;
+                    $endPrevMonth = true;
                 }
-            }while(!$endNotThisMonth);
+            }while(!$endPrevMonth);
 
+            // loop through the array backwards (we counter backwards: 01... 31... 30 for example)
+            // put this in a special table cell
             $prevMonthDays = count($prevMonthDayArray) - 1;
             for ($j = $prevMonthDays; $j >= 0; $j--) {
                 echo "<td class=\"kalenderdateblocked\"> $prevMonthDayArray[$j] </td>";
             }
 
+            // fill current table row with current month date(s)
             if ($prevMonthWeekDay !== "Sun") {
                 echo "<td class=\"calendardate\"> $day </td>";
             }
 
             // current month days
         } else {
-            if (!$endNotThisMonth) {
-                $endNotThisMonth = true;
+
+            // possible that 01 starts on a monday, so we have to "end" our previous month
+            if (!$endPrevMonth) {
+                $endPrevMonth = true;
             };
 
+            // new table row every monday
+            if ($weekday === "Mon") {
+                echo "</tr><tr>";
+            }
 
-                if ($weekday === "Mon") {
-                    echo "</tr><tr>";
-                }
+            // check if we are entering a new month, if so we stop looping
+            if ($day === "01" && ($prevDay === "31" || $prevDay === "30" || $prevDay === "29" || $prevDay === "28")) {
+                $endMonth = true;
+            } else {
+                echo "<td class=\"calendardate\"> $day </td>";
 
-                if ($day === "01" && ($prevDay === "31" || $prevDay === "30" || $prevDay === "29" || $prevDay === "28")) {
+                // loop escaper
+                if ($counter > 100) {
                     $endMonth = true;
-                } else {
-                    echo "<td class=\"calendardate\"> $day </td>";
-
-                    if ($counter > 100) {
-                        $endMonth = true;
-                    }
                 }
-//            }
+            }
         }
 
-        if ($endNotThisMonth) {
+        // count up our current month days
+        if ($endPrevMonth) {
             $prevDay = $day;
             $counter++;
         }
 
+        // loop escaper
         $loops++;
         if ($loops > 100) {
             $endMonth = true;
