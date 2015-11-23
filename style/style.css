@@ -35,20 +35,14 @@ td {
 
 .kalenderdag {
     background-color: #bdbdbd;
-    height: 50px;
-}
-/*
-.kalenderdatum {
-    float: left;
-    background-color: #eaeaea;
-    width: 150px;
-    height: 100px;
-} */
-
-.kalenderdag > th {
-    text-align: left;
+    height: 25px;
 }
 
+    .kalenderdag > th {
+        color: white;
+        text-align: center;
+    }
+    
 .kalenderdatum {
     width: inherit;
     height: 100px;
@@ -60,6 +54,19 @@ td {
         float: left;
         text-align: left;
     }
+    
+    .kalenderdatum,
+    .kalendernotthismonth {
+        padding: 5px;
+        vertical-align: top;
+        text-align: left;
+    }
+
+.kalendernotthismonth {
+    background-color: #fafafa;
+    color: #dedede;
+    height: 95px;
+}
 
 .bezet {
     background-color: #ffffff;
@@ -96,7 +103,7 @@ td {
     width: 90px;
 }
 
-    .NextDay:hover, NextDay:focus {
+    .NextDay:hover, .NextDay:focus {
         background-color: #d1d1d1;
         -webkit-box-shadow: 0 0 1px rgba(0,0,0, .75);
         -moz-box-shadow: 0 0 1px rgba(0,0,0, .75);
