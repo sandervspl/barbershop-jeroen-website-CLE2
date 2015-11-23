@@ -1,8 +1,7 @@
 <?php
     // y-m-d
 //    $starting_day = date("y-m-d");
-    $starting_day = "2015-11-1";
-    $time = strtotime($starting_day);
+
 //$time = time();
 //$time = date("M", time() -  3600 );
 ?>
@@ -17,16 +16,27 @@
 <body>
 <?php
 if (isset($_GET['month'])) {
-    $maand = date("m",$_GET['month']);
+    $m = $_GET['month'];
+    $starting_day = "2015-".$m."-1";
+    $time = strtotime($starting_day);
+
+    $maand = date("m", $time);
 } else {
-    $maand = date("m",$time);
+    $starting_day = "2015-11-1";
+    $time = strtotime($starting_day);
+
+    $maand = date("m", $time);
 }
 
-$prevMonth = date("m", mktime(0,0,0, $maand-1, date("d",$time), date("y",$time)));
-$nextMonth = date("m", mktime(0,0,0, $maand+1, date("d",$time), date("y",$time)));
-echo "<a href='kalender.php?month=$prevMonth'>< $prevMonth</a>";
-echo "   ", date("m", mktime(0,0,0, $maand, date("d",$time), date("y",$time))), "   ";
-echo "<a href='kalender.php?month=$nextMonth'>$nextMonth ></a>";
+$prevMonth = date("M", mktime(0,0,0, $maand-1, date("d",$time), date("y",$time)));
+$nextMonth = date("M", mktime(0,0,0, $maand+1, date("d",$time), date("y",$time)));
+
+$prevMonthNr = date("m", mktime(0,0,0, $maand-1, date("d",$time), date("y",$time)));
+$nextMonthNr = date("m", mktime(0,0,0, $maand+1, date("d",$time), date("y",$time)));
+
+echo "<label class='monthlabel'><a href='kalender.php?month=$prevMonthNr'> < $prevMonth </a></label>";
+echo "<label class='monthlabel'>   ", date("F Y", mktime(0,0,0, $maand, date("d",$time), date("y",$time))), "   </label>";
+echo "<label class='monthlabel'><a href='kalender.php?month=$nextMonthNr'> $nextMonth > </a></label><br>";
 ?>
 
 <table>
@@ -49,11 +59,12 @@ echo "<a href='kalender.php?month=$nextMonth'>$nextMonth ></a>";
     $prevDay = -1;
     $counter = 0;
     $loops = 0;
+
     do {
         $day = date("d", mktime(0,0,0, date("m",$time), date("d",$time)+$counter, date("y",$time)));        // 01-31
         $weekday = date("D", mktime(0,0,0, date("m",$time), date("d",$time)+$counter, date("y",$time)));    // Mon-Sun
 
-        // not current month days
+        // previous month days
         if ($day === "01" && $weekday !== "Mon" && !$endPrevMonth) {
             $i = 1;
 
@@ -69,19 +80,18 @@ echo "<a href='kalender.php?month=$nextMonth'>$nextMonth ></a>";
                 }
             }while(!$endPrevMonth);
 
-            // loop through the array backwards (we counter backwards: 01... 31... 30 for example)
-            // put this in a special table cell
+            // loop through the array backwards (we counted backwards: 01... 31... 30 for example)
+            // put these in a special table cell
             $prevMonthDays = count($prevMonthDayArray) - 1;
             for ($j = $prevMonthDays; $j >= 0; $j--) {
                 echo "<td class=\"kalenderdateblocked\"> $prevMonthDayArray[$j] </td>";
             }
 
-            // fill current table row with current month date(s)
-            if ($prevMonthWeekDay !== "Sun") {
-                echo "<td class=\"calendardate\"> $day </td>";
-            }
+            // it will always miss day 01 on first row if this is not here. (line 108)
+            echo "<td class=\"calendardate\"> $day </td>";
 
-            // current month days
+
+        // current month days
         } else {
 
             // possible that 01 starts on a monday, so we have to "end" our previous month
