@@ -89,7 +89,7 @@ echo "<label class='monthlabel'><a href='kalender.php?month=$nextMonthNr&year=$n
                 echo "<td class=\"calendardateblocked\"> $prevMonthDayArray[$i] </td>";
             }
 
-            // it will always miss day 01 on first row if this is not here. (line 108)
+            // it will always miss day 01 on first row if this is not here. (line 110)
             echo "<td class=\"calendardate\"> $day </td>";
 
 

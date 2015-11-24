@@ -58,7 +58,7 @@ td {
     
 .calendardate {
     width: inherit;
-    height: 45px;
+    height: 55px;
     background-color: #dedede;
 }
 
@@ -74,7 +74,7 @@ td {
 
 .calendardateblocked {
     width: inherit;
-    height: 45px;
+    height: 55px;
     background-color: #fafafa;
     color: #dedede;
 }
