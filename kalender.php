@@ -58,10 +58,9 @@ echo "<label class='monthlabel'><a href='kalender.php?month=$nextMonthNr&year=$n
     <?php
     $endMonth = false;
     $endPrevMonth = false;
-    $notThisMonthArray = array();
+    $doNextMonth = false;
     $prevDay = -1;
     $counter = 0;
-    $loops = 0;
 
     do {
         $day = date("d", mktime(0,0,0, date("m",$time), date("d",$time)+$counter, date("y",$time)));        // 01-31
@@ -86,8 +85,8 @@ echo "<label class='monthlabel'><a href='kalender.php?month=$nextMonthNr&year=$n
             // loop through the array backwards (we counted backwards: 01... 31... 30 for example)
             // put these in a special table cell
             $prevMonthDays = count($prevMonthDayArray) - 1;
-            for ($j = $prevMonthDays; $j >= 0; $j--) {
-                echo "<td class=\"kalenderdateblocked\"> $prevMonthDayArray[$j] </td>";
+            for ($i = $prevMonthDays; $i >= 0; $i--) {
+                echo "<td class=\"calendardateblocked\"> $prevMonthDayArray[$i] </td>";
             }
 
             // it will always miss day 01 on first row if this is not here. (line 108)
@@ -107,32 +106,44 @@ echo "<label class='monthlabel'><a href='kalender.php?month=$nextMonthNr&year=$n
                 $endPrevMonth = true;
             };
 
-            // check if we are entering a new month, if so we stop looping
+            // check if we are entering a new month, if so want to fill up our current row with new dates if needed
             if ($day === "01" && ($prevDay === "31" || $prevDay === "30" || $prevDay === "29" || $prevDay === "28")) {
-                $endMonth = true;
-            } else {
-                echo "<td class=\"calendardate\"> $day </td>";
-
-                // loop escaper
-                if ($counter > 100) {
+                if ($weekday !== "Mon") {
+                    $doNextMonth = true;
+                } else {
                     $endMonth = true;
+                }
+            } else {
+                if (!$doNextMonth) {
+                    echo "<td class=\"calendardate\"> $day </td>";
+                }
+            }
+
+            // fill up row with days of next month
+            if ($doNextMonth) {
+                if ($weekday === "Mon") {
+                    $doNextMonth = false;
+                    $endMonth = true;
+                } else {
+                    echo "<td class=\"calendardateblocked\"> $day </td>";
                 }
             }
         }
 
-        // count up our current month days
+        // count up days
         if ($endPrevMonth) {
             $prevDay = $day;
             $counter++;
-        }
 
-        // loop escaper
-        $loops++;
-        if ($loops > 100) {
-            $endMonth = true;
+            // loop escaper
+            if ($counter > 100) {
+                $endMonth = true;
+            }
         }
     }while(!$endMonth);
     ?>
+
+    </tr>
 </table>
 
 </body>
