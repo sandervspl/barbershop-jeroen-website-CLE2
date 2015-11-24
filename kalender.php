@@ -15,16 +15,19 @@
 </head>
 <body>
 <?php
+// grab month & year from url
 if (isset($_GET['month']) && isset($_GET['year'])) {
     $m = $_GET['month'];
     $y = $_GET['year'];
     $starting_day = "$y-$m-1";
     $time = strtotime($starting_day);
 } else {
-    $starting_day = "2020-11-1";
+    // grab current year/month and start at day 01
+    $starting_day = date("Y-m-")."01";
     $time = strtotime($starting_day);
 }
 
+// previous, current and next month buttons/label
 $maand = date("m", $time);
 $year = date("Y", $time);
 
@@ -89,7 +92,7 @@ echo "<label class='monthlabel'><a href='kalender.php?month=$nextMonthNr&year=$n
                 echo "<td class=\"calendardateblocked\"> $prevMonthDayArray[$i] </td>";
             }
 
-            // it will always miss day 01 on first row if this is not here. (line 110)
+            // it will always miss day 01 on first row if this is not here. (line 117)
             if ($weekday !== "Mon" && $weekday !== "Sun") {
                 echo "<td class=\"calendardate\"> $day </td>";
             } else {
