@@ -79,8 +79,16 @@ td {
     color: #dedede;
 }
 
+.calendardate-sun-mon {
+    width: inherit;
+    height: 55px;
+    background-color: #949494;
+    color: #dedede;
+}
+
 .calendardate,
-.calendardateblocked {
+.calendardateblocked,
+.calendardate-sun-mon {
         padding: 5px;
         vertical-align: top;
         text-align: left;

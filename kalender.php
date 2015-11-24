@@ -90,7 +90,11 @@ echo "<label class='monthlabel'><a href='kalender.php?month=$nextMonthNr&year=$n
             }
 
             // it will always miss day 01 on first row if this is not here. (line 110)
-            echo "<td class=\"calendardate\"> $day </td>";
+            if ($weekday !== "Mon" && $weekday !== "Sun") {
+                echo "<td class=\"calendardate\"> $day </td>";
+            } else {
+                echo "<td class=\"calendardate-sun-mon\"> $day </td>";
+            }
 
 
         // current month days
@@ -113,9 +117,15 @@ echo "<label class='monthlabel'><a href='kalender.php?month=$nextMonthNr&year=$n
                 } else {
                     $endMonth = true;
                 }
+
+            // if not we fill our cells with current month data
             } else {
                 if (!$doNextMonth) {
-                    echo "<td class=\"calendardate\"> $day </td>";
+                    if ($weekday !== "Mon" && $weekday !== "Sun") {
+                        echo "<td class=\"calendardate\"> $day </td>";
+                    } else {
+                        echo "<td class=\"calendardate-sun-mon\"> $day </td>";
+                    }
                 }
             }
 
