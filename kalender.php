@@ -97,15 +97,15 @@ echo "<label class='monthlabel'><a href='kalender.php?month=$nextMonthNr&year=$n
         // current month days
         } else {
 
+            // new table row every monday
+            if ($endPrevMonth && $weekday === "Mon") {
+                echo "</tr><tr>";
+            }
+
             // possible that 01 starts on a monday, so we have to "end" our previous month
             if (!$endPrevMonth) {
                 $endPrevMonth = true;
             };
-
-            // new table row every monday
-            if ($weekday === "Mon") {
-                echo "</tr><tr>";
-            }
 
             // check if we are entering a new month, if so we stop looping
             if ($day === "01" && ($prevDay === "31" || $prevDay === "30" || $prevDay === "29" || $prevDay === "28")) {
