@@ -19,18 +19,18 @@ select {
 }
 
 textarea:focus, input:focus {
-    border: 2px solid #900;
+    border: 2px solid #7fa59a;
 }
 
 table {
     border: 0px;
 
     /* don't allow browser text-selection */
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    /*-webkit-touch-callout: none;*/
+    /*-webkit-user-select: none;*/
+    /*-moz-user-select: none;*/
+    /*-ms-user-select: none;*/
+    /*user-select: none;*/
 }
 
 th {
@@ -42,7 +42,21 @@ th {
 td {
     text-align: right;
     margin-right: 15px;
-    width: 100px;
+}
+
+.appointments-table {
+    float: left;
+}
+
+    .appointments-table > td {
+        width: 200px;
+    }
+
+.appointments-time {
+    text-align: right;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #72c8e9;
 }
 
 .calendarday {
@@ -57,15 +71,8 @@ td {
     }
     
 .calendardate {
-    width: inherit;
-    height: 55px;
     background-color: #dedede;
 }
-
-    .calendardate:hover {
-        background-color: white;
-        cursor: pointer;
-    }
 
     .calendardate > label {
         float: left;
@@ -73,15 +80,11 @@ td {
     }
 
 .calendardateblocked {
-    width: inherit;
-    height: 55px;
     background-color: #fafafa;
     color: #dedede;
 }
 
 .calendardate-sun-mon {
-    width: inherit;
-    height: 55px;
     background-color: #949494;
     color: #dedede;
 }
@@ -89,14 +92,33 @@ td {
 .calendardate,
 .calendardateblocked,
 .calendardate-sun-mon {
-        padding: 5px;
-        vertical-align: top;
-        text-align: left;
+    vertical-align: top;
+    text-align: left;
+    height: 60px;
+    width: 100px;
+}
+
+.divBox {
+    width: 100%;
+    height: 100%;
+}
+
+.divBox a {
+    width: 100%;
+    height: 100%;
+    display: block;
+    text-decoration: none;
+    color: white;
+}
+
+.divBox a:hover {
+    background-color: white;
+    color: black;
 }
 
 .bezet {
-    background-color: #ffffff;
-    color: white;
+    background-color: #b50000;
+    color: #f8f8f8;
 }
 
 .nietbezet {

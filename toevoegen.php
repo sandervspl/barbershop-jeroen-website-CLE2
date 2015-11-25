@@ -23,18 +23,17 @@ if (isset($_GET["datum"])) {
     $datum = $newstr;
 }
 
-if (isset($_GET["tijd"])) {
+if (isset($_GET['tijd'])) {
     $pattern = '/((09)|(1[0-8]))((30)|(00))/';
-    $match = 0;
-    preg_match($pattern, $_GET["tijd"], $match);
+    $matches = array();
+    preg_match($pattern, $_GET['tijd'], $matches);
 
-    if (empty($match)) {
+    if (empty($matches)) {
         $ok = false;
         $error_msg = "ERROR: Tijd klopt niet. Kan alleen :30 of :00 zijn en tussen 09:00 en 18:00.";
     }
 
-    $newstr = substr_replace($_GET["tijd"], ":", 2, 0);
-    $tijd = $newstr;
+    $tijd = substr_replace($_GET['tijd'], ":", 2, 0);
 }
 
 if (isset($_POST['submit'])) {

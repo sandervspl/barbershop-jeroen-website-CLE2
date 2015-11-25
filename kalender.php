@@ -1,9 +1,6 @@
 <?php
-    // y-m-d
-//    $starting_day = date("y-m-d");
-
-//$time = time();
-//$time = date("M", time() -  3600 );
+    //$time = time();
+    //$time = date("M", time() -  3600 );
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -28,20 +25,20 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
 }
 
 // previous, current and next month buttons/label
-$maand = date("m", $time);
+$month = date("m", $time);
 $year = date("Y", $time);
 
-$prevMonth = date("M", mktime(0,0,0, $maand-1, date("d",$time), date("y",$time)));
-$nextMonth = date("M", mktime(0,0,0, $maand+1, date("d",$time), date("y",$time)));
+$prevMonth = date("M", mktime(0,0,0, $month-1, date("d",$time), date("y",$time)));
+$nextMonth = date("M", mktime(0,0,0, $month+1, date("d",$time), date("y",$time)));
 
-$prevMonthNr = date("m", mktime(0,0,0, $maand-1, date("d",$time), date("y",$time)));
-$nextMonthNr = date("m", mktime(0,0,0, $maand+1, date("d",$time), date("y",$time)));
+$prevMonthNr = date("m", mktime(0,0,0, $month-1, date("d",$time), date("y",$time)));
+$nextMonthNr = date("m", mktime(0,0,0, $month+1, date("d",$time), date("y",$time)));
 
-$prevYearNr = date("Y", mktime(0,0,0, $maand-1, date("d",$time), date("y",$time)));
-$nextYearNr = date("Y", mktime(0,0,0, $maand+1, date("d",$time), date("y",$time)));
+$prevYearNr = date("Y", mktime(0,0,0, $month-1, date("d",$time), date("y",$time)));
+$nextYearNr = date("Y", mktime(0,0,0, $month+1, date("d",$time), date("y",$time)));
 
 echo "<label class='monthlabel'><a href='kalender.php?month=$prevMonthNr&year=$prevYearNr'> < $prevMonth </a></label>";
-echo "<label class='monthlabel'>   ", date("F Y", mktime(0,0,0, $maand, date("d",$time), $year)), "   </label>";
+echo "<label class='monthlabel'>   ", date("F Y", mktime(0,0,0, $month, date("d",$time), $year)), "   </label>";
 echo "<label class='monthlabel'><a href='kalender.php?month=$nextMonthNr&year=$nextYearNr'> $nextMonth > </a></label><br>";
 ?>
 
@@ -92,9 +89,12 @@ echo "<label class='monthlabel'><a href='kalender.php?month=$nextMonthNr&year=$n
                 echo "<td class=\"calendardateblocked\"> $prevMonthDayArray[$i] </td>";
             }
 
-            // it will always miss day 01 on first row if this is not here. (line 117)
+            // it will always miss day 01 on first row if this is not here. (line 114)
             if ($weekday !== "Mon" && $weekday !== "Sun") {
-                echo "<td class=\"calendardate\"> $day </td>";
+                echo "<td class=\"calendardate\">";
+                echo "<div class=\"divBox\">";
+                echo "<a href=\"selection_page.php?dag=$day&maand=$month&jaar=$year\"> $day </a>";
+                echo "</div></td>";
             } else {
                 echo "<td class=\"calendardate-sun-mon\"> $day </td>";
             }
@@ -125,7 +125,10 @@ echo "<label class='monthlabel'><a href='kalender.php?month=$nextMonthNr&year=$n
             } else {
                 if (!$doNextMonth) {
                     if ($weekday !== "Mon" && $weekday !== "Sun") {
-                        echo "<td class=\"calendardate\"> $day </td>";
+                        echo "<td class=\"calendardate\">";
+                        echo "<div class=\"divBox\">";
+                        echo "<a href=\"selection_page.php?dag=$day&maand=$month&jaar=$year\"> $day </a>";
+                        echo "</div></td>";
                     } else {
                         echo "<td class=\"calendardate-sun-mon\"> $day </td>";
                     }

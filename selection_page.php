@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
+<form method="post" action="">
+    <input type="submit" name="prevday" value="< Vorige Dag">
+    <input type="submit" name="nextday" value="Volgende Dag >">
+</form>
+
 <?php
 
 if (isset($_GET['dag'])) {
@@ -110,8 +115,20 @@ if (isset($_POST['prevday'])) {
             $u = $uur;
         }
 
+        $datum = $jaar.'-'.$maand.'-'.$dag;
         $tijd = $u . ":" . $m;
         $b = "nietbezet";
+
+        $db = mysqli_connect('localhost', 'root', '', 'website');
+        $sql = sprintf("SELECT * FROM afspraken WHERE datum='%s' AND tijd='%s'",
+            mysqli_real_escape_string($db, $datum),
+            mysqli_real_escape_string($db, $tijd));
+        $result = mysqli_query($db, $sql);
+
+        if (mysqli_num_rows($result) > 0) {
+            $b = "bezet";
+        }
+        mysqli_close($db);
 
         $datum = $dag.'/'.$maand.'/'.$jaar;
 
@@ -120,14 +137,11 @@ if (isset($_POST['prevday'])) {
 
         $dd = $jaar.$maand.$dag;
         $tt = str_replace(':', '', $tijd);
-        echo "<td><a href='toevoegen.php?datum=$dd&tijd=$tt'>Reserveer </a></td> </tr>";
+        if ($b === "nietbezet") {
+            echo "<td><a href='toevoegen.php?datum=$dd&tijd=$tt'> Reserveer </a></td> </tr>";
+        }
     }
 ?>
-
-<form method="post" action="">
-    <input type="submit" name="prevday" value="< Vorige Dag">
-    <input type="submit" name="nextday" value="Volgende Dag >">
-</form>
 
 <script src="scripts/Nextday.js"></script>
 </body>
