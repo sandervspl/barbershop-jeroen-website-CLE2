@@ -39,59 +39,42 @@ for ($minute = 0; $minute <= 18; $minute++) {
     }
 
     if ($hour < 10) {
-        $u = "0".$hour;
+        $u = "0" . $hour;
     } else {
         $u = $hour;
     }
 
-    $time = $u.":".$m;
+    $time = $u . ":" . $m;
     $db = mysqli_connect('localhost', 'root', '', 'website');
     $sql = sprintf("SELECT * FROM afspraken WHERE datum='%s' AND tijd='%s'",
         mysqli_real_escape_string($db, $date),
         mysqli_real_escape_string($db, $time));
     $result = mysqli_query($db, $sql);
 
-    echo "<table class='appointments-table'>";
-    echo "<td class='appointments-time' colspan='2'>", $time, "</td></tr>";
+    if ($minute % 6 == 0) {
+        $b = "appointments-table-clear";
+    } else {
+        $b = "appointments-table";
+    }
+
+    echo "<table class=$b>";
+    echo "<td class='appointments-time' colspan='2'> $time </td>";
 
     if (mysqli_num_rows($result) > 0) {
         foreach ($result as $row) {
-            echo "<tr><th>Naam</th>";
+            echo "<tr><th class='appointments-key'>Naam</th>";
             echo "<td>", $row['voornaam'], " ", $row['achternaam'], "</td><tr>";
-            echo "<tr><th>Baard</th>";
+            echo "<tr><th class='appointments-key'>Baard</th>";
             echo "<td>", $row['baard'], "</td></tr>";
-            echo "<tr><th>Kapper</th>";
+            echo "<tr><th class='appointments-key'>Kapper</th>";
             echo "<td>", $row['kapper'], "</td></tr>";
-
-//            $appointments[] = array(
-//                'voornaam' => $row['voornaam'],
-//                'achternaam' => $row['achternaam'],
-//                'datum' => $row['datum'],
-//                'tijd' => $row['tijd'],
-//                'baard' => $row['baard'],
-//                'kapper' => $row['kapper']
-//            );
         }
     }
 
-    echo "</table>";
-
     mysqli_close($db);
+
+    echo "</table>";
 }
-
-//foreach ($appointments as $row) {
-//    echo "<table class='appointments-table'>";
-////    echo "<tr><th>Tijd</th>";
-//    echo "<td class='appointments-time' colspan='2'>", $row['tijd'], "</td></tr>";
-//    echo "<tr><th>Naam</th>";
-//    echo "<td>", $row['voornaam'], " ", $row['achternaam'], "</td><tr>";
-//    echo "<tr><th>Baard</th>";
-//    echo "<td>", $row['baard'], "</td></tr>";
-//    echo "<tr><th>Kapper</th>";
-//    echo "<td>", $row['kapper'], "</td></tr>";
-//    echo "</table>";
-//}
 ?>
-
 </body>
 </html>

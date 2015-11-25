@@ -24,7 +24,6 @@ textarea:focus, input:focus {
 
 table {
     border: 0px;
-
     /* don't allow browser text-selection */
     /*-webkit-touch-callout: none;*/
     /*-webkit-user-select: none;*/
@@ -44,8 +43,13 @@ td {
     margin-right: 15px;
 }
 
-.appointments-table {
+.appointments-table,
+.appointments-table-clear {
     float: left;
+}
+
+.appointments-table-clear {
+    clear: left;
 }
 
     .appointments-table > td {
@@ -57,6 +61,11 @@ td {
     font-size: 20px;
     font-weight: bold;
     background-color: #72c8e9;
+    width: 200px;
+}
+
+.appointments-key {
+    text-align: left;
 }
 
 .calendarday {
