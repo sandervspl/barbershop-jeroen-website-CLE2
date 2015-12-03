@@ -1,3 +1,140 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.button {
+    width: 300px;
+    height: auto;
+    /*margin-top: 50px;*/
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+    font-family: Nunito, serif;
+    font-size: 50px;
+    text-align: center;
+
+    border: 2px solid black;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+}
+
+.button span {
+    cursor: pointer;
+
+    width: 100%;
+    height: 100%;
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+
+.barber-name {
+    font-family: Lobster, serif;
+}
+
+#summary-text img {
+    vertical-align: middle;
+}
+
+#main-header {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+}
+
+#header-logo {
+    margin-right: 25px;
+    width: 120px;
+    height: 120px;
+    vertical-align: middle;
+}
+
+#header-name {
+    display: inline-block;
+    font-family: Lobster, serif;
+    font-size: 35px;
+}
+
+nav {
+    width: 100%;
+    height: 50px;
+    display: inline-block;
+    text-align: center;
+}
+
+nav ul,
+section ul {
+    list-style: none;
+}
+
+nav ul li,
+section ul li {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+section ul li a {
+    color: black;
+}
+
+section ul li label {
+    cursor: pointer;
+    width: 150px;
+    padding: 5px;
+    font-family: Lobster, serif;
+    font-size: 35px;
+    color: #cacaca;
+    text-align: center;
+
+    border: 2px solid #cacaca;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+    section ul li label:hover {
+        cursor: pointer;
+    }
+
+#navigation-background {
+    /*background-color: #6f6f6f;*/
+    border-top: 1px solid black;
+}
+
+#main-page {
+    width: 80%;
+    height: auto;
+    margin: 10px auto;
+    padding: 0 15px 5px;
+    background-color: #fdf3d3;
+    text-align: center;
+}
+
+.header-text {
+    font-family: Nunito, serif;
+    font-size: 50px;
+    color: black;
+}
+
+p.header-text {
+    margin: 0;
+}
+
+.hair-beard-img {
+    cursor: pointer;
+    width: 150px;
+    height: 150px;
+}
+
 label {
     float: left;
     text-align: right;
@@ -23,13 +160,13 @@ textarea:focus, input:focus {
 }
 
 table {
-    border: 0px;
+    border: 0;
     /* don't allow browser text-selection */
-    /*-webkit-touch-callout: none;*/
-    /*-webkit-user-select: none;*/
-    /*-moz-user-select: none;*/
-    /*-ms-user-select: none;*/
-    /*user-select: none;*/
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 th {
@@ -68,10 +205,22 @@ td {
     text-align: left;
 }
 
+
+
+/*********************/
+/*
+    CALENDAR STYLE
+                    */
+/*********************/
+
+#calendar {
+    margin: 25px auto;
+}
+
 .calendarday {
     width: inherit;
     height: 25px;
-    background-color: #bdbdbd;
+    background-color: #5d2800;
 }
 
     .calendarday > th {
@@ -80,7 +229,7 @@ td {
     }
     
 .calendardate {
-    background-color: #dedede;
+    background-color: #cf8b6b;
 }
 
     .calendardate > label {
@@ -89,13 +238,13 @@ td {
     }
 
 .calendardateblocked {
-    background-color: #fafafa;
-    color: #dedede;
+    background-color: rgba(255, 221, 142, 0.33);
+    color: #bfbfbf;
 }
 
 .calendardate-sun-mon {
-    background-color: #949494;
-    color: #dedede;
+    background-color: #636363;
+    color: rgb(191, 191, 191);
 }
 
 .calendardate,
@@ -107,12 +256,21 @@ td {
     width: 100px;
 }
 
+.calendarday,
+.calendardate,
+.calendardateblocked,
+.calendardate-sun-mon
+{
+    font-family: Lobster, serif;
+}
+
 .divBox {
+    cursor: pointer;
     width: 100%;
     height: 100%;
 }
 
-.divBox a {
+.divBox span {
     width: 100%;
     height: 100%;
     display: block;
@@ -120,10 +278,20 @@ td {
     color: white;
 }
 
-.divBox a:hover {
+.divBox span:hover {
     background-color: white;
     color: black;
 }
+
+
+
+
+
+/*********************/
+/*
+    OTHER STUFF
+                    */
+/*********************/
 
 .bezet {
     background-color: #b50000;
