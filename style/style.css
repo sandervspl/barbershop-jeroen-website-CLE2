@@ -385,7 +385,8 @@ td {
 
     width: 200px;
     display: inline-block;
-    text-align: left;
+    /*text-align: left;*/
+    float: left;
     margin-right: 20px;
     margin-bottom: 20px;
 }
@@ -424,6 +425,31 @@ td {
     float: left;
 }
 
+#morning-header {
+    /*background-color: green;*/
+    float: left;
+    clear: left;
+    height: 200px;
+    width: 200px;
+    margin-right: 35px;
+}
+
+#afternoon-header {
+    float: left;
+    clear: left;
+    height: 400px;
+    width: 200px;
+    margin-right: 35px;
+}
+
+#evening-header {
+    float: left;
+    clear: left;
+    height: 100px;
+    width: 200px;
+    margin-right: 35px;
+}
+
 section #date-and-time span#date-and-time-header {
     /*background-color: green;*/
     font-family: Lobster, serif;
@@ -438,9 +464,10 @@ section #date-and-time span#date-and-time-header {
 section #date-and-time #date-and-time-times-container p.header-text {
     text-align: left;
     font-family: Lobster, serif;
+    font-size: 45px;
     color: white;
     margin: 0 auto 25px auto;
-    border-bottom: 1px solid black;
+    /*border-bottom: 1px solid black;*/
 }
 
 div.month-name {
@@ -474,6 +501,12 @@ div.month-name {
     vertical-align: middle;
     padding-top: 25px;
 }
+
+
+
+
+
+
 
 
 

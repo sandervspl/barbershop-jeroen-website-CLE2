@@ -41,6 +41,7 @@ if ($dayname === "Thu") {
 
 $didMorningHeader = false;
 $didAfternoonHeader = false;
+$didEveningHeader = false;
 
 for ($i = 0; $i <= $end_hour; $i++) {
     if ($i % 2 == 0) {
@@ -82,15 +83,27 @@ for ($i = 0; $i <= $end_hour; $i++) {
     $result = mysqli_query($db, $sql);
 
     if ($hour < 12 && !$didMorningHeader) { ?>
-        <p class="header-text">Morning</p>
+        <div id="morning-header">
+            <p class="header-text">Morning</p>
+        </div>
         <?php
         $didMorningHeader = true;
     }
 
     if ($hour > 11 && $hour < 18 && !$didAfternoonHeader) { ?>
-        <p class="header-text">Afternoon</p>
+        <div id="afternoon-header">
+            <p class="header-text">Afternoon</p>
+        </div>
         <?php
         $didAfternoonHeader = true;
+    }
+
+    if ($hour > 18 && !$didEveningHeader) { ?>
+        <div id="evening-header">
+            <p class="header-text">Evening</p>
+        </div>
+        <?php
+        $didEveningHeader = true;
     }
 
     if (mysqli_num_rows($result) > 0) {
