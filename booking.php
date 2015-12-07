@@ -1,4 +1,20 @@
 <?php
+// grab month & year from url
+if (isset($_GET['month']) && isset($_GET['year'])) {
+    $m = $_GET['month'];
+    $y = $_GET['year'];
+    $starting_day = "$y-$m-1";
+    $time = strtotime($starting_day);
+} else {
+    // grab current year/month and start at day 01
+    $starting_day = date("Y-m-")."01";
+    $time = strtotime($starting_day);
+}
+
+// previous, current and next month buttons/label
+$monthname = date("F", $time);
+$month = date("m", $time);
+$year = date("Y", $time);
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -13,77 +29,44 @@
 
 <header>
     <div id="main-header">
-        <img src="http://barbershopbarcelona.com/wp-content/uploads/2014/11/thebarbershop-Redondo.png" id="header-logo">
+        <a href="index_.php"><img src="http://barbershopbarcelona.com/wp-content/uploads/2014/11/thebarbershop-Redondo.png" id="header-logo"></a>
         <span id="header-name">Classic Barbershop Jeroen</span>
     </div>
     <nav id="navigation-background">
-        <ul>
-            <li><a href="#">one</a></li>
-            <li><a href="#">two</a></li>
-            <li><a href="#">three</a></li>
-            <li><a href="#">four</a></li>
-            <li><a href="#">five</a></li>
-            <li><a href="#">six</a></li>
-        </ul>
+        <div class="navigation-helper">
+            <ul>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Reserveer</a></li>
+            </ul>
+        </div>
     </nav>
 </header>
 
 <section id="main-page">
-    <p id="summary-text" class="header-text">
-        <img id="cut" class="hair-beard-img" src=""> door <span class="barber-name"></span>
-    </p>
+    <div id="summary-header">
+    <table class="header-text">
+        <tr>
+            <th>Wat</th>
+            <th>Tijd</th>
+            <th>Wie</th>
+        </tr>
+        <tr>
+            <td><img id="cut" class="hair-beard-img" src="images/index/no-hair-no-beard.png"></td>
+            <td><img id="cut-time" class="hair-beard-img" src="images/booking/timer_5_min.png"></td>
+            <td><span class="barber-name">aaa</span></td>
+            <script src="scripts/calendar.js"></script>
+            <script type="text/javascript">
+                cutSelected();
+                barberSelected();
+            </script>
+        </tr>
+    </table>
+    </div>
 
-<script>
-    var b = document.getElementById('cut');
-
-    // insert chosen cut type
-    switch(window.sessionStorage.cut) {
-        case "hair": {
-            b.setAttribute('src', 'images/index/yes-hair-no-beard-selected.png');
-            break;
-        }
-
-        case "beard": {
-            b.setAttribute('src', 'images/index/no-hair-yes-beard-selected.png');
-            break;
-        }
-
-        case "moustache": {
-            b.setAttribute('src', 'images/index/no-hair-no-beard-yes-moustache-selected.png');
-            break;
-        }
-
-        case "all": {
-            b.setAttribute('src', 'images/index/yes-hair-yes-beard-selected.png');
-            break;
-        }
-
-        default: {
-            b.setAttribute('src', 'images/index/no-hair-no-beard.png');
-        }
-    }
-
-    // insert chosen barber name
-    document.querySelector('.barber-name').innerHTML = window.sessionStorage.barber;
-</script>
-
-<?php
-// grab month & year from url
-if (isset($_GET['month']) && isset($_GET['year'])) {
-    $m = $_GET['month'];
-    $y = $_GET['year'];
-    $starting_day = "$y-$m-1";
-    $time = strtotime($starting_day);
-} else {
-    // grab current year/month and start at day 01
-    $starting_day = date("Y-m-")."01";
-    $time = strtotime($starting_day);
-}
-
-// previous, current and next month buttons/label
-$month = date("m", $time);
-$year = date("Y", $time);
-?>
+    <div class="month-name">
+        <p class="header-text"><?= $monthname; ?></p>
+    </div>
 
 <table id="calendar">
     <tr class="calendarday">
@@ -129,17 +112,27 @@ $year = date("Y", $time);
                 // put these in a special table cell
                 $prevMonthDays = count($prevMonthDayArray) - 1;
                 for ($i = $prevMonthDays; $i >= 0; $i--) {
-                    echo "<td class=\"calendardateblocked\"> $prevMonthDayArray[$i] </td>";
+                    echo "<td class=\"calendardateblocked\">";
+                    echo "<div class=\"divBox\">";
+                    echo "<span> $prevMonthDayArray[$i] </span>";
+                    echo "</div></td>";
                 }
 
                 // it will always miss day 01 on first row if this is not here. (line 114)
                 if ($weekday !== "Mon" && $weekday !== "Sun") {
-                    echo "<td class=\"calendardate\">";
+                    if ($weekday === "Tue") {
+                        echo "<td class=\"calendardate-tue\">";
+                    } else {
+                        echo "<td class=\"calendardate\">";
+                    }
+                    echo "<div class=\"divBox\">";
+                    echo "<span onclick=\"onDateClick($day, '$monthname', $year)\"> $day </span>";
+                    echo "</div></td>";
+                } else {
+                    echo "<td class=\"calendardate-sun-mon\">";
                     echo "<div class=\"divBox\">";
                     echo "<span> $day </span>";
                     echo "</div></td>";
-                } else {
-                    echo "<td class=\"calendardate-sun-mon\"> $day </td>";
                 }
 
 
@@ -168,12 +161,19 @@ $year = date("Y", $time);
                 } else {
                     if (!$doNextMonth) {
                         if ($weekday !== "Mon" && $weekday !== "Sun") {
-                            echo "<td class=\"calendardate\">";
+                            if ($weekday === "Tue") {
+                                echo "<td class=\"calendardate-tue\">";
+                            } else {
+                                echo "<td class=\"calendardate\">";
+                            }
                             echo "<div class=\"divBox\">";
-                            echo "<span onclick=\"onDateClick()\"> $day </span>";
+                            echo "<span onclick=\"onDateClick($day, '$monthname', $year)\"> $day </span>";
                             echo "</div></td>";
                         } else {
-                            echo "<td class=\"calendardate-sun-mon\"> $day </td>";
+                            echo "<td class=\"calendardate-sun-mon\">";
+                            echo "<div class=\"divBox\">";
+                            echo "<span> $day </span>";
+                            echo "</div></td>";
                         }
                     }
                 }
@@ -184,7 +184,10 @@ $year = date("Y", $time);
                         $doNextMonth = false;
                         $endMonth = true;
                     } else {
-                        echo "<td class=\"calendardateblocked\"> $day </td>";
+                        echo "<td class=\"calendardateblocked\">";
+                        echo "<div class=\"divBox\">";
+                        echo "<span> $day </span>";
+                        echo "</div></td>";
                     }
                 }
             }
@@ -205,7 +208,10 @@ $year = date("Y", $time);
     </tr>
 </table>
 
-<p id="booking-date" class="header-text"></p>
+<section id="date-and-time">
+    <span id="date-and-time-header" class="header-text"></span>
+</section>
+
 
 </section>
 

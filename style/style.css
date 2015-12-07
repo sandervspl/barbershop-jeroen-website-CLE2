@@ -1,6 +1,32 @@
-html, body {
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
     margin: 0;
     padding: 0;
+    border: 0;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, menu, nav, section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+    background-image: url("../images/bg2.jpg");
+    background-size: 100%;
 }
 
 .button {
@@ -43,6 +69,7 @@ html, body {
     width: 100%;
     display: inline-block;
     text-align: center;
+    background-color: white;
 }
 
 #header-logo {
@@ -58,22 +85,53 @@ html, body {
     font-size: 35px;
 }
 
-nav {
+nav#navigation-background {
     width: 100%;
-    height: 50px;
-    display: inline-block;
+    height: 35px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-top: 1px solid black;
+}
+
+    nav#navigation-background .navigation-helper {
+        width: 100%;
+        height: 100%;
+        vertical-align: top;
+    }
+
+    nav#navigation-background .navigation-helper ul {
+        position: relative;
+        padding: 0;
+        list-style: none;
+        text-align: center;
+        transform: translateY(-50%);
+        top: 50%;
+    }
+
+nav#navigation-background ul li {
     text-align: center;
+    display: inline-block;
+    margin-right: 25px;
 }
 
-nav ul,
-section ul {
-    list-style: none;
+nav#navigation-background ul li a {
+    font-size: 20px;
+    font-family: Nunito, serif;
+    text-decoration: none;
+    color: white;
 }
 
-nav ul li,
+    nav#navigation-background ul li a:hover {
+        text-decoration: underline;
+    }
+
 section ul li {
     display: inline-block;
     margin-right: 15px;
+}
+
+section ul {
+    margin-top: 10px;
+    list-style: none;
 }
 
 section ul li a {
@@ -86,10 +144,10 @@ section ul li label {
     padding: 5px;
     font-family: Lobster, serif;
     font-size: 35px;
-    color: #cacaca;
+    color: #000000;
     text-align: center;
 
-    border: 2px solid #cacaca;
+    border: 2px solid #000000;
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
     border-radius: 8px;
@@ -105,17 +163,12 @@ section ul li label {
         cursor: pointer;
     }
 
-#navigation-background {
-    /*background-color: #6f6f6f;*/
-    border-top: 1px solid black;
-}
-
 #main-page {
     width: 80%;
     height: auto;
     margin: 10px auto;
     padding: 0 15px 5px;
-    background-color: #fdf3d3;
+    background-color: rgba(253, 243, 211, 0.8);
     text-align: center;
 }
 
@@ -133,6 +186,10 @@ p.header-text {
     cursor: pointer;
     width: 150px;
     height: 150px;
+}
+
+#main-page #summary-header .header-text tr .hair-beard-img {
+    cursor: default;
 }
 
 label {
@@ -214,58 +271,78 @@ td {
 /*********************/
 
 #calendar {
-    margin: 25px auto;
+    margin: 5px auto;
+    border-spacing: 0;
+}
+
+.calendarday, .calendardate, .calendardateblocked, .calendardate-sun-mon, .calendardate-tue {
+    font-family: Lobster, serif;
+}
+
+.calendardate, .calendardateblocked, .calendardate-sun-mon, .calendardate-tue {
+    vertical-align: top;
+    text-align: left;
+    height: 25px;
+    width: 100px;
 }
 
 .calendarday {
     width: inherit;
     height: 25px;
-    background-color: #5d2800;
+    background-color: #5d4437;
 }
 
     .calendarday > th {
         color: white;
         text-align: center;
-    }
-    
-.calendardate {
-    background-color: #cf8b6b;
-}
-
-    .calendardate > label {
-        float: left;
-        text-align: left;
+        padding-top: 3px;
     }
 
-.calendardateblocked {
-    background-color: rgba(255, 221, 142, 0.33);
-    color: #bfbfbf;
+.calendardate-tue {
+    border-left: 1px solid black;
 }
 
-.calendardate-sun-mon {
-    background-color: #636363;
-    color: rgb(191, 191, 191);
+.calendardate .divBox, .calendardate-tue .divBox {
+    cursor: pointer;
+
+    /*border: 1px solid black;*/
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
 }
 
-.calendardate,
-.calendardateblocked,
-.calendardate-sun-mon {
-    vertical-align: top;
+.calendardate .divBox span, .calendardate-tue .divBox span {
+    color: white;
+}
+
+.calendardate .divBox:hover, .calendardate-tue .divBox:hover {
+    background-color: black;
+}
+
+.calendardate > label, .calendardate-tue > label {
+    float: left;
     text-align: left;
-    height: 60px;
-    width: 100px;
 }
 
-.calendarday,
-.calendardate,
-.calendardateblocked,
-.calendardate-sun-mon
-{
-    font-family: Lobster, serif;
+.calendardateblocked .divBox {
+    /*border-right: 1px solid #bfbfbf;*/
+    /*border-bottom: 1px solid #bfbfbf;*/
+}
+
+.calendardateblocked .divBox span {
+    color: #5e5e5e;
+}
+
+.calendardate-sun-mon .divBox {
+    /*border-left: 1px solid #bfbfbf;*/
+    /*border-right: 1px solid #bfbfbf;*/
+    /*border-bottom: 1px solid #bfbfbf;*/
+}
+
+.calendardate-sun-mon .divBox span {
+    color: #848484;
 }
 
 .divBox {
-    cursor: pointer;
     width: 100%;
     height: 100%;
 }
@@ -275,12 +352,8 @@ td {
     height: 100%;
     display: block;
     text-decoration: none;
-    color: white;
-}
-
-.divBox span:hover {
-    background-color: white;
     color: black;
+    padding: 5px 0 0 5px;
 }
 
 
@@ -292,6 +365,46 @@ td {
     OTHER STUFF
                     */
 /*********************/
+
+section #date-and-time span#date-and-time-header {
+    display: block;
+    width: 700px;
+    margin: 60px auto;
+    padding-top: 10px;
+    border-top: 1px solid black;
+    /*background-color: green;*/
+}
+
+div.month-name {
+    width: 700px;
+    margin: 35px auto 0 auto;
+    padding-top: 10px;
+    border-top: 1px solid black;
+}
+
+#main-page .month-name p.header-text {
+    font-family: Lobster, serif;
+    text-align: left;
+}
+
+#main-page p.header-text {
+    text-align: center;
+}
+
+#summary-header .header-text {
+    margin: auto;
+}
+
+#summary-header .header-text th {
+    text-align: center;
+    width: 250px;
+}
+
+#main-page #summary-header .header-text tr td {
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 25px;
+}
 
 .bezet {
     background-color: #b50000;

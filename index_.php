@@ -19,18 +19,17 @@ session_start();
 
 <header>
 <div id="main-header">
-    <img src="http://barbershopbarcelona.com/wp-content/uploads/2014/11/thebarbershop-Redondo.png" id="header-logo">
+    <a href="index_.php"><img src="http://barbershopbarcelona.com/wp-content/uploads/2014/11/thebarbershop-Redondo.png" id="header-logo"></a>
     <span id="header-name">Classic Barbershop Jeroen</span>
 </div>
 <nav id="navigation-background">
-    <ul>
-        <li><a href="#">one</a></li>
-        <li><a href="#">two</a></li>
-        <li><a href="#">three</a></li>
-        <li><a href="#">four</a></li>
-        <li><a href="#">five</a></li>
-        <li><a href="#">six</a></li>
-    </ul>
+    <div class="navigation-helper">
+        <ul>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Reserveer</a></li>
+        </ul>
+    </div>
 </nav>
 </header>
 
@@ -45,12 +44,12 @@ session_start();
 
     <p class="header-text">Door...</p>
     <ul>
-        <li><label id="Jeroen" onclick="nameSelection(this)">Jeroen</label></li>
-        <li><label id="Juno" onclick="nameSelection(this)">Juno</label></li>
+        <li><label id="Jeroen" onclick="barberSelection(this)">Jeroen</label></li>
+        <li><label id="Juno" onclick="barberSelection(this)">Juno</label></li>
     </ul>
 
     <div class="button">
-        <span onclick="checkBookButton()">Reserveer</span>
+        <span id="bookButton" onclick="checkBookButton()">Reserveer</span>
     </div>
 </section>
 
