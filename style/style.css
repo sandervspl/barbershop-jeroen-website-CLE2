@@ -25,17 +25,16 @@ footer, header, menu, nav, section {
 
 body {
     line-height: 1;
-    background-image: url("../images/bg2.jpg");
+    background-image: url("../images/bg4.jpg");
     background-size: 100%;
+    background-repeat: no-repeat;
+    background-color: black;
 }
 
 .button {
     width: 300px;
     height: auto;
-    /*margin-top: 50px;*/
-    margin: 0 auto;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin: 50px auto 50px auto;
 
     font-family: Nunito, serif;
     font-size: 50px;
@@ -166,9 +165,9 @@ section ul li label {
 #main-page {
     width: 80%;
     height: auto;
-    margin: 10px auto;
+    margin: 50px auto;
     padding: 0 15px 5px;
-    background-color: rgba(253, 243, 211, 0.8);
+    background-color: rgba(253, 243, 211, 0.9);
     text-align: center;
 }
 
@@ -184,8 +183,8 @@ p.header-text {
 
 .hair-beard-img {
     cursor: pointer;
-    width: 150px;
-    height: 150px;
+    width: 140px;
+    height: 140px;
 }
 
 #main-page #summary-header .header-text tr .hair-beard-img {
@@ -237,8 +236,7 @@ td {
     margin-right: 15px;
 }
 
-.appointments-table,
-.appointments-table-clear {
+.appointments-table, .appointments-table-clear {
     float: left;
 }
 
@@ -366,13 +364,78 @@ td {
                     */
 /*********************/
 
+.time-taken {
+    color: red;
+}
+
+.time-open {
+    color: black;
+}
+
+#date-and-time-times-container {
+    /*background-color: green;*/
+    text-align: left;
+    height: 0;
+    overflow: auto;
+    /*visibility: hidden;*/
+}
+
+.times-container {
+    /*background-color: rgba(255, 255, 255, 0.8);*/
+    /*border: 1px solid black;*/
+
+    width: 300px;
+    display: inline-block;
+    text-align: left;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.times-container div {
+    /*background-color: blue;*/
+    position: relative;
+    float: left;
+}
+
+.times-container p {
+    font-family: Nunito, serif;
+    font-size: 50px;
+    float: right;
+}
+
+.times-icon {
+    cursor: pointer;
+
+    width: 100px;
+    height: 100px;
+    margin-right: 15px;
+    float: left;
+}
+
+.times-icon-taken {
+    width: 100px;
+    height: 100px;
+    margin-right: 15px;
+    float: left;
+}
+
 section #date-and-time span#date-and-time-header {
+    /*background-color: green;*/
+    font-family: Lobster, serif;
+    color: #5d4437;
     display: block;
     width: 700px;
-    margin: 60px auto;
+    margin: 60px auto 25px auto;
     padding-top: 10px;
-    border-top: 1px solid black;
-    /*background-color: green;*/
+    /*border-bottom: 1px solid black;*/
+}
+
+section #date-and-time #date-and-time-times-container p.header-text {
+    text-align: left;
+    font-family: Lobster, serif;
+    color: white;
+    margin: 0 auto 25px auto;
+    border-bottom: 1px solid black;
 }
 
 div.month-name {
@@ -388,6 +451,7 @@ div.month-name {
 }
 
 #main-page p.header-text {
+    margin-top: 25px;
     text-align: center;
 }
 
@@ -447,3 +511,11 @@ div.month-name {
         -moz-box-shadow: 0 0 1px rgba(0,0,0, .75);
         box-shadow: 0 0 1px rgba(0,0,0, .75);
     }
+
+footer {
+    clear: both;
+    width: 100%;
+    height: 50px;
+    background-color: white;
+    margin-top: 20px;
+}

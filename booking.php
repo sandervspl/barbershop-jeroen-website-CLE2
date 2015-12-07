@@ -126,7 +126,7 @@ $year = date("Y", $time);
                         echo "<td class=\"calendardate\">";
                     }
                     echo "<div class=\"divBox\">";
-                    echo "<span onclick=\"onDateClick($day, '$monthname', $year)\"> $day </span>";
+                    echo "<span onclick=\"onDateClick($day, '$monthname', $month, $year)\"> $day </span>";
                     echo "</div></td>";
                 } else {
                     echo "<td class=\"calendardate-sun-mon\">";
@@ -167,7 +167,7 @@ $year = date("Y", $time);
                                 echo "<td class=\"calendardate\">";
                             }
                             echo "<div class=\"divBox\">";
-                            echo "<span onclick=\"onDateClick($day, '$monthname', $year)\"> $day </span>";
+                            echo "<span onclick=\"onDateClick($day, '$monthname', $month, $year)\"> $day </span>";
                             echo "</div></td>";
                         } else {
                             echo "<td class=\"calendardate-sun-mon\">";
@@ -210,10 +210,17 @@ $year = date("Y", $time);
 
 <section id="date-and-time">
     <span id="date-and-time-header" class="header-text"></span>
+
+    <div id="date-and-time-times-container">
+        <div id="times-table"><span class="header-text">Loading times...</span></div>
+    </div>
 </section>
 
 
 </section>
+
+<footer>
+</footer>
 
 <script src="scripts/calendar.js"></script>
 <script src="scripts/select.js"></script>

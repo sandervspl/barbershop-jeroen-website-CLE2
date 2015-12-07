@@ -53,6 +53,9 @@ session_start();
     </div>
 </section>
 
+<footer>
+</footer>
+
 <script src="scripts/select.js"></script>
 </body>
 </html>
