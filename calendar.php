@@ -53,25 +53,24 @@
                 // put these in a special table cell
                 $prevMonthDays = count($prevMonthDayArray) - 1;
                 for ($i = $prevMonthDays; $i >= 0; $i--) {
-                    echo "<td class=\"calendardateblocked\">";
-                    echo "<div class=\"divBox\">";
+                    echo '<td class="calendardateblocked">';
+                    echo '<div class="divBox">';
                     echo "<span> $prevMonthDayArray[$i] </span>";
                     echo "</div></td>";
                 }
 
                 // it will always miss day 01 on first row if this is not here. (line 114)
                 if ($weekday !== "Mon" && $weekday !== "Sun") {
-                    echo "<td class=\"calendardate\">";
-                    echo "<div class=\"divBox\">";
+                    echo '<td class="calendardate">';
+                    echo '<div class="divBox">';
                     echo "<span onclick=\"onDateClick($day, '$monthname', $month, $year)\"> $day </span>";
                     echo "</div></td>";
                 } else {
-                    echo "<td class=\"calendardate-sun-mon\">";
-                    echo "<div class=\"divBox\">";
+                    echo '<td class="calendardate-sun-mon">';
+                    echo '<div class="divBox">';
                     echo "<span> $day </span>";
                     echo "</div></td>";
                 }
-
 
                 // current month days
             } else {
@@ -98,13 +97,13 @@
                 } else {
                     if (!$doNextMonth) {
                         if ($weekday !== "Mon" && $weekday !== "Sun") {
-                            echo "<td class=\"calendardate\">";
-                            echo "<div class=\"divBox\">";
+                            echo '<td class="calendardate">';
+                            echo '<div class="divBox">';
                             echo "<span onclick=\"onDateClick($day, '$monthname', $month, $year)\"> $day </span>";
                             echo "</div></td>";
                         } else {
-                            echo "<td class=\"calendardate-sun-mon\">";
-                            echo "<div class=\"divBox\">";
+                            echo '<td class="calendardate-sun-mon">';
+                            echo '<div class="divBox">';
                             echo "<span> $day </span>";
                             echo "</div></td>";
                         }
