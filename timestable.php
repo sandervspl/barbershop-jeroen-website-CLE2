@@ -29,12 +29,20 @@ if (isset($_GET['month']) && isset($_GET['year']) && isset($_GET['day'])) {
 
 $date = $year."-".$month."-".$day;
 $hour = 9;
-$hours = 18;
+$end_hour = 17;
+
+$dayname = date("D", mktime(0,0,0, $month, $day, $year));
+if ($dayname === "Thu") {
+    $hour = 11;
+    $end_hour = 17;
+} else if ($dayname === "Sat") {
+    $end_hour = 15;
+}
 
 $didMorningHeader = false;
 $didAfternoonHeader = false;
 
-for ($minute = 0; $minute <= 17; $minute++) {
+for ($minute = 0; $minute <= $end_hour; $minute++) {
     if ($minute % 2 == 0) {
         if ($minute > 0) {
             $hour++;
@@ -63,7 +71,6 @@ for ($minute = 0; $minute <= 17; $minute++) {
     }
     $time2 = $uu . ":" . $mm;
 
-    $db = mysqli_connect('localhost', 'root', '', 'website');
     $sql = sprintf("SELECT * FROM afspraken WHERE datum='%s' AND tijd='%s'",
         mysqli_real_escape_string($db, $date),
         mysqli_real_escape_string($db, $time1));
