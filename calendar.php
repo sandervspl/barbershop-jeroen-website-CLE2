@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>$Title$</title>
+    <title>Classic Barbershop Jeroen</title>
     
     <link rel="stylesheet" href="style/style.css">
 </head>
@@ -22,7 +22,6 @@
     </tr>
 
     <tr>
-
         <?php
         $endMonth = false;
         $endPrevMonth = false;
@@ -62,11 +61,7 @@
 
                 // it will always miss day 01 on first row if this is not here. (line 114)
                 if ($weekday !== "Mon" && $weekday !== "Sun") {
-                    if ($weekday === "Tue") {
-                        echo "<td class=\"calendardate-tue\">";
-                    } else {
-                        echo "<td class=\"calendardate\">";
-                    }
+                    echo "<td class=\"calendardate\">";
                     echo "<div class=\"divBox\">";
                     echo "<span onclick=\"onDateClick($day, '$monthname', $month, $year)\"> $day </span>";
                     echo "</div></td>";
@@ -103,11 +98,7 @@
                 } else {
                     if (!$doNextMonth) {
                         if ($weekday !== "Mon" && $weekday !== "Sun") {
-                            if ($weekday === "Tue") {
-                                echo "<td class=\"calendardate-tue\">";
-                            } else {
-                                echo "<td class=\"calendardate\">";
-                            }
+                            echo "<td class=\"calendardate\">";
                             echo "<div class=\"divBox\">";
                             echo "<span onclick=\"onDateClick($day, '$monthname', $month, $year)\"> $day </span>";
                             echo "</div></td>";

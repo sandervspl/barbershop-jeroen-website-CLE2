@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <title>Afspraken</title>
 
-    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="../style/style.css">
 </head>
 <body>
 

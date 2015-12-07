@@ -7,7 +7,7 @@
 
     <title>Selection Page</title>
     
-    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="../style/style.css">
 </head>
 <body>
 <form method="post" action="">
@@ -143,6 +143,6 @@ if (isset($_POST['prevday'])) {
     }
 ?>
 
-<script src="scripts/Nextday.js"></script>
+<script src="../scripts/Nextday.js"></script>
 </body>
 </html>

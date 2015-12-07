@@ -270,14 +270,15 @@ td {
 
 #calendar {
     margin: 5px auto;
+    border-collapse: separate;
     border-spacing: 0;
 }
 
-.calendarday, .calendardate, .calendardateblocked, .calendardate-sun-mon, .calendardate-tue {
+.calendarday, .calendardate, .calendardateblocked, .calendardate-sun-mon {
     font-family: Lobster, serif;
 }
 
-.calendardate, .calendardateblocked, .calendardate-sun-mon, .calendardate-tue {
+.calendardate, .calendardateblocked, .calendardate-sun-mon {
     vertical-align: top;
     text-align: left;
     height: 25px;
@@ -296,27 +297,24 @@ td {
         padding-top: 3px;
     }
 
-.calendardate-tue {
-    border-left: 1px solid black;
-}
-
-.calendardate .divBox, .calendardate-tue .divBox {
+.calendardate .divBox {
     cursor: pointer;
 
+    white-space: nowrap;
     /*border: 1px solid black;*/
-    border-right: 1px solid black;
+    /*border-right: 1px solid black;*/
     border-bottom: 1px solid black;
 }
 
-.calendardate .divBox span, .calendardate-tue .divBox span {
+.calendardate .divBox span {
     color: white;
 }
 
-.calendardate .divBox:hover, .calendardate-tue .divBox:hover {
+.calendardate .divBox:hover {
     background-color: black;
 }
 
-.calendardate > label, .calendardate-tue > label {
+.calendardate > label {
     float: left;
     text-align: left;
 }
@@ -383,8 +381,9 @@ td {
 .times-container {
     /*background-color: rgba(255, 255, 255, 0.8);*/
     /*border: 1px solid black;*/
+    cursor: pointer;
 
-    width: 300px;
+    width: 200px;
     display: inline-block;
     text-align: left;
     margin-right: 20px;
@@ -397,24 +396,30 @@ td {
     float: left;
 }
 
-.times-container p {
+.times-container div p {
     font-family: Nunito, serif;
-    font-size: 50px;
+    font-size: 30px;
     float: right;
 }
 
-.times-icon {
-    cursor: pointer;
+.times-container div p:last-child {
+    font-size: 15px;
+    position: relative;
+    float: left;
+}
 
-    width: 100px;
-    height: 100px;
+.times-icon {
+    /*cursor: pointer;*/
+
+    width: 55px;
+    height: 55px;
     margin-right: 15px;
     float: left;
 }
 
 .times-icon-taken {
-    width: 100px;
-    height: 100px;
+    width: 55px;
+    height: 55px;
     margin-right: 15px;
     float: left;
 }
@@ -469,6 +474,13 @@ div.month-name {
     vertical-align: middle;
     padding-top: 25px;
 }
+
+
+
+
+/**/
+/*MISC*/
+/**/
 
 .bezet {
     background-color: #b50000;

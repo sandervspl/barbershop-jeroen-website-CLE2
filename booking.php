@@ -64,6 +64,7 @@ $year = date("Y", $time);
     </table>
     </div>
 
+    <!--  month name above calendar  -->
     <div class="month-name">
         <p class="header-text"><?= $monthname; ?></p>
     </div>

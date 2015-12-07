@@ -76,14 +76,6 @@ for ($minute = 0; $minute <= $end_hour; $minute++) {
         mysqli_real_escape_string($db, $time1));
     $result = mysqli_query($db, $sql);
 
-    if (mysqli_num_rows($result) > 0) {
-        $class = "time-taken";
-        $class_i = "times-icon-taken";
-    } else {
-        $class = "time-open";
-        $class_i = "times-icon";
-    }
-
     if ($hour < 12 && !$didMorningHeader) { ?>
         <p class="header-text">Morning</p>
         <?php
@@ -95,9 +87,17 @@ for ($minute = 0; $minute <= $end_hour; $minute++) {
         <?php
         $didAfternoonHeader = true;
     }
+
+    if (mysqli_num_rows($result) > 0) {
+        $class = "time-taken";
+        $class_i = "times-icon-taken";
+    } else {
+        $class = "time-open";
+        $class_i = "times-icon";
+    }
     ?>
-    <div class="times-container">
-        <img id=<?=$time1?> class="<?=$class_i?>" src="images/booking/timer_30_min.png" onclick="onTimeClick(this.id)">
+    <div class="times-container" onclick="onTimeClick(this.id)">
+        <img id=<?=$time1?> class="<?=$class_i?>" src="images/booking/timer_clear2.png">
         <div>
             <p class="<?=$class?>"><?= $time1 ?></p><br>
             <p class="<?=$class?>"><?= $time2 ?></p>
