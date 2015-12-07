@@ -42,16 +42,16 @@ if ($dayname === "Thu") {
 $didMorningHeader = false;
 $didAfternoonHeader = false;
 
-for ($minute = 0; $minute <= $end_hour; $minute++) {
-    if ($minute % 2 == 0) {
-        if ($minute > 0) {
+for ($i = 0; $i <= $end_hour; $i++) {
+    if ($i % 2 == 0) {
+        if ($i > 0) {
             $hour++;
         }
 
         $m = "00";
     }
 
-    if ($minute % 2) {
+    if ($i % 2) {
         $m = "30";
     }
 
@@ -70,6 +70,11 @@ for ($minute = 0; $minute <= $end_hour; $minute++) {
         $mm = "30";
     }
     $time2 = $uu . ":" . $mm;
+
+    // lunch break
+    if ($hour === 13) {
+        continue;
+    }
 
     $sql = sprintf("SELECT * FROM afspraken WHERE datum='%s' AND tijd='%s'",
         mysqli_real_escape_string($db, $date),
