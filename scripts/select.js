@@ -33,18 +33,21 @@ function cutSelect(sender) {
     window.sessionStorage.cut = sender.id;
 }
 
+// set and unset styles for barber option
 function barberSelection(sender) {
-    // loop through our UL to check if any other name is selected
-    var a_elements = sender.parentNode.parentNode.getElementsByTagName("label");
-
+    var a_elements = window.document.getElementsByClassName("barbers");
     for (var i = 0, len = a_elements.length; i < len; i++) {
-        a_elements[i].style.color = '#000000';
-        a_elements[i].style.border = '2px solid #000000';
+        a_elements[i].style.border = '1px solid black';
+    }
+
+    a_elements = window.document.getElementsByClassName("barbername");
+    for (var j = 0, leng = a_elements.length; j < leng; j++) {
+        a_elements[j].style.color = 'black';
     }
 
     // set sender as selected
     sender.style.color = 'white';
-    sender.style.border = '2px solid white';
+    sender.parentNode.style.border = '1px solid white';
 
     window.sessionStorage.barber = sender.id;
 }
@@ -104,6 +107,10 @@ function barberSelected() {
 function timeSelected() {
     window.document.querySelector('#chosen-time').innerHTML = window.sessionStorage.time;
     window.document.querySelector('#chosen-etime').innerHTML = window.sessionStorage.end_time;
+}
+
+function monthSelected() {
+    window.document.querySelector('#chosen-month').innerHTML = window.sessionStorage.monthday + " " + window.sessionStorage.month;
 }
 
 

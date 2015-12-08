@@ -40,16 +40,19 @@ function onDateClick(d, mo, m, y) {
     //b.style.visibility = "visible";
     b.style.height = "auto";
 
+    window.sessionStorage.monthday = d;
+
     // animate
     //$('date-and-time-times-container').animate({height:'300px'}, 5000, function() {});
 
     //window.location.href = 'booking.php?day=' + d + "&month=" + m + "&year=" + y;
 }
 
-function onTimeClick(time, etime) {
+function onTimeClick(time, etime, month) {
     if (time == 0 || etime == 0) return;
 
     window.sessionStorage.time = time;
     window.sessionStorage.end_time = etime;
+    window.sessionStorage.month = month;
     window.location.href = 'gegevens.php';
 }

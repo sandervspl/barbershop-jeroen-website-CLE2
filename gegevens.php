@@ -1,5 +1,5 @@
 <?php
-session_start();
+include_once "gegevens_check.php";
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -29,26 +29,57 @@ session_start();
 </header>
 
 <section id="main-page">
-    <div id="summary-header">
-        <table class="header-text">
-            <tr>
-                <th>Wat</th>
-                <th>Wie</th>
-                <th>Tijd</th>
-            </tr>
-            <tr>
-                <td><img id="cut" class="hair-beard-img" src="images/index/no-hair-no-beard.png"></td>
-                <td><span class="barber-name">aaa</span></td>
-                <td><span id="chosen-time">08:00</span> - <span id="chosen-etime">08:00</span></td>
-                <script src="scripts/select.js"></script>
-                <script type="text/javascript">
-                    cutSelected();
-                    barberSelected();
-                    timeSelected();
-                </script>
-            </tr>
-        </table>
+<div id="wrapper">
+    <div id="summary-wrapper">
+        <p class="header-text">Bestelling</p>
+        <div id="summary-wrapper-text">
+            <span class="barber-name">Jeroen</span><br/>
+                <p id="chosen-month">32 January</p>
+            <div id="summary-wrapper-text-time">
+                <span id="chosen-time">03:22</span>
+                <span id="chosen-etime">04:20</span>
+            </div>
+        </div>
+        <div id="summary-wrapper-icon">
+            <img id="cut" class="hair-beard-img" src="images/index/no-hair-no-beard.png">
+        </div>
+        <script src="scripts/select.js"></script>
+        <script type="text/javascript">
+            cutSelected();
+            barberSelected();
+            timeSelected();
+            monthSelected();
+        </script>
     </div>
+
+    <section id="gegevens-form">
+        <div>
+            <form id="mainForm" action="#" method="post">
+                <div>
+                    <p>
+                        <label class="input-text" for="firstNameInput">Voornaam</label>
+                        <input id="firstNameInput" name="FirstName" type="text" autofocus="autofocus" class="textinput"/>
+                    </p>
+                    <p>
+                        <label class="input-text" for="lastNameInput">Achternaam</label>
+                        <input id="lastNameInput" name="LastName" type="text" class="textinput" size="10"/>
+                    </p>
+                    <p>
+                        <label class="input-text" for="emailInput">Email</label><br/>
+                        <input id="emailInput" name="Email" type="email" class="textinput"/>
+                    </p>
+
+                    <p>
+                        <label class="input-text" for="phoneInput">Telefoon</label><br/>
+                        <input id="phoneInput" name="PhoneNumber" type="text" class="textinput"/>
+                    </p>
+                </div>
+
+                <input type="submit" class="button" value="Reserveer"/>
+            </form>
+        </div>
+    </section>
+</div>
 </section>
 
 <footer>

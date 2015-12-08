@@ -27,6 +27,8 @@ if (isset($_GET['month']) && isset($_GET['year']) && isset($_GET['day'])) {
     $year = date("Y");
 }
 
+$monthname = date("F");
+
 $date = $year."-".$month."-".$day;
 $hour = 9;
 $end_hour = 17;
@@ -121,8 +123,10 @@ for ($i = 0; $i <= $end_hour; $i++) {
         $func2 = "\"" . $time2 . "\"";
         $img_src = "images/booking/timer_clear2.png";
     }
+
+    $mn = "\"" . $monthname . "\"";
     ?>
-    <div id=<?=$time1?> class=<?=$class_d?> onclick='onTimeClick(<?=$func1?>, <?=$func2?>)'>
+    <div id=<?=$time1?> class=<?=$class_d?> onclick='onTimeClick(<?=$func1?>, <?=$func2?>, <?=$mn?>)'>
         <img id=<?=$time1?> class="<?=$class_i?>" src=<?=$img_src?>>
         <div>
             <p class="<?=$class_p?>"><?= $time1 ?></p><br>

@@ -14,8 +14,10 @@ session_start();
         window.sessionStorage.cut = 0;
         window.sessionStorage.barber = 0;
         window.sessionStorage.time = 0;
-        window.sessionStorage.etime = 0;
+        window.sessionStorage.end_time = 0;
         window.sessionStorage.cut_time = 0;
+        window.sessionStorage.cut_month = 0;
+        window.sessionStorage.cut_monthday = 0;
     </script>
 </head>
 <body>
@@ -37,7 +39,8 @@ session_start();
 </header>
 
 <section id="main-page">
-    <p class="header-text">Ik wil...</p>
+    <p id="header-text-header">Get a haircut</p>
+    <p class="header-text">Your cut</p>
     <ul>
         <li><img src="images/index/yes-hair-no-beard.png" id="hair" class="hair-beard-img" onclick="cutSelect(this, this.src)"></li>
         <li><img src="images/index/no-hair-yes-beard.png" id="beard" class="hair-beard-img" onclick="cutSelect(this, this.src)"></li>
@@ -45,10 +48,12 @@ session_start();
         <li><img src="images/index/yes-hair-yes-beard.png" id="all" class="hair-beard-img" onclick="cutSelect(this, this.src)"></li>
     </ul>
 
-    <p class="header-text">Door...</p>
+    <div class="divider"></div>
+
+    <p class="header-text">Your barber</p>
     <ul>
-        <li><label id="Jeroen" onclick="barberSelection(this)">Jeroen</label></li>
-        <li><label id="Juno" onclick="barberSelection(this)">Juno</label></li>
+        <li class="barbers"><label id="Jeroen" class="barbername" onclick="barberSelection(this)">Jeroen</label></li>
+        <li class="barbers"><label id="Juno" class="barbername" onclick="barberSelection(this)">Juno</label></li>
     </ul>
 
     <div class="button">
