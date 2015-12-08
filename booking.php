@@ -44,6 +44,7 @@ $year = date("Y", $time);
 </header>
 
 <section id="main-page">
+    <p id="header-text-header">Date & Time</p>
     <div id="summary-header">
     <table class="header-text">
         <tr>

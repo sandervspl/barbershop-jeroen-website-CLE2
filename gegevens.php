@@ -1,5 +1,58 @@
 <?php
-include_once "gegevens_check.php";
+if (isset($_POST['submit'])) {
+    $voornaam = '';
+    $achternaam = '';
+    $email = '';            // TODO: Regex
+    $phone = '';            // TODO: regex
+
+    $ok = true;
+    if (!isset($_POST['voornaam']) || $_POST ['voornaam'] === '') {
+        $ok = false;
+    } else {
+        $voornaam = $_POST['voornaam'];
+    }
+    if (!isset($_POST['achternaam']) || $_POST ['achternaam'] === '') {
+        $ok = false;
+    } else {
+        $achternaam = $_POST['achternaam'];
+    }
+    if (!isset($_POST['email']) || $_POST ['email'] === '') {
+        $ok = false;
+    } else {
+        $email = $_POST['email'];
+    }
+    if (!isset($_POST['phone']) || $_POST ['phone'] === '') {
+        $ok = false;
+    } else {
+        $phone = $_POST['phone'];
+    }
+
+    if ($ok) {
+        $barber = "Jeroen";
+        $date = "1-1-2015";
+        $time = "16:00";
+
+//        $date = date("Y-") . $month . "-" . $day;
+        // add to db
+        $db = mysqli_connect('localhost', 'root', '', 'website') or die('Error: '.mysqli_connect_error());
+
+        $sql = sprintf("INSERT INTO afspraken (voornaam, achternaam, datum, tijd, baard, kapper) VALUES ('%s', '%s', '%s', '%s', '%s', '%s')",
+            mysqli_real_escape_string($db, $voornaam),
+            mysqli_real_escape_string($db, $achternaam),
+            mysqli_real_escape_string($db, $date),
+            mysqli_real_escape_string($db, $time),
+            mysqli_real_escape_string($db, "JA"),
+            mysqli_real_escape_string($db, $barber)
+        );
+        mysqli_query($db, $sql);
+        mysqli_close($db);
+
+        // go to next page (thanks for your reservation etc.)
+    } else {
+        echo "FAILED";
+    }
+//    include_once "gegevens_check.php";
+}
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -29,6 +82,7 @@ include_once "gegevens_check.php";
 </header>
 
 <section id="main-page">
+    <p id="header-text-header">Confirm appointment</p>
 <div id="wrapper">
     <div id="summary-wrapper">
         <p class="header-text">Bestelling</p>
@@ -58,28 +112,30 @@ include_once "gegevens_check.php";
                 <div>
                     <p>
                         <label class="input-text" for="firstNameInput">Voornaam</label>
-                        <input id="firstNameInput" name="FirstName" type="text" autofocus="autofocus" class="textinput"/>
+                        <input id="firstNameInput" name="voornaam" type="text" autofocus="autofocus" class="textinput"/>
                     </p>
                     <p>
                         <label class="input-text" for="lastNameInput">Achternaam</label>
-                        <input id="lastNameInput" name="LastName" type="text" class="textinput" size="10"/>
+                        <input id="lastNameInput" name="achternaam" type="text" class="textinput" size="10"/>
                     </p>
                     <p>
                         <label class="input-text" for="emailInput">Email</label><br/>
-                        <input id="emailInput" name="Email" type="email" class="textinput"/>
+                        <input id="emailInput" name="email" type="email" class="textinput"/>
                     </p>
 
                     <p>
                         <label class="input-text" for="phoneInput">Telefoon</label><br/>
-                        <input id="phoneInput" name="PhoneNumber" type="text" class="textinput"/>
+                        <input id="phoneInput" name="phone" type="text" class="textinput"/>
                     </p>
                 </div>
 
-                <input type="submit" class="button" value="Reserveer"/>
+                <input type="submit" name="submit" class="button" value="submit"/>
             </form>
         </div>
     </section>
 </div>
+
+<!--    <div class="spacer"></div>-->
 </section>
 
 <footer>

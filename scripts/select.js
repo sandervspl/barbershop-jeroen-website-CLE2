@@ -124,3 +124,15 @@ function checkBookButton() {
         window.location.href = 'booking.php';
     }
 }
+
+
+
+
+// getters
+function getBarber() {
+    return window.sessionStorage.barber;
+}
+
+function getTime() {
+    return window.sessionStorage.time;
+}

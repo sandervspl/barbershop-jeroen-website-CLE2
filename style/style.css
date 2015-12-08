@@ -37,6 +37,13 @@ body {
     border-bottom: 1px solid black;
 }
 
+.spacer {
+    background-color: green;
+    clear: both;
+    margin-top: 50px;
+    height: 100px;
+}
+
 .button {
     cursor: pointer;
 

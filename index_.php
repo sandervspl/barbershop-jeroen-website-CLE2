@@ -1,5 +1,8 @@
 <?php
 session_start();
+$_SESSION['barber'] = 0;
+$_SESSION['date'] = "0-0-000";
+$_SESSION['time'] = "0:00";
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
