@@ -46,54 +46,10 @@ function onDateClick(d, mo, m, y) {
     //window.location.href = 'booking.php?day=' + d + "&month=" + m + "&year=" + y;
 }
 
-function cutSelected() {
-    var b = window.document.getElementById('cut');
-    var i = window.document.getElementById('cut-time');
+function onTimeClick(time, etime) {
+    if (time == 0 || etime == 0) return;
 
-    // insert chosen cut type
-    switch(window.sessionStorage.cut) {
-        case "hair": {
-            b.setAttribute('src', 'images/index/yes-hair-no-beard.png');
-            i.setAttribute('src', 'images/booking/timer_30_min.png');
-            window.sessionStorage.cut_time = 30;
-            break;
-        }
-
-        case "beard": {
-            b.setAttribute('src', 'images/index/no-hair-yes-beard.png');
-            i.setAttribute('src', 'images/booking/timer_30_min.png');
-            window.sessionStorage.cut_time = 30;
-            break;
-        }
-
-        case "moustache": {
-            b.setAttribute('src', 'images/index/no-hair-no-beard-yes-moustache.png');
-            i.setAttribute('src', 'images/booking/timer_30_min.png');
-            window.sessionStorage.cut_time = 30;
-            break;
-        }
-
-        case "all": {
-            b.setAttribute('src', 'images/index/yes-hair-yes-beard.png');
-            i.setAttribute('src', 'images/booking/timer_45_min.png');
-            window.sessionStorage.cut_time = 45;
-            break;
-        }
-
-        default: {
-            b.setAttribute('src', 'images/index/no-hair-no-beard.png');
-            i.setAttribute('src', 'images/booking/timer_clear.png');
-            window.sessionStorage.cut_time = 5;
-        }
-    }
-}
-
-function barberSelected() {
-    // insert chosen barber name
-    window.document.querySelector('.barber-name').innerHTML = window.sessionStorage.barber;
-}
-
-function onTimeClick(time) {
     window.sessionStorage.time = time;
+    window.sessionStorage.end_time = etime;
     window.location.href = 'gegevens.php';
 }

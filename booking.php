@@ -55,7 +55,7 @@ $year = date("Y", $time);
             <td><img id="cut" class="hair-beard-img" src="images/index/no-hair-no-beard.png"></td>
             <td><img id="cut-time" class="hair-beard-img" src="images/booking/timer_clear.png"></td>
             <td><span class="barber-name">aaa</span></td>
-            <script src="scripts/calendar.js"></script>
+            <script src="scripts/select.js"></script>
             <script type="text/javascript">
                 cutSelected();
                 barberSelected();

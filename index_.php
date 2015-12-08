@@ -11,8 +11,11 @@ session_start();
     <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
 
     <script>
-//        window.sessionStorage.cut = 0;
-//        window.sessionStorage.barber = 0;
+        window.sessionStorage.cut = 0;
+        window.sessionStorage.barber = 0;
+        window.sessionStorage.time = 0;
+        window.sessionStorage.etime = 0;
+        window.sessionStorage.cut_time = 0;
     </script>
 </head>
 <body>
@@ -36,10 +39,10 @@ session_start();
 <section id="main-page">
     <p class="header-text">Ik wil...</p>
     <ul>
-        <li><img src="images/index/yes-hair-no-beard.png" id="hair" class="hair-beard-img" onclick="cutSelect(this, this.src)" onmouseover="hover(this, this.src)" onmouseout="unhover(this, this.src)"></li>
-        <li><img src="images/index/no-hair-yes-beard.png" id="beard" class="hair-beard-img" onclick="cutSelect(this, this.src)" onmouseover="hover(this, this.src)" onmouseout="unhover(this, this.src)"></li>
-        <li><img src="images/index/no-hair-no-beard-yes-moustache.png" id="moustache" class="hair-beard-img" onclick="cutSelect(this, this.src)" onmouseover="hover(this, this.src)" onmouseout="unhover(this, this.src)"></li>
-        <li><img src="images/index/yes-hair-yes-beard.png" id="all" class="hair-beard-img" onclick="cutSelect(this, this.src)" onmouseover="hover(this, this.src)" onmouseout="unhover(this, this.src)"></li>
+        <li><img src="images/index/yes-hair-no-beard.png" id="hair" class="hair-beard-img" onclick="cutSelect(this, this.src)"></li>
+        <li><img src="images/index/no-hair-yes-beard.png" id="beard" class="hair-beard-img" onclick="cutSelect(this, this.src)"></li>
+        <li><img src="images/index/no-hair-no-beard-yes-moustache.png" id="moustache" class="hair-beard-img" onclick="cutSelect(this, this.src)"></li>
+        <li><img src="images/index/yes-hair-yes-beard.png" id="all" class="hair-beard-img" onclick="cutSelect(this, this.src)"></li>
     </ul>
 
     <p class="header-text">Door...</p>

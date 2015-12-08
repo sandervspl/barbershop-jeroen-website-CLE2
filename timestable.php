@@ -110,17 +110,19 @@ for ($i = 0; $i <= $end_hour; $i++) {
         $class_p = "time-taken";
         $class_i = "times-icon-taken";
         $class_d = "times-container-taken";
-        $func = "";
+        $func1 = 0;
+        $func2 = 0;
         $img_src = "images/booking/timer_clear2-taken.png";
     } else {
         $class_p = "time-open";
         $class_i = "times-icon";
         $class_d = "times-container";
-        $func = "onTimeClick(this.id)";
+        $func1 = "\"" . $time1 . "\"";  // add "" around data to avoid syntax error in onTimeClick() parameters
+        $func2 = "\"" . $time2 . "\"";
         $img_src = "images/booking/timer_clear2.png";
     }
     ?>
-    <div class=<?=$class_d?> onclick=<?=$func?>>
+    <div id=<?=$time1?> class=<?=$class_d?> onclick='onTimeClick(<?=$func1?>, <?=$func2?>)'>
         <img id=<?=$time1?> class="<?=$class_i?>" src=<?=$img_src?>>
         <div>
             <p class="<?=$class_p?>"><?= $time1 ?></p><br>
