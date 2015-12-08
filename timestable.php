@@ -107,18 +107,24 @@ for ($i = 0; $i <= $end_hour; $i++) {
     }
 
     if (mysqli_num_rows($result) > 0) {
-        $class = "time-taken";
+        $class_p = "time-taken";
         $class_i = "times-icon-taken";
+        $class_d = "times-container-taken";
+        $func = "";
+        $img_src = "images/booking/timer_clear2-taken.png";
     } else {
-        $class = "time-open";
+        $class_p = "time-open";
         $class_i = "times-icon";
+        $class_d = "times-container";
+        $func = "onTimeClick(this.id)";
+        $img_src = "images/booking/timer_clear2.png";
     }
     ?>
-    <div class="times-container" onclick="onTimeClick(this.id)">
-        <img id=<?=$time1?> class="<?=$class_i?>" src="images/booking/timer_clear2.png">
+    <div class=<?=$class_d?> onclick=<?=$func?>>
+        <img id=<?=$time1?> class="<?=$class_i?>" src=<?=$img_src?>>
         <div>
-            <p class="<?=$class?>"><?= $time1 ?></p><br>
-            <p class="<?=$class?>"><?= $time2 ?></p>
+            <p class="<?=$class_p?>"><?= $time1 ?></p><br>
+            <p class="<?=$class_p?>"><?= $time2 ?></p>
         </div>
     </div>
 

@@ -11,8 +11,8 @@ session_start();
     <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
 
     <script>
-        window.sessionStorage.cut = 0;
-        window.sessionStorage.barber = 0;
+//        window.sessionStorage.cut = 0;
+//        window.sessionStorage.barber = 0;
     </script>
 </head>
 <body>

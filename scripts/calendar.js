@@ -82,7 +82,7 @@ function cutSelected() {
 
         default: {
             b.setAttribute('src', 'images/index/no-hair-no-beard.png');
-            i.setAttribute('src', 'images/booking/timer_5_min.png');
+            i.setAttribute('src', 'images/booking/timer_clear.png');
             window.sessionStorage.cut_time = 5;
         }
     }

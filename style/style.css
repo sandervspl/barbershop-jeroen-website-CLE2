@@ -358,12 +358,12 @@ td {
 
 /*********************/
 /*
-    OTHER STUFF
-                    */
+    BOOKING/TIMESTABLE
+                        */
 /*********************/
 
 .time-taken {
-    color: red;
+    color: #b2b2b2;
 }
 
 .time-open {
@@ -375,7 +375,6 @@ td {
     text-align: left;
     height: 0;
     overflow: auto;
-    /*visibility: hidden;*/
 }
 
 .times-container {
@@ -385,33 +384,42 @@ td {
 
     width: 200px;
     display: inline-block;
-    /*text-align: left;*/
     float: left;
     margin-right: 20px;
     margin-bottom: 20px;
 }
 
-.times-container div {
+.times-container:hover div p:first-child {
+    color: white;
+    text-decoration: underline;
+}
+
+.times-container-taken {
+    width: 200px;
+    display: inline-block;
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.times-container div, .times-container-taken div {
     /*background-color: blue;*/
     position: relative;
     float: left;
 }
 
-.times-container div p {
+.times-container div p, .times-container-taken div p {
     font-family: Nunito, serif;
     font-size: 30px;
     float: right;
 }
 
-.times-container div p:last-child {
+.times-container div p:last-child, .times-container-taken div p:last-child {
     font-size: 15px;
-    position: relative;
     float: left;
 }
 
 .times-icon {
-    /*cursor: pointer;*/
-
     width: 55px;
     height: 55px;
     margin-right: 15px;
@@ -453,21 +461,19 @@ td {
 section #date-and-time span#date-and-time-header {
     /*background-color: green;*/
     font-family: Lobster, serif;
-    color: #5d4437;
+    color: #000000;
     display: block;
     width: 700px;
     margin: 60px auto 25px auto;
     padding-top: 10px;
-    /*border-bottom: 1px solid black;*/
 }
 
 section #date-and-time #date-and-time-times-container p.header-text {
     text-align: left;
     font-family: Lobster, serif;
     font-size: 45px;
-    color: white;
+    color: #5d4437;
     margin: 0 auto 25px auto;
-    /*border-bottom: 1px solid black;*/
 }
 
 div.month-name {
@@ -505,15 +511,22 @@ div.month-name {
 
 
 
+/*********************/
+/*
+        GEGEVENS
+                        */
+/*********************/
 
 
 
 
 
 
-/**/
-/*MISC*/
-/**/
+/*********************/
+/*
+         MISC
+                        */
+/*********************/
 
 .bezet {
     background-color: #b50000;

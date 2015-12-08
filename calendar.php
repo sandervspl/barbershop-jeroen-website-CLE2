@@ -116,8 +116,8 @@
                         $doNextMonth = false;
                         $endMonth = true;
                     } else {
-                        echo "<td class=\"calendardateblocked\">";
-                        echo "<div class=\"divBox\">";
+                        echo '<td class="calendardateblocked">';
+                        echo '<div class="divBox">';
                         echo "<span> $day </span>";
                         echo "</div></td>";
                     }

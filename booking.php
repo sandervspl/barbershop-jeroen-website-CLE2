@@ -53,7 +53,7 @@ $year = date("Y", $time);
         </tr>
         <tr>
             <td><img id="cut" class="hair-beard-img" src="images/index/no-hair-no-beard.png"></td>
-            <td><img id="cut-time" class="hair-beard-img" src="images/booking/timer_5_min.png"></td>
+            <td><img id="cut-time" class="hair-beard-img" src="images/booking/timer_clear.png"></td>
             <td><span class="barber-name">aaa</span></td>
             <script src="scripts/calendar.js"></script>
             <script type="text/javascript">
@@ -80,7 +80,7 @@ $year = date("Y", $time);
         <div id="date-and-time-times-container">
 
             <!--  all times here come from timestable.php via AJAX code in calendar.js  -->
-            <div id="times-table"><span class="header-text">Loading times...</span></div>
+            <div id="times-table"><span class="header-text">Loading times ...</span></div>
         </div>
     </section>
 </section>

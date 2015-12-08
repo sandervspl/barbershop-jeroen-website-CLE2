@@ -11,8 +11,8 @@ session_start();
     <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
 
     <script>
-        window.sessionStorage.cut = 0;
-        window.sessionStorage.barber = 0;
+//        window.sessionStorage.cut = 0;
+//        window.sessionStorage.barber = 0;
     </script>
 </head>
 <body>
@@ -34,11 +34,31 @@ session_start();
 </header>
 
 <section id="main-page">
+    <div id="summary-header">
+        <table class="header-text">
+            <tr>
+                <th>Wat</th>
+                <th>Tijd</th>
+                <th>Wie</th>
+            </tr>
+            <tr>
+                <td><img id="cut" class="hair-beard-img" src="images/index/no-hair-no-beard.png"></td>
+                <td><img id="cut-time" class="hair-beard-img" src="images/booking/timer_clear.png"></td>
+                <td><span class="barber-name">aaa</span></td>
+                <script src="scripts/calendar.js"></script>
+                <script type="text/javascript">
+                    cutSelected();
+                    barberSelected();
+                </script>
+            </tr>
+        </table>
+    </div>
 </section>
 
 <footer>
 </footer>
 
+<script src="scripts/calendar.js"></script>
 <script src="scripts/select.js"></script>
 </body>
 </html>
