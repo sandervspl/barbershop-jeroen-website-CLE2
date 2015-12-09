@@ -150,6 +150,24 @@ nav#navigation-background ul li a {
     top: 20px;
 }
 
+#header-text-header-big {
+    font-family: Lobster, serif;
+    font-size: 50px;
+    margin: auto auto 50px auto;
+    width: 80%;
+    position: relative;
+    top: 50px;
+}
+
+#header-text-header-big + p {
+    font-family: Lobster, serif;
+    font-size: 30px;
+    margin: auto auto 50px auto;
+    width: 80%;
+    position: relative;
+    top: 15px;
+}
+
 section ul {
     margin: 20px auto 50px auto;
     list-style: none;
@@ -787,6 +805,13 @@ input[type="submit"].button {
          MISC
                         */
 /*********************/
+
+#img-chair {
+    width: 250px;
+    height: 250px;
+    position: relative;
+    top: 30px;
+}
 
 .bezet {
     background-color: #b50000;
