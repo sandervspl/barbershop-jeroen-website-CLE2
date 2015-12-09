@@ -2,54 +2,39 @@
  * Created by Sandervspl on 12/2/15.
  */
 
-//function writeCookie(name,value,days) {
-//    var date, expires;
-//    if (days) {
-//        date = new Date();
-//        date.setTime(date.getTime()+(days*24*60*60*1000));
-//        expires = "; expires=" + date.toGMTString();
-//    } else {
-//        expires = "";
-//    }
-//
-//    document.cookie = name + "=" + value + expires + "; path=/";
-//}
+function lockButton(id) {
+    //var elements = document.getElementsByClassName(id);
+    //var names = '';
+    //for(var i=0; i<elements.length; i++) {
+    //    names += elements[i].name;
+    //}
+    //
+    //alert(elements.length);
 
-function cutSelect(sender) {
-    // loop through our UL to check if any other img files are set as selected
-    var a_elements = sender.parentNode.parentNode.getElementsByTagName("img");
-
-    for (var i = 0, len = a_elements.length; i < len; i++) {
-        var str = a_elements[i].getAttribute('src');
-        var src = str.replace("-selected.png", ".png");
-        a_elements[i].setAttribute('src', src);
+    if (window.document.getElementById(id)) {
+        window.document.getElementById(id).disabled = true;
+        alert("button disabled");
     }
-
-    // set sender as selected
-    var img = sender.getAttribute('src');
-    src = img.replace(".png", "-selected.png");
-    sender.setAttribute('src', src);
-
-    window.sessionStorage.cut = sender.id;
 }
 
-// set and unset styles for barber option
+function unlockButton() {
+    if (window.sessionStorage.barber != 0 && window.sessionStorage.cut != 0) {
+        if(window.document.getElementById("bookButton")) {
+            window.document.getElementById("bookButton").disabled = false;
+        }
+    }
+}
+
+function cutSelect(sender) {
+    window.sessionStorage.cut = sender.id;
+
+    unlockButton();
+}
+
 function barberSelection(sender) {
-    var a_elements = window.document.getElementsByClassName("barbers");
-    for (var i = 0, len = a_elements.length; i < len; i++) {
-        a_elements[i].style.border = '1px solid black';
-    }
-
-    a_elements = window.document.getElementsByClassName("barbername");
-    for (var j = 0, leng = a_elements.length; j < leng; j++) {
-        a_elements[j].style.color = 'black';
-    }
-
-    // set sender as selected
-    sender.style.color = 'white';
-    sender.parentNode.style.border = '1px solid white';
-
     window.sessionStorage.barber = sender.id;
+
+    unlockButton();
 }
 
 // insert chosen cut type chosen by user

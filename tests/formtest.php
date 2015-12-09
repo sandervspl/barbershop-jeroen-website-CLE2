@@ -31,7 +31,8 @@
         </p>
     </div>
 
-    <input type="submit" class="submitbutton" value="Place order"/>
+    <input type="submit" class="submitbutton" value="Place order" onclick="alertTest()"/>
+    <script>function alertTest() { alert("test") }</script>
 </form>
 </body>
 </html>

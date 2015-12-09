@@ -1,18 +1,12 @@
 <?php
-$host     = 'localhost';
-$user     = 'root';
-$pw       = '';
-$database = 'website';
+session_start();
 
-$db =  mysqli_connect($host, $user, $pw, $database) or die('Error: '.mysqli_connect_error());
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
     <title>Classic Barbershop Jeroen</title>
-
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
@@ -79,10 +73,18 @@ for ($i = 0; $i <= $end_hour; $i++) {
         continue;
     }
 
+    $host     = 'localhost';
+    $user     = 'root';
+    $pw       = '';
+    $database = 'website';
+    $db =  mysqli_connect($host, $user, $pw, $database) or die('Error: '.mysqli_connect_error());
+
     $sql = sprintf("SELECT * FROM afspraken WHERE datum='%s' AND tijd='%s'",
         mysqli_real_escape_string($db, $date),
         mysqli_real_escape_string($db, $time1));
     $result = mysqli_query($db, $sql);
+
+    mysqli_close($db);
 
     if ($hour < 12 && !$didMorningHeader) { ?>
         <div id="morning-header">
@@ -109,35 +111,40 @@ for ($i = 0; $i <= $end_hour; $i++) {
     }
 
     if (mysqli_num_rows($result) > 0) {
-        $class_p = "time-taken";
+        $class_p = "time-button-taken";
         $class_i = "times-icon-taken";
         $class_d = "times-container-taken";
         $func1 = 0;
         $func2 = 0;
         $img_src = "images/booking/timer_clear2-taken.png";
+        $isDisabled = "disabled";
     } else {
-        $class_p = "time-open";
+        $class_p = "time-button";
         $class_i = "times-icon";
         $class_d = "times-container";
         $func1 = "\"" . $time1 . "\"";  // add "" around data to avoid syntax error in onTimeClick() parameters
         $func2 = "\"" . $time2 . "\"";
         $img_src = "images/booking/timer_clear2.png";
+        $isDisabled = "";
     }
 
     $mn = "\"" . $monthname . "\"";
     ?>
+
     <div id=<?=$time1?> class=<?=$class_d?> onclick='onTimeClick(<?=$func1?>, <?=$func2?>, <?=$mn?>)'>
-        <img id=<?=$time1?> class="<?=$class_i?>" src=<?=$img_src?>>
+        <img id=<?=$time1?> class="<?=$class_i?>" src=<?=$img_src?> />
         <div>
-            <p class="<?=$class_p?>"><?= $time1 ?></p><br>
+            <button id="<?=$time1?>" type="submit" name="time" class="<?=$class_p?>" value="<?=$time1?>" <?=$isDisabled?>><?= $time1 ?></button><br />
+            <script src="scripts/select.js"></script>
+            <script type="text/javascript">lockButton("time-button-taken")</script>
+
             <p class="<?=$class_p?>"><?= $time2 ?></p>
         </div>
     </div>
-
     <?php
 }
-
-mysqli_close($db);
 ?>
+
+<script src="scripts/select.js"></script>
 </body>
 </html>

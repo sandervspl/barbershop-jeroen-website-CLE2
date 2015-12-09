@@ -27,7 +27,7 @@ $_SESSION['time'] = "0:00";
 
 <header>
 <div id="main-header">
-    <a href="index_.php"><img src="http://barbershopbarcelona.com/wp-content/uploads/2014/11/thebarbershop-Redondo.png" id="header-logo"></a>
+    <a href="index.php"><img src="http://barbershopbarcelona.com/wp-content/uploads/2014/11/thebarbershop-Redondo.png" id="header-logo"></a>
     <span id="header-name">Classic Barbershop Jeroen</span>
 </div>
 <nav id="navigation-background">
@@ -45,10 +45,10 @@ $_SESSION['time'] = "0:00";
     <p id="header-text-header">Get a haircut</p>
     <p class="header-text">Your cut</p>
     <ul>
-        <li><img src="images/index/yes-hair-no-beard.png" id="hair" class="hair-beard-img" onclick="cutSelect(this, this.src)"></li>
-        <li><img src="images/index/no-hair-yes-beard.png" id="beard" class="hair-beard-img" onclick="cutSelect(this, this.src)"></li>
-        <li><img src="images/index/no-hair-no-beard-yes-moustache.png" id="moustache" class="hair-beard-img" onclick="cutSelect(this, this.src)"></li>
-        <li><img src="images/index/yes-hair-yes-beard.png" id="all" class="hair-beard-img" onclick="cutSelect(this, this.src)"></li>
+        <li><img src="images/index/yes-hair-no-beard.png" id="hair" class="hair-beard-img" onclick="cutSelect(this)"></li>
+        <li><img src="images/index/no-hair-yes-beard.png" id="beard" class="hair-beard-img" onclick="cutSelect(this)"></li>
+        <li><img src="images/index/no-hair-no-beard-yes-moustache.png" id="moustache" class="hair-beard-img" onclick="cutSelect(this)"></li>
+        <li><img src="images/index/yes-hair-yes-beard.png" id="all" class="hair-beard-img" onclick="cutSelect(this)"></li>
     </ul>
 
     <div class="divider"></div>

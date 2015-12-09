@@ -1,15 +1,16 @@
 <?php
-// grab month & year from url
-if (isset($_GET['month']) && isset($_GET['year'])) {
-    $m = $_GET['month'];
-    $y = $_GET['year'];
-    $starting_day = "$y-$m-1";
-    $time = strtotime($starting_day);
-} else {
-    // grab current year/month and start at day 01
-    $starting_day = date("Y-m-")."01";
-    $time = strtotime($starting_day);
+session_start();
+
+if (isset($_POST['time']) && isset($_POST['date'])) {
+    $_SESSION['date'] = $_POST['date'];
+    $_SESSION['time'] = $_POST['time'];
+
+    header("location: gegevens.php");
 }
+
+// grab current year/month and start at day 01
+$starting_day = date("Y-m-")."01";
+$time = strtotime($starting_day);
 
 // previous, current and next month buttons/label
 $monthname = date("F", $time);
@@ -29,7 +30,7 @@ $year = date("Y", $time);
 
 <header>
     <div id="main-header">
-        <a href="index_.php"><img src="http://barbershopbarcelona.com/wp-content/uploads/2014/11/thebarbershop-Redondo.png" id="header-logo"></a>
+        <a href="index.php"><img src="http://barbershopbarcelona.com/wp-content/uploads/2014/11/thebarbershop-Redondo.png" id="header-logo"></a>
         <span id="header-name">Classic Barbershop Jeroen</span>
     </div>
     <nav id="navigation-background">
@@ -69,9 +70,10 @@ $year = date("Y", $time);
     <div class="month-name">
         <p class="header-text"><?= $monthname; ?></p>
     </div>
+    <form name="datetime" method="post">
 
     <!--  calendar  -->
-    <?php include_once "calendar.php";?>
+    <?php include_once "calendar.php"; ?>
 
     <!--  clicked date from calendar  -->
     <section id="date-and-time">
@@ -84,6 +86,7 @@ $year = date("Y", $time);
             <div id="times-table"><span class="header-text">Loading times ...</span></div>
         </div>
     </section>
+    </form>
 </section>
 
 <footer>

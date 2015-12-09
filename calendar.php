@@ -32,6 +32,8 @@
         do {
             $day = date("d", mktime(0,0,0, date("m",$time), date("d",$time)+$counter, date("y",$time)));        // 01-31
             $weekday = date("D", mktime(0,0,0, date("m",$time), date("d",$time)+$counter, date("y",$time)));    // Mon-Sun
+            $monthname = "\"".date("F", $time)."\"";
+            $date = date("Y-") . date("m-", $time) . $day;
 
             // previous month days
             if ($day === "01" && $weekday !== "Mon" && !$endPrevMonth) {
@@ -61,15 +63,16 @@
 
                 // it will always miss day 01 on first row if this is not here. (line 114)
                 if ($weekday !== "Mon" && $weekday !== "Sun") {
-                    echo '<td class="calendardate">';
-                    echo '<div class="divBox">';
-                    echo "<span onclick=\"onDateClick($day, '$monthname', $month, $year)\"> $day </span>";
+                    echo '<td class="calendardate cut-selector">';
+                    echo "<div class='divBox'>";
+                    echo "<input type='radio' id='$date' class='date-radio' name='date' value='$date' onclick='onDateClick($day, $monthname, $month, $year)' />";
+                    echo "<label for='$date' onclick='onDateClick($day, $monthname, $month, $year)'> $day </label>";
                     echo "</div></td>";
                 } else {
                     echo '<td class="calendardate-sun-mon">';
                     echo '<div class="divBox">';
                     echo "<span> $day </span>";
-                    echo "</div></td>";
+                    echo "</div></div></td>";
                 }
 
                 // current month days
@@ -97,9 +100,10 @@
                 } else {
                     if (!$doNextMonth) {
                         if ($weekday !== "Mon" && $weekday !== "Sun") {
-                            echo '<td class="calendardate">';
-                            echo '<div class="divBox">';
-                            echo "<span onclick=\"onDateClick($day, '$monthname', $month, $year)\"> $day </span>";
+                            echo '<td class="calendardate cut-selector">';
+                            echo "<div class='divBox'>";
+                            echo "<input type='radio' id='$date' class='date-radio' name='date' value='$date' onclick='onDateClick($day, $monthname, $month, $year)' />";
+                            echo "<label for='$date' onclick='onDateClick($day, $monthname, $month, $year)'> $day </label>";
                             echo "</div></td>";
                         } else {
                             echo '<td class="calendardate-sun-mon">';
