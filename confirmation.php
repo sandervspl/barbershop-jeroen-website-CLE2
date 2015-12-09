@@ -22,7 +22,7 @@ session_start();
         <div class="navigation-helper">
             <ul>
                 <li><a href="#">Contact</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="#">Over Ons</a></li>
                 <li><a href="#">Reserveer</a></li>
             </ul>
         </div>
@@ -31,7 +31,7 @@ session_start();
 
 <section id="main-page">
     <img id="img-chair" src="images/confirmation/chair.png">
-    <p id="header-text-header-big">Bedankt voor het reserveren!</p>
+    <p class="header-text-big">Bedankt voor het reserveren!</p>
     <p>Tot dan!</p>
 </section>
 

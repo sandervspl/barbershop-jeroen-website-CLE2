@@ -46,7 +46,7 @@ if (!isset($_POST['submit'])) {
         <div class="navigation-helper">
             <ul>
                 <li><a href="#">Contact</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="#">Over Ons</a></li>
                 <li><a href="#">Reserveer</a></li>
             </ul>
         </div>
@@ -54,10 +54,10 @@ if (!isset($_POST['submit'])) {
 </header>
 
 <section id="main-page">
-    <p id="header-text-header">Get a haircut</p>
+    <p id="header-text-header">Knipbeurt & Kapper</p>
     <div>
         <form id="mainForm" action="#" method="post">
-            <p class="header-text">Your cut</p>
+            <p class="header-text">Knipbeurt</p>
             <div class="cut-selector">
                 <input id="hair" type="radio" name="cut" value="hair" onclick="cutSelect(this)" />
                 <label class="trans hair" for="hair" onclick="cutSelect(this)"></label>
@@ -73,7 +73,7 @@ if (!isset($_POST['submit'])) {
 
                 <div class="divider"></div>
 
-                <p class="header-text">Your barber</p>
+                <p class="header-text">Kapper</p>
                 <input id="Jeroen" type="radio" name="barber" value="Jeroen" onclick="barberSelection(this)" />
                 <label class="trans barber-selection" for="Jeroen">Jeroen</label>
 
@@ -89,5 +89,6 @@ if (!isset($_POST['submit'])) {
 </footer>
 
 <script src="scripts/select.js"></script>
+<script>lockButton("bookButton")</script>
 </body>
 </html>

@@ -139,7 +139,6 @@ nav#navigation-background ul li a {
     }
 
 
-
 #header-text-header {
     font-family: Lobster, serif;
     font-size: 50px;
@@ -150,22 +149,25 @@ nav#navigation-background ul li a {
     top: 20px;
 }
 
-#header-text-header-big {
+.header-text-big {
     font-family: Lobster, serif;
     font-size: 50px;
     margin: auto auto 50px auto;
-    width: 80%;
     position: relative;
     top: 50px;
 }
 
-#header-text-header-big + p {
+.header-text-big + p {
     font-family: Lobster, serif;
     font-size: 30px;
     margin: auto auto 50px auto;
-    width: 80%;
     position: relative;
     top: 15px;
+}
+
+.header-text-small {
+    font-family: Lobster, serif;
+    font-size: 25px;
 }
 
 section ul {

@@ -29,11 +29,11 @@ function showTimes(date, d, m, y) {
     }
 }
 
-function onDateClick(d, mo, m, y) {
+function onDateClick(d, da, mo, m, y) {
     date = d + "_" + m + "_" + y;
     showTimes(date, d, m, y);
 
-    window.document.querySelector('#date-and-time-header').innerHTML = d + " " + mo + " " + y;
+    window.document.querySelector('#date-and-time-header').innerHTML = "<p class='header-text-small'>" + da + "</p>" + d + " " + mo + " " + y;
     window.document.getElementById('date-and-time-header').style.borderBottom = "1px solid black";
 
     b = window.document.getElementById('date-and-time-times-container');

@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
         <div class="navigation-helper">
             <ul>
                 <li><a href="#">Contact</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="#">Over Ons</a></li>
                 <li><a href="#">Reserveer</a></li>
             </ul>
         </div>

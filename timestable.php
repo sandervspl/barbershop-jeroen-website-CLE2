@@ -88,7 +88,7 @@ for ($i = 0; $i <= $end_hour; $i++) {
 
     if ($hour < 12 && !$didMorningHeader) { ?>
         <div id="morning-header">
-            <p class="header-text">Morning</p>
+            <p class="header-text">Ochtend</p>
         </div>
         <?php
         $didMorningHeader = true;
@@ -96,7 +96,7 @@ for ($i = 0; $i <= $end_hour; $i++) {
 
     if ($hour > 11 && $hour < 18 && !$didAfternoonHeader) { ?>
         <div id="afternoon-header">
-            <p class="header-text">Afternoon</p>
+            <p class="header-text">Middag</p>
         </div>
         <?php
         $didAfternoonHeader = true;
@@ -104,7 +104,7 @@ for ($i = 0; $i <= $end_hour; $i++) {
 
     if ($hour > 18 && !$didEveningHeader) { ?>
         <div id="evening-header">
-            <p class="header-text">Evening</p>
+            <p class="header-text">Avond</p>
         </div>
         <?php
         $didEveningHeader = true;

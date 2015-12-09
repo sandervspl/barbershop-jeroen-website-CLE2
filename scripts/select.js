@@ -13,7 +13,6 @@ function lockButton(id) {
 
     if (window.document.getElementById(id)) {
         window.document.getElementById(id).disabled = true;
-        alert("button disabled");
     }
 }
 

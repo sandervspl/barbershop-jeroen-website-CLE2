@@ -1,4 +1,5 @@
 <?php
+include_once "nlDate.php";
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -32,8 +33,9 @@
         do {
             $day = date("d", mktime(0,0,0, date("m",$time), date("d",$time)+$counter, date("y",$time)));        // 01-31
             $weekday = date("D", mktime(0,0,0, date("m",$time), date("d",$time)+$counter, date("y",$time)));    // Mon-Sun
-            $monthname = "\"".date("F", $time)."\"";
-            $date = date("Y-") . date("m-", $time) . $day;
+            $weekday_f =  "\"".date("l", mktime(0,0,0, date("m",$time), date("d",$time)+$counter, date("y",$time)))."\"";  // Monday-Sunday
+            $monthname = "\"".date("F", $time)."\"";                                                            // January-December
+            $date = date("Y-") . date("m-", $time) . $day;                                                      // 0000-00-00
 
             // previous month days
             if ($day === "01" && $weekday !== "Mon" && !$endPrevMonth) {
@@ -65,7 +67,7 @@
                 if ($weekday !== "Mon" && $weekday !== "Sun") {
                     echo '<td class="calendardate cut-selector">';
                     echo "<div class='divBox'>";
-                    echo "<input type='radio' id='$date' class='date-radio' name='date' value='$date' onclick='onDateClick($day, $monthname, $month, $year)' />";
+                    echo "<input type='radio' id='$date' class='date-radio' name='date' value='$date' onclick='onDateClick($day, $weekday_f, $monthname, $month, $year)' />";
                     echo "<label for='$date' onclick='onDateClick($day, $monthname, $month, $year)'> $day </label>";
                     echo "</div></td>";
                 } else {
@@ -102,7 +104,7 @@
                         if ($weekday !== "Mon" && $weekday !== "Sun") {
                             echo '<td class="calendardate cut-selector">';
                             echo "<div class='divBox'>";
-                            echo "<input type='radio' id='$date' class='date-radio' name='date' value='$date' onclick='onDateClick($day, $monthname, $month, $year)' />";
+                            echo "<input type='radio' id='$date' class='date-radio' name='date' value='$date' onclick='onDateClick($day, $weekday_f, $monthname, $month, $year)' />";
                             echo "<label for='$date' onclick='onDateClick($day, $monthname, $month, $year)'> $day </label>";
                             echo "</div></td>";
                         } else {

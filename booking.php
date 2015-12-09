@@ -37,7 +37,7 @@ $year = date("Y", $time);
         <div class="navigation-helper">
             <ul>
                 <li><a href="#">Contact</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="#">Over Ons</a></li>
                 <li><a href="#">Reserveer</a></li>
             </ul>
         </div>
@@ -45,7 +45,7 @@ $year = date("Y", $time);
 </header>
 
 <section id="main-page">
-    <p id="header-text-header">Date & Time</p>
+    <p id="header-text-header">Dag & Tijd</p>
     <div id="summary-header">
     <table class="header-text">
         <tr>
