@@ -11,7 +11,7 @@ $cut = '';
 $ok = true;
 if (!isset($_POST['voornaam']) || $_POST['voornaam'] === '') {
     $ok = false;
-    echo "<br /> Error: VOORNAAM variable is not set. ";
+    echo "Error: VOORNAAM variable is not set. ";
 } else {
     $voornaam = $_POST['voornaam'];
 }
