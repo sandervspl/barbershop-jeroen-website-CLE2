@@ -79,9 +79,10 @@ for ($i = 0; $i <= $end_hour; $i++) {
     $database = 'website';
     $db =  mysqli_connect($host, $user, $pw, $database) or die('Error: '.mysqli_connect_error());
 
-    $sql = sprintf("SELECT * FROM afspraken WHERE datum='%s' AND tijd='%s'",
+    $sql = sprintf("SELECT * FROM afspraken WHERE datum='%s' AND tijd='%s' AND kapper='%s'",
         mysqli_real_escape_string($db, $date),
-        mysqli_real_escape_string($db, $time1));
+        mysqli_real_escape_string($db, $time1),
+        mysqli_real_escape_string($db, $_SESSION['barber']));
     $result = mysqli_query($db, $sql);
 
     mysqli_close($db);

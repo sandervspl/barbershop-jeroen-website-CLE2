@@ -20,6 +20,7 @@ if (!isset($_POST['submit'])) {
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classic Barbershop Jeroen</title>
     <link rel="stylesheet" href="style/style.css">
     <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
@@ -59,16 +60,16 @@ if (!isset($_POST['submit'])) {
         <form id="mainForm" action="#" method="post">
             <p class="header-text">Knipbeurt</p>
             <div class="cut-selector">
-                <input id="hair" type="radio" name="cut" value="hair" onclick="cutSelect(this)" />
+                <input id="hair" type="radio" name="cut" value="haar" onclick="cutSelect(this)" />
                 <label class="trans hair" for="hair" onclick="cutSelect(this)"></label>
 
-                <input id="beard" type="radio" name="cut" value="beard" onclick="cutSelect(this)" />
+                <input id="beard" type="radio" name="cut" value="baard" onclick="cutSelect(this)" />
                 <label class="trans beard" for="beard"></label>
 
-                <input id="moustache" type="radio" name="cut" value="moustache" onclick="cutSelect(this)" />
+                <input id="moustache" type="radio" name="cut" value="snor" onclick="cutSelect(this)" />
                 <label class="trans moustache" for="moustache"></label>
 
-                <input id="all" type="radio" name="cut" value="all" onclick="cutSelect(this)" />
+                <input id="all" type="radio" name="cut" value="alles" onclick="cutSelect(this)" />
                 <label class="trans all" for="all"></label>
 
                 <div class="divider"></div>

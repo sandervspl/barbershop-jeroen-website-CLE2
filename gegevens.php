@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+//echo $_SESSION['barber'] . " / " . $_SESSION['cut'] . " / " . $_SESSION['time'] . " / " . $_SESSION['date'];
+
 if (isset($_POST['submit'])) {
     include_once "gegevens_check.php";
 }
@@ -9,6 +11,7 @@ if (isset($_POST['submit'])) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classic Barbershop Jeroen</title>
     <link rel="stylesheet" href="style/style.css">
     <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
@@ -33,7 +36,7 @@ if (isset($_POST['submit'])) {
 </header>
 
 <section id="main-page">
-    <p id="header-text-header">Confirm appointment</p>
+    <p id="header-text-header">Bevestig Afspraak</p>
 <div id="wrapper">
     <div id="summary-wrapper">
         <p class="header-text">Bestelling</p>

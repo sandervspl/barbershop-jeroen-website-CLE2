@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -21,6 +25,10 @@ time, mark, audio, video {
 article, aside, details, figcaption, figure,
 footer, header, menu, nav, section {
     display: block;
+}
+
+:-moz-any-link {
+    outline: 0;
 }
 
 body {
@@ -56,9 +64,9 @@ body {
     padding: 7px 13px;
     text-align: center;
     white-space: nowrap;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
+
+    /*disable chrome outline on focus/activation*/
+    outline: 0;
 }
 
     .button:enabled:active {
@@ -81,22 +89,34 @@ body {
 
 #main-header {
     width: 100%;
-    display: inline-block;
+    height: 120px;
+    line-height: 120px;
+    /*display: inline-block;*/
     text-align: center;
     background-color: white;
 }
 
-#header-logo {
-    margin-right: 25px;
-    width: 120px;
-    height: 120px;
+#header-name {
+    font-family: Lobster, serif;
+    font-size: 40px;
+
+    margin-bottom: 10px;
+
+    display: inline-block;
     vertical-align: middle;
+    line-height: normal;
+    text-align: center;
 }
 
-#header-name {
+#header-logo {
+    margin-right: 25px;
+    width: 110px;
+    height: 110px;
+
     display: inline-block;
-    font-family: Lobster, serif;
-    font-size: 35px;
+    vertical-align: middle;
+    line-height: normal;
+    text-align: center;
 }
 
 nav#navigation-background {
@@ -142,7 +162,7 @@ nav#navigation-background ul li a {
 #header-text-header {
     font-family: Lobster, serif;
     font-size: 50px;
-    margin: auto auto 50px auto;
+    margin: auto auto 75px auto;
     border-bottom: 1px solid black;
     width: 80%;
     position: relative;
@@ -251,7 +271,10 @@ section ul li a {
 
 .barber-selection {
     cursor: pointer;
+
     padding: 5px;
+    margin-right: 10px;
+
     font-family: Lobster, serif;
     font-size: 35px;
     color: #000000;
@@ -275,8 +298,8 @@ section ul li a {
     opacity: 1;
 }
 .cut-selector input:checked +.trans {
-    /*-webkit-filter: none;*/
-    /*-moz-filter: none;*/
+    -webkit-filter: none;
+    -moz-filter: none;
     filter: none;
 }
 
@@ -288,14 +311,14 @@ section ul li a {
     -webkit-transition: all 100ms ease-in;
     -moz-transition: all 100ms ease-in;
     transition: all 100ms ease-in;
-    /*-webkit-filter: brightness(1.8) grayscale(1) opacity(.7);*/
-    /*-moz-filter: brightness(1.8) grayscale(1) opacity(.7);*/
+    -webkit-filter: brightness(1.8) grayscale(1) opacity(.25);
+    -moz-filter: brightness(1.8) grayscale(1) opacity(.25);
     filter: brightness(1.8) grayscale(1) opacity(.25);
 }
 
 .trans:hover {
-    /*-webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);*/
-    /*-moz-filter: brightness(1.2) grayscale(.5) opacity(.9);*/
+    -webkit-filter: brightness(1.2) grayscale(.5) opacity(1);
+    -moz-filter: brightness(1.2) grayscale(.5) opacity(1);
     filter: brightness(1.2) grayscale(.5) opacity(1);
 }
 
@@ -445,6 +468,7 @@ footer {
 .calendardate .divBox {
     cursor: pointer;
 
+    color: black;
     white-space: nowrap;
     border-bottom: 1px solid black;
 }
@@ -454,6 +478,10 @@ footer {
 }
 
 .calendardate .divBox:hover {
+    background-color: black;
+}
+
+.date-radio:checked + label {
     background-color: black;
 }
 
@@ -501,16 +529,21 @@ footer {
     border: none;
 
     font-family: Nunito, serif;
+    color: black;
     font-size: 30px;
 
     margin: -5px auto;
     padding: 0;
     float: right;
+
+    outline: 0;
+    transition: 0.2s;
 }
 
     .times-container:hover .time-button {
         color: white;
         text-decoration: underline;
+        transition: 0.1s;
     }
 
 .time-button-taken {
@@ -693,7 +726,7 @@ div.month-name {
     padding-top: 20px;
     padding-bottom: 20px;
     height: auto;
-    width: 300px;
+    width: 30%;
 }
 
 #summary-wrapper p.header-text {
@@ -752,32 +785,40 @@ p#chosen-month {
 #gegevens-form {
     background-color: rgba(255, 255, 255, 0.55);
     float: left;
-    width: 650px;
-    height: 370px;
-    margin-left: 50px;
+    /*width: 650px;*/
+    width:65%;
+    margin-left: 20px;
     padding-top: 20px;
 }
 
 #gegevens-form div {
     /*background-color: red;*/
     margin: auto;
-    width: 300px;
-    height: 400px;
+    width: 250px;
 }
 
 #gegevens-form label {
     /*background-color: greenyellow;*/
     float: left;
     text-align: left;
-    margin-right: 15px;
     width: 150px;
+}
+
+/*#gegevens-form input[type="text"]#phone {*/
+    /*margin-bottom: 60px;*/
+/*}*/
+
+#gegevens-form input[type="submit"] {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 15px;
 }
 
 #gegevens-form input[type="text"], #gegevens-form input[type="email"] {
     background-color: transparent;
     font-family: Nunito, serif;
-    font-size: 25px;
-    width: 250px;
+    font-size: 17px;
+    width: 100%;
     height: 25px;
     float: left;
     margin-bottom: 30px;
@@ -793,13 +834,19 @@ p#chosen-month {
     font-size: 35px;
 }
 
+input[type="submit"]:active, input[type="submit"]:focus {
+    outline: none;
+    -moz-outline-style: 0;
+}
+
 input[type="submit"].button {
     margin: 0;
 }
 
-
-
-
+input[type="submit"].button:active, input[type="submit"].button:focus {
+    outline: none;
+    -moz-outline-style: 0;
+}
 
 
 /*********************/
