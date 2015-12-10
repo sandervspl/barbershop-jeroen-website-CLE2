@@ -3,7 +3,7 @@ session_start();
 
 if (!isset($_POST['submit'])) {
     $_SESSION['barber'] = '';
-    $_SESSION['cut'] = '';               // TODO: replace this with 'baard' in db
+    $_SESSION['cut'] = '';
     $_SESSION['date'] = '';
     $_SESSION['time'] = '';
 } else {

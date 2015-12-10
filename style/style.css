@@ -41,9 +41,15 @@ body {
 
 .divider {
     margin: 50px auto 50px auto;
-    width: 500px;
+    width: 50%;
     border-bottom: 1px solid black;
 }
+
+    @media only screen and (max-width: 600px) {
+        .divider {
+            width: 75%;
+        }
+    }
 
 .button {
     cursor: pointer;
@@ -87,6 +93,14 @@ body {
     vertical-align: middle;
 }
 
+
+
+/*********************/
+/*
+    LOGO / HEADER
+                    */
+/*********************/
+
 #main-header {
     width: 100%;
     height: 120px;
@@ -119,12 +133,50 @@ body {
     text-align: center;
 }
 
+@media only screen and (max-width: 600px) {
+    #header-logo {
+        /*visibility: hidden;*/
+        width: 85px;
+        height: 85px;
+    }
+
+    #header-name {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    #header-logo {
+        /*visibility: hidden;*/
+        width: 115px;
+        height: 115px;
+    }
+
+    #header-name {
+        visibility: hidden;
+    }
+}
+
+
+
+/*********************/
+/*
+    NAVIGATION BAR
+                    */
+/*********************/
+
 nav#navigation-background {
     width: 100%;
     height: 35px;
     background-color: rgba(0, 0, 0, 0.5);
     border-top: 1px solid black;
 }
+
+    @media only screen and (max-width: 750px) {
+        nav#navigation-background {
+            border-bottom: 1px solid black;
+        }
+    }
 
     nav#navigation-background .navigation-helper {
         width: 100%;
@@ -158,6 +210,15 @@ nav#navigation-background ul li a {
         text-decoration: underline;
     }
 
+@media only screen and (max-width: 350px) {
+    nav#navigation-background ul {
+        visibility: hidden;
+    }
+}
+
+
+
+
 
 #header-text-header {
     font-family: Lobster, serif;
@@ -168,6 +229,12 @@ nav#navigation-background ul li a {
     position: relative;
     top: 20px;
 }
+
+    @media only screen and (max-width: 450px) {
+        #header-text-header {
+            font-size: 40px;
+        }
+    }
 
 .header-text-big {
     font-family: Lobster, serif;
@@ -273,7 +340,7 @@ section ul li a {
     cursor: pointer;
 
     padding: 5px;
-    margin-right: 10px;
+    margin: auto 10px 10px auto;
 
     font-family: Lobster, serif;
     font-size: 35px;
@@ -336,11 +403,24 @@ section ul li a {
     text-align: center;
 }
 
+    @media only screen and (max-width: 750px) {
+        #main-page {
+            width: 100%;
+            margin: 0;
+        }
+    }
+
 .header-text {
     font-family: Nunito, serif;
     font-size: 50px;
     color: black;
 }
+
+    @media only screen and (max-width: 450px) {
+        .header-text {
+            font-size: 35px;
+        }
+    }
 
 .header-text-lobster {
     font-family: Lobster, serif;
@@ -350,6 +430,11 @@ section ul li a {
 
 p.header-text {
     margin: 0;
+}
+
+#main-page p.header-text {
+    margin: 25px auto 25px auto;
+    text-align: center;
 }
 
 .hair-beard-img {
@@ -423,10 +508,8 @@ footer {
     width: 100%;
     height: 50px;
     background-color: white;
-    margin-top: 20px;
+    border-top: 1px solid black;
 }
-
-
 
 
 
@@ -437,6 +520,7 @@ footer {
 /*********************/
 
 #calendar {
+    width: 71%;
     margin: 5px auto;
     border-collapse: separate;
     border-spacing: 0;
@@ -454,7 +538,6 @@ footer {
 }
 
 .calendarday {
-    width: inherit;
     height: 25px;
     background-color: #5d4437;
 }
@@ -625,29 +708,23 @@ footer {
     float: left;
 }
 
-#morning-header {
-    /*background-color: green;*/
+#morning-header, #afternoon-header, #evening-header {
+    width: 19.6%;
+    margin-right: 35px;
     float: left;
     clear: left;
+}
+
+#morning-header {
     height: 200px;
-    width: 200px;
-    margin-right: 35px;
 }
 
 #afternoon-header {
-    float: left;
-    clear: left;
     height: 400px;
-    width: 200px;
-    margin-right: 35px;
 }
 
 #evening-header {
-    float: left;
-    clear: left;
     height: 100px;
-    width: 200px;
-    margin-right: 35px;
 }
 
 section #date-and-time span#date-and-time-header {
@@ -655,7 +732,7 @@ section #date-and-time span#date-and-time-header {
     font-family: Lobster, serif;
     color: #000000;
     display: block;
-    width: 700px;
+    width: 71%;
     margin: 60px auto 35px auto;
     padding-top: 10px;
 }
@@ -669,7 +746,7 @@ section #date-and-time #date-and-time-times-container p.header-text {
 }
 
 div.month-name {
-    width: 700px;
+    width: 71%;
     margin: 35px auto 0 auto;
     padding-top: 10px;
     border-top: 1px solid black;
@@ -679,11 +756,6 @@ div.month-name {
     font-family: Lobster, serif;
     text-align: left;
     margin: 25px auto -5px auto;
-}
-
-#main-page p.header-text {
-    margin: 25px auto 25px auto;
-    text-align: center;
 }
 
 #summary-header .header-text {
@@ -722,7 +794,6 @@ div.month-name {
     border-right: 1px solid black;
     float: left;
     text-align: center;
-    /*margin-top: 10px;*/
     padding-top: 20px;
     padding-bottom: 20px;
     height: auto;
@@ -735,7 +806,8 @@ div.month-name {
     margin: 0 0 50px 0;
 }
 
-#summary-wrapper-icon {
+#summary-wrapper-icon img {
+    cursor: default;
     /*float: left;*/
 }
 
@@ -785,7 +857,6 @@ p#chosen-month {
 #gegevens-form {
     background-color: rgba(255, 255, 255, 0.55);
     float: left;
-    /*width: 650px;*/
     width:65%;
     margin-left: 20px;
     padding-top: 20px;
@@ -803,10 +874,6 @@ p#chosen-month {
     text-align: left;
     width: 150px;
 }
-
-/*#gegevens-form input[type="text"]#phone {*/
-    /*margin-bottom: 60px;*/
-/*}*/
 
 #gegevens-form input[type="submit"] {
     width: 100%;
@@ -846,6 +913,46 @@ input[type="submit"].button {
 input[type="submit"].button:active, input[type="submit"].button:focus {
     outline: none;
     -moz-outline-style: 0;
+}
+
+
+@media only screen and (max-width: 1200px) {
+    #wrapper {
+        min-height: 0;
+        margin-bottom: 10px;
+    }
+
+    #summary-wrapper {
+        float: none;
+        clear: both;
+        width: 100%;
+        border-right: none;
+    }
+
+    #gegevens-form {
+        float: none;
+        clear: both;
+        margin: 10px 0 0 0;
+        padding-bottom: 10px;
+        width: 100%;
+    }
+
+    #chosen-month {
+        position: relative;
+    }
+
+    #chosen-time, #chosen-etime {
+        position: relative;
+    }
+
+    #summary-wrapper-icon {
+
+    }
+
+    #summary-wrapper-text .barber-name {
+        position: relative;
+        left: 35%;
+    }
 }
 
 
