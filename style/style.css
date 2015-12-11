@@ -2,6 +2,10 @@
     box-sizing: border-box;
 }
 
+html {
+    height: 100%;
+}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -43,6 +47,7 @@ a {
     }
 
 body {
+    height: 100%;
     line-height: 1;
     background-image: url("../images/bg4.jpg");
     background-size: 100%;
@@ -387,10 +392,27 @@ section ul li a {
 .cut-selector input:active +.trans {
     opacity: 1;
 }
-.cut-selector input:checked +.trans {
+div.cut-selector div#cuts input:checked +.trans {
     -webkit-filter: none;
     -moz-filter: none;
     filter: none;
+
+    /*width: 130px;*/
+    /*height: 130px;*/
+    /*margin: 0;*/
+    /*padding: 0;*/
+}
+
+div.cut-selector div#barbers input:checked +.trans {
+    -webkit-filter: none;
+    -moz-filter: none;
+    filter: none;
+
+    /*width: 145px;*/
+    /*height: 40px;*/
+    /*font-size: 33px;*/
+    /*margin: 0;*/
+    /*padding: 0;*/
 }
 
 .trans {
@@ -544,7 +566,7 @@ footer {
 
 #calendar {
     width: 71%;
-    margin: 5px auto;
+    margin: 2px auto;
     border-collapse: separate;
     border-spacing: 0;
 }
@@ -627,6 +649,8 @@ footer {
     BOOKING/TIMESTABLE
                         */
 /*********************/
+
+
 
 .time-button {
     cursor: pointer;
@@ -766,16 +790,71 @@ section #date-and-time #date-and-time-times-container p.header-text {
 
 div.month-name {
     width: 71%;
-    margin: 35px auto 0 auto;
-    padding-top: 10px;
+    height: 70px;
+    margin: 45px auto auto auto;
     border-top: 1px solid black;
+    position: relative;
+    overflow: hidden;
 }
 
-#main-page .month-name p.header-text {
+.month-name .header-text {
     font-family: Lobster, serif;
-    text-align: left;
-    margin: 25px auto -5px auto;
+    margin: 25px auto 0 auto;
+    /*text-align: left;*/
+    /*float: left;*/
+    position: absolute;
+    left: 0;
+    top: -12px;
 }
+
+#month-name-header-helper {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    float: left;
+    left: 0;
+    top: 0;
+}
+
+#month-arrow-helper {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    float: right;
+    right: 0;
+    top: 0;
+
+}
+
+#arrow_left {
+    cursor: default;
+    width: 35px;
+    height: 35px;
+    display: inline-block;
+
+    position: absolute;
+    bottom: 0;
+    right: 40px;
+
+    -webkit-filter: brightness(1.8) grayscale(1) opacity(.25);
+    -moz-filter: brightness(1.8) grayscale(1) opacity(.25);
+    filter: brightness(1.8) grayscale(1) opacity(.25);
+}
+
+#arrow_right {
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    display: inline-block;
+
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+    #arrow_left:active, #arrow_right:active {
+        padding: 2px 2px 2px;
+    }
 
 #summary-header .header-text {
     margin: auto;
@@ -828,6 +907,10 @@ div.month-name {
             /*margin-top: 30px;*/
         /*}*/
 
+        #calendar {
+            padding-bottom: -5px;
+        }
+
         #morning-header {
             font-size: 15px;
         }
@@ -859,7 +942,11 @@ div.month-name {
         }
     }
 
-
+    @media only screen and (max-width: 450px) {
+        .month-name .header-text {
+            top: 7px;
+        }
+    }
 
 
 

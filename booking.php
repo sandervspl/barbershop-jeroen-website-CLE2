@@ -12,7 +12,6 @@ if (isset($_POST['time']) && isset($_POST['date'])) {
 $starting_day = date("Y-m-")."01";
 $time = strtotime($starting_day);
 
-// previous, current and next month buttons/label
 $monthname = date("F", $time);
 $month = date("m", $time);
 $year = date("Y", $time);
@@ -69,12 +68,23 @@ $year = date("Y", $time);
 
     <!--  month name above calendar  -->
     <div class="month-name">
-        <p class="header-text"><?= $monthname; ?></p>
+        <div id="month-name-header-helper">
+            <span id="calendar-header-text" class="header-text"><?= $monthname; ?></span>
+        </div>
+        <div id="month-arrow-helper">
+            <img id="arrow_left" src="images/booking/calendar_left.png" onclick="prevMonth(this, <?=$month?>, <?=$year?>)">
+            <img id="arrow_right" src="images/booking/calendar_right.png" onclick="nextMonth(this, <?=$month?>, <?=$year?>)">
+            </div>
     </div>
     <form name="datetime" method="post">
 
     <!--  calendar  -->
-    <?php include_once "calendar.php"; ?>
+<!--    --><?php //include_once "calendar.php"; ?>
+    <div id="calendar-table"><span class="header-text">Loading calendar ...</span></div>
+    <script src="scripts/calendar.js"></script>
+    <script type="text/javascript">
+        loadCalendar(<?=$month?>, <?=$year?>);
+    </script>
 
     <!--  clicked date from calendar  -->
     <section id="date-and-time">

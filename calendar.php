@@ -1,5 +1,15 @@
 <?php
 include_once "nlDate.php";
+
+if (isset($_GET['month']) && isset($_GET['year'])) {
+    $month = $_GET['month'];
+    $year = $_GET['year'];
+    $starting_day = "$year-$month-1";
+    $time = strtotime($starting_day);
+} else {
+    $month = date("m", $time);
+    $year =  date("Y", $time);
+}
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
