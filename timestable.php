@@ -1,3 +1,5 @@
+<!--TODO: add waiter for ajax code. It's slow on Chrome.-->
+
 <?php
 session_start();
 

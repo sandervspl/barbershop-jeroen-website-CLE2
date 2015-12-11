@@ -30,15 +30,15 @@ $year = date("Y", $time);
 
 <header>
     <div id="main-header">
-        <a href="index.php"><img src="http://barbershopbarcelona.com/wp-content/uploads/2014/11/thebarbershop-Redondo.png" id="header-logo"></a>
+        <a href="index.php"><img src="images/other/bblogo.png" id="header-logo"></a>
         <span id="header-name">Classic Barbershop Jeroen</span>
     </div>
     <nav id="navigation-background">
         <div class="navigation-helper">
             <ul>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Over Ons</a></li>
-                <li><a href="#">Reserveer</a></li>
+                <li><a href="contact.php">Contact</a></li>
+                <li><a href="overons.php">Over Ons</a></li>
+                <li><a href="reserveer.php">Reserveer</a></li>
             </ul>
         </div>
     </nav>
@@ -72,15 +72,14 @@ $year = date("Y", $time);
             <span id="calendar-header-text" class="header-text"><?= $monthname; ?></span>
         </div>
         <div id="month-arrow-helper">
-            <img id="arrow_left" src="images/booking/calendar_left.png" onclick="prevMonth(this, <?=$month?>, <?=$year?>)">
-            <img id="arrow_right" src="images/booking/calendar_right.png" onclick="nextMonth(this, <?=$month?>, <?=$year?>)">
+            <img id="arrow-right" src="images/booking/calendar_right.png" onclick="nextMonth(this, <?=$month?>, <?=$year?>)">
             </div>
     </div>
     <form name="datetime" method="post">
 
     <!--  calendar  -->
 <!--    --><?php //include_once "calendar.php"; ?>
-    <div id="calendar-table"><span class="header-text">Loading calendar ...</span></div>
+    <div id="calendar-table"><span class="header-text"></span></div>
     <script src="scripts/calendar.js"></script>
     <script type="text/javascript">
         loadCalendar(<?=$month?>, <?=$year?>);
@@ -94,7 +93,21 @@ $year = date("Y", $time);
         <div id="date-and-time-times-container">
 
             <!--  all times here come from timestable.php via AJAX code in calendar.js  -->
-            <div id="times-table"><span class="header-text">Loading times ...</span></div>
+            <div id="times-table"><span class="header-text">
+                    <form id="mobile-dropdown-lists">
+                        <label for="hour">Uur</label>
+                        <select name="hour" title="hour">
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                        </select>
+
+                        <label for="minute">Minuut</label>
+                        <select name="minute" title="minute">
+                            <option value="00">00</option>
+                            <option value="30">30</option>
+                        </select>
+                    </form>
+                </span></div>
         </div>
     </section>
     </form>

@@ -73,6 +73,12 @@ body {
         }
     }
 
+.loading-gif {
+    width: 25px;
+    height: 25px;
+    margin: auto;
+}
+
 .button {
     cursor: pointer;
 
@@ -571,6 +577,10 @@ footer {
     border-spacing: 0;
 }
 
+.calendartoday {
+    background: rgba(0, 0, 0, 0.25);
+}
+
 .calendarday, .calendardate, .calendardateblocked, .calendardate-sun-mon {
     font-family: Lobster, serif;
 }
@@ -826,7 +836,7 @@ div.month-name {
 
 }
 
-#arrow_left {
+#arrow-left {
     cursor: default;
     width: 35px;
     height: 35px;
@@ -841,7 +851,7 @@ div.month-name {
     filter: brightness(1.8) grayscale(1) opacity(.25);
 }
 
-#arrow_right {
+#arrow-right {
     cursor: pointer;
     width: 35px;
     height: 35px;
@@ -852,7 +862,7 @@ div.month-name {
     right: 0;
 }
 
-    #arrow_left:active, #arrow_right:active {
+    #arrow-left:active, #arrow-right:active {
         padding: 2px 2px 2px;
     }
 

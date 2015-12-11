@@ -24,15 +24,15 @@ if (isset($_POST['submit'])) {
 
 <header>
     <div id="main-header">
-        <a href="index.php"><img src="http://barbershopbarcelona.com/wp-content/uploads/2014/11/thebarbershop-Redondo.png" id="header-logo"></a>
+        <a href="index.php"><img src="images/other/bblogo.png" id="header-logo"></a>
         <span id="header-name">Classic Barbershop Jeroen</span>
     </div>
     <nav id="navigation-background">
         <div class="navigation-helper">
             <ul>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Over Ons</a></li>
-                <li><a href="#">Reserveer</a></li>
+                <li><a href="contact.php">Contact</a></li>
+                <li><a href="overons.php">Over Ons</a></li>
+                <li><a href="reserveer.php">Reserveer</a></li>
             </ul>
         </div>
     </nav>

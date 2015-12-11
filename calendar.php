@@ -45,6 +45,12 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
             $monthname = "\"".date("F", $time)."\"";                                                            // January-December
             $date = date("Y-") . date("m-", $time) . $day;                                                      // 0000-00-00
 
+            if ($date === date("Y-m-d")) {
+                $todayclass = "calendartoday";
+            } else {
+                $todayclass = "";
+            }
+
             // previous month days
             if ($day === "01" && $weekday !== "Mon" && !$endPrevMonth) {
                 $i = 1;
@@ -65,7 +71,7 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
                 // put these in a special table cell
                 $prevMonthDays = count($prevMonthDayArray) - 1;
                 for ($i = $prevMonthDays; $i >= 0; $i--) {
-                    echo '<td class="calendardateblocked">';
+                    echo "<td class='calendardateblocked $todayclass'>";
                     echo '<div class="divBox">';
                     echo "<span> $prevMonthDayArray[$i] </span>";
                     echo "</div></td>";
@@ -73,13 +79,13 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
 
                 // it will always miss day 01 on first row if this is not here. (line 114)
                 if ($weekday !== "Mon" && $weekday !== "Sun") {
-                    echo '<td class="calendardate cut-selector">';
+                    echo "<td class='calendardate cut-selector $todayclass'>";
                     echo "<div class='divBox'>";
                     echo "<input type='radio' id='$date' class='date-radio' name='date' value='$date' onclick='onDateClick($day, $weekday_f, $monthname, $month, $year)' />";
                     echo "<label for='$date' onclick='onDateClick($day, $monthname, $month, $year)'> $day </label>";
                     echo "</div></td>";
                 } else {
-                    echo '<td class="calendardate-sun-mon">';
+                    echo "<td class='calendardate-sun-mon $todayclass'>";
                     echo '<div class="divBox">';
                     echo "<span> $day </span>";
                     echo "</div></div></td>";
@@ -110,13 +116,13 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
                 } else {
                     if (!$doNextMonth) {
                         if ($weekday !== "Mon" && $weekday !== "Sun") {
-                            echo '<td class="calendardate cut-selector">';
+                            echo "<td class='calendardate cut-selector $todayclass'>";
                             echo "<div class='divBox'>";
                             echo "<input type='radio' id='$date' class='date-radio' name='date' value='$date' onclick='onDateClick($day, $weekday_f, $monthname, $month, $year)' />";
                             echo "<label for='$date' onclick='onDateClick($day, $monthname, $month, $year)'> $day </label>";
                             echo "</div></td>";
                         } else {
-                            echo '<td class="calendardate-sun-mon">';
+                            echo "<td class='calendardate-sun-mon $todayclass'>";
                             echo '<div class="divBox">';
                             echo "<span> $day </span>";
                             echo "</div></td>";
@@ -130,7 +136,7 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
                         $doNextMonth = false;
                         $endMonth = true;
                     } else {
-                        echo '<td class="calendardateblocked">';
+                        echo "<td class='calendardateblocked $todayclass'>";
                         echo '<div class="divBox">';
                         echo "<span> $day </span>";
                         echo "</div></td>";

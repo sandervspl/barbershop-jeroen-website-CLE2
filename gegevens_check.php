@@ -47,12 +47,16 @@ if (!isset($_SESSION['barber']) || $_SESSION['barber'] === '') {
 if (!isset($_SESSION['date']) || $_SESSION['date'] === '') {
     $ok = false;
     echo "<br /> Error: DATE variable is not set. ";
+    header("Location: error.php");
+    exit();
 } else {
     $date = $_SESSION['date'];
 }
 if (!isset($_SESSION['time']) || $_SESSION['time'] === '') {
     $ok = false;
     echo "<br /> Error: TIME variable is not set. ";
+    header("Location: error.php");
+    exit();
 } else {
     $time = $_SESSION['time'];
 }

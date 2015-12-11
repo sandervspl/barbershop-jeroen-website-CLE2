@@ -5,6 +5,8 @@
 function loadCalendar(m, y) {
     var xmlhttp;
 
+    document.getElementById("calendar-table").innerHTML = "<img class=\"loading-gif\" src=\"http://www.jasonkenison.com/uploads/blog/loading.gif\" />";
+
     if (window.XMLHttpRequest) {
         // code for IE7+, Firefox, Chrome, Opera, Safari
         xmlhttp = new XMLHttpRequest();
@@ -40,32 +42,23 @@ function getMonth(m) {
     return month[m];
 }
 
-function prevMonth(sender, m, y) {
-    sender.style.webKitFilter = "opacity(25%)";
-    sender.style.mozFilter = "opacity(25%)";
-    sender.style.filter = "opacity(25%)";
-    window.document.getElementById('arrow_right').style.webKitFilter = "opacity(100%)";
-    window.document.getElementById('arrow_right').style.mozFilter = "opacity(100%)";
-    window.document.getElementById('arrow_right').style.filter = "opacity(100%)";
-
-    window.document.getElementById('calendar-header-text').innerHTML = getMonth(m);
-
-    loadCalendar(m, y);
-}
-
 function nextMonth(sender, m, y) {
-    sender.style.webKitFilter = "opacity(25%)";
-    sender.style.mozFilter = "opacity(25%)";
-    sender.style.filter = "opacity(25%)";
-    window.document.getElementById('arrow_left').style.webKitFilter = "opacity(100%)";
-    window.document.getElementById('arrow_left').style.mozFilter = "opacity(100%)";
-    window.document.getElementById('arrow_left').style.filter = "opacity(100%)";
+    console.log(sender.src);
 
-    m++;
-    if (m > 12) {
-        m = 1;
-        y++;
+    var src = sender.src;
+
+    if (sender.src.includes("images/booking/calendar_left.png")) {
+        sender.setAttribute('src', 'images/booking/calendar_right.png');
+    } else {
+        sender.setAttribute('src', 'images/booking/calendar_left.png');
+
+        m++;
+        if (m > 12) {
+            m = 1;
+            y++;
+        }
     }
+
     window.document.getElementById('calendar-header-text').innerHTML = getMonth(m);
 
     loadCalendar(m, y);
@@ -82,6 +75,8 @@ function showTimes(date, d, m, y) {
             document.getElementById("times-table").innerHTML = "";
         } else {
             var xmlhttp;
+
+            document.getElementById("times-table").innerHTML = '<img class="loading-gif" src="http://www.jasonkenison.com/uploads/blog/loading.gif" />';
 
             if (window.XMLHttpRequest) {
                 // code for IE7+, Firefox, Chrome, Opera, Safari
