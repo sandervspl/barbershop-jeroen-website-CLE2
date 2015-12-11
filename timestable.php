@@ -11,18 +11,17 @@ session_start();
 </head>
 <body>
 <?php
+
 if (isset($_GET['month']) && isset($_GET['year']) && isset($_GET['day'])) {
     $day = $_GET['day'];
     $month = $_GET['month'];
-    $year = $_GET['year'];
+    $year = intval($_GET['year']);
 } else {
     $day = date("d");
     $month = date("m");
     $year = date("Y");
 }
-
 $monthname = date("F");
-
 $date = $year."-".$month."-".$day;
 $hour = 9;
 $end_hour = 17;

@@ -31,6 +31,17 @@ footer, header, menu, nav, section {
     outline: 0;
 }
 
+a {
+    font-family: Nunito, serif;
+    color: white;
+    text-decoration: none;
+}
+
+    a:hover {
+        /*color: #e8e8e8;*/
+        text-decoration: underline;
+    }
+
 body {
     line-height: 1;
     background-image: url("../images/bg4.jpg");
@@ -38,6 +49,12 @@ body {
     background-repeat: no-repeat;
     background-color: black;
 }
+
+    @media only screen and (max-width: 600px) {
+        body {
+            background-image: none;
+        }
+    }
 
 .divider {
     margin: 50px auto 50px auto;
@@ -148,12 +165,13 @@ body {
 @media only screen and (max-width: 450px) {
     #header-logo {
         /*visibility: hidden;*/
-        width: 115px;
-        height: 115px;
+        width: 75px;
+        height: 75px;
+        margin-right: 10px;
     }
 
     #header-name {
-        visibility: hidden;
+        font-size: 20px;
     }
 }
 
@@ -187,6 +205,7 @@ nav#navigation-background {
     nav#navigation-background .navigation-helper ul {
         position: relative;
         padding: 0;
+        margin: auto;
         list-style: none;
         text-align: center;
         transform: translateY(-50%);
@@ -198,6 +217,10 @@ nav#navigation-background ul li {
     display: inline-block;
     margin-right: 25px;
 }
+
+    nav#navigation-background ul li:last-child {
+        margin-right: 0;
+    }
 
 nav#navigation-background ul li a {
     font-size: 20px;
@@ -211,8 +234,8 @@ nav#navigation-background ul li a {
     }
 
 @media only screen and (max-width: 350px) {
-    nav#navigation-background ul {
-        visibility: hidden;
+    nav#navigation-background ul li a {
+        font-size: 15px;
     }
 }
 
@@ -397,7 +420,7 @@ section ul li a {
     width: 80%;
     height: auto;
     min-height: 500px;
-    margin: 50px auto;
+    margin: 30px auto;
     padding: 0 15px 5px;
     background-color: rgba(253, 243, 211, 0.9);
     text-align: center;
@@ -824,7 +847,7 @@ div.month-name {
         }
 
         section #date-and-time span#date-and-time-header {
-            font-size: 30px;
+            font-size: 27px;
         }
 
         .header-text-small {
@@ -1025,11 +1048,10 @@ input[type="submit"].button:active, input[type="submit"].button:focus {
                         */
 /*********************/
 
-#img-chair {
+#img-big {
     width: 250px;
     height: 250px;
     position: relative;
-    top: 30px;
 }
 
 .bezet {

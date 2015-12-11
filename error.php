@@ -1,11 +1,4 @@
 <?php
-session_start();
-
-include_once "session_variables_check.php";
-
-if (!$ok) {
-    header ("Location: error.php");
-}
 ?>
 <!DOCTYPE HTML>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -16,6 +9,16 @@ if (!$ok) {
     <link rel="stylesheet" href="style/style.css">
     <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
+
+    <script>
+        window.sessionStorage.cut = 0;
+        window.sessionStorage.barber = 0;
+        window.sessionStorage.time = 0;
+        window.sessionStorage.end_time = 0;
+        window.sessionStorage.cut_time = 0;
+        window.sessionStorage.cut_month = 0;
+        window.sessionStorage.cut_monthday = 0;
+    </script>
 </head>
 <body>
 
@@ -36,15 +39,13 @@ if (!$ok) {
 </header>
 
 <section id="main-page">
-    <p id="header-text-header">Reservatie Compleet</p>
-    <img id="img-big" src="images/confirmation/chair.png">
-    <p class="header-text-big">Bedankt voor het reserveren!</p>
-    <p>Tot dan!</p>
+    <p id="header-text-header">Oops!</p>
+    <img id="img-big" src="images/other/error.png">
+    <p class="header-text-lobster">Er is iets misgegaan.</p><br />
+    <p class="header-text-small"><a href="index.php">Ga terug naar de hoofdpagina.</a></p>
 </section>
 
 <footer>
 </footer>
-
-<script src="scripts/select.js"></script>
 </body>
 </html>

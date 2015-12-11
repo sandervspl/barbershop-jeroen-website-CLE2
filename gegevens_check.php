@@ -1,8 +1,8 @@
 <?php
 $voornaam = '';
 $achternaam = '';
-$email = '';            // TODO: Regex
-$phone = '';            // TODO: regex
+$email = '';
+$phone = '';
 $barber = '';
 $date = '';
 $time = '';
@@ -25,12 +25,21 @@ if (!isset($_POST['email']) || $_POST['email'] === '') {
     $ok = false;
     echo "<br /> Error: EMAIL variable is not set. ";
 } else {
-    $email = $_POST['email'];
+    if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        $ok = false;
+        echo "Error: Invalid EMAIL.";
+    } else {
+        $email = $_POST['email'];
+    }
 }
 if (!isset($_POST['phone']) || $_POST['phone'] === '') {
     $ok = false;
     echo "<br /> Error: PHONE variable is not set. ";
 } else {
+    if (preg_match("[0-9]{10}", $_POST['phone'])) {
+        $ok = false;
+        echo "Error: Invalid PHONE.";
+    }
     $phone = $_POST['phone'];
 }
 if (!isset($_SESSION['barber']) || $_SESSION['barber'] === '') {
