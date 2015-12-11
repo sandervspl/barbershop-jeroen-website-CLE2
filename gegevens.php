@@ -1,7 +1,10 @@
 <?php
 session_start();
 
-//echo $_SESSION['barber'] . " / " . $_SESSION['cut'] . " / " . $_SESSION['time'] . " / " . $_SESSION['date'];
+$voornaam = '';
+$achternaam = '';
+$phone = '';
+$email = '';
 
 if (isset($_POST['submit'])) {
     include_once "gegevens_check.php";
@@ -66,20 +69,20 @@ if (isset($_POST['submit'])) {
                 <div>
                     <p>
                         <label class="input-text" for="voornaam">Voornaam</label>
-                        <input id="voornaam" name="voornaam" type="text" autofocus="autofocus" class="textinput" />
+                        <input type="text" id="voornaam" class="textinput" name="voornaam" autofocus="autofocus" value="<?=$voornaam?>" />
                     </p>
                     <p>
                         <label class="input-text" for="achternaam">Achternaam</label>
-                        <input id="achternaam" name="achternaam" type="text" class="textinput" />
+                        <input type="text" id="achternaam" class="textinput" name="achternaam" value="<?=$achternaam?>" />
                     </p>
                     <p>
                         <label class="input-text" for="email">Email</label><br/>
-                        <input id="email" name="email" type="email" class="textinput" />
+                        <input type="email" id="email" class="textinput" name="email" value="<?=$email?>" />
                     </p>
 
                     <p>
                         <label class="input-text" for="phone">Telefoon</label><br/>
-                        <input id="phone" name="phone" type="text" class="textinput" />
+                        <input type="text" id="phone" class="textinput" name="phone" value="<?=$phone?>" />
                     </p>
                 </div>
 
