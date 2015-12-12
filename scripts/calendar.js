@@ -27,26 +27,22 @@ function loadCalendar(m, y) {
 
 function getMonth(m) {
     var month = new Array(13);
-    month[1] = "January";
-    month[2] = "February";
-    month[3] = "March";
+    month[1] = "Januari";
+    month[2] = "Februari";
+    month[3] = "Maart";
     month[4] = "April";
-    month[5] = "May";
-    month[6] = "June";
-    month[7] = "July";
-    month[8] = "August";
+    month[5] = "Mei";
+    month[6] = "Juni";
+    month[7] = "Juli";
+    month[8] = "Augustus";
     month[9] = "September";
-    month[10] = "October";
+    month[10] = "Oktober";
     month[11] = "November";
     month[12] = "December";
     return month[m];
 }
 
 function nextMonth(sender, m, y) {
-    console.log(sender.src);
-
-    var src = sender.src;
-
     if (sender.src.includes("images/booking/calendar_left.png")) {
         sender.setAttribute('src', 'images/booking/calendar_right.png');
     } else {

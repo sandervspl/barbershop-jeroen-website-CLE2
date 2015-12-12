@@ -1,6 +1,12 @@
 <?php
 session_start();
 
+include_once "nlDate.php";
+
+if (!isset($_SESSION['barber']) || !isset($_SESSION['cut'])) {
+    header("Location: reserveer.php");
+}
+
 if (isset($_POST['time']) && isset($_POST['date'])) {
     $_SESSION['date'] = $_POST['date'];
     $_SESSION['time'] = $_POST['time'];
@@ -12,7 +18,7 @@ if (isset($_POST['time']) && isset($_POST['date'])) {
 $starting_day = date("Y-m-")."01";
 $time = strtotime($starting_day);
 
-$monthname = date("F", $time);
+$monthname = nlDate(date("F", $time));
 $month = date("m", $time);
 $year = date("Y", $time);
 ?>

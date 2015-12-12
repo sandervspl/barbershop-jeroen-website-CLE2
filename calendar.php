@@ -14,20 +14,20 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <title>Classic Barbershop Jeroen</title>
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
 <table id="calendar">
     <tr class="calendarday">
-        <th>Mon</th>
-        <th>Tue</th>
-        <th>Wed</th>
-        <th>Thu</th>
-        <th>Fri</th>
-        <th>Sat</th>
-        <th>Sun</th>
+        <th>Maa</th>
+        <th>Din</th>
+        <th>Woe</th>
+        <th>Don</th>
+        <th>Vri</th>
+        <th>Zat</th>
+        <th>Zon</th>
     </tr>
 
     <tr>
@@ -44,6 +44,9 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
             $weekday_f =  "\"".date("l", mktime(0,0,0, date("m",$time), date("d",$time)+$counter, date("y",$time)))."\"";  // Monday-Sunday
             $monthname = "\"".date("F", $time)."\"";                                                            // January-December
             $date = date("Y-") . date("m-", $time) . $day;                                                      // 0000-00-00
+
+            $weekday_f = nlDate($weekday_f);
+            $monthname = nlDate($monthname);
 
             if ($date === date("Y-m-d")) {
                 $todayclass = "calendartoday";

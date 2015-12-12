@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+if (!isset($_SESSION['barber']) || !isset($_SESSION['cut']) || !isset($_SESSION['date']) || !isset($_SESSION['time'])) {
+    header("Location: reserveer.php");
+}
+
 $voornaam = '';
 $achternaam = '';
 $phone = '';
