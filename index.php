@@ -15,7 +15,6 @@
 <header>
     <div id="main-header">
         <a href="index.php"><img src="images/other/bblogo.png" id="header-logo"></a>
-        <span id="header-name">Classic Barbershop Jeroen</span>
     </div>
     <nav id="navigation-background">
         <div class="navigation-helper">

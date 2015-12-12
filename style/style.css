@@ -22,7 +22,6 @@ time, mark, audio, video {
     margin: 0;
     padding: 0;
     border: 0;
-    /*vertical-align: baseline;*/
 }
 
 /* HTML5 display-role reset for older browsers */
@@ -49,10 +48,8 @@ a {
 body {
     height: 100%;
     line-height: 1;
-    background-image: url("../images/bg4.jpg");
+    background: black url("../images/bg4.jpg") no-repeat;
     background-size: 100%;
-    background-repeat: no-repeat;
-    background-color: black;
 }
 
     @media only screen and (max-width: 600px) {
@@ -131,11 +128,10 @@ body {
 
 #main-header {
     width: 100%;
-    height: 120px;
-    line-height: 120px;
-    /*display: inline-block;*/
+    height: 130px;
+    line-height: 130px;
     text-align: center;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.95);
 }
 
 #header-name {
@@ -151,8 +147,7 @@ body {
 }
 
 #header-logo {
-    margin-right: 25px;
-    width: 110px;
+    width: 323px;
     height: 110px;
 
     display: inline-block;
@@ -163,26 +158,15 @@ body {
 
 @media only screen and (max-width: 600px) {
     #header-logo {
-        /*visibility: hidden;*/
-        width: 85px;
+        width: 249px;
         height: 85px;
-    }
-
-    #header-name {
-        font-size: 30px;
     }
 }
 
 @media only screen and (max-width: 450px) {
     #header-logo {
-        /*visibility: hidden;*/
-        width: 75px;
+        width: 220px;
         height: 75px;
-        margin-right: 10px;
-    }
-
-    #header-name {
-        font-size: 20px;
     }
 }
 
@@ -319,15 +303,6 @@ section ul li a {
     color: black;
 }
 
-/*section ul li label {*/
-    /*cursor: pointer;*/
-    /*padding: 5px;*/
-    /*font-family: Lobster, serif;*/
-    /*font-size: 35px;*/
-    /*color: #000000;*/
-    /*text-align: center;*/
-/*}*/
-
 
 
 
@@ -402,23 +377,12 @@ div.cut-selector div#cuts input:checked +.trans {
     -webkit-filter: none;
     -moz-filter: none;
     filter: none;
-
-    /*width: 130px;*/
-    /*height: 130px;*/
-    /*margin: 0;*/
-    /*padding: 0;*/
 }
 
 div.cut-selector div#barbers input:checked +.trans {
     -webkit-filter: none;
     -moz-filter: none;
     filter: none;
-
-    /*width: 145px;*/
-    /*height: 40px;*/
-    /*font-size: 33px;*/
-    /*margin: 0;*/
-    /*padding: 0;*/
 }
 
 .trans {
@@ -553,8 +517,6 @@ td {
 }
 
 footer {
-    /*position: absolute;*/
-    /*bottom: 0;*/
     clear: both;
     width: 100%;
     height: 50px;
@@ -728,7 +690,6 @@ footer {
 
 .times-container, .times-container-taken {
     /*background-color: rgba(255, 255, 255, 0.8);*/
-    /*border: 1px solid black;*/
     cursor: pointer;
 
     width: 200px;
@@ -810,8 +771,6 @@ div.month-name {
 .month-name .header-text {
     font-family: Lobster, serif;
     margin: 25px auto 0 auto;
-    /*text-align: left;*/
-    /*float: left;*/
     position: absolute;
     left: 0;
     top: -12px;
@@ -836,22 +795,7 @@ div.month-name {
 
 }
 
-#arrow-left {
-    cursor: default;
-    width: 35px;
-    height: 35px;
-    display: inline-block;
-
-    position: absolute;
-    bottom: 0;
-    right: 40px;
-
-    -webkit-filter: brightness(1.8) grayscale(1) opacity(.25);
-    -moz-filter: brightness(1.8) grayscale(1) opacity(.25);
-    filter: brightness(1.8) grayscale(1) opacity(.25);
-}
-
-#arrow-right {
+#calendar-arrow {
     cursor: pointer;
     width: 35px;
     height: 35px;
@@ -862,7 +806,7 @@ div.month-name {
     right: 0;
 }
 
-    #arrow-left:active, #arrow-right:active {
+    #calendar-arrow:active {
         padding: 2px 2px 2px;
     }
 
@@ -898,11 +842,6 @@ div.month-name {
         section #date-and-time span#date-and-time-header {
             font-size: 35px;
         }
-
-        #morning-header, #afternoon-header, #evening-header {
-            /*margin-top: 10px;*/
-            /*height: 52px;*/
-        }
         
         .times-container, .times-container-taken {
             float: right;
@@ -911,11 +850,6 @@ div.month-name {
     }
 
     @media only screen and (max-width: 500px) {
-        /*#morning-header div.times-container,*/
-        /*#afternoon-header div.times-container,*/
-        /*#evening-header div.times-container {*/
-            /*margin-top: 30px;*/
-        /*}*/
 
         #calendar {
             padding-bottom: -5px;
@@ -992,12 +926,10 @@ div.month-name {
 
 #summary-wrapper-icon img {
     cursor: default;
-    /*float: left;*/
 }
 
 #summary-wrapper-text {
     /*background-color: #d32a0e;*/
-    /*float: left;*/
     margin-top: 35px;
 }
 
@@ -1128,15 +1060,104 @@ input[type="submit"].button:active, input[type="submit"].button:focus {
     #chosen-time, #chosen-etime {
         position: relative;
     }
-
-    #summary-wrapper-icon {
-
-    }
-
-    #summary-wrapper-text .barber-name {
-
-    }
 }
+
+
+
+
+/*********************/
+/*
+         CONTACT
+                        */
+/*********************/
+
+#contact-wrapper, #phone-wrapper, #facebook-wrapper {
+    /*background-color: purple;*/
+
+    display: flex;
+    width: 60%;
+    position: relative;
+    top: 50px;
+    margin: -60px auto 50px auto;
+}
+
+#phone-wrapper, #facebook-wrapper {
+    /*background-color: purple;*/
+
+    display: flex;
+    width: 60%;
+
+    margin: 50px auto;
+}
+
+#contact-img-wrapper, #phone-img-wrapper, #facebook-img-wrapper {
+     /*background-color: green;*/
+
+    width: 100px;
+    margin: 0 5% 0 5%;
+ }
+
+#phone-text-wrapper, #facebook-text-wrapper {
+    /*background-color: green;*/
+
+    position: relative;
+    line-height: 100px;
+    text-align: left;
+}
+
+#contact-text-wrapper {
+    /*background-color: yellow;*/
+
+    padding-top: 15px;
+    text-align: left;
+    line-height: 20px;
+}
+
+#contact-text-wrapper p, #phone-text-wrapper p, #facebook-text-wrapper p {
+    font-family: Nunito, serif;
+    font-size: 20px;
+}
+
+.contact-img {
+    width: 100px;
+    height: 100px;
+}
+
+    @media only screen and (max-width: 600px) {
+        .contact-img {
+            width: 50px;
+            height: 50px;
+        }
+
+        #phone-text-wrapper {
+            line-height: 50px;
+        }
+
+        #contact-wrapper, #phone-wrapper, #facebook-wrapper {
+            width: 100%;
+        }
+
+        #contact-text-wrapper p, #phone-text-wrapper p, #facebook-text-wrapper p {
+            font-family: Nunito, serif;
+            font-size: 15px;
+        }
+
+        #contact-text-wrapper {
+            padding-top: 0;
+        }
+    }
+
+    @media only screen and (max-width: 450px) {
+        #contact-img-wrapper, #phone-img-wrapper, #facebook-img-wrapper {
+            margin: 0 1% 0 1%;
+        }
+
+        #phone-text-wrapper, #facebook-text-wrapper {
+            line-height: 50px;
+        }
+    }
+
+
 
 
 /*********************/

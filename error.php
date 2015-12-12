@@ -14,8 +14,7 @@
 
 <header>
     <div id="main-header">
-        <a href="reserveer.php"><img src="images/other/bblogo.png" id="header-logo"></a>
-        <span id="header-name">Classic Barbershop Jeroen</span>
+        <a href="index.php"><img src="images/other/bblogo.png" id="header-logo"></a>
     </div>
     <nav id="navigation-background">
         <div class="navigation-helper">
@@ -32,7 +31,7 @@
     <p id="header-text-header">Oops!</p>
     <img id="img-big" src="images/other/error.png">
     <p class="header-text-lobster">Er is iets misgegaan.</p><br />
-    <p class="header-text-small"><a href="reserveer.php">Ga terug naar de hoofdpagina.</a></p>
+    <p class="header-text-small"><a href="reserveer.php">Probeer opnieuw</a></p>
 </section>
 
 <footer>

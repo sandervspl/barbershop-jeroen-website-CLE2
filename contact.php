@@ -15,7 +15,6 @@
 <header>
     <div id="main-header">
         <a href="index.php"><img src="images/other/bblogo.png" id="header-logo"></a>
-        <span id="header-name">Classic Barbershop Jeroen</span>
     </div>
     <nav id="navigation-background">
         <div class="navigation-helper">
@@ -29,7 +28,33 @@
 </header>
 
 <section id="main-page">
-
+    <p id="header-text-header">Contact</p>
+    <div id="contact-wrapper">
+        <div id="contact-img-wrapper">
+            <img class="contact-img" src="images/contact/location.png">
+        </div>
+        <div id="contact-text-wrapper">
+            <p><strong>Classics Barbershop Jeroen</strong></p>
+            <p>Passage 8</p>
+            <p>3331CM Zwijndrecht</p>
+        </div>
+    </div>
+    <div id="phone-wrapper">
+        <div id="phone-img-wrapper">
+            <img class="contact-img" src="images/contact/phone.png">
+        </div>
+        <div id="phone-text-wrapper">
+            <p>078 - 6452920</p>
+        </div>
+    </div>
+    <div id="facebook-wrapper">
+        <div id="facebook-img-wrapper">
+            <a href="https://www.facebook.com/pages/Classics-Barbershop-Jeroen/192319830891775"><img class="contact-img" src="images/contact/facebook.png"></a>
+        </div>
+        <div id="facebook-text-wrapper">
+            <a href="https://www.facebook.com/pages/Classics-Barbershop-Jeroen/192319830891775"><p>Like ons op Facebook!</p></a>
+        </div>
+    </div>
 </section>
 
 <footer>
