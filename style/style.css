@@ -532,6 +532,10 @@ footer {
                     */
 /*********************/
 
+#calendar-wrapper {
+    height: 230px;
+}
+
 #calendar {
     width: 71%;
     margin: 2px auto;
@@ -544,7 +548,7 @@ footer {
 }
 
 .calendarday, .calendardate, .calendardateblocked, .calendardate-sun-mon {
-    font-family: Lobster, serif;
+    font-family: Nunito, serif;
 }
 
 .calendardate, .calendardateblocked, .calendardate-sun-mon {
@@ -612,7 +616,11 @@ footer {
     padding: 5px 0 0 5px;
 }
 
-
+    @media only screen and (max-width: 450px) {
+        .calendarday {
+            font-size: 13px;
+        }
+    }
 
 
 

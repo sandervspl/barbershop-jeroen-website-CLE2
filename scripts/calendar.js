@@ -72,6 +72,7 @@ function showTimes(date, d, m, y) {
         } else {
             var xmlhttp;
 
+            document.getElementById("main-page").style.minHeight = "1200px";
             document.getElementById("times-table").innerHTML = '<img class="loading-gif" src="http://www.jasonkenison.com/uploads/blog/loading.gif" />';
 
             if (window.XMLHttpRequest) {

@@ -83,11 +83,13 @@ $year = date("Y", $time);
     <form name="datetime" method="post">
 
     <!--  calendar  -->
-    <div id="calendar-table"><span class="header-text"></span></div>
-    <script src="scripts/calendar.js"></script>
-    <script type="text/javascript">
-        loadCalendar(<?=$month?>, <?=$year?>);
-    </script>
+        <div id="calendar-wrapper">
+            <div id="calendar-table"><span class="header-text"></span></div>
+            <script src="scripts/calendar.js"></script>
+            <script type="text/javascript">
+                loadCalendar(<?=$month?>, <?=$year?>);
+            </script>
+        </div>
 
     <!--  clicked date from calendar  -->
     <section id="date-and-time">
