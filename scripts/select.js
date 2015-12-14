@@ -23,7 +23,7 @@ function cutSelect(sender) {
 }
 
 function barberSelection(sender) {
-    window.sessionStorage.barber = sender.id;
+    //window.sessionStorage.barber = sender.id;
 }
 
 // insert chosen cut type chosen by user

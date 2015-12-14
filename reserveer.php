@@ -1,21 +1,17 @@
-<!--TODO: Voeg 'geen voorkeur' toe aan barber lijst-->
-
 <?php
 session_start();
 
 if (!isset($_POST['submit'])) {
-    $_SESSION['barber'] = 'Geen voorkeur';
+    $_SESSION['barber'] = '';
     $_SESSION['cut'] = '';
     $_SESSION['date'] = '';
     $_SESSION['time'] = '';
-
-    echo $_SESSION['barber'];
 } else {
     if (isset($_POST['cut'])) {
         if (isset($_POST['barber'])) {
             $_SESSION['barber'] = $_POST['barber'];
         } else {
-            $_SESSION['barber'] = 'Geen voorkeur';
+            $_SESSION['barber'] = 'geenvoorkeur';
         }
 
         $_SESSION['cut'] = $_POST['cut'];
@@ -36,7 +32,6 @@ if (!isset($_POST['submit'])) {
     <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
     <script>
         window.sessionStorage.cut = 0;
-        window.sessionStorage.barber = "Geen voorkeur";
         window.sessionStorage.time = 0;
         window.sessionStorage.end_time = 0;
         window.sessionStorage.cut_time = 0;

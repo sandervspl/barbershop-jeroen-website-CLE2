@@ -1,14 +1,8 @@
 <?php
 session_start();
 
-echo "barber: " . $_SESSION['barber'];
-
 if (!isset($_SESSION['cut']) || !isset($_SESSION['date']) || !isset($_SESSION['time'])) {
     header("Location: reserveer.php");
-}
-
-if (isset($_GET['barber'])) {
-    $_SESSION['barber'] = $_GET['barber'];
 }
 
 $voornaam = '';
@@ -53,7 +47,7 @@ if (isset($_POST['submit'])) {
     <div id="summary-wrapper">
         <p class="header-text">Bestelling</p>
         <div id="summary-wrapper-text">
-            <span class="barber-name">Jeroen</span><br/>
+            <span class="barber-name"><?=$_SESSION['barber']?></span><br/>
                 <p id="chosen-month">32 January</p>
             <div id="summary-wrapper-text-time">
                 <span id="chosen-time">03:22</span>
@@ -66,7 +60,6 @@ if (isset($_POST['submit'])) {
         <script src="scripts/select.js"></script>
         <script type="text/javascript">
             cutSelected();
-            barberSelected();
             timeSelected();
             monthSelected();
         </script>
