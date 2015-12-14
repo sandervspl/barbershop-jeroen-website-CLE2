@@ -89,8 +89,6 @@ if (!isset($_POST['submit'])) {
                     <input id="Juno" type="radio" name="barber" value="Juno" onclick="barberSelection(this)" />
                     <label class="trans barber-selection" for="Juno">Juno</label>
 
-    <!--                <input id="Geenvoorkeur" type="radio" name="geenvoorkeur" value="Geenvoorkeur" onclick="barberSelection(this)" />-->
-    <!--                <label class="trans barber-selection geenvoorkeur" for="Geenvoorkeur">Beide</label>-->
                     <p>Laat leeg als je geen voorkeur hebt.</p>
                 </div>
             </div>

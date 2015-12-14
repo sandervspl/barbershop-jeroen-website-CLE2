@@ -448,6 +448,7 @@ section#main-page div#summary-header div.white-background {
 
 #calendar-wrapper div.white-background {
     width: 75%;
+    height: 180px;
     margin: auto;
 }
 
@@ -987,7 +988,7 @@ div.month-name {
         }
     }
 
-    @media only screen and (max-width: 400px) {
+    @media only screen and (max-width: 480px) {
         section#main-page div#summary-header div.white-background, div#calendar-wrapper div.white-background {
             width: 100%;
         }
@@ -998,7 +999,7 @@ div.month-name {
 
         #calendar-header-text {
             left: 0;
-            top: 5px;
+            top: -10px;
         }
 
         #calendar-arrow {
@@ -1032,6 +1033,13 @@ div.month-name {
         div#times-table div#afternoon-header p.header-text,
         div#times-table div#evening-header p.header-text {
             font-size: 30px;
+        }
+    }
+
+    @media only screen and (max-width: 320px) {
+        #calendar-header-text {
+            left: 0;
+            top: 0;
         }
     }
 
