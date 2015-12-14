@@ -1,3 +1,5 @@
+<!--TODO: Voeg 'geen voorkeur' toe aan barber lijst-->
+
 <?php
 session_start();
 
@@ -25,6 +27,15 @@ if (!isset($_POST['submit'])) {
     <link rel="stylesheet" href="style/style.css">
     <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
+    <script>
+        window.sessionStorage.cut = 0;
+        window.sessionStorage.barber = 0;
+        window.sessionStorage.time = 0;
+        window.sessionStorage.end_time = 0;
+        window.sessionStorage.cut_time = 0;
+        window.sessionStorage.cut_month = 0;
+        window.sessionStorage.cut_monthday = 0;
+    </script>
 </head>
 <body>
 

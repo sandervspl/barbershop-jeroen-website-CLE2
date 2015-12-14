@@ -28,7 +28,7 @@
 </header>
 
 <section id="main-page">
-
+    <p id="header-text-header">Wie zijn wij</p>
 </section>
 
 <footer>

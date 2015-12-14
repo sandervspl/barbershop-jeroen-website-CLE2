@@ -55,7 +55,7 @@ $year = date("Y", $time);
     <table class="header-text">
         <tr>
             <th>Wat</th>
-            <th>Tijd</th>
+            <th>Tijdsuur</th>
             <th>Wie</th>
         </tr>
         <tr>

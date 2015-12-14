@@ -32,6 +32,40 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
 
     <tr>
         <?php
+        function isFeestdag($day, $month) {
+            $b = false;
+            $date = $day . "-" . $month;
+
+            switch ($date) {
+                case "01-1":           // nieuwjaarsdagen
+                case "02-1":
+                    $b = true;
+                    break;
+
+                case "03-4":           // goede vrijdag
+                    $b = true;
+                    break;
+
+                case "27-4":           // koningsdag
+                    $b = true;
+                    break;
+
+                case "5-5":           // bevrijdingsdag
+                    $b = true;
+                    break;
+
+                case "25-12":           // eerste en tweede kerstdag
+                case "26-12";
+                    $b = true;
+                    break;
+
+                default:
+                    $b = false;
+            }
+
+            return $b;
+        }
+
         $endMonth = false;
         $endPrevMonth = false;
         $doNextMonth = false;
@@ -48,7 +82,11 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
             $weekday_f = nlDate($weekday_f);
             $monthname = nlDate($monthname);
 
-            if ($date === date("Y-m-d")) {
+            $curday = date("d");
+            $curmonth = date("m");
+            $curdate = date("Y-m-d");
+
+            if ($date === $curdate) {
                 $todayclass = "calendartoday";
             } else {
                 $todayclass = "";
@@ -80,8 +118,13 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
                     echo "</div></td>";
                 }
 
-                // it will always miss day 01 on first row if this is not here. (line 114)
-                if ($weekday !== "Mon" && $weekday !== "Sun") {
+                // it will always miss day 01 on first row if this is not here. (line 163)
+                if ($day < $curday && $curmonth === $month || isFeestdag($day, $month)) {
+                    echo "<td class='calendardateblocked $todayclass'>";
+                    echo '<div class="divBox">';
+                    echo "<span> $day </span>";
+                    echo "</div></td>";
+                } else if ($weekday !== "Mon" && $weekday !== "Sun") {
                     echo "<td class='calendardate cut-selector $todayclass'>";
                     echo "<div class='divBox'>";
                     echo "<input type='radio' id='$date' class='date-radio' name='date' value='$date' onclick='onDateClick($day, $weekday_f, $monthname, $month, $year)' />";
@@ -118,7 +161,12 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
                     // if not we fill our cells with current month data
                 } else {
                     if (!$doNextMonth) {
-                        if ($weekday !== "Mon" && $weekday !== "Sun") {
+                        if ($day < $curday && $curmonth === $month || isFeestdag($day, $month)) {
+                            echo "<td class='calendardateblocked $todayclass'>";
+                            echo '<div class="divBox">';
+                            echo "<span> $day </span>";
+                            echo "</div></td>";
+                        } else if ($weekday !== "Mon" && $weekday !== "Sun") {
                             echo "<td class='calendardate cut-selector $todayclass'>";
                             echo "<div class='divBox'>";
                             echo "<input type='radio' id='$date' class='date-radio' name='date' value='$date' onclick='onDateClick($day, $weekday_f, $monthname, $month, $year)' />";

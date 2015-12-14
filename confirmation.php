@@ -35,7 +35,7 @@ if (!$ok) {
 </header>
 
 <section id="main-page">
-    <p id="header-text-header">Reservatie Compleet</p>
+    <p id="header-text-header">Reservering Compleet</p>
     <img id="img-big" src="images/confirmation/chair.png">
     <p class="header-text-big">Bedankt voor het reserveren!</p>
     <p>Tot dan!</p>

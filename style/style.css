@@ -416,6 +416,10 @@ div.cut-selector div#barbers input:checked +.trans {
     padding: 0 15px 5px;
     background-color: rgba(253, 243, 211, 0.9);
     text-align: center;
+
+    -moz-box-shadow: 10px 10px 10px 1px #ff1e3e;
+    -webkit-box-shadow: 1px 1px 10px 1px #888888;
+    box-shadow: 1px 1px 10px 1px #888888;
 }
 
     @media only screen and (max-width: 750px) {

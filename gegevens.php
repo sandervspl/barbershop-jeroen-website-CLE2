@@ -79,7 +79,7 @@ if (isset($_POST['submit'])) {
                         <input type="text" id="achternaam" class="textinput" name="achternaam" value="<?=$achternaam?>" />
                     </p>
                     <p>
-                        <label class="input-text" for="email">Email</label><br/>
+                        <label class="input-text" for="email">E-Mail</label><br/>
                         <input type="email" id="email" class="textinput" name="email" value="<?=$email?>" />
                     </p>
 
