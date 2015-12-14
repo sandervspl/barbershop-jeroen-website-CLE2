@@ -105,23 +105,7 @@ $year = date("Y", $time);
         <div id="date-and-time-times-container">
 
             <!--  all times here come from timestable.php via AJAX code in calendar.js  -->
-            <div id="times-table">
-                <span class="header-text">
-                    <form id="mobile-dropdown-lists">
-                        <label for="hour">Uur</label>
-                        <select name="hour" title="hour">
-                            <option value="09">09</option>
-                            <option value="10">10</option>
-                        </select>
-
-                        <label for="minute">Minuut</label>
-                        <select name="minute" title="minute">
-                            <option value="00">00</option>
-                            <option value="30">30</option>
-                        </select>
-                    </form>
-                </span>
-            </div>
+            <div id="times-table"></div>
         </div>
     </section>
     </form>

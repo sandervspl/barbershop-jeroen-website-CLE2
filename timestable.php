@@ -10,6 +10,7 @@ session_start();
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
+
 <?php
 
 if (isset($_GET['month']) && isset($_GET['year']) && isset($_GET['day'])) {
@@ -147,22 +148,27 @@ for ($i = 0; $i <= $end_hour; $i++) {
         <div id="morning-header">
             <p class="header-text">Ochtend</p>
         </div>
+        <div class="times-container-day">
         <?php
         $didMorningHeader = true;
     }
 
     if ($hour > 11 && $hour < 18 && !$didAfternoonHeader) { ?>
+        </div>
         <div id="afternoon-header">
             <p class="header-text">Middag</p>
         </div>
+        <div class="times-container-day">
         <?php
         $didAfternoonHeader = true;
     }
 
     if ($hour > 18 && !$didEveningHeader) { ?>
+        </div>
         <div id="evening-header">
             <p class="header-text">Avond</p>
         </div>
+        <div class="times-container-day">
         <?php
         $didEveningHeader = true;
     }
@@ -181,6 +187,10 @@ for ($i = 0; $i <= $end_hour; $i++) {
         </div>
     </div>
     <?php
+}
+
+if ($didEveningHeader) {
+    ?></div><?php
 }
 ?>
 

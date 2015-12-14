@@ -62,36 +62,30 @@ function nextMonth(sender, m, y) {
 
 //change time information from date without reloading page (AJAX)
 function showTimes(date, d, m, y) {
-    if (document.getElementsByTagName('body')[0].clientWidth < 595) {
-        console.log("Screen too small, not displaying times-table");
-
-        // TODO: DO DROPDOWN LIST FOR MOBILE
+    if (date == "") {
+        document.getElementById("times-table").innerHTML = "";
     } else {
-        if (date == "") {
-            document.getElementById("times-table").innerHTML = "";
+        var xmlhttp;
+
+        document.getElementById("main-page").style.minHeight = "1200px";
+        document.getElementById("times-table").innerHTML = '<img class="loading-gif" src="http://www.jasonkenison.com/uploads/blog/loading.gif" />';
+
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
         } else {
-            var xmlhttp;
-
-            document.getElementById("main-page").style.minHeight = "1200px";
-            document.getElementById("times-table").innerHTML = '<img class="loading-gif" src="http://www.jasonkenison.com/uploads/blog/loading.gif" />';
-
-            if (window.XMLHttpRequest) {
-                // code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp = new XMLHttpRequest();
-            } else {
-                // code for IE6, IE5
-                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xmlhttp.onreadystatechange = function () {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    document.getElementById("times-table").innerHTML = xmlhttp.responseText;
-                }
-            };
-
-            var url = "timestable.php?day=" + d + "&month=" + m + "&year=" + y;
-            xmlhttp.open("GET", url, true);
-            xmlhttp.send();
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("times-table").innerHTML = xmlhttp.responseText;
+            }
+        };
+
+        var url = "timestable.php?day=" + d + "&month=" + m + "&year=" + y;
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
     }
 }
 
