@@ -74,7 +74,11 @@ function cutSelected() {
 
 // insert saved barber name chosen by user
 function barberSelected() {
-    window.document.querySelector('.barber-name').innerHTML = window.sessionStorage.barber;
+    if (window.sessionStorage.barber != 0) {
+        window.document.querySelector('.barber-name').innerHTML = window.sessionStorage.barber;
+    } else {
+        window.document.querySelector('.barber-name').innerHTML = "Geen voorkeur";
+    }
 }
 
 // insert saved time chosen by user

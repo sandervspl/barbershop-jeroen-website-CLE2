@@ -37,6 +37,7 @@ if (!isset($_POST['submit'])) {
         window.sessionStorage.cut_time = 0;
         window.sessionStorage.cut_month = 0;
         window.sessionStorage.cut_monthday = 0;
+        window.sessionStorage.barber = 0;
     </script>
 </head>
 <body>
