@@ -71,13 +71,13 @@ function nlDate($datum){
     $datum = str_replace("Sunday",         "Zondag",         $datum);
 
     // Vervang de verkorting van de dag, hoofdletters
-    $datum = str_replace("Mon",            "Maa",             $datum);
-    $datum = str_replace("Tue",         "Din",             $datum);
-    $datum = str_replace("Wed",         "Woe",             $datum);
-    $datum = str_replace("Thu",         "Don",             $datum);
-    $datum = str_replace("Fri",         "Vri",             $datum);
-    $datum = str_replace("Sat",         "Zat",             $datum);
-    $datum = str_replace("Sun",         "Zon",             $datum);
+    $datum = str_replace("Mon",            "Ma",             $datum);
+    $datum = str_replace("Tue",         "Di",             $datum);
+    $datum = str_replace("Wed",         "Wo",             $datum);
+    $datum = str_replace("Thu",         "Do",             $datum);
+    $datum = str_replace("Fri",         "Vr",             $datum);
+    $datum = str_replace("Sat",         "Za",             $datum);
+    $datum = str_replace("Sun",         "Zo",             $datum);
 
     return $datum;
 }

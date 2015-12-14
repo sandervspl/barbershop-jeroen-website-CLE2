@@ -57,23 +57,25 @@ $year = date("Y", $time);
 <section id="main-page">
     <p id="header-text-header">Dag & Tijd</p>
     <div id="summary-header">
-    <table class="header-text">
-        <tr>
-            <th>Wat</th>
-            <th>Tijdsuur</th>
-            <th>Wie</th>
-        </tr>
-        <tr>
-            <td><img id="cut" class="hair-beard-img" src="images/index/no-hair-no-beard.png"></td>
-            <td><img id="cut-time" class="hair-beard-img" src="images/booking/timer_clear.png"></td>
-            <td><span class="barber-name"></span></td>
-            <script src="scripts/select.js"></script>
-            <script type="text/javascript">
-                cutSelected();
-                barberSelected();
-            </script>
-        </tr>
-    </table>
+    <div class="white-background">
+        <table class="header-text">
+            <tr>
+                <th>Wat</th>
+                <th>Tijdsuur</th>
+                <th>Wie</th>
+            </tr>
+            <tr>
+                <td><img id="cut" class="hair-beard-img" src="images/index/no-hair-no-beard.png"></td>
+                <td><img id="cut-time" class="hair-beard-img" src="images/booking/timer_clear.png"></td>
+                <td><span class="barber-name"></span></td>
+                <script src="scripts/select.js"></script>
+                <script type="text/javascript">
+                    cutSelected();
+                    barberSelected();
+                </script>
+            </tr>
+        </table>
+    </div>
     </div>
 
     <!--  month name above calendar  -->
@@ -89,11 +91,13 @@ $year = date("Y", $time);
 
     <!--  calendar  -->
         <div id="calendar-wrapper">
-            <div id="calendar-table"><span class="header-text"></span></div>
-            <script src="scripts/calendar.js"></script>
-            <script type="text/javascript">
-                loadCalendar(<?=$month?>, <?=$year?>);
-            </script>
+            <div class="white-background">
+                <div id="calendar-table"><span class="header-text"></span></div>
+                <script src="scripts/calendar.js"></script>
+                <script type="text/javascript">
+                    loadCalendar(<?=$month?>, <?=$year?>);
+                </script>
+            </div>
         </div>
 
     <!--  clicked date from calendar  -->

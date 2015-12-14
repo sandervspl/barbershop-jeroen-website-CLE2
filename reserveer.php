@@ -65,8 +65,9 @@ if (!isset($_POST['submit'])) {
     <p id="header-text-header">Knipbeurt & Kapper</p>
     <div>
         <form id="mainForm" action="#" method="post">
-            <p class="header-text">Knipbeurt</p>
             <div class="cut-selector">
+            <div class="white-background">
+                <p class="header-text">Knipbeurt</p>
                 <div id="cuts">
                 <input id="hair" type="radio" name="cut" value="haar" onclick="cutSelect(this)" />
                 <label class="trans hair" for="hair" onclick="cutSelect(this)"></label>
@@ -80,9 +81,10 @@ if (!isset($_POST['submit'])) {
                 <input id="all" type="radio" name="cut" value="alles" onclick="cutSelect(this)" />
                 <label class="trans all" for="all"></label>
                 </div>
-
+            </div>
                 <div class="divider"></div>
 
+            <div class="white-background">
                 <p class="header-text">Kapper</p>
                 <div id="barbers">
                     <input id="Jeroen" type="radio" name="barber" value="Jeroen" onclick="barberSelection(this)" />
@@ -95,6 +97,7 @@ if (!isset($_POST['submit'])) {
     <!--                <label class="trans barber-selection geenvoorkeur" for="Geenvoorkeur">Beide</label>-->
                     <p>Laat leeg als je geen voorkeur hebt.</p>
                 </div>
+            </div>
             </div>
             <button id="bookButton" type="submit" name="submit" class="button" onclick="checkBookButton()">reserveer</button>
         </form>

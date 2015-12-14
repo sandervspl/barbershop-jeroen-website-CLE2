@@ -385,7 +385,7 @@ section ul li a {
 }
 
 #barbers > p:nth-child(5) {
-    margin-top: 10px;
+    padding: 5px 0 10px 0;
     font-family: Nunito, serif;
     font-size: 10px;
 }
@@ -428,7 +428,27 @@ div.cut-selector div#barbers input:checked +.trans {
 
 
 
+.white-background {
+    background-color: rgba(255, 255, 255, 0.35);
+    height: auto;
+    width: auto;
+    padding: 10px 0 15px 0;
+}
 
+.cut-selector .white-background {
+    width: 75%;
+    margin: auto;
+}
+
+section#main-page div#summary-header div.white-background {
+    width: 75%;
+    margin: auto;
+}
+
+#calendar-wrapper div.white-background {
+    width: 75%;
+    margin: auto;
+}
 
 #main-page {
     width: 80%;
@@ -474,7 +494,7 @@ p.header-text {
 }
 
 #main-page p.header-text {
-    margin: 25px auto 25px auto;
+    margin: 15px auto 15px auto;
     text-align: center;
 }
 
@@ -559,11 +579,11 @@ footer {
 /*********************/
 
 #calendar-wrapper {
-    height: 230px;
+    height: 150px;
 }
 
 #calendar {
-    width: 71%;
+    width: 81%;
     margin: 2px auto;
     border-collapse: separate;
     border-spacing: 0;
@@ -604,7 +624,8 @@ footer {
 }
 
 .calendardate .divBox label {
-    color: white;
+    color: #ffffff;
+    font-weight: bold;
 }
 
 .calendardate .divBox:hover {
@@ -806,8 +827,8 @@ div.month-name {
     font-family: Lobster, serif;
     margin: 25px auto 0 auto;
     position: absolute;
-    left: 0;
-    top: -12px;
+    left: 50px;
+    top: -10px;
 }
 
 #month-name-header-helper {
@@ -837,7 +858,7 @@ div.month-name {
 
     position: absolute;
     bottom: 0;
-    right: 0;
+    right: 50px;
 }
 
     #calendar-arrow:active {
@@ -1004,7 +1025,7 @@ p#chosen-month {
 }
 
 #gegevens-form {
-    background-color: rgba(255, 255, 255, 0.55);
+    background-color: rgba(255, 255, 255, 0.35);
     float: left;
     width:65%;
     margin-left: 20px;

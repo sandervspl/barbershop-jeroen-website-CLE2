@@ -21,13 +21,13 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
 <body>
 <table id="calendar">
     <tr class="calendarday">
-        <th>Maa</th>
-        <th>Din</th>
-        <th>Woe</th>
-        <th>Don</th>
-        <th>Vri</th>
-        <th>Zat</th>
-        <th>Zon</th>
+        <th>Ma</th>
+        <th>Di</th>
+        <th>Wo</th>
+        <th>Do</th>
+        <th>Vr</th>
+        <th>Za</th>
+        <th>Zo</th>
     </tr>
 
     <tr>
