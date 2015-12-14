@@ -1,4 +1,4 @@
-<!--TODO: add waiter for ajax code. It's slow on Chrome.-->
+<!--TODO: set $barbers to $_SESSION['barber']-->
 
 <?php
 session_start();
@@ -80,13 +80,53 @@ for ($i = 0; $i <= $end_hour; $i++) {
     $database = 'website';
     $db =  mysqli_connect($host, $user, $pw, $database) or die('Error: '.mysqli_connect_error());
 
-    $sql = sprintf("SELECT * FROM afspraken WHERE datum='%s' AND tijd='%s' AND kapper='%s'",
+    $sql = sprintf("SELECT kapper FROM afspraken WHERE datum = '%s' AND tijd = '%s'",
         mysqli_real_escape_string($db, $date),
-        mysqli_real_escape_string($db, $time1),
-        mysqli_real_escape_string($db, $_SESSION['barber']));
-    $result = mysqli_query($db, $sql);
+        mysqli_real_escape_string($db, $time1));
 
+    $taken = false;
+    $result = mysqli_query($db, $sql);
+    $row = mysqli_fetch_row($result);
     mysqli_close($db);
+
+    // if both barbers have appointments at this time, we set it as taken
+    if (mysqli_num_rows($result) == 2) {
+        $taken = true;
+    }
+
+    // if chosen barber has an appointment at this time, we set it as taken
+    if (mysqli_num_rows($result) == 1) {
+        if (isset($_SESSION['barber']) && $_SESSION['barber'] !== '' && $_SESSION['barber'] === $row[0]) {
+            $taken = true;
+        }
+    }
+
+    // if we have no preference but only one of the barbers has an appointment at this time, the second barber is selected
+    if ($_SESSION['barber'] === 'Geen voorkeur') {
+        if ($row[0] === 'Jeroen') {
+            $barber =  "\"" . "Juno" . "\"";
+        } else {
+            $barber =  "\"". "Jeroen" . "\"";
+        }
+    }
+
+    if ($taken) {
+        $class_p = "time-button-taken";
+        $class_i = "times-icon-taken";
+        $class_d = "times-container-taken";
+        $func1 = 0;
+        $func2 = 0;
+        $img_src = "images/booking/timer_clear2-taken.png";
+        $isDisabled = "disabled";
+    } else {
+        $class_p = "time-button";
+        $class_i = "times-icon";
+        $class_d = "times-container";
+        $func1 = "\"" . $time1 . "\"";  // add "" around data to avoid syntax error in onTimeClick() parameters
+        $func2 = "\"" . $time2 . "\"";
+        $img_src = "images/booking/timer_clear2.png";
+        $isDisabled = "";
+    }
 
     if ($hour < 12 && !$didMorningHeader) { ?>
         <div id="morning-header">
@@ -112,28 +152,10 @@ for ($i = 0; $i <= $end_hour; $i++) {
         $didEveningHeader = true;
     }
 
-    if (mysqli_num_rows($result) > 0) {
-        $class_p = "time-button-taken";
-        $class_i = "times-icon-taken";
-        $class_d = "times-container-taken";
-        $func1 = 0;
-        $func2 = 0;
-        $img_src = "images/booking/timer_clear2-taken.png";
-        $isDisabled = "disabled";
-    } else {
-        $class_p = "time-button";
-        $class_i = "times-icon";
-        $class_d = "times-container";
-        $func1 = "\"" . $time1 . "\"";  // add "" around data to avoid syntax error in onTimeClick() parameters
-        $func2 = "\"" . $time2 . "\"";
-        $img_src = "images/booking/timer_clear2.png";
-        $isDisabled = "";
-    }
-
     $mn = "\"" . $monthname . "\"";
     ?>
 
-    <div id=<?=$time1?> class=<?=$class_d?> onclick='onTimeClick(<?=$func1?>, <?=$func2?>, <?=$mn?>)'>
+    <div id=<?=$time1?> class=<?=$class_d?> onclick='onTimeClick(<?=$func1?>, <?=$func2?>, <?=$mn?>, <?=$barber?>)'>
         <img id=<?=$time1?> class="<?=$class_i?>" src=<?=$img_src?> />
         <div>
             <button id="<?=$time1?>" type="submit" name="time" class="<?=$class_p?>" value="<?=$time1?>" <?=$isDisabled?>><?= $time1 ?></button><br />

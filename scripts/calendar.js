@@ -114,11 +114,11 @@ function onDateClick(d, da, mo, m, y) {
     //window.location.href = 'booking.php?day=' + d + "&month=" + m + "&year=" + y;
 }
 
-function onTimeClick(time, etime, month) {
+function onTimeClick(time, etime, month, barber) {
     if (time == 0 || etime == 0) return;
 
     window.sessionStorage.time = time;
     window.sessionStorage.end_time = etime;
     window.sessionStorage.month = month;
-    window.location.href = 'gegevens.php';
+    window.sessionStorage.barber = barber;
 }

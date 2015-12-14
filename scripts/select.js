@@ -3,21 +3,13 @@
  */
 
 function lockButton(id) {
-    //var elements = document.getElementsByClassName(id);
-    //var names = '';
-    //for(var i=0; i<elements.length; i++) {
-    //    names += elements[i].name;
-    //}
-    //
-    //alert(elements.length);
-
     if (window.document.getElementById(id)) {
         window.document.getElementById(id).disabled = true;
     }
 }
 
 function unlockButton() {
-    if (window.sessionStorage.barber != 0 && window.sessionStorage.cut != 0) {
+    if (window.sessionStorage.cut != 0) {
         if(window.document.getElementById("bookButton")) {
             window.document.getElementById("bookButton").disabled = false;
         }
@@ -32,8 +24,6 @@ function cutSelect(sender) {
 
 function barberSelection(sender) {
     window.sessionStorage.barber = sender.id;
-
-    unlockButton();
 }
 
 // insert chosen cut type chosen by user
@@ -99,12 +89,9 @@ function monthSelected() {
 
 
 function checkBookButton() {
-    if (window.sessionStorage.cut == 0 || window.sessionStorage.barber == 0) {
+    if (window.sessionStorage.cut == 0) {
         alert("Kies een kapper en/of wat je gedaan wilt hebben tijdens jouw afspraak.");
     } else {
-        //sender.style.color = 'white';
-        //sender.style.border = '2px solid white';
-
         window.location.href = 'booking.php';
     }
 }

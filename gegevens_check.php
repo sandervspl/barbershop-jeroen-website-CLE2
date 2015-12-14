@@ -40,7 +40,6 @@ if (!isset($_POST['phone']) || $_POST['phone'] === '') {
 }
 if (!isset($_SESSION['barber']) || $_SESSION['barber'] === '') {
     $ok = false;
-    echo "<br /> Error: BARBER variable is not set. ";
 } else {
     $barber = $_SESSION['barber'];
 }
@@ -87,7 +86,8 @@ if ($ok) {
     // add to db
     $db = mysqli_connect('localhost', 'root', '', 'website') or die('Error: '.mysqli_connect_error());
 
-    $sql = sprintf("INSERT INTO afspraken (voornaam, achternaam, datum, tijd, knipbeurt, kapper, email, telefoon) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
+    $sql = sprintf("INSERT INTO afspraken (voornaam, achternaam, datum, tijd, knipbeurt, kapper, email, telefoon)
+                    VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
         mysqli_real_escape_string($db, $voornaam),
         mysqli_real_escape_string($db, $achternaam),
         mysqli_real_escape_string($db, $date),

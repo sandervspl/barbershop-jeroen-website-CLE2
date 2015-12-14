@@ -4,13 +4,20 @@
 session_start();
 
 if (!isset($_POST['submit'])) {
-    $_SESSION['barber'] = '';
+    $_SESSION['barber'] = 'Geen voorkeur';
     $_SESSION['cut'] = '';
     $_SESSION['date'] = '';
     $_SESSION['time'] = '';
+
+    echo $_SESSION['barber'];
 } else {
-    if (isset($_POST['cut']) && isset($_POST['barber'])) {
-        $_SESSION['barber'] = $_POST['barber'];
+    if (isset($_POST['cut'])) {
+        if (isset($_POST['barber'])) {
+            $_SESSION['barber'] = $_POST['barber'];
+        } else {
+            $_SESSION['barber'] = 'Geen voorkeur';
+        }
+
         $_SESSION['cut'] = $_POST['cut'];
 
         $url = "booking.php";
@@ -29,7 +36,7 @@ if (!isset($_POST['submit'])) {
     <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
     <script>
         window.sessionStorage.cut = 0;
-        window.sessionStorage.barber = 0;
+        window.sessionStorage.barber = "Geen voorkeur";
         window.sessionStorage.time = 0;
         window.sessionStorage.end_time = 0;
         window.sessionStorage.cut_time = 0;
@@ -73,15 +80,20 @@ if (!isset($_POST['submit'])) {
                 <input id="all" type="radio" name="cut" value="alles" onclick="cutSelect(this)" />
                 <label class="trans all" for="all"></label>
                 </div>
+
                 <div class="divider"></div>
 
                 <p class="header-text">Kapper</p>
                 <div id="barbers">
-                <input id="Jeroen" type="radio" name="barber" value="Jeroen" onclick="barberSelection(this)" />
-                <label class="trans barber-selection" for="Jeroen">Jeroen</label>
+                    <input id="Jeroen" type="radio" name="barber" value="Jeroen" onclick="barberSelection(this)" />
+                    <label class="trans barber-selection" for="Jeroen">Jeroen</label>
 
-                <input id="Juno" type="radio" name="barber" value="Juno" onclick="barberSelection(this)" />
-                <label class="trans barber-selection" for="Juno">Juno</label>
+                    <input id="Juno" type="radio" name="barber" value="Juno" onclick="barberSelection(this)" />
+                    <label class="trans barber-selection" for="Juno">Juno</label>
+
+    <!--                <input id="Geenvoorkeur" type="radio" name="geenvoorkeur" value="Geenvoorkeur" onclick="barberSelection(this)" />-->
+    <!--                <label class="trans barber-selection geenvoorkeur" for="Geenvoorkeur">Beide</label>-->
+                    <p>Laat leeg als je geen voorkeur hebt.</p>
                 </div>
             </div>
             <button id="bookButton" type="submit" name="submit" class="button" onclick="checkBookButton()">reserveer</button>

@@ -1,8 +1,14 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['barber']) || !isset($_SESSION['cut']) || !isset($_SESSION['date']) || !isset($_SESSION['time'])) {
+echo "barber: " . $_SESSION['barber'];
+
+if (!isset($_SESSION['cut']) || !isset($_SESSION['date']) || !isset($_SESSION['time'])) {
     header("Location: reserveer.php");
+}
+
+if (isset($_GET['barber'])) {
+    $_SESSION['barber'] = $_GET['barber'];
 }
 
 $voornaam = '';

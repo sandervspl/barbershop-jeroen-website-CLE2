@@ -3,15 +3,20 @@ session_start();
 
 include_once "nlDate.php";
 
-if (!isset($_SESSION['barber']) || !isset($_SESSION['cut'])) {
+echo $_SESSION['barber'];
+
+if (!isset($_SESSION['cut'])) {
     header("Location: reserveer.php");
 }
 
 if (isset($_POST['time']) && isset($_POST['date'])) {
     $_SESSION['date'] = $_POST['date'];
     $_SESSION['time'] = $_POST['time'];
+    $_SESSION['barber'] = $barber;
 
     header("location: gegevens.php");
+} else {
+    $barber = "Lul";
 }
 
 // grab current year/month and start at day 01
