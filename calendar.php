@@ -1,3 +1,5 @@
+<!--TODO: JUNO IS ER ALLEEN DINSDAG, DONDERDAG EN ZATERDAG-->
+
 <?php
 include_once "nlDate.php";
 

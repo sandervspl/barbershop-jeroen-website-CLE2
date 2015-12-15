@@ -80,10 +80,8 @@ for ($i = 0; $i <= $end_hour; $i++) {
         continue;
     }
 
-    $host     = 'localhost';
-    $user     = 'root';
-    $pw       = '';
-    $database = 'website';
+    // database connection information
+    include_once "connect.php";
     $db =  mysqli_connect($host, $user, $pw, $database) or die('Error: '.mysqli_connect_error());
 
     $sql = sprintf("SELECT kapper FROM afspraken WHERE datum = '%s' AND tijd = '%s'",

@@ -66,8 +66,13 @@ if (!isset($_SESSION['cut']) || $_SESSION['cut'] === '') {
     $cut = $_SESSION['cut'];
 }
 
-// check if appointment already exists
-$db = mysqli_connect('localhost', 'root', '', 'website') or die('Error: '.mysqli_connect_error());
+
+
+// database connection information
+include_once "connect.php";
+
+$db =  mysqli_connect($host, $user, $pw, $database) or die('Error: '.mysqli_connect_error());
+
 $sql = sprintf("SELECT * FROM afspraken WHERE datum='%s' AND tijd='%s' AND kapper='%s'",
     mysqli_real_escape_string($db, $_SESSION['date']),
     mysqli_real_escape_string($db, $_SESSION['time']),
