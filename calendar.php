@@ -128,7 +128,7 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
                     echo "<td class='calendardate cut-selector $todayclass'>";
                     echo "<div class='divBox'>";
                     echo "<input type='radio' id='$date' class='date-radio' name='date' value='$date' onclick='onDateClick($day, $weekday_f, $monthname, $month, $year)' />";
-                    echo "<label for='$date' onclick='onDateClick($day, $monthname, $month, $year)'> $day </label>";
+                    echo "<label for='$date'> $day </label>";
                     echo "</div></td>";
                 } else {
                     echo "<td class='calendardate-sun-mon $todayclass'>";
@@ -170,7 +170,7 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
                             echo "<td class='calendardate cut-selector $todayclass'>";
                             echo "<div class='divBox'>";
                             echo "<input type='radio' id='$date' class='date-radio' name='date' value='$date' onclick='onDateClick($day, $weekday_f, $monthname, $month, $year)' />";
-                            echo "<label for='$date' onclick='onDateClick($day, $monthname, $month, $year)'> $day </label>";
+                            echo "<label for='$date'> $day </label>";
                             echo "</div></td>";
                         } else {
                             echo "<td class='calendardate-sun-mon $todayclass'>";

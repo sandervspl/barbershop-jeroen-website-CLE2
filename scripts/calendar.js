@@ -90,22 +90,21 @@ function showTimes(date, d, m, y) {
 }
 
 function onDateClick(d, da, mo, m, y) {
-    date = d + "_" + m + "_" + y;
-    showTimes(date, d, m, y);
+    // don't load timetable if it's already showing
+    if (window.sessionStorage.currentDayTimes != d) {
+        window.sessionStorage.currentDayTimes = d;
 
-    window.document.querySelector('#date-and-time-header').innerHTML = "<p class='header-text-small'>" + da + "</p>" + d + " " + mo + " " + y;
-    window.document.getElementById('date-and-time-header').style.borderBottom = "1px solid black";
+        date = d + "_" + m + "_" + y;
+        showTimes(date, d, m, y);
 
-    b = window.document.getElementById('date-and-time-times-container');
-    //b.style.visibility = "visible";
-    b.style.height = "auto";
+        window.document.getElementById('date-and-time-header').innerHTML = "<p class='header-text-small'>" + da + "</p>" + d + " " + mo + " " + y;
+        window.document.getElementById('date-and-time-header').style.borderBottom = "1px solid black";
 
-    window.sessionStorage.monthday = d;
+        b = window.document.getElementById('date-and-time-times-container');
+        b.style.height = "auto";
 
-    // animate
-    //$('date-and-time-times-container').animate({height:'300px'}, 5000, function() {});
-
-    //window.location.href = 'booking.php?day=' + d + "&month=" + m + "&year=" + y;
+        window.sessionStorage.monthday = d;
+    }
 }
 
 function onTimeClick(time, etime, month) {

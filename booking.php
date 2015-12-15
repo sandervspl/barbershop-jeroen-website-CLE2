@@ -20,9 +20,17 @@ if (isset($_POST['timestablebutton']) && isset($_POST['date'])) {
 $starting_day = date("Y-m-")."01";
 $time = strtotime($starting_day);
 
-$monthname = nlDate(date("F", $time));
 $month = date("m", $time);
 $year = date("Y", $time);
+
+if (isset($_GET['month']) && isset($_GET['year'])) {
+    $month = $_GET['month'];
+    $year = $_GET['year'];
+    $starting_day = $year ."-". $month ."-". "01";
+    $time = strtotime($starting_day);
+}
+
+$monthname = nlDate(date("F", $time));
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
