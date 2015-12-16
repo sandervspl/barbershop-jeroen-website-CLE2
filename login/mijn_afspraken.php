@@ -3,6 +3,16 @@ if(!isset($_SESSION)) {
     session_start();
 }
 
+if (isset($_POST['remove'])) {
+    require_once "../connect.php";
+    $db = mysqli_connect($host, $user, $pw, $database);
+
+    $id = $_POST['id'];
+    $sql = sprintf("DELETE FROM afspraken WHERE id='%s'",
+        mysqli_real_escape_string($db, $id));
+
+    $result = mysqli_query($db, $sql);
+}
 ?>
 <!DOCTYPE HTML>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -61,7 +71,7 @@ if(!isset($_SESSION)) {
                     $row = mysqli_fetch_row($result);
                     $email = $row[0];
 
-                    $sql = sprintf("SELECT A.datum, A.tijd, A.knipbeurt, A.kapper FROM afspraken A WHERE A.email in (select B.email from users B where B.email='%s') ORDER BY A.datum",
+                    $sql = sprintf("SELECT A.id, A.datum, A.tijd, A.knipbeurt, A.kapper FROM afspraken A WHERE A.email in (select B.email from users B where B.email='%s') ORDER BY A.datum",
                                     mysqli_real_escape_string($db, $email)
                         );
 
@@ -73,6 +83,7 @@ if(!isset($_SESSION)) {
                     }
 
                     foreach ($appointments as $appointment) {
+                        $id = $appointment['id'];
                         ?>
                         <div class="header-text-small appointment-title">Datum: </div>
                         <div class="header-text-small appointment-value"><?= $appointment['datum'] ?></div>
@@ -85,6 +96,10 @@ if(!isset($_SESSION)) {
                         <br />
                         <div class="header-text-small appointment-title">Kapper: </div>
                         <div class="header-text-small appointment-value"><?= $appointment['kapper'] ?></div>
+                        <br/><br />
+
+<!--                        TODO: MAKE THIS WORK-->
+                        <button id="<?=$id?>" type='submit' name='remove' class="button-delete" value="<?=$id?>")>Verwijder</button>
                         <br/><br />
                         <div class="divider-light"></div>
                         <?php
