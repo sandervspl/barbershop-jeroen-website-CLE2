@@ -191,14 +191,20 @@ if(!empty($_POST))
                 <form action="edit_account.php" method="post">
                     <span class="header-text-lobster"><?php echo htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?></span>
                     <br /><br /><br />
-                    <label for="email" class="input-text">E-Mail</label><br />
-                    <input id="email" type="text" name="email" value="<?php echo htmlentities($_SESSION['user']['email'], ENT_QUOTES, 'UTF-8'); ?>" />
-                    <br /><br />
-                    <label for="password" class="input-text">Wachtwoord</label><br />
-                    <input id="password" type="password" name="password" value="" /><br />
-                    <p>(laat leeg als je het wachtwoord niet wilt wijzigen)</p>
-                    <br /><br />
-                    <input type="submit" value="Wijzig Account" class="button" />
+                    <div id="account-image">
+                        <img src="../images/login/account.png">
+                    </div>
+
+                    <div id="account-text">
+                        <label for="email" class="input-text">E-Mail</label><br />
+                        <input id="email" type="text" name="email" value="<?php echo htmlentities($_SESSION['user']['email'], ENT_QUOTES, 'UTF-8'); ?>" />
+                        <br /><br />
+                        <label for="password" class="input-text">Wachtwoord</label><br />
+                        <input id="password" type="password" name="password" value="" /><br />
+                        <p>(laat leeg als je het wachtwoord niet wilt wijzigen)</p>
+                        <br /><br />
+                        <input type="submit" value="Wijzig Account" class="button" />
+                    </div>
                 </form>
             </div>
         </div>

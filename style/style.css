@@ -1509,8 +1509,9 @@ div#over-ons-barbers p.header-text-big {
 
 #login-register-wrapper {
     /*background-color: green;*/
-    width: 40%;
+    width: 80%;
     margin: auto;
+    text-align: center;
 }
 
 
@@ -1524,6 +1525,45 @@ div#over-ons-barbers p.header-text-big {
     padding: 0;
     font-family: Nunito, serif;
     font-size: 10px;
+}
+
+#account-image, #account-text {
+    /*background-color: yellow;*/
+    display: inline-block;
+}
+
+#account-image > img {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 20px;
+}
+
+#account-image {
+    vertical-align: top;
+    margin-right: 40px;
+}
+
+#account-text {
+    text-align: left;
+}
+
+#account-text > a {
+    line-height: 25px;
+}
+
+.appointment-title {
+    /*background-color: green;*/
+    width: 140px;
+    display: inline-block;
+    font-family: Nunito, serif;
+}
+
+.appointment-value {
+    font-size: 15px;
+    width: 140px;
+    display: inline-block;
+    font-family: Nunito, serif;
+    text-align: right;
 }
 
 /*********************/

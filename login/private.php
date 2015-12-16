@@ -234,7 +234,7 @@ if(!empty($_POST))
                     <?php if (isset($_SESSION['user']['username'])) { ?>
                         <a href="private.php" id="login-button">[<?php echo htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?>]</a>
                     <?php } else { ?>
-                        <a href="login/login.php" id="login-button">Login</a>
+                        <a href="login.php" id="login-button">Login</a>
                     <?php } ?>
                 </li>
             </ul>
@@ -248,10 +248,16 @@ if(!empty($_POST))
         <div class="white-background">
             <div id="login-register-wrapper">
                 <span class="header-text-lobster"><?php echo htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?></span>
-                <br /><br />
-                <a href="mijn_afspraken.php">Mijn Afspraken</a><br />
-                <a href="edit_account.php">Edit Account</a><br />
-                <a href="logout.php">Logout</a>
+                <br /><br /><br />
+                <div id="account-image">
+                    <img src="../images/login/account.png">
+                </div>
+
+                <div id="account-text">
+                    <a href="mijn_afspraken.php">Mijn Afspraken</a><br />
+                    <a href="edit_account.php">Edit Account</a><br />
+                    <a href="logout.php">Logout</a>
+                </div>
             </div>
         </div>
     </div>

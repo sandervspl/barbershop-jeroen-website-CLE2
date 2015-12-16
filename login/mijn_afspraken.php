@@ -30,7 +30,7 @@ if(!isset($_SESSION)) {
                     <?php if (isset($_SESSION['user']['username'])) { ?>
                         <a href="private.php" id="login-button">[<?php echo htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?>]</a>
                     <?php } else { ?>
-                        <a href="login/login.php" id="login-button">Login</a>
+                        <a href="login.php" id="login-button">Login</a>
                     <?php } ?>
                 </li>
             </ul>
@@ -44,6 +44,52 @@ if(!isset($_SESSION)) {
         <div class="white-background">
             <div id="login-register-wrapper">
                 <span class="header-text-lobster"><?php echo htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?></span>
+                <br /><br /><br />
+                <div id="account-image">
+                    <img src="../images/login/account.png">
+                </div>
+
+                <div id="account-text">
+                    <?php
+                    require_once "../connect.php";
+                    $db = mysqli_connect($host, $user, $pw, $database);
+
+                    $sql = sprintf("SELECT email FROM users WHERE username='%s'",
+                                    mysqli_real_escape_string($db, $_SESSION['user']['username']));
+
+                    $result = mysqli_query($db, $sql);
+                    $row = mysqli_fetch_row($result);
+                    $email = $row[0];
+
+                    $sql = sprintf("SELECT A.datum, A.tijd, A.knipbeurt, A.kapper FROM afspraken A WHERE A.email in (select B.email from users B where B.email='%s') ORDER BY A.datum",
+                                    mysqli_real_escape_string($db, $email)
+                        );
+
+                    $result = mysqli_query($db, $sql);
+                    $appointments = [];
+
+                    while($row = mysqli_fetch_assoc($result)) {
+                        $appointments[] = $row;
+                    }
+
+                    foreach ($appointments as $appointment) {
+                        ?>
+                        <div class="header-text-small appointment-title">Datum: </div>
+                        <div class="header-text-small appointment-value"><?= $appointment['datum'] ?></div>
+                        <br />
+                        <div class="header-text-small appointment-title">Tijd: </div>
+                        <div class="header-text-small appointment-value"><?= $appointment['tijd'] ?></div>
+                        <br />
+                        <div class="header-text-small appointment-title">Knipbeurt: </div>
+                        <div class="header-text-small appointment-value"><?= $appointment['knipbeurt'] ?></div>
+                        <br />
+                        <div class="header-text-small appointment-title">Kapper: </div>
+                        <div class="header-text-small appointment-value"><?= $appointment['kapper'] ?></div>
+                        <br/><br />
+                        <?php
+                    }
+                    ?>
+                </div>
                 <br /><br />
             </div>
         </div>
