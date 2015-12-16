@@ -10,7 +10,7 @@ if(!isset($_SESSION)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classic Barbershop Jeroen</title>
-    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="../style/style.css">
     <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
 </head>
@@ -18,17 +18,17 @@ if(!isset($_SESSION)) {
 
 <header>
     <div id="main-header">
-        <a href="index.php"><img src="images/other/bblogo.png" id="header-logo"></a>
+        <a href="../index.php"><img src="../images/other/bblogo.png" id="header-logo"></a>
     </div>
     <nav id="navigation-background">
         <div class="navigation-helper">
             <ul>
-                <li><a href="contact.php">Contact</a></li>
-                <li><a href="index.php">Over Ons</a></li>
-                <li><a href="reserveer.php">Reserveer</a></li>
+                <li><a href="../contact.php">Contact</a></li>
+                <li><a href="../index.php">Over Ons</a></li>
+                <li><a href="../reserveer.php">Reserveer</a></li>
                 <li>
                     <?php if (isset($_SESSION['user']['username'])) { ?>
-                        <a href="login/private.php" id="login-button">[<?php echo htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?>]</a>
+                        <a href="private.php" id="login-button">[<?php echo htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?>]</a>
                     <?php } else { ?>
                         <a href="login/login.php" id="login-button">Login</a>
                     <?php } ?>
@@ -39,10 +39,15 @@ if(!isset($_SESSION)) {
 </header>
 
 <section id="main-page">
-    <p id="header-text-header">Oops!</p>
-    <img id="img-big" src="images/other/error.png">
-    <p class="header-text-lobster">Er is iets misgegaan.</p><br />
-    <p class="header-text-small"><a href="reserveer.php">Probeer opnieuw</a></p>
+    <p id="header-text-header">Mijn afspraken</p>
+    <div id="basic-wrapper">
+        <div class="white-background">
+            <div id="login-register-wrapper">
+                <span class="header-text-lobster"><?php echo htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?></span>
+                <br /><br />
+            </div>
+        </div>
+    </div>
 </section>
 
 <footer>

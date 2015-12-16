@@ -36,7 +36,7 @@ footer, header, menu, nav, section {
 
 a {
     font-family: Nunito, serif;
-    color: white;
+    color: #8e675d;
     text-decoration: none;
 }
 
@@ -45,7 +45,7 @@ a {
     }
 
 a p {
-    color: gray;
+    color: #8e675d;
 }
 
 body {
@@ -130,6 +130,11 @@ footer {
     vertical-align: middle;
 }
 
+#basic-wrapper {
+    width: 75%;
+    margin: auto;
+}
+
 
 
 /*********************/
@@ -190,11 +195,17 @@ footer {
                     */
 /*********************/
 
+a#login-button {
+    /*background-color: yellow;*/
+    display: inline-block;
+}
+
 nav#navigation-background {
     width: 100%;
-    height: 35px;
+    height: 25px;
     background-color: rgba(0, 0, 0, 0.5);
     border-top: 1px solid black;
+    text-align: center;
 }
 
     @media only screen and (max-width: 750px) {
@@ -203,26 +214,28 @@ nav#navigation-background {
         }
     }
 
-    nav#navigation-background .navigation-helper {
-        width: 100%;
-        height: 100%;
-        vertical-align: top;
-    }
+#login-helper {
+    /*background-color: blue;*/
+    width: 10%;
+    display: inline-block;
+    text-align: right;
+}
 
-    nav#navigation-background .navigation-helper ul {
-        position: relative;
-        padding: 0;
-        margin: auto;
-        list-style: none;
-        text-align: center;
-        transform: translateY(-50%);
-        top: 50%;
-    }
+#navigation-helper {
+    display: inline-block;
+}
+
+nav#navigation-background .navigation-helper ul {
+    /*background-color: red;*/
+    margin: auto;
+    list-style: none;
+}
 
 nav#navigation-background ul li {
+    /*background-color: green;*/
     text-align: center;
     display: inline-block;
-    margin-right: 25px;
+    margin: auto 25px auto 0;
 }
 
     nav#navigation-background ul li:last-child {
@@ -240,11 +253,11 @@ nav#navigation-background ul li a {
         text-decoration: underline;
     }
 
-    @media only screen and (max-width: 350px) {
-        nav#navigation-background ul li a {
-            font-size: 15px;
+        @media only screen and (max-width: 350px) {
+            nav#navigation-background ul li a {
+                font-size: 15px;
+            }
         }
-    }
 
 
 
@@ -1051,14 +1064,12 @@ div.month-name {
 /*********************/
 
 #wrapper {
-    /*background-color: purple;*/
     height: inherit;
     min-height: 400px;
     margin-bottom: 100px;
 }
 
 #summary-wrapper {
-    /*background-color: green;*/
     border-right: 1px solid black;
     float: left;
     text-align: center;
@@ -1069,7 +1080,6 @@ div.month-name {
 }
 
 #summary-wrapper p.header-text {
-    /*background-color: #d32a0e;*/
     font-family: Lobster, serif;
     margin: 0 0 50px 0;
 }
@@ -1079,12 +1089,10 @@ div.month-name {
 }
 
 #summary-wrapper-text {
-    /*background-color: #d32a0e;*/
     margin-top: 35px;
 }
 
 #summary-wrapper-text .barber-name {
-    /*background-color: blue;*/
     float: left;
     font-size: 45px;
     padding: 0 10px 0 10px;
@@ -1093,7 +1101,6 @@ div.month-name {
 }
 
 #summary-wrapper-text #chosen-time, #summary-wrapper-text #chosen-etime {
-    /*background-color: yellow;*/
     position: relative;
     top: -15px;
     left: -5px;
@@ -1113,7 +1120,6 @@ div.month-name {
 }
 
 p#chosen-month {
-    /*background-color: #00fafa;*/
     position: relative;
     top: -23px;
     font-family: Lobster, serif;
@@ -1129,36 +1135,34 @@ p#chosen-month {
 }
 
 #gegevens-form div {
-    /*background-color: red;*/
     margin: auto;
     width: 250px;
 }
 
-#gegevens-form label {
-    /*background-color: greenyellow;*/
-    float: left;
+label {
+    /*float: left;*/
     text-align: left;
     width: 150px;
 }
 
-#gegevens-form input[type="submit"] {
+input[type="submit"] {
     width: 100%;
     padding: 0;
     margin-bottom: 15px;
 }
 
-#gegevens-form input[type="text"], #gegevens-form input[type="email"] {
+input[type="text"], input[type="email"], input[type="password"] {
     background-color: transparent;
     font-family: Nunito, serif;
     font-size: 17px;
     width: 100%;
     height: 25px;
-    float: left;
+    /*float: left;*/
     margin-bottom: 30px;
     border: 1px solid black;
 }
 
-    #gegevens-form input:focus {
+    input:focus {
         border: 1px solid #aeaeae;
     }
 
@@ -1217,7 +1221,7 @@ input[type="submit"].button:active, input[type="submit"].button:focus {
 /*********************/
 /*
          CONTACT
-                        */
+                      */
 /*********************/
 
 #contactpage-maps-wrapper, #contactpage-text-wrapper {
@@ -1348,6 +1352,179 @@ input[type="submit"].button:active, input[type="submit"].button:focus {
 
 
 
+
+
+
+/*********************/
+/*
+         INDEX
+                        */
+/*********************/
+
+#over-ons {
+    width: 75%;
+    margin: auto;
+}
+
+#over-ons-text {
+    /*background-color: red;*/
+    width: 95%;
+    margin: 10px auto 20px;
+    font-family: Nunito, serif;
+    font-size: 15px;
+}
+
+#over-ons-barbers {
+    /*background-color: yellow;*/
+    width: 95%;
+    margin: auto;
+}
+
+#over-ons-jeroen-wrapper, #over-ons-juno-wrapper {
+    /*background-color: green;*/
+    display: inline-block;
+    /*border-top: 1px solid rgba(0, 0, 0, 0.10);*/
+    margin: auto;
+}
+
+#over-ons-jeroen-wrapper {
+    margin-right: 40px;
+}
+
+#over-ons-juno-wrapper {
+    margin-left: 40px;
+}
+
+div#over-ons div.white-background div#over-ons-jeroen-wrapper p.header-text-lobster,
+div#over-ons div.white-background div#over-ons-juno-wrapper p.header-text-lobster {
+    margin-bottom: 10px;
+    font-size: 35px;
+}
+
+div#over-ons-barbers p.header-text-big {
+    /*background-color: green;*/
+    margin-bottom: 70px;
+    border-bottom: 1px solid black;
+    width: 75%;
+}
+
+#over-ons-jeroen-wrapper img, #over-ons-juno-wrapper img {
+    width: 250px;
+    height: 250px;
+}
+
+    @media only screen and (max-width: 1024px) {
+        #over-ons-jeroen-wrapper img, #over-ons-juno-wrapper img {
+            width: 200px;
+            height: 200px;
+        }
+    }
+
+    @media only screen and (max-width: 800px) {
+        /*#over-ons-jeroen-wrapper, #over-ons-juno-wrapper {*/
+        /*display: inline;*/
+        /*margin: auto;*/
+        /*}*/
+
+        #over-ons-jeroen-wrapper img, #over-ons-juno-wrapper img {
+            width: 160px;
+            height: 160px;
+            /*margin: auto;*/
+        }
+
+        #over-ons-jeroen-wrapper {
+            margin-right: 20px;
+        }
+
+        #over-ons-juno-wrapper {
+            margin-left: 20px;
+        }
+    }
+
+    @media only screen and (max-width: 768px) {
+        #over-ons-jeroen-wrapper img, #over-ons-juno-wrapper img {
+            width: 160px;
+            height: 160px;
+        }
+
+        #over-ons-jeroen-wrapper {
+            margin-right: 20px;
+        }
+
+        #over-ons-juno-wrapper {
+            margin-left: 20px;
+        }
+    }
+
+    @media only screen and (max-width: 480px) {
+        #over-ons {
+            width: 95%;
+        }
+
+        #over-ons-text {
+            text-align: left;
+            width: 80%;
+        }
+
+        div#over-ons-barbers p.header-text-big {
+            /*background-color: green;*/
+            width: 80%;
+            font-size: 45px;
+        }
+
+        #over-ons-jeroen-wrapper, #over-ons-juno-wrapper {
+            display: inline;
+            margin: auto;
+        }
+
+        #over-ons-juno-wrapper {
+            border-top: 1px solid rgba(0, 0, 0, 0.10);
+        }
+
+        #over-ons-jeroen-wrapper img, #over-ons-juno-wrapper img {
+            width: 200px;
+            height: 200px;
+            margin: auto;
+        }
+
+        #over-ons-jeroen-wrapper img {
+            margin-bottom: 30px;
+        }
+
+        #over-ons-jeroen-wrapper p.header-text-lobster, #over-ons-juno-wrapper p.header-text-lobster {
+            font-size: 30px;
+        }
+    }
+
+
+
+
+
+
+/*********************/
+/*
+         REGISTER
+                        */
+/*********************/
+
+#login-register-wrapper {
+    /*background-color: green;*/
+    width: 40%;
+    margin: auto;
+}
+
+
+/*********************/
+/*
+         ACCOUNT
+                     */
+/*********************/
+
+#login-register-wrapper > form:nth-child(1) > p:nth-child(14) {
+    padding: 0;
+    font-family: Nunito, serif;
+    font-size: 10px;
+}
 
 /*********************/
 /*

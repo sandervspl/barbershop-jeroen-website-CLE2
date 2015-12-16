@@ -1,5 +1,7 @@
 <?php
-session_start();
+if(!isset($_SESSION)) {
+    session_start();
+}
 
 ?>
 <!DOCTYPE HTML>
@@ -81,7 +83,7 @@ for ($i = 0; $i <= $end_hour; $i++) {
     }
 
     // database connection information
-    include_once "connect.php";
+    require_once "connect.php";
     $db =  mysqli_connect($host, $user, $pw, $database) or die('Error: '.mysqli_connect_error());
 
     $sql = sprintf("SELECT kapper FROM afspraken WHERE datum = '%s' AND tijd = '%s'",

@@ -1,4 +1,8 @@
 <?php
+if(!isset($_SESSION)) {
+    session_start();
+}
+
 ?>
 <!DOCTYPE HTML>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -40,8 +44,15 @@
         <div class="navigation-helper">
             <ul>
                 <li><a href="contact.php">Contact</a></li>
-                <li><a href="overons.php">Over Ons</a></li>
+                <li><a href="index.php">Over Ons</a></li>
                 <li><a href="reserveer.php">Reserveer</a></li>
+                <li>
+                    <?php if (isset($_SESSION['user']['username'])) { ?>
+                        <a href="login/private.php" id="login-button">[<?php echo htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?>]</a>
+                    <?php } else { ?>
+                        <a href="login/login.php" id="login-button">Login</a>
+                    <?php } ?>
+                </li>
             </ul>
         </div>
     </nav>

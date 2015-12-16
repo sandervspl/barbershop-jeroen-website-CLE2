@@ -1,5 +1,7 @@
 <?php
-session_start();
+if(!isset($_SESSION)) {
+    session_start();
+}
 
 if (!isset($_SESSION['cut']) || !isset($_SESSION['date']) || !isset($_SESSION['time'])) {
     header("Location: reserveer.php");
@@ -11,7 +13,7 @@ $phone = '';
 $email = '';
 
 if (isset($_POST['submit'])) {
-    include_once "gegevens_check.php";
+    require_once "gegevens_check.php";
 }
 ?>
 <!DOCTYPE HTML>
@@ -34,8 +36,15 @@ if (isset($_POST['submit'])) {
         <div class="navigation-helper">
             <ul>
                 <li><a href="contact.php">Contact</a></li>
-                <li><a href="overons.php">Over Ons</a></li>
+                <li><a href="index.php">Over Ons</a></li>
                 <li><a href="reserveer.php">Reserveer</a></li>
+                <li>
+                    <?php if (isset($_SESSION['user']['username'])) { ?>
+                        <a href="login/private.php" id="login-button">[<?php echo htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?>]</a>
+                    <?php } else { ?>
+                        <a href="login/login.php" id="login-button">Login</a>
+                    <?php } ?>
+                </li>
             </ul>
         </div>
     </nav>

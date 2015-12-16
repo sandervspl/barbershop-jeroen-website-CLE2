@@ -1,4 +1,8 @@
 <?php
+if(!isset($_SESSION)) {
+    session_start();
+}
+
 ?>
 <!DOCTYPE HTML>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -20,8 +24,15 @@
         <div class="navigation-helper">
             <ul>
                 <li><a href="contact.php">Contact</a></li>
-                <li><a href="overons.php">Over Ons</a></li>
+                <li><a href="index.php">Over Ons</a></li>
                 <li><a href="reserveer.php">Reserveer</a></li>
+                <li>
+                    <?php if (isset($_SESSION['user']['username'])) { ?>
+                        <a href="login/private.php" id="login-button">[<?php echo htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?>]</a>
+                    <?php } else { ?>
+                        <a href="login/login.php" id="login-button">Login</a>
+                    <?php } ?>
+                </li>
             </ul>
         </div>
     </nav>
@@ -29,6 +40,32 @@
 
 <section id="main-page">
     <p id="header-text-header">Wie zijn wij</p>
+    <div id="over-ons">
+        <div class="white-background">
+            <div id="over-ons-text">
+                <p>Classics Barbershop Jeroen is een heren kapsalon op <a href="contact.php">Winkelcentrum De Passage in Zwijndrecht</a>.</p>
+                <p>Wij zijn gespecialiseerd in het knippen van heren, maar ook uw kleine boefjes zijn welkom.</p>
+                <p>U bent van harte welkom bij ons in de nieuwe zaak.</p>
+                <br />
+                <p>Om een afspraak te maken kunt u dat via ons gloednieuwe <a href="reserveer.php">online reserveersysteem</a> doen.</p>
+                <p>Ouderwets <a href="contact.php">bellen of langskomen</a> is natuurlijk ook mogelijk.</p>
+                <br />
+                <p class="header-text-small">Tot snel!</p>
+            </div>
+
+            <div id="over-ons-barbers">
+                <p class="header-text-big">De barbers</p>
+                <div id="over-ons-jeroen-wrapper">
+                    <p class="header-text-lobster">Jeroen</p>
+                    <img src="images/index/jeroen.jpg">
+                </div>
+                <div id="over-ons-juno-wrapper">
+                    <p class="header-text-lobster">Juno</p>
+                    <img src="images/index/juno.jpg">
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <footer>

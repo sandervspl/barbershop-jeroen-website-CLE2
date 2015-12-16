@@ -1,7 +1,7 @@
 <!--TODO: JUNO IS ER ALLEEN DINSDAG, DONDERDAG EN ZATERDAG-->
 
 <?php
-include_once "nlDate.php";
+require_once "nlDate.php";
 
 if (isset($_GET['month']) && isset($_GET['year'])) {
     $month = $_GET['month'];

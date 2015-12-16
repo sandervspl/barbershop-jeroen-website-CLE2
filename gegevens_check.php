@@ -69,7 +69,7 @@ if (!isset($_SESSION['cut']) || $_SESSION['cut'] === '') {
 
 
 // database connection information
-include_once "connect.php";
+require_once "connect.php";
 
 $db =  mysqli_connect($host, $user, $pw, $database) or die('Error: '.mysqli_connect_error());
 
@@ -93,14 +93,14 @@ if ($ok) {
 
     $sql = sprintf("INSERT INTO afspraken (voornaam, achternaam, datum, tijd, knipbeurt, kapper, email, telefoon)
                     VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
-        mysqli_real_escape_string($db, $voornaam),
-        mysqli_real_escape_string($db, $achternaam),
-        mysqli_real_escape_string($db, $date),
-        mysqli_real_escape_string($db, $time),
-        mysqli_real_escape_string($db, $cut),
-        mysqli_real_escape_string($db, $barber),
-        mysqli_real_escape_string($db, $email),
-        mysqli_real_escape_string($db, $phone)
+                    mysqli_real_escape_string($db, $voornaam),
+                    mysqli_real_escape_string($db, $achternaam),
+                    mysqli_real_escape_string($db, $date),
+                    mysqli_real_escape_string($db, $time),
+                    mysqli_real_escape_string($db, $cut),
+                    mysqli_real_escape_string($db, $barber),
+                    mysqli_real_escape_string($db, $email),
+                    mysqli_real_escape_string($db, $phone)
     );
     mysqli_query($db, $sql);
     mysqli_close($db);
