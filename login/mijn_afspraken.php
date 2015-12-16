@@ -86,6 +86,7 @@ if(!isset($_SESSION)) {
                         <div class="header-text-small appointment-title">Kapper: </div>
                         <div class="header-text-small appointment-value"><?= $appointment['kapper'] ?></div>
                         <br/><br />
+                        <div class="divider-light"></div>
                         <?php
                     }
                     ?>
