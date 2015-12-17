@@ -1,6 +1,8 @@
-<!--TODO: JUNO IS ER ALLEEN DINSDAG, DONDERDAG EN ZATERDAG-->
-
 <?php
+if(!isset($_SESSION)) {
+    session_start();
+}
+
 require_once "nlDate.php";
 
 if (isset($_GET['month']) && isset($_GET['year'])) {
@@ -139,7 +141,8 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
             }
 
             // it will always miss day 1 on first row if this is not here. TODO: fix this
-            if ($day < $curday && $curmonth === $month || isFeestdag($day, $month) || $weekday === "Mon" || $weekday === "Sun") { ?>
+            if ($day < $curday && $curmonth === $month || isFeestdag($day, $month) || $weekday === "Mon" || $weekday === "Sun" ||
+                ($_SESSION['barber'] === "Juno" && ($weekday === "Mon" || $weekday === "Wed" || $weekday === "Fri"))) { ?>
                 <td class="calendardateblocked <?=$todayclass?>">
                     <div class="divBox">
                         <span> <?=$day?> </span>
@@ -179,7 +182,8 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
             // if not we fill our cells with current month data
         } else {
             if (!$doNextMonth) {
-                if ($day < $curday && $curmonth === $month || isFeestdag($day, $month) || $weekday === "Mon" || $weekday === "Sun") { ?>
+                if ($day < $curday && $curmonth === $month || isFeestdag($day, $month) || $weekday === "Mon" || $weekday === "Sun" ||
+                    ($_SESSION['barber'] === "Juno" && ($weekday === "Mon" || $weekday === "Wed" || $weekday === "Fri"))) { ?>
                     <td class="calendardateblocked <?=$todayclass?>">
                         <div class="divBox">
                             <span> <?=$day?> </span>

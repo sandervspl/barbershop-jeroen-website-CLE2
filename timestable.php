@@ -95,34 +95,42 @@ for ($i = 0; $i <= $end_hour; $i++) {
     $row = mysqli_fetch_row($result);
     mysqli_close($db);
 
-    // if both barbers have appointments at this time, we set it as taken
+    // if both barbers have appointments at this time we set it as taken
     if (mysqli_num_rows($result) == 2) {
         $taken = true;
     }
 
-    // if chosen barber has an appointment at this time, we set it as taken
+    // if the chosen barber has an appointment at this time we set it as taken
     else if (mysqli_num_rows($result) == 1) {
         if ($_SESSION['barber'] === $row[0]) {
             $taken = true;
         }
-    }
 
-    // if no barber has an appointment at this time, we random one
-    else {
-        $b = rand(0, 2);
-        if (!$b) {
-            $barber = "Jeroen";
-        } else {
-            $barber = "Juno";
+        // if we have no preference but only one of the barbers has an appointment at this time, the second barber is selected
+        if ($_SESSION['barber'] === 'geenvoorkeur') {
+            if ($row[0] === "Jeroen") {
+                $barber = "Juno";
+            } else {
+                $barber = "Jeroen";
+            }
         }
     }
 
-    // if we have no preference but only one of the barbers has an appointment at this time, the second barber is selected
-    if ($_SESSION['barber'] === 'geenvoorkeur') {
-        if ($row[0] === 'Jeroen') {
-            $barber = "Juno";
-        } else {
+    // if no barber has an appointment at this time we random one if it's not Tue, Thu or Sat.
+    else if ($_SESSION['barber'] === 'geenvoorkeur') {
+        $starting_day = "$year-$month-$day";
+        $time = strtotime($starting_day);
+        $weekday = date("D", mktime(0,0,0, date("m",$time), date("d",$time), date("y",$time)));
+
+        if ($weekday === "Tue" || $weekday === "Thu" || $weekday === "Sat") {
             $barber = "Jeroen";
+        } else {
+            $b = rand(0, 2);
+            if ($b) {
+                $barber = "Jeroen";
+            } else {
+                $barber = "Juno";
+            }
         }
     }
 
