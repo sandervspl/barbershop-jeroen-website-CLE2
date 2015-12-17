@@ -187,7 +187,7 @@ if(!empty($_POST))
     <p id="header-text-header">Wijzig account</p>
     <div id="basic-wrapper">
         <div class="white-background">
-            <div id="login-register-wrapper">
+            <div id="account-wrapper-wide">
                 <form action="edit_account.php" method="post">
                     <span class="header-text-lobster"><?php echo htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?></span>
                     <br /><br /><br />

@@ -52,7 +52,7 @@ if (isset($_POST['remove'])) {
     <p id="header-text-header">Mijn afspraken</p>
     <div id="basic-wrapper">
         <div class="white-background">
-            <div id="login-register-wrapper">
+            <div id="account-wrapper-wide">
                 <span class="header-text-lobster"><?php echo htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?></span>
                 <br /><br /><br />
                 <div id="account-image">

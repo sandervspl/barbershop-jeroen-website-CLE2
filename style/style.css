@@ -1526,6 +1526,12 @@ div#over-ons-barbers p.header-text-big {
 
 #login-register-wrapper {
     /*background-color: green;*/
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+
+#account-wrapper-wide {
     width: 80%;
     margin: auto;
     text-align: center;
@@ -1538,7 +1544,7 @@ div#over-ons-barbers p.header-text-big {
                      */
 /*********************/
 
-#login-register-wrapper > form:nth-child(1) > p:nth-child(14) {
+#account-text > p:nth-child(10) {
     padding: 0;
     font-family: Nunito, serif;
     font-size: 10px;

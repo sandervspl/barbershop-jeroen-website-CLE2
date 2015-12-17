@@ -255,8 +255,8 @@ if(!empty($_POST))
 
                 <div id="account-text">
                     <a href="mijn_afspraken.php">Mijn Afspraken</a><br />
-                    <a href="edit_account.php">Edit Account</a><br />
-                    <a href="logout.php">Logout</a>
+                    <a href="edit_account.php">Wijzig Account</a><br />
+                    <a href="logout.php">Uitloggen</a>
                 </div>
             </div>
         </div>

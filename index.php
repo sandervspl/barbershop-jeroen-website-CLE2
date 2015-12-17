@@ -43,6 +43,7 @@ if(!isset($_SESSION)) {
     <div id="over-ons">
         <div class="white-background">
             <div id="over-ons-text">
+                <p class="header-text">Classics Barbershop</p>
                 <p>Classics Barbershop Jeroen is een heren kapsalon op <a href="contact.php">Winkelcentrum De Passage in Zwijndrecht</a>.</p>
                 <p>Wij zijn gespecialiseerd in het knippen van heren, maar ook uw kleine boefjes zijn welkom.</p>
                 <p>U bent van harte welkom bij ons in de nieuwe zaak.</p>
