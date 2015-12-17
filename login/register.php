@@ -227,13 +227,13 @@ if(!empty($_POST))
         <div class="white-background">
             <div id="login-register-wrapper">
                 <form action="register.php" method="post">
-                    <label for="username" class="input-text">Gebruikersnaam</label><br />
+                    <label for="username" class="input-text-small">Gebruikersnaam</label><br />
                     <input id="username" type="text" name="username" value="" />
                     <br /><br />
-                    <label for="email" class="input-text">E-Mail</label><br />
+                    <label for="email" class="input-text-small">E-Mail</label><br />
                     <input id="email" type="text" name="email" value="" />
                     <br /><br />
-                    <label for="password" class="input-text">Wachtwoord</label><br />
+                    <label for="password" class="input-text-small">Wachtwoord</label><br />
                     <input id="password" type="password" name="password" value="" />
                     <br /><br />
                     <input type="submit" class="button" value="Registreer" />

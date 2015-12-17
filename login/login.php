@@ -147,10 +147,10 @@ if(!empty($_POST))
         <div class="white-background">
             <div id="login-register-wrapper">
                 <form action="login.php" method="post">
-                    <label for="username" class="input-text">Username</label><br />
+                    <label for="username" class="input-text-small">Gebruikersnaam</label><br />
                     <input type="text" id="username" class="textinput" name="username" value="<?php echo $submitted_username; ?>" />
                     <br /><br />
-                    <label for="password" class="input-text">password</label><br />
+                    <label for="password" class="input-text-small">Wachtwoord</label><br />
                     <input type="password" id="password" class="textinput" name="password" value="" />
                     <br /><br />
                     <input type="submit" value="Login" class="button" />

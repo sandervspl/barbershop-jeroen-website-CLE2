@@ -104,7 +104,7 @@ footer {
 
     background-color: black;
     font-family: Nunito, serif;
-    font-size: 30px;
+    font-size: 25px;
     color: #ffffff;
 
     border: 1px solid black;
@@ -304,13 +304,14 @@ nav#navigation-background ul li a {
     top: 50px;
 }
 
-.header-text-big + p {
-    font-family: Lobster, serif;
-    font-size: 30px;
-    margin: auto auto 50px auto;
-    position: relative;
-    top: 15px;
-}
+/*.header-text-big + p {*/
+    /*background-color: green;*/
+    /*font-family: Lobster, serif;*/
+    /*font-size: 30px;*/
+    /*margin: auto auto 50px auto;*/
+    /*position: relative;*/
+    /*top: 15px;*/
+/*}*/
 
 .header-text-small {
     font-family: Lobster, serif;
@@ -472,6 +473,10 @@ div.cut-selector div#barbers input:checked +.trans {
     height: auto;
     width: auto;
     padding: 10px 0 15px 0;
+}
+
+.white-background-margin {
+    margin: 20px auto;
 }
 
 .cut-selector .white-background {
@@ -841,7 +846,7 @@ section #date-and-time span#date-and-time-header {
     color: #000000;
     display: block;
     width: 71%;
-    margin: 60px auto 35px auto;
+    margin: 100px auto 35px auto;
     padding-top: 10px;
 }
 
@@ -1378,6 +1383,19 @@ input[type="submit"].button:active, input[type="submit"].button:focus {
                         */
 /*********************/
 
+table#opening-times {
+    margin: auto;
+    width: 30%;
+}
+
+table#opening-times tr td:first-child {
+    text-align: left;
+}
+
+table#opening-times tr td:nth-child(2) {
+    text-align: right;
+}
+
 #over-ons {
     width: 75%;
     margin: auto;
@@ -1483,12 +1501,6 @@ div#over-ons-barbers p.header-text-big {
             width: 80%;
         }
 
-        div#over-ons-barbers p.header-text-big {
-            /*background-color: green;*/
-            width: 80%;
-            font-size: 45px;
-        }
-
         #over-ons-jeroen-wrapper, #over-ons-juno-wrapper {
             display: inline;
             margin: auto;
@@ -1526,15 +1538,20 @@ div#over-ons-barbers p.header-text-big {
 
 #login-register-wrapper {
     /*background-color: green;*/
-    width: 50%;
+    width: 25%;
     margin: auto;
-    text-align: center;
+    text-align: left;
 }
 
 #account-wrapper-wide {
     width: 80%;
     margin: auto;
     text-align: center;
+}
+
+.input-text-small {
+    font-family: Nunito, serif;
+    font-size: 20px;
 }
 
 

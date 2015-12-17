@@ -134,6 +134,12 @@ for ($i = 0; $i <= $end_hour; $i++) {
         }
     }
 
+    // if today is chosen and we are past current time, we disable the option
+    $curtime = localtime(time(), true);
+    if ($date === date("Y-m-d") && $curtime['tm_hour'] >= $hour && ($curtime['tm_min'] >= 1 || $curtime['tm_min'] >= 30)) {
+        $taken = true;
+    }
+
     if ($taken) {
         $class_p = "time-button-taken";
         $class_i = "times-icon-taken";
