@@ -63,7 +63,7 @@ $monthname = nlDate(date("F", $time));
             </tr>
             <tr>
                 <td><img id="cut" class="hair-beard-img" src="images/index/no-hair-no-beard.png"></td>
-                <td><img id="cut-time" class="hair-beard-img" src="images/booking/timer_clear.png"></td>
+                <td><img id="cut-time" class="hair-beard-img" src="images/booking/timer_clear.png"><p id="cut-time-text">0min</p></td>
                 <td><span class="barber-name"><?=$_SESSION['barber']?></span></td>
                 <script src="scripts/select.js"></script>
                 <script type="text/javascript">

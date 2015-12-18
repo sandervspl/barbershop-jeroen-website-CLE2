@@ -38,28 +38,40 @@ function cutSelected() {
     switch(window.sessionStorage.cut) {
         case "hair": {
             b.setAttribute('src', 'images/index/yes-hair-no-beard.png');
-            if (cutTime) cutTime.setAttribute('src', 'images/booking/timer_30_min.png');
+            if (cutTime) {
+                cutTime.setAttribute('src', 'images/booking/timer_30_min.png');
+                window.document.getElementById('cut-time-text').innerHTML = "30 minuten";
+            }
             window.sessionStorage.cut_time = 30;
             break;
         }
 
         case "beard": {
             b.setAttribute('src', 'images/index/no-hair-yes-beard.png');
-            if (cutTime) cutTime.setAttribute('src', 'images/booking/timer_30_min.png');
+            if (cutTime) {
+                cutTime.setAttribute('src', 'images/booking/timer_30_min.png');
+                window.document.getElementById('cut-time-text').innerHTML = "30 minuten";
+            }
             window.sessionStorage.cut_time = 30;
             break;
         }
 
         case "moustache": {
             b.setAttribute('src', 'images/index/no-hair-no-beard-yes-moustache.png');
-            if (cutTime) cutTime.setAttribute('src', 'images/booking/timer_30_min.png');
+            if (cutTime) {
+                cutTime.setAttribute('src', 'images/booking/timer_30_min.png');
+                window.document.getElementById('cut-time-text').innerHTML = "30 minuten";
+            }
             window.sessionStorage.cut_time = 30;
             break;
         }
 
         case "all": {
             b.setAttribute('src', 'images/index/yes-hair-yes-beard.png');
-            if (cutTime) cutTime.setAttribute('src', 'images/booking/timer_60_min.png');
+            if (cutTime) {
+                cutTime.setAttribute('src', 'images/booking/timer_60_min.png');
+                window.document.getElementById('cut-time-text').innerHTML = "60 minuten";
+            }
             window.sessionStorage.cut_time = 60;
             break;
         }

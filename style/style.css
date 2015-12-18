@@ -180,8 +180,8 @@ footer {
 }
 
 #header-logo {
-    width: 323px;
-    height: 110px;
+    width: 250px;
+    height: 85px;
 
     display: inline-block;
     vertical-align: middle;
@@ -722,6 +722,11 @@ td {
     height: 100px;
 }
 
+#cut-time-text {
+    margin-top: 5px;
+    font-size: 20px;
+}
+
 .time-button {
     cursor: pointer;
 
@@ -1164,6 +1169,10 @@ p#chosen-month {
     width: 250px;
 }
 
+#gegevens-form .button {
+    margin-bottom: 10px;
+}
+
 label {
     /*float: left;*/
     text-align: left;
@@ -1182,7 +1191,6 @@ input[type="text"], input[type="email"], input[type="password"] {
     font-size: 17px;
     width: 100%;
     height: 25px;
-    /*float: left;*/
     margin-bottom: 30px;
     border: 1px solid black;
 }
@@ -1706,6 +1714,12 @@ div#over-ons-barbers p.header-text-big {
          MISC
                         */
 /*********************/
+
+/*confirmation page "tot dan"*/
+#main-page > p:nth-child(5) {
+    font-family: Lobster, serif;
+    font-size: 30px;
+}
 
 #img-big {
     width: 250px;
