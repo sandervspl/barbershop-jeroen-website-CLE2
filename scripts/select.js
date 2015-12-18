@@ -59,8 +59,8 @@ function cutSelected() {
 
         case "all": {
             b.setAttribute('src', 'images/index/yes-hair-yes-beard.png');
-            if (cutTime) cutTime.setAttribute('src', 'images/booking/timer_45_min.png');
-            window.sessionStorage.cut_time = 45;
+            if (cutTime) cutTime.setAttribute('src', 'images/booking/timer_60_min.png');
+            window.sessionStorage.cut_time = 60;
             break;
         }
 

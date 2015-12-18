@@ -136,8 +136,13 @@ for ($i = 0; $i <= $end_hour; $i++) {
 
     // if today is chosen and we are past current time, we disable the option
     $curtime = localtime(time(), true);
-    if ($date === date("Y-m-d") && $curtime['tm_hour'] >= $hour && ($curtime['tm_min'] >= 1 || $curtime['tm_min'] >= 30)) {
+    if ($date === date("Y-m-d") && $curtime['tm_hour'] >= $hour) {
         $taken = true;
+    }
+
+    // there are some weird interactions with current hour and we need this exception for it
+    if ($date === date("Y-m-d") && $curtime['tm_hour'] === $hour && $curtime['tm_min'] < $m) {
+        $taken = false;
     }
 
     if ($taken) {

@@ -216,13 +216,13 @@ a#login-button {
     display: inline-block;
 }
 
-nav#navigation-background {
+#navigation-background {
     width: 100%;
-    height: 25px;
     background-color: rgba(0, 0, 0, 0.5);
-    border-top: 1px solid black;
-    text-align: center;
-    line-height: 25px;
+    /*background-color: rgba(253, 243, 211, 0.9);*/
+    /*border-top: 1px solid black;*/
+    position: relative;
+    vertical-align: top;
 }
 
     @media only screen and (max-width: 750px) {
@@ -231,25 +231,27 @@ nav#navigation-background {
         }
     }
 
-#login-helper {
-    /*background-color: blue;*/
-    width: 10%;
-    display: inline-block;
-    text-align: right;
-}
-
-#navigation-helper {
-    display: inline-block;
-}
-
-nav#navigation-background .navigation-helper ul {
-    /*background-color: red;*/
+.navigation-container {
+    position: relative;
+    width: 80%;
+    height: 30px;
     margin: auto;
-    list-style: none;
+    line-height: 30px;
+}
+
+.navigation-left {
+    text-align: center;
+}
+
+.navigation-right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    text-align: right;
+    vertical-align: top;
 }
 
 nav#navigation-background ul li {
-    /*background-color: green;*/
     text-align: center;
     display: inline-block;
     margin: auto 25px auto 0;
@@ -259,14 +261,15 @@ nav#navigation-background ul li {
         margin-right: 0;
     }
 
-nav#navigation-background ul li a {
-    font-size: 20px;
-    font-family: Nunito, serif;
+nav a {
+    font-size: 15px;
+    font-family: "Open Sans", serif;
+    text-transform: uppercase;
     text-decoration: none;
     color: white;
 }
 
-    nav#navigation-background ul li a:hover {
+    nav#navigation-background a:hover {
         text-decoration: underline;
     }
 
@@ -1175,7 +1178,7 @@ input[type="submit"] {
 
 input[type="text"], input[type="email"], input[type="password"] {
     background-color: transparent;
-    font-family: Nunito, serif;
+    font-family: "Open Sans", serif;
     font-size: 17px;
     width: 100%;
     height: 25px;
@@ -1257,6 +1260,7 @@ input[type="submit"].button:active, input[type="submit"].button:focus {
     width: 30%;
     margin-right: 5px;
     padding-right: 15px;
+    font-family: "Open Sans", serif !important;
 }
 
 #contactpage-maps-wrapper {
@@ -1300,7 +1304,6 @@ input[type="submit"].button:active, input[type="submit"].button:focus {
 }
 
 #contact-text-wrapper p, #phone-text-wrapper p, #facebook-text-wrapper p {
-    font-family: Nunito, serif;
     font-size: 13px;
     display: inline-block;
     vertical-align: middle;
@@ -1309,6 +1312,10 @@ input[type="submit"].button:active, input[type="submit"].button:focus {
 
 #phone-text-wrapper p, #facebook-text-wrapper p {
     font-size: 15px;
+}
+
+#facebook-text-wrapper a {
+    font-family: "Open Sans", serif !important;
 }
 
 .contact-img {
@@ -1405,8 +1412,16 @@ table#opening-times tr td:nth-child(2) {
     /*background-color: red;*/
     width: 95%;
     margin: 10px auto 20px;
-    font-family: Nunito, serif;
+    font-family: "Open Sans", serif;
     font-size: 15px;
+}
+
+#over-ons-text a {
+    font-family: "Open Sans", serif;
+}
+
+#over-ons-text .header-text-small {
+    font-size: 40px;
 }
 
 #over-ons-barbers {
@@ -1549,11 +1564,23 @@ div#over-ons-barbers p.header-text-big {
     text-align: center;
 }
 
+#login-register-wrapper a, #account-wrapper-wide a {
+    font-family: "Open Sans", serif;
+}
+
 .input-text-small {
     font-family: Nunito, serif;
     font-size: 20px;
 }
 
+.registerbutton {
+    margin: auto;
+    text-align: center;
+}
+
+#login-register-wrapper form input {
+    margin-bottom: 10px;
+}
 
 /*********************/
 /*
@@ -1585,6 +1612,7 @@ div#over-ons-barbers p.header-text-big {
 
 #account-text {
     text-align: left;
+    line-height: 25px;
 }
 
 #account-text > a {
@@ -1592,19 +1620,86 @@ div#over-ons-barbers p.header-text-big {
 }
 
 .appointment-title {
-    /*background-color: green;*/
     width: 140px;
     display: inline-block;
-    font-family: Nunito, serif;
 }
 
 .appointment-value {
-    font-size: 15px;
     width: 140px;
     display: inline-block;
-    font-family: Nunito, serif;
     text-align: right;
+    /*text-transform: uppercase;*/
 }
+
+.appointment-value, .appointment-title {
+    font-size: 15px;
+    font-family: "Open Sans", serif;
+}
+
+#account-text input {
+    margin-bottom: 10px;
+}
+
+
+
+/*********************/
+/*
+         CREDITS
+                        */
+/*********************/
+
+#credits {
+    font-family: "Open Sans", serif;
+    width: 75%;
+    margin: auto;
+}
+
+#credits-text {
+    width: 50%;
+    margin: auto;
+    text-align: left;
+    line-height: 25px;
+}
+
+#credits-text h1 {
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+#credits-text a {
+    font-family: "Open Sans", serif;
+    color: black;
+    text-transform: uppercase;
+}
+
+
+/*********************/
+/*
+         FOOTER
+                        */
+/*********************/
+
+.footer-container {
+    width: 80%;
+    font-family: "Open Sans", serif;
+    font-size: 13px;
+    line-height: 50px;
+    margin: auto;
+}
+
+.footer-container .left {
+    float: left;
+}
+
+.footer-container .right {
+    float: right;
+}
+
+.footer-container a {
+    font-family: "Open Sans",serif;
+    color: black;
+}
+
 
 /*********************/
 /*

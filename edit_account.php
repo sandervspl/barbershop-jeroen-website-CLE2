@@ -155,32 +155,15 @@ if(!empty($_POST))
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classic Barbershop Jeroen</title>
-    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="style/style.css">
     <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
 <header>
-    <div id="main-header">
-        <a href="../index.php"><img src="../images/other/bblogo.png" id="header-logo"></a>
-    </div>
-    <nav id="navigation-background">
-        <div class="navigation-helper">
-            <ul>
-                <li><a href="../contact.php">Contact</a></li>
-                <li><a href="../index.php">Over Ons</a></li>
-                <li><a href="../reserveer.php">Reserveer</a></li>
-                <li>
-                    <?php if (isset($_SESSION['user']['username'])) { ?>
-                        <a href="private.php" id="login-button">[<?php echo htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?>]</a>
-                    <?php } else { ?>
-                        <a href="login.php" id="login-button">Login</a>
-                    <?php } ?>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <?php require_once "header.php" ?>
 </header>
 
 <section id="main-page">
@@ -192,7 +175,7 @@ if(!empty($_POST))
                     <span class="header-text-lobster"><?php echo htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?></span>
                     <br /><br /><br />
                     <div id="account-image">
-                        <img src="../images/login/account.png">
+                        <img src="images/login/account.png">
                     </div>
 
                     <div id="account-text">
@@ -212,6 +195,7 @@ if(!empty($_POST))
 </section>
 
 <footer>
+    <?php require_once "footer.php" ?>
 </footer>
 </body>
 </html>

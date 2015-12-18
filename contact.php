@@ -13,6 +13,7 @@ if(!isset($_SESSION)) {
     <link rel="stylesheet" href="style/style.css">
     <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
 <!--    GOOGLE MAPS API-->
     <script src="https://maps.googleapis.com/maps/api/js"></script>
@@ -37,25 +38,7 @@ if(!isset($_SESSION)) {
 <body>
 
 <header>
-    <div id="main-header">
-        <a href="index.php"><img src="images/other/bblogo.png" id="header-logo"></a>
-    </div>
-    <nav id="navigation-background">
-        <div class="navigation-helper">
-            <ul>
-                <li><a href="contact.php">Contact</a></li>
-                <li><a href="index.php">Over Ons</a></li>
-                <li><a href="reserveer.php">Reserveer</a></li>
-                <li>
-                    <?php if (isset($_SESSION['user']['username'])) { ?>
-                        <a href="login/private.php" id="login-button">[<?php echo htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?>]</a>
-                    <?php } else { ?>
-                        <a href="login/login.php" id="login-button">Login</a>
-                    <?php } ?>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <?php require_once "header.php" ?>
 </header>
 
 <section id="main-page">
@@ -94,6 +77,7 @@ if(!isset($_SESSION)) {
 </section>
 
 <footer>
+    <?php require_once "footer.php" ?>
 </footer>
 </body>
 </html>
