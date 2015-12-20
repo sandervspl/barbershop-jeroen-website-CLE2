@@ -1,0 +1,74 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+table {
+    width: 50%;
+    margin: auto;
+    border-spacing: 0;
+}
+
+th {
+    background-color: lavender;
+}
+
+td {
+    border-right: 1px solid black;
+}
+
+h1 {
+    width: 50%;
+    text-align: left;
+    margin: auto;
+}
+
+.blocked {
+    color: lightgrey;
+}
+
+table#calendar tr td.open div {
+    cursor: pointer;
+
+    white-space: nowrap;
+    width: 100%;
+    height: 100%;
+}
+
+    table#calendar tr td.open div:hover {
+        background-color: lightgreen;
+    }
+
+div label, div span {
+    width: inherit;
+    height: 100%;
+    text-align: left;
+    display: block;
+    padding: 5px 0 0 5px;
+}
+
+    .date-radio:checked + label {
+        background-color: lightgreen;
+    }
+
+td.open div input {
+    visibility: hidden;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+}
+
+.submit-button {
+    margin: 25px auto;
+    text-align: center;
+}
+
+input[type="submit"] {
+    padding: 5px;
+}
+
+input[type="submit"]:active {
+    padding: 6px 3px 3px 6px;
+}

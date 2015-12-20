@@ -44,6 +44,7 @@ if(!isset($_SESSION)) {
 <section id="main-page">
     <p id="header-text-header">Contact</p>
     <div id="contactpage-text-wrapper">
+        <div class="white-background">
         <div id="contact-wrapper">
             <div id="contact-img-wrapper">
                 <img class="contact-img" src="images/contact/location.png">
@@ -70,9 +71,10 @@ if(!isset($_SESSION)) {
                 <a href="https://www.facebook.com/pages/Classics-Barbershop-Jeroen/192319830891775"><p>Like ons op Facebook!</p></a>
             </div>
         </div>
+        </div>
     </div>
     <div id="contactpage-maps-wrapper">
-        <div id="map"></div>
+        <div id="map" class="white-background"></div>
     </div>
 </section>
 

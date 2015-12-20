@@ -58,7 +58,7 @@ if (isset($_POST['submit'])) {
     </div>
 
     <section id="gegevens-form">
-        <div>
+        <div class="white-background">
             <form id="mainForm" action="#" method="post">
                 <div>
                     <p>

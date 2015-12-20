@@ -167,7 +167,7 @@ for ($i = 0; $i <= $end_hour; $i++) {
         <div id="morning-header">
             <p class="header-text">Ochtend</p>
         </div>
-        <div class="times-container-day">
+        <div class="times-container-day white-background">
         <?php
         $didMorningHeader = true;
     }
@@ -177,7 +177,7 @@ for ($i = 0; $i <= $end_hour; $i++) {
         <div id="afternoon-header">
             <p class="header-text">Middag</p>
         </div>
-        <div class="times-container-day">
+        <div class="times-container-day white-background">
         <?php
         $didAfternoonHeader = true;
     }
@@ -187,7 +187,7 @@ for ($i = 0; $i <= $end_hour; $i++) {
         <div id="evening-header">
             <p class="header-text">Avond</p>
         </div>
-        <div class="times-container-day">
+        <div class="times-container-day white-background">
         <?php
         $didEveningHeader = true;
     }

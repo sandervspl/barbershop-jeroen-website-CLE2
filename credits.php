@@ -26,7 +26,7 @@ if(!isset($_SESSION)) {
     <div id="credits">
         <div class="white-background">
             <div id="credits-text">
-                <h1>Icons—</h1>
+                <h1>Artwork—</h1>
                 <p>Mario Maldonado</p>
                 <p>Lucas Almeida</p>
                 <p>Guiditta Valentina Gentile</p>

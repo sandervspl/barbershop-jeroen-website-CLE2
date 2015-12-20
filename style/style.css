@@ -2,10 +2,6 @@
     box-sizing: border-box;
 }
 
-html {
-    height: 100%;
-}
-
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -24,6 +20,10 @@ time, mark, audio, video {
     border: 0;
 }
 
+html {
+    height: 100%;
+}
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, menu, nav, section {
@@ -32,6 +32,10 @@ footer, header, menu, nav, section {
 
 :-moz-any-link {
     outline: 0;
+}
+
+body {
+    font-family: "Open Sans", serif;
 }
 
 a {
@@ -67,6 +71,20 @@ footer {
     height: 50px;
     background-color: white;
     border-top: 1px solid black;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+.capitalize {
+    text-transform: capitalize;
+}
+.lowercase {
+    text-transform: lowercase;
+}
+
+.inline-block {
+    display: inline-block;
 }
 
 .divider {
@@ -151,6 +169,11 @@ footer {
     margin: auto;
 }
 
+.small-geen-voorkeur {
+    padding-top: 10px;
+    font-family: Nunito, serif;
+    font-size: 11px;
+}
 
 
 /*********************/
@@ -286,7 +309,7 @@ nav a {
 #header-text-header {
     font-family: Lobster, serif;
     font-size: 50px;
-    margin: auto auto 75px auto;
+    margin: -10px auto 75px auto;
     border-bottom: 1px solid black;
     width: 80%;
     position: relative;
@@ -307,18 +330,10 @@ nav a {
     top: 50px;
 }
 
-/*.header-text-big + p {*/
-    /*background-color: green;*/
-    /*font-family: Lobster, serif;*/
-    /*font-size: 30px;*/
-    /*margin: auto auto 50px auto;*/
-    /*position: relative;*/
-    /*top: 15px;*/
-/*}*/
-
 .header-text-small {
     font-family: Lobster, serif;
     font-size: 25px;
+    text-transform: capitalize;
 }
 
 section ul {
@@ -427,11 +442,10 @@ section ul li a {
     user-select: none;
 }
 
-#barbers > p:nth-child(5) {
-    padding: 5px 0 10px 0;
-    font-family: Nunito, serif;
-    font-size: 10px;
-}
+div form#mainForm div.cut-selector div.white-background {
+    padding-top: 27px;
+    padding-bottom: 27px;
+ }
 
 .cut-selector input:active +.trans {
     opacity: 1;
@@ -475,7 +489,11 @@ div.cut-selector div#barbers input:checked +.trans {
     background-color: rgba(255, 255, 255, 0.35);
     height: auto;
     width: auto;
-    padding: 10px 0 15px 0;
+    padding: 15px 0;
+
+    -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 2px 2px 2px rgba(0,0,0 .25);
+    box-shadow: 2px 2px 2px rgba(0,0,0, .25);
 }
 
 .white-background-margin {
@@ -503,8 +521,8 @@ section#main-page div#summary-header div.white-background {
     height: auto;
     min-height: 650px;
     margin: 30px auto;
-    padding: 0 15px 5px;
-    background-color: rgba(253, 243, 211, 0.9);
+    padding: 30px 15px;
+    background-color: rgba(253, 243, 211, 0.95);
     text-align: center;
 
     -moz-box-shadow: 10px 10px 10px 1px #888888;
@@ -520,8 +538,9 @@ section#main-page div#summary-header div.white-background {
     }
 
 .header-text {
-    font-family: Nunito, serif;
-    font-size: 50px;
+    font-family: "Droid Serif", serif;
+    font-weight: bold;
+    font-size: 40px;
     color: black;
 }
 
@@ -542,7 +561,7 @@ p.header-text {
 }
 
 #main-page p.header-text {
-    margin: 15px auto 15px auto;
+    margin: 0 auto 30px;
     text-align: center;
 }
 
@@ -723,6 +742,7 @@ td {
 }
 
 #cut-time-text {
+    font-family: Nunito, serif;
     margin-top: 5px;
     font-size: 20px;
 }
@@ -773,14 +793,12 @@ td {
 }
 
 #date-and-time-times-container {
-    /*background-color: green;*/
     text-align: left;
     height: 0;
     overflow: auto;
 }
 
 .times-container-day {
-    background-color: rgba(255, 255, 255, 0.35);
     height: auto;
     width: 66.3%;
     margin-bottom: 20px;
@@ -802,7 +820,6 @@ td {
 }
 
 .times-container, .times-container-taken {
-    /*background-color: rgba(255, 255, 255, 0.8);*/
     cursor: pointer;
 
     width: auto;
@@ -830,36 +847,28 @@ td {
 }
 
 #morning-header, #afternoon-header, #evening-header {
+    height: auto;
     width: 19.6%;
     margin-right: 15px;
     float: left;
     clear: left;
 }
 
-#morning-header {
-    height: auto;
-}
-
-#afternoon-header {
-    height: auto;
-}
-
-#evening-header {
-    height: auto;
-}
-
-section #date-and-time span#date-and-time-header {
-    /*background-color: green;*/
+span#date-and-time-header {
     font-family: Lobster, serif;
+    text-transform: lowercase;
+    font-size: 50px;
     color: #000000;
     display: block;
     width: 71%;
     margin: 100px auto 35px auto;
     padding-top: 10px;
+    padding-bottom: 5px;
 }
 
-section #date-and-time #date-and-time-times-container p.header-text {
+#date-and-time-times-container p.header-text {
     text-align: left;
+    text-transform: capitalize;
     font-family: Lobster, serif;
     font-size: 45px;
     color: #5d4437;
@@ -876,6 +885,8 @@ div.month-name {
 }
 
 .month-name .header-text {
+    text-transform: capitalize;
+    font-size: 50px;
     font-family: Lobster, serif;
     margin: 25px auto 0 auto;
     position: absolute;
@@ -924,7 +935,7 @@ div.month-name {
 #summary-header .header-text th {
     text-align: center;
     width: 250px;
-    font-size: 35px;
+    font-size: 30px;
 }
 
 #main-page #summary-header .header-text tr td {
@@ -1101,7 +1112,7 @@ div.month-name {
 
 #summary-wrapper {
     border-right: 1px solid black;
-    float: left;
+    display: inline-block;
     text-align: center;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -1157,21 +1168,29 @@ p#chosen-month {
 }
 
 #gegevens-form {
-    background-color: rgba(255, 255, 255, 0.35);
-    float: left;
+    /*background-color: rgba(255, 255, 255, 0.35);*/
+    display: inline-block;
     width:65%;
     margin-left: 20px;
     padding-top: 20px;
 }
 
+#gegevens-form .white-background {
+    width: 100%;
+}
+
 #gegevens-form div {
     margin: auto;
     width: 250px;
+    text-align: left;
 }
 
 #gegevens-form .button {
-    margin-bottom: 10px;
+    margin: auto auto 10px auto;
+    width: 200px;
 }
+
+
 
 label {
     /*float: left;*/
@@ -1201,7 +1220,7 @@ input[type="text"], input[type="email"], input[type="password"] {
 
 .input-text {
     font-family: Nunito, serif;
-    font-size: 35px;
+    font-size: 25px;
 }
 
 input[type="submit"]:active, input[type="submit"]:focus {
@@ -1209,13 +1228,13 @@ input[type="submit"]:active, input[type="submit"]:focus {
     -moz-outline-style: 0;
 }
 
-input[type="submit"].button {
-    margin: 0;
-}
-
 input[type="submit"].button:active, input[type="submit"].button:focus {
     outline: none;
     -moz-outline-style: 0;
+}
+
+input[type="submit"].button {
+    margin: 0;
 }
 
     @media only screen and (max-width: 1000px) {
@@ -1258,7 +1277,6 @@ input[type="submit"].button:active, input[type="submit"].button:focus {
 /*********************/
 
 #contactpage-maps-wrapper, #contactpage-text-wrapper {
-    background-color: rgba(255, 255, 255, 0.55);
     height: 500px;
     vertical-align: top;
     display: inline-block;
@@ -1267,8 +1285,10 @@ input[type="submit"].button:active, input[type="submit"].button:focus {
 #contactpage-text-wrapper {
     width: 30%;
     margin-right: 5px;
+}
+
+#contactpage-text-wrapper .white-background {
     padding-right: 15px;
-    font-family: "Open Sans", serif !important;
 }
 
 #contactpage-maps-wrapper {
@@ -1414,9 +1434,10 @@ table#opening-times tr td:nth-child(2) {
 #over-ons {
     width: 75%;
     margin: auto;
+    line-height: 20px;
 }
 
-#over-ons-text {
+#over-ons-text, #over-ons-barbers {
     /*background-color: red;*/
     width: 95%;
     margin: 10px auto 20px;
@@ -1432,16 +1453,14 @@ table#opening-times tr td:nth-child(2) {
     font-size: 40px;
 }
 
-#over-ons-barbers {
-    /*background-color: yellow;*/
-    width: 95%;
-    margin: auto;
+#over-ons-text .header-text, #over-ons-barbers .header-text {
+    margin-bottom: 40px !important;
 }
 
 #over-ons-jeroen-wrapper, #over-ons-juno-wrapper {
     /*background-color: green;*/
+    height: auto;
     display: inline-block;
-    /*border-top: 1px solid rgba(0, 0, 0, 0.10);*/
     margin: auto;
 }
 
@@ -1455,8 +1474,8 @@ table#opening-times tr td:nth-child(2) {
 
 div#over-ons div.white-background div#over-ons-jeroen-wrapper p.header-text-lobster,
 div#over-ons div.white-background div#over-ons-juno-wrapper p.header-text-lobster {
-    margin-bottom: 10px;
-    font-size: 35px;
+    margin-top: 20px;
+    font-size: 45px;
 }
 
 div#over-ons-barbers p.header-text-big {
@@ -1469,6 +1488,10 @@ div#over-ons-barbers p.header-text-big {
 #over-ons-jeroen-wrapper img, #over-ons-juno-wrapper img {
     width: 250px;
     height: 250px;
+
+    -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.85);
+    -moz-box-shadow: 0 0 4px rgba(0,0,0 .85);
+    box-shadow: 0 0 4px rgba(0,0,0, .85);
 }
 
     @media only screen and (max-width: 1024px) {
@@ -1636,7 +1659,6 @@ div#over-ons-barbers p.header-text-big {
     width: 140px;
     display: inline-block;
     text-align: right;
-    /*text-transform: uppercase;*/
 }
 
 .appointment-value, .appointment-title {
@@ -1715,10 +1737,20 @@ div#over-ons-barbers p.header-text-big {
                         */
 /*********************/
 
+#confirmation-wrapper {
+    width: 75%;
+    margin: auto;
+}
+
 /*confirmation page "tot dan"*/
-#main-page > p:nth-child(5) {
+div.bedankt.inline-block p:nth-child(3) {
     font-family: Lobster, serif;
     font-size: 30px;
+}
+
+.bedankt {
+    vertical-align: top;
+    margin: auto auto auto 15px;
 }
 
 #img-big {
@@ -1726,6 +1758,12 @@ div#over-ons-barbers p.header-text-big {
     height: 250px;
     position: relative;
 }
+
+#confirmation-wrapper div.white-background img#img-big.inline-block {
+    margin-right: 15px;
+}
+
+
 
 .bezet {
     background-color: #b50000;

@@ -3,6 +3,7 @@ $barber = '';
 $date = '';
 $time = '';
 $cut = '';
+$email = '';
 
 $ok = true;
 if (!isset($_POST['voornaam']) || $_POST['voornaam'] === '') {
@@ -66,8 +67,6 @@ if (!isset($_SESSION['cut']) || $_SESSION['cut'] === '') {
     $cut = $_SESSION['cut'];
 }
 
-
-
 // database connection information
 require_once "connect.php";
 
@@ -87,9 +86,8 @@ if (mysqli_num_rows($result) > 0) {
 mysqli_close($db);
 
 if ($ok) {
-//        $date = date("Y-") . $month . "-" . $day;
     // add to db
-    $db = mysqli_connect('localhost', 'root', '', 'website') or die('Error: '.mysqli_connect_error());
+    $db = mysqli_connect($host, $user, $pw, $database) or die('Error: '.mysqli_connect_error());
 
     $sql = sprintf("INSERT INTO afspraken (voornaam, achternaam, datum, tijd, knipbeurt, kapper, email, telefoon)
                     VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
@@ -102,11 +100,15 @@ if ($ok) {
                     mysqli_real_escape_string($db, $email),
                     mysqli_real_escape_string($db, $phone)
     );
-    mysqli_query($db, $sql);
+    $result = mysqli_query($db, $sql);
     mysqli_close($db);
 
-    // go to next page (thanks for your reservation etc.)
-    header("location: confirmation.php");
+    if ($result) {
+        // go to next page (thanks for your reservation etc.)
+        header("location: confirmation.php");
+    } else {
+        header("location: error.php");
+    }
 }
 ?>
 <!DOCTYPE HTML>

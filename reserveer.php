@@ -35,6 +35,7 @@ if (!isset($_POST['submit'])) {
     <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:700' rel='stylesheet' type='text/css'>
     <script>
         window.sessionStorage.cut = 0;
         window.sessionStorage.time = 0;
@@ -43,7 +44,6 @@ if (!isset($_POST['submit'])) {
         window.sessionStorage.cut_month = 0;
         window.sessionStorage.cut_monthday = 0;
         window.sessionStorage.barber = 0;
-        window.sessionStorage.currentDayTimes = 0;
     </script>
 </head>
 <body>
@@ -53,40 +53,41 @@ if (!isset($_POST['submit'])) {
 </header>
 
 <section id="main-page">
-    <p id="header-text-header">Knipbeurt & Kapper</p>
+    <p id="header-text-header">Reserveren</p>
     <div>
         <form id="mainForm" action="#" method="post">
             <div class="cut-selector">
-            <div class="white-background">
-                <p class="header-text">Knipbeurt</p>
-                <div id="cuts">
-                <input id="hair" type="radio" name="cut" value="haar" onclick="cutSelect(this)" />
-                <label class="trans hair" for="hair" onclick="cutSelect(this)"></label>
+                <div class="white-background">
+                    <div id="cuts">
+                    <p class="header-text">Knipbeurt</p>
+                    <input id="hair" type="radio" name="cut" value="haar" onclick="cutSelect(this)" />
+                    <label class="trans hair" for="hair" onclick="cutSelect(this)"></label>
 
-                <input id="beard" type="radio" name="cut" value="baard" onclick="cutSelect(this)" />
-                <label class="trans beard" for="beard"></label>
+                    <input id="beard" type="radio" name="cut" value="baard" onclick="cutSelect(this)" />
+                    <label class="trans beard" for="beard"></label>
 
-                <input id="moustache" type="radio" name="cut" value="snor" onclick="cutSelect(this)" />
-                <label class="trans moustache" for="moustache"></label>
+                    <input id="moustache" type="radio" name="cut" value="snor" onclick="cutSelect(this)" />
+                    <label class="trans moustache" for="moustache"></label>
 
-                <input id="all" type="radio" name="cut" value="alles" onclick="cutSelect(this)" />
-                <label class="trans all" for="all"></label>
+                    <input id="all" type="radio" name="cut" value="alles" onclick="cutSelect(this)" />
+                    <label class="trans all" for="all"></label>
+                    </div>
                 </div>
-            </div>
+
                 <div class="divider"></div>
 
-            <div class="white-background">
-                <p class="header-text">Kapper</p>
-                <div id="barbers">
-                    <input id="Jeroen" type="radio" name="barber" value="Jeroen" onclick="barberSelection(this)" />
-                    <label class="trans barber-selection" for="Jeroen">Jeroen</label>
+                <div class="white-background">
+                    <div id="barbers">
+                        <p class="header-text">Kapper</p>
+                        <input id="Jeroen" type="radio" name="barber" value="Jeroen" onclick="barberSelection(this)" />
+                        <label class="trans barber-selection" for="Jeroen">Jeroen</label>
 
-                    <input id="Juno" type="radio" name="barber" value="Juno" onclick="barberSelection(this)" />
-                    <label class="trans barber-selection" for="Juno">Juno</label>
+                        <input id="Juno" type="radio" name="barber" value="Juno" onclick="barberSelection(this)" />
+                        <label class="trans barber-selection" for="Juno">Juno</label>
 
-                    <p>Laat leeg als je geen voorkeur hebt.</p>
+                        <p class="small-geen-voorkeur">Laat leeg als je geen voorkeur hebt.</p>
+                    </div>
                 </div>
-            </div>
             </div>
             <button id="bookButton" type="submit" name="submit" class="button" onclick="checkBookButton()">reserveer</button>
         </form>

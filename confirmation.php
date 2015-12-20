@@ -19,6 +19,7 @@ if (!$ok) {
     <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Arapey:400italic' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
@@ -28,10 +29,16 @@ if (!$ok) {
 
 <section id="main-page">
     <p id="header-text-header">Reservering Compleet</p>
-    <img id="img-big" src="images/confirmation/chair.png">
-    <p class="header-text-big">Bedankt voor het reserveren!</p>
-    <br />
-    <p>Tot dan!</p>
+    <div id="confirmation-wrapper">
+        <div class="white-background">
+            <img id="img-big" class="inline-block" src="images/confirmation/chair.png">
+            <div class="bedankt inline-block">
+                <p class="header-text-big">Bedankt voor het reserveren!</p>
+                <br />
+                <p>Tot dan!</p>
+            </div>
+    </div>
+    </div>
 </section>
 
 <footer>
