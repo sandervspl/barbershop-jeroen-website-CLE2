@@ -85,11 +85,11 @@ if (!isset($_POST['submit'])) {
                         <input id="Juno" type="radio" name="barber" value="Juno" onclick="barberSelection(this)" />
                         <label class="trans barber-selection" for="Juno">Juno</label>
 
-                        <p class="small-geen-voorkeur">Laat leeg als je geen voorkeur hebt.</p>
+                        <p class="small-text">Laat leeg als je geen voorkeur hebt.</p>
                     </div>
                 </div>
             </div>
-            <button id="bookButton" type="submit" name="submit" class="button" onclick="checkBookButton()">reserveer</button>
+            <button id="bookButton" type="submit" name="submit" class="button" onclick="checkBookButton()">Volgende</button>
         </form>
     </div>
 </section>

@@ -1,35 +1,58 @@
 <?php
-
-// First we execute our common code to connection to the database and start the session
 require("common.php");
 
-// This if statement checks to determine whether the registration form has been submitted
-// If it has, then the registration code is run, otherwise the form is displayed
+$usernameExists = false;
+$emailExists = false;
+$emailInvalid = false;
+$error = 0;
+
+$username = '';
+$voornaam = '';
+$achternaam = '';
+$telefoon = '';
+$email = '';
+
+// check submitted data if there is any
 if(!empty($_POST))
 {
-    // Ensure that the user has entered a non-empty username
     if(empty($_POST['username']))
     {
-        // Note that die() is generally a terrible way of handling user errors
-        // like this.  It is much better to display the error with the form
-        // and allow the user to correct their mistake.  However, that is an
-        // exercise for you to implement yourself.
-        die("Please enter a username.");
+        $error++;
+    } else {
+        $username = $_POST['username'];
     }
 
-    // Ensure that the user has entered a non-empty password
     if(empty($_POST['password']))
     {
-        die("Please enter a password.");
+        $error++;
     }
 
-    // Make sure the user entered a valid E-Mail address
-    // filter_var is a useful PHP function for validating form input, see:
-    // http://us.php.net/manual/en/function.filter-var.php
-    // http://us.php.net/manual/en/filter.filters.php
     if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))
     {
-        die("Invalid E-Mail Address");
+        $error++;
+    } else {
+        $email = $_POST['email'];
+    }
+
+    if(empty($_POST['voornaam']))
+    {
+        $error++;
+    } else {
+        $voornaam = $_POST['voornaam'];
+    }
+
+    if(empty($_POST['achternaam']))
+    {
+        $error++;
+    } else {
+        $achternaam = $_POST['achternaam'];
+    }
+
+    if(empty($_POST['telefoon']))
+    {
+        $error++;
+    } else {
+        $telefoon = $_POST['telefoon'];
     }
 
     // We will use this SQL query to see whether the username entered by the
@@ -55,28 +78,21 @@ if(!empty($_POST))
         ':username' => $_POST['username']
     );
 
-    try
-    {
+    try {
         // These two statements run the query against your database table.
         $stmt = $db->prepare($query);
         $result = $stmt->execute($query_params);
     }
-    catch(PDOException $ex)
-    {
-        // Note: On a production website, you should not output $ex->getMessage().
-        // It may provide an attacker with helpful information about your code.
-        die("Failed to run query: " . $ex->getMessage());
+    catch(PDOException $ex) {
+        die("Failed to run query");
     }
 
-    // The fetch() method returns an array representing the "next" row from
-    // the selected results, or false if there are no more rows to fetch.
     $row = $stmt->fetch();
 
     // If a row was returned, then we know a matching username was found in
     // the database already and we should not allow the user to continue.
-    if($row)
-    {
-        die("This username is already in use");
+    if($row) {
+        $usernameExists = true;
     }
 
     // Now we perform the same type of check for the email address, in order
@@ -93,97 +109,76 @@ if(!empty($_POST))
         ':email' => $_POST['email']
     );
 
-    try
-    {
+    try {
         $stmt = $db->prepare($query);
         $result = $stmt->execute($query_params);
     }
-    catch(PDOException $ex)
-    {
-        die("Failed to run query: " . $ex->getMessage());
+    catch(PDOException $ex) {
+        die("Failed to run query");
     }
 
+    // If a row was returned, then we know a matching e-mail was found in
+    // the database already and we should not allow the user to continue.
     $row = $stmt->fetch();
-
-    if($row)
-    {
-        die("This email address is already registered");
+    if($row) {
+        $emailExists = true;
+        $error++;
     }
 
-    // An INSERT query is used to add new rows to a database table.
-    // Again, we are using special tokens (technically called parameters) to
-    // protect against SQL injection attacks.
-    $query = "
-            INSERT INTO users (
-                username,
-                password,
-                salt,
-                email
-            ) VALUES (
-                :username,
-                :password,
-                :salt,
-                :email
-            )
-        ";
 
-    // A salt is randomly generated here to protect again brute force attacks
-    // and rainbow table attacks.  The following statement generates a hex
-    // representation of an 8 byte salt.  Representing this in hex provides
-    // no additional security, but makes it easier for humans to read.
-    // For more information:
-    // http://en.wikipedia.org/wiki/Salt_%28cryptography%29
-    // http://en.wikipedia.org/wiki/Brute-force_attack
-    // http://en.wikipedia.org/wiki/Rainbow_table
-    $salt = dechex(mt_rand(0, 2147483647)) . dechex(mt_rand(0, 2147483647));
 
-    // This hashes the password with the salt so that it can be stored securely
-    // in your database.  The output of this next statement is a 64 byte hex
-    // string representing the 32 byte sha256 hash of the password.  The original
-    // password cannot be recovered from the hash.  For more information:
-    // http://en.wikipedia.org/wiki/Cryptographic_hash_function
-    $password = hash('sha256', $_POST['password'] . $salt);
+    if (!$error) {
+        $query = "
+                INSERT INTO users (
+                    username,
+                    password,
+                    salt,
+                    email,
+                    voornaam,
+                    achternaam,
+                    telefoon
+                ) VALUES (
+                    :username,
+                    :password,
+                    :salt,
+                    :email,
+                    :voornaam,
+                    :achternaam,
+                    :telefoon
+                )
+            ";
 
-    // Next we hash the hash value 65536 more times.  The purpose of this is to
-    // protect against brute force attacks.  Now an attacker must compute the hash 65537
-    // times for each guess they make against a password, whereas if the password
-    // were hashed only once the attacker would have been able to make 65537 different
-    // guesses in the same amount of time instead of only one.
-    for($round = 0; $round < 65536; $round++)
-    {
-        $password = hash('sha256', $password . $salt);
+        $salt = dechex(mt_rand(0, 2147483647)) . dechex(mt_rand(0, 2147483647));
+        $password = hash('sha256', $_POST['password'] . $salt);
+
+        for($round = 0; $round < 65536; $round++) {
+            $password = hash('sha256', $password . $salt);
+        }
+
+        $query_params = array(
+            ':username' => $_POST['username'],
+            ':password' => $password,
+            ':salt' => $salt,
+            ':email' => $_POST['email'],
+            ':voornaam' => $_POST['voornaam'],
+            ':achternaam' => $_POST['achternaam'],
+            ':telefoon' => $_POST['telefoon']
+        );
+
+        try {
+            // Execute the query to create the user
+            $stmt = $db->prepare($query);
+            $result = $stmt->execute($query_params);
+        }
+        catch(PDOException $ex) {
+            $error++;
+        }
+
+        // redirect
+        header("Location: registration_complete.php");
+
+        die("Redirecting to registration_complete.php");
     }
-
-    // Here we prepare our tokens for insertion into the SQL query.  We do not
-    // store the original password; only the hashed version of it.  We do store
-    // the salt (in its plaintext form; this is not a security risk).
-    $query_params = array(
-        ':username' => $_POST['username'],
-        ':password' => $password,
-        ':salt' => $salt,
-        ':email' => $_POST['email']
-    );
-
-    try
-    {
-        // Execute the query to create the user
-        $stmt = $db->prepare($query);
-        $result = $stmt->execute($query_params);
-    }
-    catch(PDOException $ex)
-    {
-        // Note: On a production website, you should not output $ex->getMessage().
-        // It may provide an attacker with helpful information about your code.
-        die("Failed to run query: " . $ex->getMessage());
-    }
-
-    // This redirects the user back to the login page after they register
-    header("Location: login.php");
-
-    // Calling die or exit after performing a redirect using the header function
-    // is critical.  The rest of your PHP script will continue to execute and
-    // will be sent to the user if you do not die or exit.
-    die("Redirecting to login.php");
 }
 
 ?>
@@ -201,47 +196,53 @@ if(!empty($_POST))
 <body>
 
 <header>
-    <div id="main-header">
-        <a href="index.php"><img src="images/other/bblogo.png" id="header-logo"></a>
-    </div>
-    <nav id="navigation-background">
-        <div class="navigation-container">
-            <div class="navigation-left">
-                <ul>
-                    <li><a href="index.php">Over Ons</a></li>
-                    <li><a href="contact.php">Contact</a></li>
-                    <li><a href="reserveer.php">Reserveer</a></li>
-                </ul>
-            </div>
-            <div class="navigation-right">
-                <?php if (isset($_SESSION['user']['username'])) { ?>
-                    <a href="private.php" id="login-button">[<?php echo htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?>]</a>
-                <?php } else { ?>
-                    <a href="login.php" id="login-button">Login</a>
-                <?php } ?>
-            </div>
-        </div>
-    </nav>
+    <?php require_once "header.php" ?>
 </header>
 
 <section id="main-page">
     <p id="header-text-header">Registreer</p>
     <div id="basic-wrapper">
         <div class="white-background">
-            <div id="login-register-wrapper">
-                <form action="register.php" method="post">
-                    <label for="username" class="input-text-small">Gebruikersnaam</label><br />
-                    <input id="username" type="text" name="username" value="" />
-                    <br /><br />
-                    <label for="email" class="input-text-small">E-Mail</label><br />
-                    <input id="email" type="text" name="email" value="" />
-                    <br /><br />
-                    <label for="password" class="input-text-small">Wachtwoord</label><br />
-                    <input id="password" type="password" name="password" value="" />
-                    <br /><br />
-                    <input type="submit" class="button" value="Registreer" />
-                </form>
-            </div>
+            <form action="register.php" method="post" onsubmit="return validateForm()">
+                <div class="login-register-wrapper">
+                        <label for="username" class="input-text-small">Gebruikersnaam</label>
+                        <input id="username" type="text" name="username" value="<?=$username?>" onblur="validateUsername(id)" />
+                        <div id="usernameError" class="small-text error-text error-text-wrapper" style="visibility: hidden;">Gebruik alleen letters, - of _</div>
+                        <?php if ($usernameExists) { ?>
+                            <span id="usernameAlreadyInDBError" class="small-text error-text" style="display: block;">Er is al een gebruiker met deze naam</span>
+                            <script src="scripts/validation.js"></script>
+                            <script type="text/javascript"> setInputFalse("username"); </script>
+                        <?php } ?>
+
+                        <label for="voornaam" class="input-text-small">Voornaam</label>
+                        <input id="voornaam" type="text" name="voornaam" value="<?=$voornaam?>" onblur="validateNaam(id)" />
+                        <div id="voornaamError" class="small-text error-text error-text-wrapper" style="visibility: hidden;">Gebruik alleen letters, - of '</div>
+
+                        <label for="achternaam" class="input-text-small">Achternaam</label>
+                        <input id="achternaam" type="text" name="achternaam" value="<?=$achternaam?>" onblur="validateNaam(id)" />
+                        <div id="achternaamError" class="small-text error-text error-text-wrapper" style="visibility: hidden;">Gebruik alleen letters, - of '</div>
+                </div>
+                <div class="login-register-wrapper">
+
+                        <label for="email" class="input-text-small">E-Mail</label>
+                        <input id="email" type="text" name="email" value="<?=$email?>" onblur="validateEmail(id)" />
+                        <div id="emailError" class="small-text error-text error-text-wrapper" style="visibility: hidden;">Voer een geldig E-Mail adres in</div>
+                        <?php if ($emailExists) { ?>
+                            <span id="emailAlreadyInDBError" class="small-text error-text" style="display: block;">Er is al een gebruiker met dit e-mail adres</span>
+                            <script src="scripts/validation.js"></script>
+                            <script type="text/javascript"> setInputFalse("email"); </script>
+                        <?php } ?>
+
+                        <label for="telefoon" class="input-text-small">Telefoon</label>
+                        <input id="telefoon" type="text" name="telefoon" value="<?=$telefoon?>" onblur="validateTelefoon(id)" />
+                        <div id="telefoonError" class="small-text error-text error-text-wrapper" style="visibility: hidden;">Voer een geldig telefoonnummer in</div>
+
+                        <label for="password" class="input-text-small">Wachtwoord</label>
+                        <input id="password" type="password" name="password" value="" onblur="validatePassword(id)" />
+                        <div id="passwordError" class="small-text error-text error-text-wrapper" style="visibility: hidden;">Minimaal 5 en maximaal 24 letters, nummers, of speciale karakters</div>
+                </div>
+                <input type="submit" id="register-button" class="button" value="Registreer" />
+            </form>
         </div>
     </div>
 </section>
@@ -249,5 +250,7 @@ if(!empty($_POST))
 <footer>
     <?php require_once "footer.php" ?>
 </footer>
+
+<script src="scripts/validation.js"></script>
 </body>
 </html>

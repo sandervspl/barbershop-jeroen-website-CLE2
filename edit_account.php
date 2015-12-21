@@ -85,6 +85,7 @@ if(!empty($_POST))
     // Initial query parameter values
     $query_params = array(
         ':email' => $_POST['email'],
+        ':telefoon' => $_POST['telefoon'],
         ':user_id' => $_SESSION['user']['id'],
     );
 
@@ -96,13 +97,12 @@ if(!empty($_POST))
         $query_params[':salt'] = $salt;
     }
 
-    // Note how this is only first half of the necessary update query.  We will dynamically
-    // construct the rest of it depending on whether or not the user is changing
-    // their password.
+
     $query = "
             UPDATE users
             SET
                 email = :email
+                , telefoon = :telefoon
         ";
 
     // If the user is changing their password, then we extend the SQL query
@@ -130,24 +130,41 @@ if(!empty($_POST))
     }
     catch(PDOException $ex)
     {
-        // Note: On a production website, you should not output $ex->getMessage().
-        // It may provide an attacker with helpful information about your code.
-        die("Failed to run query: " . $ex->getMessage());
+        die("Failed to run query 1: " . $ex->getMessage());
     }
 
     // Now that the user's E-Mail address has changed, the data stored in the $_SESSION
     // array is stale; we need to update it so that it is accurate.
     $_SESSION['user']['email'] = $_POST['email'];
 
-    // This redirects the user back to the members-only page after they register
-    header("Location: private.php");
-
-    // Calling die or exit after performing a redirect using the header function
-    // is critical.  The rest of your PHP script will continue to execute and
-    // will be sent to the user if you do not die or exit.
-    die("Redirecting to private.php");
+    // Redirect
+    header("Location: edit_account_success.php");
+    die("Redirecting to edit_account_success.php");
 }
 
+
+// database connection information
+require_once "connect.php";
+
+$db =  mysqli_connect($host, $user, $pw, $database) or die('Error: '.mysqli_connect_error());
+
+$sql = sprintf("SELECT voornaam, achternaam, telefoon FROM users WHERE username='%s'",
+    $_SESSION['user']['username']);
+
+$result = mysqli_query($db, $sql);
+$gegevens = [];
+$voornaam = '';
+$achternaam = '';
+$email = '';
+$telefoon = '';
+
+while($row = mysqli_fetch_assoc($result)) {
+    $gegevens = $row;
+}
+
+$voornaam   = $gegevens['voornaam'];
+$achternaam = $gegevens['achternaam'];
+$telefoon   = $gegevens['telefoon'];
 ?>
 <!DOCTYPE HTML>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -171,17 +188,24 @@ if(!empty($_POST))
     <div id="basic-wrapper">
         <div class="white-background">
             <div id="account-wrapper-wide">
-                <form action="edit_account.php" method="post">
-                    <span class="header-text-lobster"><?php echo htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?></span>
-                    <br /><br /><br />
+                <form id="edit-account-form" action="edit_account.php" method="post">
                     <div id="account-image">
                         <img src="images/login/account.png">
                     </div>
 
                     <div id="account-text">
+                        <span class="header-text-lobster"><?= htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?></span>
+                        <br />
+                        <span><?= $voornaam . " " . $achternaam ?></span>
+                        <br /><br />
                         <label for="email" class="input-text">E-Mail</label><br />
                         <input id="email" type="text" name="email" value="<?php echo htmlentities($_SESSION['user']['email'], ENT_QUOTES, 'UTF-8'); ?>" />
                         <br /><br />
+
+                        <label for="telefoon" class="input-text">Telefoon</label><br />
+                        <input id="telefoon" type="text" name="telefoon" value="<?= $telefoon ?>" />
+                        <br /><br />
+
                         <label for="password" class="input-text">Wachtwoord</label><br />
                         <input id="password" type="password" name="password" value="" /><br />
                         <p>(laat leeg als je het wachtwoord niet wilt wijzigen)</p>

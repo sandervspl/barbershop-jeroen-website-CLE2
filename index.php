@@ -23,7 +23,7 @@ if(!isset($_SESSION)) {
 </header>
 
 <section id="main-page">
-<!--    <p id="header-text-header">Wie zijn wij</p>-->
+    <p id="header-text-header">Wie zijn wij</p>
     <div id="over-ons">
         <div class="white-background">
             <div id="over-ons-text">

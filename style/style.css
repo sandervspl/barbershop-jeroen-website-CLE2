@@ -55,7 +55,7 @@ a p {
 body {
     height: 100%;
     line-height: 1;
-    background: black url("../images/bg4.jpg") no-repeat;
+    background: black url("../images/bg4.jpg") no-repeat fixed ;
     background-size: 100%;
 }
 
@@ -85,6 +85,14 @@ footer {
 
 .inline-block {
     display: inline-block;
+}
+
+.clear {
+    clear: both;
+}
+
+.block {
+    display: block;
 }
 
 .divider {
@@ -146,6 +154,13 @@ footer {
         padding: 8px 13px 6px;
     }
 
+    .button:hover:enabled {
+        border: 1px solid white;
+        -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.15);
+        -moz-box-shadow: 2px 2px 2px rgba(0,0,0 .15);
+        box-shadow: 2px 2px 2px rgba(0,0,0, .15);
+    }
+
 .button:disabled {
     background-color: #747474;
     border: 1px solid #747474;
@@ -169,7 +184,7 @@ footer {
     margin: auto;
 }
 
-.small-geen-voorkeur {
+.small-text {
     padding-top: 10px;
     font-family: Nunito, serif;
     font-size: 11px;
@@ -491,9 +506,9 @@ div.cut-selector div#barbers input:checked +.trans {
     width: auto;
     padding: 15px 0;
 
-    -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
-    -moz-box-shadow: 2px 2px 2px rgba(0,0,0 .25);
-    box-shadow: 2px 2px 2px rgba(0,0,0, .25);
+    -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 2px 2px 2px rgba(0,0,0 .15);
+    box-shadow: 2px 2px 2px rgba(0,0,0, .15);
 }
 
 .white-background-margin {
@@ -522,7 +537,7 @@ section#main-page div#summary-header div.white-background {
     min-height: 650px;
     margin: 30px auto;
     padding: 30px 15px;
-    background-color: rgba(253, 243, 211, 0.95);
+    background-color: rgba(253, 243, 211, 0.99);
     text-align: center;
 
     -moz-box-shadow: 10px 10px 10px 1px #888888;
@@ -1170,25 +1185,65 @@ p#chosen-month {
 #gegevens-form {
     /*background-color: rgba(255, 255, 255, 0.35);*/
     display: inline-block;
-    width:65%;
+    width: 45%;
     margin-left: 20px;
     padding-top: 20px;
+    vertical-align: top;
+    line-height: 30px;
+}
+
+#gegevens-form .white-background table {
+    margin: auto;
+    width: 80%;
+}
+
+#gegevens-form .white-background table tr td:first-child {
+    text-align: left;
+}
+
+#gegevens-form .white-background p:first-child {
+    margin: auto auto 40px;
+    text-align: center;
 }
 
 #gegevens-form .white-background {
     width: 100%;
 }
 
-#gegevens-form div {
-    margin: auto;
-    width: 250px;
-    text-align: left;
-}
-
 #gegevens-form .button {
-    margin: auto auto 10px auto;
+    margin: 20px auto 10px auto;
     width: 200px;
 }
+
+.gegevens-form-buttons-wrapper {
+    /*background-color: green;*/
+    display: inline-block;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.gegevens-form-button:first-child {
+    float: left;
+}
+
+.gegevens-form-button {
+    display: inline-block;
+    width: 30% !important;
+    font-size: 20px;
+    float: right;
+    appearance: button;
+    -moz-appearance: button;
+    -webkit-appearance: button;
+}
+
+    .gegevens-form-button:hover {
+        text-decoration: none;
+    }
+
+form#mainForm div.gegevens input {
+    width: 50%;
+}
+
 
 
 
@@ -1210,7 +1265,7 @@ input[type="text"], input[type="email"], input[type="password"] {
     font-size: 17px;
     width: 100%;
     height: 25px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     border: 1px solid black;
 }
 
@@ -1582,11 +1637,13 @@ div#over-ons-barbers p.header-text-big {
                         */
 /*********************/
 
-#login-register-wrapper {
+.login-register-wrapper {
     /*background-color: green;*/
     width: 25%;
-    margin: auto;
+    margin: auto 20px auto 20px;
     text-align: left;
+    vertical-align: top;
+    display: inline-block;
 }
 
 #account-wrapper-wide {
@@ -1595,7 +1652,7 @@ div#over-ons-barbers p.header-text-big {
     text-align: center;
 }
 
-#login-register-wrapper a, #account-wrapper-wide a {
+.login-register-wrapper a, #account-wrapper-wide a {
     font-family: "Open Sans", serif;
 }
 
@@ -1609,9 +1666,37 @@ div#over-ons-barbers p.header-text-big {
     text-align: center;
 }
 
-#login-register-wrapper form input {
-    margin-bottom: 10px;
+form div.login-register-wrapper input {
+    margin-bottom: 0;
 }
+
+form div.login-register-wrapper label {
+    display:inline-block;
+    margin-top: 5px;
+}
+
+#register-button {
+    margin: 20px auto 0;
+    width: 25%;
+}
+
+form .login-register-wrapper .small-text {
+    padding: 1px;
+}
+
+.error-text {
+    color: #e35152;
+}
+
+.error-text-wrapper {
+    /*background-color: green;*/
+    width: auto;
+    height: 25px;
+}
+
+
+
+
 
 /*********************/
 /*
@@ -1619,7 +1704,7 @@ div#over-ons-barbers p.header-text-big {
                      */
 /*********************/
 
-#account-text > p:nth-child(10) {
+#account-text p {
     padding: 0;
     font-family: Nunito, serif;
     font-size: 10px;
@@ -1670,6 +1755,9 @@ div#over-ons-barbers p.header-text-big {
     margin-bottom: 10px;
 }
 
+#edit-account-form {
+    display: inline;
+}
 
 
 /*********************/
@@ -1737,11 +1825,6 @@ div#over-ons-barbers p.header-text-big {
                         */
 /*********************/
 
-#confirmation-wrapper {
-    width: 75%;
-    margin: auto;
-}
-
 /*confirmation page "tot dan"*/
 div.bedankt.inline-block p:nth-child(3) {
     font-family: Lobster, serif;
@@ -1759,8 +1842,8 @@ div.bedankt.inline-block p:nth-child(3) {
     position: relative;
 }
 
-#confirmation-wrapper div.white-background img#img-big.inline-block {
-    margin-right: 15px;
+.text-only p {
+    top: 0;
 }
 
 

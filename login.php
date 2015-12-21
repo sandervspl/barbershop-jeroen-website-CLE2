@@ -7,6 +7,7 @@ require("common.php");
 // login form if they fail to enter the correct password.  It is initialized here
 // to an empty value, which will be shown if the user has not submitted the form.
 $submitted_username = '';
+$failed = false;
 
 // This if statement checks to determine whether the login form has been submitted
 // If it has, then the login code is run, otherwise the form is displayed
@@ -95,7 +96,7 @@ if(!empty($_POST))
     else
     {
         // Tell the user they failed
-        print("Login Failed.");
+        $failed = true;
 
         // Show them their username again so all they have to do is enter a new
         // password.  The use of htmlentities prevents XSS attacks.  You should
@@ -121,40 +122,23 @@ if(!empty($_POST))
 <body>
 
 <header>
-    <div id="main-header">
-        <a href="index.php"><img src="images/other/bblogo.png" id="header-logo"></a>
-    </div>
-    <nav id="navigation-background">
-        <div class="navigation-container">
-            <div class="navigation-left">
-                <ul>
-                    <li><a href="index.php">Over Ons</a></li>
-                    <li><a href="contact.php">Contact</a></li>
-                    <li><a href="reserveer.php">Reserveer</a></li>
-                </ul>
-            </div>
-            <div class="navigation-right">
-                <?php if (isset($_SESSION['user']['username'])) { ?>
-                    <a href="private.php" id="login-button">[<?php echo htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?>]</a>
-                <?php } else { ?>
-                    <a href="login.php" id="login-button">Login</a>
-                <?php } ?>
-            </div>
-        </div>
-    </nav>
+    <?php require_once "header.php" ?>
 </header>
 
 <section id="main-page">
     <p id="header-text-header">Login</p>
     <div id="basic-wrapper">
         <div class="white-background">
-            <div id="login-register-wrapper">
+            <div class="login-register-wrapper">
                 <form action="login.php" method="post">
                     <label for="username" class="input-text-small">Gebruikersnaam</label><br />
                     <input type="text" id="username" class="textinput" name="username" value="<?php echo $submitted_username; ?>" />
                     <br /><br />
                     <label for="password" class="input-text-small">Wachtwoord</label><br />
                     <input type="password" id="password" class="textinput" name="password" value="" />
+                    <?php if ($failed) { ?>
+                        <span id="loginFailedError" class="small-text error-text" style="display: block;">Gebruikersnaam en/of wachtwoord is verkeerd</span>
+                    <?php } ?>
                     <br /><br />
                     <input type="submit" value="Login" class="button" />
                 </form>

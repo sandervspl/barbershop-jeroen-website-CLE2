@@ -1,13 +1,4 @@
 <?php
-if(!isset($_SESSION)) {
-    session_start();
-}
-
-require_once "session_variables_check.php";
-
-if (!$ok) {
-    header ("Location: error.php");
-}
 ?>
 <!DOCTYPE HTML>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -28,16 +19,13 @@ if (!$ok) {
 </header>
 
 <section id="main-page">
-    <p id="header-text-header">Reservering Compleet</p>
+    <p id="header-text-header">Betaling</p>
     <div id="basic-wrapper">
         <div class="white-background">
-            <img id="img-big" class="inline-block" src="images/confirmation/chair.png">
-            <div class="bedankt inline-block">
-                <p class="header-text-big">Bedankt voor het reserveren!</p>
-                <br />
-                <p>Tot dan!</p>
+            <div class="inline-block text-only">
+                <a href="private.php">Klik hier om terug te gaan naar jouw account</a>
             </div>
-    </div>
+        </div>
     </div>
 </section>
 

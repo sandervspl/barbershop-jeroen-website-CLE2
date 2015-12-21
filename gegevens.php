@@ -57,33 +57,85 @@ if (isset($_POST['submit'])) {
         </script>
     </div>
 
-    <section id="gegevens-form">
-        <div class="white-background">
-            <form id="mainForm" action="#" method="post">
-                <div>
-                    <p>
-                        <label class="input-text" for="voornaam">Voornaam</label>
-                        <input type="text" id="voornaam" class="textinput" name="voornaam" autofocus="autofocus" value="<?=$voornaam?>" />
-                    </p>
-                    <p>
-                        <label class="input-text" for="achternaam">Achternaam</label>
-                        <input type="text" id="achternaam" class="textinput" name="achternaam" value="<?=$achternaam?>" />
-                    </p>
-                    <p>
-                        <label class="input-text" for="email">E-Mail</label><br/>
-                        <input type="email" id="email" class="textinput" name="email" value="<?=$email?>" />
-                    </p>
+    <?php
+    if (isset($_SESSION['user']['username'])) {
+        // database connection information
+        require_once "connect.php";
 
-                    <p>
-                        <label class="input-text" for="phone">Telefoon</label><br/>
-                        <input type="text" id="phone" class="textinput" name="phone" value="<?=$phone?>" />
-                    </p>
-                </div>
+        $db =  mysqli_connect($host, $user, $pw, $database) or die('Error: '.mysqli_connect_error());
 
-                <input type="submit" name="submit" class="button" value="reserveer" />
-            </form>
-        </div>
-    </section>
+        $sql = sprintf("SELECT voornaam, achternaam, email, telefoon FROM users WHERE username='%s'",
+                        $_SESSION['user']['username']);
+
+        $result = mysqli_query($db, $sql);
+        $gegevens = [];
+        $voornaam = '';
+        $achternaam = '';
+        $email = '';
+        $telefoon = '';
+
+        while($row = mysqli_fetch_assoc($result)) {
+            $gegevens = $row;
+        }
+
+        $voornaam   = $gegevens['voornaam'];
+        $achternaam = $gegevens['achternaam'];
+        $email      = $gegevens['email'];
+        $telefoon   = $gegevens['telefoon'];
+
+        mysqli_close($db);
+        ?>
+        <section id="gegevens-form">
+            <div class="white-background">
+                <p class="header-text-lobster">Jouw gegevens</p>
+                <table>
+                    <tr>
+                        <td>Naam</td>
+                        <td><?= $voornaam . " " . $achternaam ?></td>
+                    </tr>
+                    <tr>
+                        <td>E-Mail</td>
+                        <td><?= $email ?></td>
+                    </tr>
+                    <tr>
+                        <td>Telefoon</td>
+                        <td><?= $telefoon ?></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="gegevens-form-buttons-wrapper">
+                <a href="edit_account.php" class="button gegevens-form-button">Wijzig</a>
+                <a href="payment.php" class="button gegevens-form-button">Afrekenen</a>
+            </div>
+        </section>
+    <?php
+    } else {
+    ?>
+        <section id="gegevens-form">
+            <div class="white-background">
+                <form id="mainForm" action="#" method="post">
+                    <div class="gegevens">
+                            <label class="input-text" for="voornaam">Voornaam</label><br />
+                            <input type="text" id="voornaam" class="textinput" name="voornaam" autofocus="autofocus" value="<?=$voornaam?>" />
+                            <br />
+
+                            <label class="input-text" for="achternaam">Achternaam</label><br />
+                            <input type="text" id="achternaam" class="textinput" name="achternaam" value="<?=$achternaam?>" />
+                            <br />
+
+                            <label class="input-text" for="email">E-Mail</label><br/>
+                            <input type="email" id="email" class="textinput" name="email" value="<?=$email?>" />
+                            <br />
+
+                            <label class="input-text" for="phone">Telefoon</label><br/>
+                            <input type="text" id="phone" class="textinput" name="phone" value="<?=$phone?>" />
+                    </div>
+
+                    <input type="submit" name="submit" class="button" value="Afrekenen" />
+                </form>
+            </div>
+        </section>
+<?php } ?>
 </div>
 
 </section>

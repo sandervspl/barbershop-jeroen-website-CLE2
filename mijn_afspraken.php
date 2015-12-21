@@ -56,13 +56,14 @@ if (isset($_POST['remove'])) {
     <div id="basic-wrapper">
         <div class="white-background">
             <div id="account-wrapper-wide">
-                <span class="header-text-lobster"><?php echo htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?></span>
-                <br /><br /><br />
                 <div id="account-image">
-                    <img src="images/login/account.png">
+                    <img src="images/login/calendar.png">
                 </div>
 
                 <div id="account-text">
+                    <span class="header-text-lobster"><?php echo htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?></span>
+                    <br /><br /><br />
+
                     <?php
                     require_once "connect.php";
                     $db = mysqli_connect($host, $user, $pw, $database);
@@ -101,7 +102,8 @@ if (isset($_POST['remove'])) {
                         <div class="header-text-small appointment-value"><?= $appointment['kapper'] ?></div>
                         <br/><br />
 
-<!--                        TODO: MAKE THIS WORK-->
+
+<!--                        TODO: MAKE THIS WORK        -->
                         <button id="<?=$id?>" type='submit' name='remove' class="button-delete" value="<?=$id?>")>Verwijder</button>
                         <br/><br />
                         <div class="divider-light"></div>
