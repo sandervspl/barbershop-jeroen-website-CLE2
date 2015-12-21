@@ -88,52 +88,65 @@ if (isset($_POST['submit'])) {
         <section id="gegevens-form">
             <div class="white-background">
                 <p class="header-text-lobster">Jouw gegevens</p>
-                <table>
-                    <tr>
-                        <td>Naam</td>
-                        <td><?= $voornaam . " " . $achternaam ?></td>
-                    </tr>
-                    <tr>
-                        <td>E-Mail</td>
-                        <td><?= $email ?></td>
-                    </tr>
-                    <tr>
-                        <td>Telefoon</td>
-                        <td><?= $telefoon ?></td>
-                    </tr>
-                </table>
-            </div>
-            <div class="gegevens-form-buttons-wrapper">
-                <a href="edit_account.php" class="button gegevens-form-button">Wijzig</a>
-                <a href="payment.php" class="button gegevens-form-button">Afrekenen</a>
-            </div>
+                    <table>
+                        <tr>
+                            <td>Naam</td>
+                            <td class="capitalize"><?= $voornaam . " " . $achternaam ?></td>
+                        </tr>
+                        <tr>
+                            <td>E-Mail</td>
+                            <td><?= $email ?></td>
+                        </tr>
+                        <tr>
+                            <td>Telefoon</td>
+                            <td><?= $telefoon ?></td>
+                        </tr>
+                    </table>
+                    <br />
+
+                    <a href="edit_account.php?location=<?=urlencode($_SERVER['REQUEST_URI'])?>" class="gegevens-form-button">Wijzig</a>
+                </div>
+
+            <form id="mainForm" action="#" method="post">
+                <div class="gegevens-form-buttons-wrapper">
+                    <input type="submit" name="submit" class="button" value="Afrekenen" />
+                </div>
+            </form>
         </section>
     <?php
     } else {
     ?>
         <section id="gegevens-form">
-            <div class="white-background">
-                <form id="mainForm" action="#" method="post">
-                    <div class="gegevens">
-                            <label class="input-text" for="voornaam">Voornaam</label><br />
-                            <input type="text" id="voornaam" class="textinput" name="voornaam" autofocus="autofocus" value="<?=$voornaam?>" />
-                            <br />
-
-                            <label class="input-text" for="achternaam">Achternaam</label><br />
-                            <input type="text" id="achternaam" class="textinput" name="achternaam" value="<?=$achternaam?>" />
-                            <br />
-
-                            <label class="input-text" for="email">E-Mail</label><br/>
-                            <input type="email" id="email" class="textinput" name="email" value="<?=$email?>" />
-                            <br />
-
-                            <label class="input-text" for="phone">Telefoon</label><br/>
-                            <input type="text" id="phone" class="textinput" name="phone" value="<?=$phone?>" />
-                    </div>
-
-                    <input type="submit" name="submit" class="button" value="Afrekenen" />
-                </form>
+            <div class="gegevens">
+                <div class="white-background">
+                    <a href="login.php?location=<?=urlencode($_SERVER['REQUEST_URI'])?>" id="login-button" class="button">Login</a>
+                </div>
             </div>
+
+            <p class="header-text-small">of</p>
+
+            <form id="mainForm" action="#" method="post">
+                <div class="gegevens">
+                    <div class="white-background">
+                        <label class="input-text" for="voornaam">Voornaam</label><br />
+                        <input type="text" id="voornaam" class="textinput" name="voornaam" autofocus="autofocus" value="<?=$voornaam?>" />
+                        <br />
+
+                        <label class="input-text" for="achternaam">Achternaam</label><br />
+                        <input type="text" id="achternaam" class="textinput" name="achternaam" value="<?=$achternaam?>" />
+                        <br />
+
+                        <label class="input-text" for="email">E-Mail</label><br/>
+                        <input type="email" id="email" class="textinput" name="email" value="<?=$email?>" />
+                        <br />
+
+                        <label class="input-text" for="phone">Telefoon</label><br/>
+                        <input type="text" id="phone" class="textinput" name="phone" value="<?=$phone?>" />
+
+                        <input type="submit" name="submit" class="button" value="Afrekenen" />
+                    </div>
+                </div>
+            </form>
         </section>
 <?php } ?>
 </div>

@@ -1182,12 +1182,23 @@ p#chosen-month {
     font-size: 25px;
 }
 
+section#gegevens-form div.gegevens {
+    margin: 10px auto;
+}
+
+div.gegevens .white-background #login-button {
+    margin: 10px;
+}
+
+#gegevens-form > div.gegevens:first-child {
+    margin-top: 0;
+}
+
 #gegevens-form {
     /*background-color: rgba(255, 255, 255, 0.35);*/
     display: inline-block;
     width: 45%;
     margin-left: 20px;
-    padding-top: 20px;
     vertical-align: top;
     line-height: 30px;
 }
@@ -1222,23 +1233,14 @@ p#chosen-month {
     margin-top: 20px;
 }
 
-.gegevens-form-button:first-child {
-    float: left;
-}
-
 .gegevens-form-button {
     display: inline-block;
     width: 30% !important;
     font-size: 20px;
-    float: right;
     appearance: button;
     -moz-appearance: button;
     -webkit-appearance: button;
 }
-
-    .gegevens-form-button:hover {
-        text-decoration: none;
-    }
 
 form#mainForm div.gegevens input {
     width: 50%;
@@ -1708,6 +1710,7 @@ form .login-register-wrapper .small-text {
     padding: 0;
     font-family: Nunito, serif;
     font-size: 10px;
+    text-align: center;
 }
 
 #account-image, #account-text {
@@ -1753,6 +1756,11 @@ form .login-register-wrapper .small-text {
 
 #account-text input {
     margin-bottom: 10px;
+}
+
+#account-text input[type="submit"] {
+    width: 60%;
+    margin: auto;
 }
 
 #edit-account-form {

@@ -89,9 +89,21 @@ if(!empty($_POST))
         // the user's details.
         $_SESSION['user'] = $row;
 
-        // Redirect the user to the private members-only page.
-        header("Location: private.php");
-        die("Redirecting to: private.php");
+
+        // Redirect
+        $redirect = NULL;
+        if($_POST['location'] != '') {
+            $redirect = $_POST['location'];
+        }
+
+        // if is a redirect address, send the user directly there
+        if($redirect) {
+            header("Location:". $redirect);
+        } else {
+            header("Location:private.php");
+        }
+
+        exit();
     }
     else
     {
@@ -99,10 +111,7 @@ if(!empty($_POST))
         $failed = true;
 
         // Show them their username again so all they have to do is enter a new
-        // password.  The use of htmlentities prevents XSS attacks.  You should
-        // always use htmlentities on user submitted values before displaying them
-        // to any users (including the user that submitted them).  For more information:
-        // http://en.wikipedia.org/wiki/XSS_attack
+        // password.  The use of htmlentities prevents XSS attacks.
         $submitted_username = htmlentities($_POST['username'], ENT_QUOTES, 'UTF-8');
     }
 }
@@ -141,9 +150,16 @@ if(!empty($_POST))
                     <?php } ?>
                     <br /><br />
                     <input type="submit" value="Login" class="button" />
+                    <input type="hidden" name="location" value="<?php
+                            if(isset($_GET['location'])) {
+                                echo htmlspecialchars($_GET['location']);
+                            }
+                            ?>"/>
                 </form>
                 <br />
-                <div class="registerbutton"><a id="register-button" href="register.php">Registreer</a></div>
+                <div class="registerbutton">
+                    <a id="register-button" href="register.php">Registreer</a>
+                </div>
             </div>
         </div>
     </div>

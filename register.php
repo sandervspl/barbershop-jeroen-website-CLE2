@@ -19,7 +19,7 @@ if(!empty($_POST))
     {
         $error++;
     } else {
-        $username = $_POST['username'];
+        $username = htmlentities($_POST['username'], ENT_QUOTES, 'UTF-8');
     }
 
     if(empty($_POST['password']))
@@ -31,32 +31,32 @@ if(!empty($_POST))
     {
         $error++;
     } else {
-        $email = $_POST['email'];
+        $email = htmlentities($_POST['email'], ENT_QUOTES, 'UTF-8');
     }
 
     if(empty($_POST['voornaam']))
     {
         $error++;
     } else {
-        $voornaam = $_POST['voornaam'];
+        $voornaam = htmlentities($_POST['voornaam'], ENT_QUOTES, 'UTF-8');
     }
 
     if(empty($_POST['achternaam']))
     {
         $error++;
     } else {
-        $achternaam = $_POST['achternaam'];
+        $achternaam = htmlentities($_POST['achternaam'], ENT_QUOTES, 'UTF-8');
     }
 
     if(empty($_POST['telefoon']))
     {
         $error++;
     } else {
-        $telefoon = $_POST['telefoon'];
+        $telefoon = htmlentities($_POST['telefoon'], ENT_QUOTES, 'UTF-8');
     }
 
     // We will use this SQL query to see whether the username entered by the
-    // user is already in use.  A SELECT query is used to retrieve data from the database.
+    // user is already in use.
     // :username is a special token, we will substitute a real value in its place when
     // we execute the query.
     $query = "
@@ -226,7 +226,7 @@ if(!empty($_POST))
 
                         <label for="email" class="input-text-small">E-Mail</label>
                         <input id="email" type="text" name="email" value="<?=$email?>" onblur="validateEmail(id)" />
-                        <div id="emailError" class="small-text error-text error-text-wrapper" style="visibility: hidden;">Voer een geldig E-Mail adres in</div>
+                        <div id="emailError" class="small-text error-text error-text-wrapper" style="visibility: hidden;">Voer een geldig e-mail adres in</div>
                         <?php if ($emailExists) { ?>
                             <span id="emailAlreadyInDBError" class="small-text error-text" style="display: block;">Er is al een gebruiker met dit e-mail adres</span>
                             <script src="scripts/validation.js"></script>

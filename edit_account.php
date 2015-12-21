@@ -137,9 +137,23 @@ if(!empty($_POST))
     // array is stale; we need to update it so that it is accurate.
     $_SESSION['user']['email'] = $_POST['email'];
 
+
+
     // Redirect
-    header("Location: edit_account_success.php");
-    die("Redirecting to edit_account_success.php");
+    $redirect = NULL;
+    if($_POST['location'] != '') {
+        $redirect = $_POST['location'];
+    }
+
+    // if is a redirect address, send the user directly there
+    if($redirect) {
+        header("Location:". $redirect);
+    } else {
+        header("Location: edit_account_success.php");
+        die("Redirecting to edit_account_success.php");
+    }
+
+    exit();
 }
 
 
@@ -209,8 +223,14 @@ $telefoon   = $gegevens['telefoon'];
                         <label for="password" class="input-text">Wachtwoord</label><br />
                         <input id="password" type="password" name="password" value="" /><br />
                         <p>(laat leeg als je het wachtwoord niet wilt wijzigen)</p>
-                        <br /><br />
-                        <input type="submit" value="Wijzig Account" class="button" />
+                        <br />
+
+                        <input type="submit" value="Bevestig" class="button" />
+                        <input type="hidden" name="location" value="<?php
+                        if(isset($_GET['location'])) {
+                            echo htmlspecialchars($_GET['location']);
+                        }
+                        ?>"/>
                     </div>
                 </form>
             </div>

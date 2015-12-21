@@ -1,44 +1,83 @@
 <?php
+if(!isset($_SESSION)) {
+    session_start();
+}
+
 $barber = '';
 $date = '';
 $time = '';
 $cut = '';
 $email = '';
+$voornaam = '';
+$achternaam = '';
+$phone = '';
 
 $ok = true;
-if (!isset($_POST['voornaam']) || $_POST['voornaam'] === '') {
-    $ok = false;
-    echo "Error: VOORNAAM variable is not set. ";
+
+// prioritize login session's data for name, e-mail and phone
+if (isset($_SESSION['user']['username'])) {
+
+    // database connection information
+    require_once "connect.php";
+
+    $db = mysqli_connect($host, $user, $pw, $database) or die('Error: ' . mysqli_connect_error());
+
+    $sql = sprintf("SELECT voornaam, achternaam, email, telefoon FROM users WHERE username='%s'",
+        $_SESSION['user']['username']);
+
+    $result = mysqli_query($db, $sql);
+    $gegevens = [];
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $gegevens = $row;
+    }
+
+    $voornaam   = $gegevens['voornaam'];
+    $achternaam = $gegevens['achternaam'];
+    $email      = $gegevens['email'];
+    $phone      = $gegevens['telefoon'];
+
+    mysqli_close($db);
+
 } else {
-    $voornaam = $_POST['voornaam'];
-}
-if (!isset($_POST['achternaam']) || $_POST['achternaam'] === '') {
-    $ok = false;
-    echo "<br /> Error: ACHTERNAAM variable is not set. ";
-} else {
-    $achternaam = $_POST['achternaam'];
-}
-if (!isset($_POST['email']) || $_POST['email'] === '') {
-    $ok = false;
-    echo "<br /> Error: EMAIL variable is not set. ";
-} else {
-    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+
+    if (!isset($_POST['voornaam']) || $_POST['voornaam'] === '') {
         $ok = false;
-        echo "<br />Error: Invalid EMAIL.";
+        echo "Error: VOORNAAM variable is not set. ";
     } else {
-        $email = $_POST['email'];
+        $voornaam = $_POST['voornaam'];
     }
-}
-if (!isset($_POST['phone']) || $_POST['phone'] === '') {
-    $ok = false;
-    echo "<br /> Error: PHONE variable is not set. ";
-} else {
-    if (!preg_match("/[0-9]{10}/", $_POST['phone'])) {
+    if (!isset($_POST['achternaam']) || $_POST['achternaam'] === '') {
         $ok = false;
-        echo "<br />Error: Invalid PHONE.";
+        echo "<br /> Error: ACHTERNAAM variable is not set. ";
+    } else {
+        $achternaam = $_POST['achternaam'];
     }
-    $phone = $_POST['phone'];
+    if (!isset($_POST['email']) || $_POST['email'] === '') {
+        $ok = false;
+        echo "<br /> Error: EMAIL variable is not set. ";
+    } else {
+        if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+            $ok = false;
+            echo "<br />Error: Invalid EMAIL.";
+        } else {
+            $email = $_POST['email'];
+        }
+    }
+    if (!isset($_POST['phone']) || $_POST['phone'] === '') {
+        $ok = false;
+        echo "<br /> Error: PHONE variable is not set. ";
+    } else {
+        if (!preg_match("/[0-9]{10}/", $_POST['phone'])) {
+            $ok = false;
+            echo "<br />Error: Invalid PHONE.";
+        }
+        $phone = $_POST['phone'];
+    }
 }
+
+
+// barber, cut, date, time data
 if (!isset($_SESSION['barber']) || $_SESSION['barber'] === '') {
     $ok = false;
 } else {
@@ -66,6 +105,7 @@ if (!isset($_SESSION['cut']) || $_SESSION['cut'] === '') {
 } else {
     $cut = $_SESSION['cut'];
 }
+
 
 // database connection information
 require_once "connect.php";
