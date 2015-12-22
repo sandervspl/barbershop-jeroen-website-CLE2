@@ -9,7 +9,7 @@ if(!isset($_SESSION)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classic Barbershop Jeroen</title>
+    <title>Classics Barbershop Jeroen</title>
     <link rel="stylesheet" href="style/style.css">
     <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
@@ -22,6 +22,11 @@ if(!isset($_SESSION)) {
             var myLatLng = {lat: 51.819129, lng: 4.643368};
 
             var map = new google.maps.Map(document.getElementById('map'), {
+                scrollwheel: false,
+                navigationControl: true,
+                mapTypeControl: false,
+                scaleControl: false,
+                draggable: true,
                 zoom: 16,
                 center: myLatLng
             });
@@ -29,7 +34,7 @@ if(!isset($_SESSION)) {
             var marker = new google.maps.Marker({
                 position: myLatLng,
                 map: map,
-                title: 'Hello World!'
+                title: 'Classics Barbershop Jeroen'
             });
         }
         google.maps.event.addDomListener(window, 'load', initMap);

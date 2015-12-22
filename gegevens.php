@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classic Barbershop Jeroen</title>
+    <title>Classics Barbershop Jeroen</title>
     <link rel="stylesheet" href="style/style.css">
     <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
@@ -38,12 +38,19 @@ if (isset($_POST['submit'])) {
 <div id="wrapper">
     <div id="summary-wrapper">
         <p class="header-text">Bestelling</p>
+
         <div id="summary-wrapper-text">
-            <span class="barber-name"><?=$_SESSION['barber']?></span><br/>
-                <p id="chosen-month">32 January</p>
-            <div id="summary-wrapper-text-time">
-                <span id="chosen-time">03:22</span>
-                <span id="chosen-etime">04:20</span>
+            <div id="summary-barbername-wrapper">
+                <span class="barber-name"><?=$_SESSION['barber']?></span>
+            </div>
+
+            <div id="summary-datetime-wrapper">
+                <p id="chosen-month">32 januari</p>
+
+                <div id="summary-wrapper-text-time">
+                    <span id="chosen-time">03:22</span>
+                    <span id="chosen-etime">04:20</span>
+                </div>
             </div>
         </div>
         <div id="summary-wrapper-icon">

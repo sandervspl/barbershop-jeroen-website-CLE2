@@ -29,7 +29,7 @@ if(!isset($_SESSION)) {
         </div>
         <div class="navigation-right">
             <?php if (isset($_SESSION['user']['username'])) { ?>
-                <a href="private.php" id="login-button">[<?php echo htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?>]</a>
+                <a href="private.php" id="login-button">[<?= htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?>]</a>
             <?php } else { ?>
                 <a href="login.php?location=<?=urlencode($_SERVER['REQUEST_URI'])?>" id="login-button">Login</a>
             <?php } ?>

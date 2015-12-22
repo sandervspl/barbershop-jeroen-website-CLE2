@@ -63,6 +63,10 @@ body {
         body {
             background-image: none;
         }
+
+        #main-page p.header-text {
+            font-size: 30px;
+        }
     }
 
 footer {
@@ -71,6 +75,21 @@ footer {
     height: 50px;
     background-color: white;
     border-top: 1px solid black;
+}
+
+.white-background {
+    background-color: rgba(255, 255, 255, 0.35);
+    height: auto;
+    width: auto;
+    padding: 15px 0;
+
+    -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 2px 2px 2px rgba(0,0,0 .15);
+    box-shadow: 2px 2px 2px rgba(0,0,0, .15);
+}
+
+.white-background-margin {
+    margin: 20px auto;
 }
 
 .uppercase {
@@ -419,19 +438,42 @@ section ul li a {
     background-image:url("../images/index/yes-hair-yes-beard.png");
 }
 
+    @media only screen and (max-width: 800px) {
+        .hair, .beard, .moustache, .all {
+            width: 110px;
+            height: 110px;
+        }
+    }
+
+    @media only screen and (max-width: 768px) {
+        .hair, .beard, .moustache, .all {
+            width: 100px;
+            height: 100px;
+        }
+    }
+
     @media only screen and (max-width: 600px) {
+        .cut-selector .white-background {
+            width: 100% !important;
+        }
+
         .hair, .beard, .moustache, .all {
             width: 120px;
             height: 120px;
         }
     }
 
-@media only screen and (max-width: 480px) {
-    .hair, .beard, .moustache, .all {
-        width: 100px;
-        height: 100px;
+    @media only screen and (max-width: 480px) {
+        .hair, .beard, .moustache, .all {
+            width: 100px;
+            height: 100px;
+        }
     }
-}
+
+
+
+
+
 
 .barber-selection {
     cursor: pointer;
@@ -495,25 +537,6 @@ div.cut-selector div#barbers input:checked +.trans {
     -webkit-filter: brightness(1.2) grayscale(.5) opacity(1);
     -moz-filter: brightness(1.2) grayscale(.5) opacity(1);
     filter: brightness(1.2) grayscale(.5) opacity(1);
-}
-
-
-
-
-
-.white-background {
-    background-color: rgba(255, 255, 255, 0.35);
-    height: auto;
-    width: auto;
-    padding: 15px 0;
-
-    -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.15);
-    -moz-box-shadow: 2px 2px 2px rgba(0,0,0 .15);
-    box-shadow: 2px 2px 2px rgba(0,0,0, .15);
-}
-
-.white-background-margin {
-    margin: 20px auto;
 }
 
 .cut-selector .white-background {
@@ -988,6 +1011,10 @@ div.month-name {
             height: 70px;
         }
 
+        #cut-time-text {
+            font-size: 15px;
+        }
+
         .barber-name {
             font-size: 25px;
         }
@@ -1028,16 +1055,24 @@ div.month-name {
     }
 
     @media only screen and (max-width: 600px) {
+        section#main-page div#summary-header div.white-background {
+            width: 100%;
+        }
+
+        #calendar-wrapper div.white-background {
+            width: 100%;
+        }
+
         #calendar {
             width: 95%;
         }
 
         #calendar-header-text {
-            left: 70px;
+            left: 0;
         }
 
         #calendar-arrow {
-            right: 70px;
+            right: 0;
         }
 
         div.month-name {
@@ -1056,6 +1091,10 @@ div.month-name {
         .times-container, .times-container-taken {
             margin-bottom: 20px;
         }
+
+        #morning-header, #afternoon-header, #evening-header {
+            font-size: 35px !important;
+        }
     }
 
     @media only screen and (max-width: 480px) {
@@ -1069,7 +1108,8 @@ div.month-name {
 
         #calendar-header-text {
             left: 0;
-            top: -10px;
+            top: 0;
+            font-size: 40px;
         }
 
         #calendar-arrow {
@@ -1111,6 +1151,19 @@ div.month-name {
             left: 0;
             top: 0;
         }
+
+        #summary-header .header-text th, .barber-name {
+            font-size: 15px;
+        }
+
+        #cut-time-text {
+            font-size: 13px;
+        }
+
+        #main-page #summary-header .header-text tr .hair-beard-img {
+            width: 50px;
+            height: 50px;
+        }
     }
 
 
@@ -1120,6 +1173,11 @@ div.month-name {
         GEGEVENS
                         */
 /*********************/
+
+#summary-barbername-wrapper, #summary-datetime-wrapper {
+    /*background-color: green;*/
+    display: inline-block;
+}
 
 #wrapper {
     height: inherit;
@@ -1132,14 +1190,14 @@ div.month-name {
     display: inline-block;
     text-align: center;
     padding-top: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 50px;
     height: auto;
     width: 30%;
 }
 
 #summary-wrapper p.header-text {
     font-family: Lobster, serif;
-    margin: 0 0 50px 0;
+    margin: 0 0 30px 0;
 }
 
 #summary-wrapper-icon img {
@@ -1147,42 +1205,47 @@ div.month-name {
 }
 
 #summary-wrapper-text {
-    margin-top: 35px;
+    margin: 35px auto 20px auto;
+    line-height: 30px;
 }
 
 #summary-wrapper-text .barber-name {
-    float: left;
     font-size: 45px;
     padding: 0 10px 0 10px;
     border-right: 1px solid black;
-    height: 45px;
 }
 
 #summary-wrapper-text #chosen-time, #summary-wrapper-text #chosen-etime {
-    position: relative;
-    top: -15px;
-    left: -5px;
     text-align: left;
     font-family: Nunito, serif;
     font-size: 25px;
 }
 
-#summary-wrapper-text-time span#chosen-etime {
+#summary-wrapper-text-time #chosen-etime {
     position: relative;
-    top: -22px;
+    top: -6px;
     font-size: 15px;
 }
 
 #summary-wrapper-text #chosen-time {
-    margin: 10px auto 0 auto;
 }
 
 p#chosen-month {
-    position: relative;
-    top: -23px;
     font-family: Lobster, serif;
     font-size: 25px;
 }
+
+    @media only screen and (max-width: 320px) {
+        div.gegevens div.white-background a#login-button.button {
+            font-size: 20px !important;
+        }
+    }
+
+
+
+
+/**/
+/*GEGEVENS FORM*/
 
 section#gegevens-form div.gegevens {
     margin: 10px auto;
@@ -1326,7 +1389,11 @@ input[type="submit"].button {
         }
     }
 
-
+    @media only screen and (max-width: 320px) {
+        form#mainForm div.gegevens input {
+            width: 75%;
+        }
+    }
 
 
 /*********************/
@@ -1410,6 +1477,33 @@ input[type="submit"].button {
     height: 70px;
 }
 
+#map {
+    /*background-color: yellow;*/
+    border: 1px solid black;
+
+    width: 100%;
+    height: 500px;
+}
+
+    @media only screen and (max-width: 1024px) {
+        #contactpage-text-wrapper {
+            width: 40%;
+        }
+
+        #contactpage-maps-wrapper {
+            width: 35%;
+            height: inherit;
+        }
+
+        #contact-text-wrapper {
+            height: auto;
+        }
+
+        #contact-img-wrapper {
+            width: 70px;
+        }
+    }
+
     @media only screen and (max-width: 800px) {
         #contactpage-maps-wrapper, #contactpage-text-wrapper {
             background-color: rgba(255, 255, 255, 0.55);
@@ -1432,6 +1526,10 @@ input[type="submit"].button {
             margin: 5px 0 20px 0;
             text-align: left;
         }
+
+        #map {
+            height: 300px;
+        }
     }
 
     @media only screen and (max-width: 320px) {
@@ -1445,26 +1543,33 @@ input[type="submit"].button {
 
         #contact-img-wrapper, #phone-img-wrapper, #facebook-img-wrapper {
             /*background-color: green;*/
-            width: 100px;
-            height: 70px;
+            width: 50px;
+            height: 50px;
             margin: 5px 10px 0 10px;
+        }
+
+        .contact-img {
+            width: 50px;
+            height: 50px;
         }
 
         #contact-text-wrapper, #phone-text-wrapper, #facebook-text-wrapper {
             width: 300px;
-            height: 70px;
+            height: 50px;
             margin: 5px 0 20px 0;
             text-align: left;
         }
+
+        #contact-text-wrapper {
+            padding-top: 0;
+            padding-bottom: 5px;
+            height: auto;
+        }
+
+        #phone-text-wrapper, #facebook-text-wrapper {
+            line-height: 50px;
+        }
     }
-
-#map {
-    /*background-color: yellow;*/
-    border: 1px solid black;
-
-    width: 100%;
-    height: 500px;
-}
 
 
 
@@ -1558,18 +1663,20 @@ div#over-ons-barbers p.header-text-big {
             width: 200px;
             height: 200px;
         }
+
+        table#opening-times {
+            width: 50%;
+        }
     }
 
     @media only screen and (max-width: 800px) {
-        /*#over-ons-jeroen-wrapper, #over-ons-juno-wrapper {*/
-        /*display: inline;*/
-        /*margin: auto;*/
-        /*}*/
+        #main-page p.header-text {
+            font-size: 35px;
+        }
 
         #over-ons-jeroen-wrapper img, #over-ons-juno-wrapper img {
             width: 160px;
             height: 160px;
-            /*margin: auto;*/
         }
 
         #over-ons-jeroen-wrapper {
@@ -1578,21 +1685,31 @@ div#over-ons-barbers p.header-text-big {
 
         #over-ons-juno-wrapper {
             margin-left: 20px;
+        }
+
+        div#over-ons div.white-background div#over-ons-jeroen-wrapper p.header-text-lobster,
+        div#over-ons div.white-background div#over-ons-juno-wrapper p.header-text-lobster {
+            font-size: 35px;
         }
     }
 
-    @media only screen and (max-width: 768px) {
-        #over-ons-jeroen-wrapper img, #over-ons-juno-wrapper img {
-            width: 160px;
-            height: 160px;
+    @media only screen and (max-width: 600px) {
+        #header-text-header {
+            font-size: 40px;
         }
 
-        #over-ons-jeroen-wrapper {
-            margin-right: 20px;
+        .navigation-container {
+            width: 100%;
         }
 
-        #over-ons-juno-wrapper {
-            margin-left: 20px;
+        .footer-container {
+            width: 100% !important;
+            font-size: 10px !important;
+        }
+
+        .navigation-right, .left, .right {
+            padding-right: 5px;
+            padding-left: 5px;
         }
     }
 
@@ -1602,8 +1719,11 @@ div#over-ons-barbers p.header-text-big {
         }
 
         #over-ons-text {
-            text-align: left;
             width: 80%;
+        }
+
+        #over-ons-text .header-text-small {
+            font-size: 30px;
         }
 
         #over-ons-jeroen-wrapper, #over-ons-juno-wrapper {
@@ -1621,16 +1741,44 @@ div#over-ons-barbers p.header-text-big {
             margin: auto;
         }
 
-        #over-ons-jeroen-wrapper img {
+        div#over-ons div.white-background div#over-ons-jeroen-wrapper p.header-text-lobster,
+        div#over-ons div.white-background div#over-ons-juno-wrapper p.header-text-lobster {
+            font-size: 30px;
+            margin-top: 5px;
             margin-bottom: 30px;
         }
 
-        #over-ons-jeroen-wrapper p.header-text-lobster, #over-ons-juno-wrapper p.header-text-lobster {
-            font-size: 30px;
+        table#opening-times {
+            width: 60%;
         }
     }
 
+    @media only screen and (max-width: 320px) {
+        nav#navigation-background ul li {
+            margin-right: 17px;
+        }
 
+        nav#navigation-background ul li a, a#login-button {
+            font-size: 12px;
+        }
+
+        .navigation-container {
+            line-height: 27px;
+        }
+
+        .navigation-left {
+            text-align: left;
+            padding-left: 5px;
+        }
+
+        #main-page p.header-text {
+            line-height: 25px;
+        }
+
+        table#opening-times {
+            width: 95%;
+        }
+    }
 
 
 
@@ -1698,7 +1846,38 @@ form .login-register-wrapper .small-text {
     height: 25px;
 }
 
+    @media only screen and (max-width: 800px) {
+        .login-register-wrapper {
+            width: 50%;
+        }
 
+        #register-button {
+            width: 50%;
+        }
+    }
+
+    @media only screen and (max-width: 768px) {
+        footer.footer-sticky {
+            position: absolute;
+            bottom: 0;
+        }
+    }
+
+    @media only screen and (max-width: 480px) {
+        footer {
+            position: relative;
+        }
+    }
+
+    @media only screen and (max-width: 320px) {
+        .login-register-wrapper {
+            width: 75%;
+        }
+
+        #register-button {
+            font-size: 17px;
+        }
+    }
 
 
 
