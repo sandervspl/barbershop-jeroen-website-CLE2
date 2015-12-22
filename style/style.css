@@ -74,11 +74,11 @@ footer {
     width: 100%;
     height: 50px;
     background-color: white;
-    border-top: 1px solid black;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 .white-background {
-    background-color: rgba(255, 255, 255, 0.35);
+    background-color: rgba(255, 255, 255, 0.50);
     height: auto;
     width: auto;
     padding: 15px 0;
@@ -191,7 +191,7 @@ footer {
 
 .barber-name {
     font-family: Lobster, serif;
-    font-size: 37px;
+    font-size: 40px;
 }
 
 #summary-text img {
@@ -1506,7 +1506,6 @@ input[type="submit"].button {
 
     @media only screen and (max-width: 800px) {
         #contactpage-maps-wrapper, #contactpage-text-wrapper {
-            background-color: rgba(255, 255, 255, 0.55);
             width: 75%;
             height: auto;
             display: block;
@@ -1534,7 +1533,6 @@ input[type="submit"].button {
 
     @media only screen and (max-width: 320px) {
         #contactpage-maps-wrapper, #contactpage-text-wrapper {
-            background-color: rgba(255, 255, 255, 0.55);
             width: 95%;
             height: auto;
             display: block;
@@ -1873,7 +1871,7 @@ form .login-register-wrapper .small-text {
         #basic-wrapper {
             width: 95%;
         }
-        
+
         .login-register-wrapper {
             width: 75%;
         }
@@ -1926,10 +1924,11 @@ form .login-register-wrapper .small-text {
 .appointment-title {
     width: 140px;
     display: inline-block;
+    text-align: left;
 }
 
 .appointment-value {
-    width: 140px;
+    width: 180px;
     display: inline-block;
     text-align: right;
 }
@@ -1952,6 +1951,13 @@ form .login-register-wrapper .small-text {
     display: inline;
 }
 
+.delete-appointment-wrapper {
+    line-height: 25px;
+}
+
+.delete-appointment-wrapper a.button.gegevens-form-button {
+    margin-top: 25px;
+}
 
 /*********************/
 /*

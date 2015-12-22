@@ -13,7 +13,7 @@ $failed = false;
 // If it has, then the login code is run, otherwise the form is displayed
 if(!empty($_POST))
 {
-    // This query retreives the user's information from the database using
+    // This query retrieves the user's information from the database using
     // their username.
     $query = "
             SELECT
@@ -99,11 +99,11 @@ if(!empty($_POST))
         // if is a redirect address, send the user directly there
         if($redirect) {
             header("Location:". $redirect);
+            die("Redirecting to $redirect");
         } else {
-            header("Location:private.php");
+            header("Location: private.php");
+            die("Redirecting to private.php");
         }
-
-        exit();
     }
     else
     {

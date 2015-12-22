@@ -176,7 +176,6 @@ if(!empty($_POST))
 
         // redirect
         header("Location: registration_complete.php");
-
         die("Redirecting to registration_complete.php");
     }
 }
