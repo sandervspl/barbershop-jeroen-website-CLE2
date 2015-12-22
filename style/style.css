@@ -1864,12 +1864,16 @@ form .login-register-wrapper .small-text {
     }
 
     @media only screen and (max-width: 480px) {
-        footer {
+        footer.footer-sticky {
             position: relative;
         }
     }
 
     @media only screen and (max-width: 320px) {
+        #basic-wrapper {
+            width: 95%;
+        }
+        
         .login-register-wrapper {
             width: 75%;
         }
