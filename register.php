@@ -1,6 +1,12 @@
 <?php
 require("common.php");
 
+// logged in users shouldn't have access to this page
+if(isset($_SESSION['user'])) {
+    header("Location: private.php");
+    die("Redirecting to private.php");
+}
+
 $usernameExists = false;
 $emailExists = false;
 $emailInvalid = false;
@@ -15,41 +21,35 @@ $email = '';
 // check submitted data if there is any
 if(!empty($_POST))
 {
-    if(empty($_POST['username']))
-    {
+    if(empty($_POST['username'])) {
         $error++;
     } else {
         $username = htmlentities($_POST['username'], ENT_QUOTES, 'UTF-8');
     }
 
-    if(empty($_POST['password']))
-    {
+    if(empty($_POST['password'])) {
         $error++;
     }
 
-    if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))
-    {
+    if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
         $error++;
     } else {
         $email = htmlentities($_POST['email'], ENT_QUOTES, 'UTF-8');
     }
 
-    if(empty($_POST['voornaam']))
-    {
+    if(empty($_POST['voornaam'])) {
         $error++;
     } else {
         $voornaam = htmlentities($_POST['voornaam'], ENT_QUOTES, 'UTF-8');
     }
 
-    if(empty($_POST['achternaam']))
-    {
+    if(empty($_POST['achternaam'])) {
         $error++;
     } else {
         $achternaam = htmlentities($_POST['achternaam'], ENT_QUOTES, 'UTF-8');
     }
 
-    if(empty($_POST['telefoon']))
-    {
+    if(empty($_POST['telefoon'])) {
         $error++;
     } else {
         $telefoon = htmlentities($_POST['telefoon'], ENT_QUOTES, 'UTF-8');
@@ -59,13 +59,7 @@ if(!empty($_POST))
     // user is already in use.
     // :username is a special token, we will substitute a real value in its place when
     // we execute the query.
-    $query = "
-            SELECT
-                1
-            FROM users
-            WHERE
-                username = :username
-        ";
+    $query = "SELECT 1 FROM users WHERE username = :username";
 
     // This contains the definitions for any special tokens that we place in
     // our SQL query.  In this case, we are defining a value for the token
@@ -82,8 +76,8 @@ if(!empty($_POST))
         // These two statements run the query against your database table.
         $stmt = $db->prepare($query);
         $result = $stmt->execute($query_params);
-    }
-    catch(PDOException $ex) {
+
+    } catch(PDOException $ex) {
         die("Failed to run query");
     }
 
@@ -97,13 +91,7 @@ if(!empty($_POST))
 
     // Now we perform the same type of check for the email address, in order
     // to ensure that it is unique.
-    $query = "
-            SELECT
-                1
-            FROM users
-            WHERE
-                email = :email
-        ";
+    $query = "SELECT 1 FROM users WHERE email = :email";
 
     $query_params = array(
         ':email' => $_POST['email']
@@ -112,8 +100,8 @@ if(!empty($_POST))
     try {
         $stmt = $db->prepare($query);
         $result = $stmt->execute($query_params);
-    }
-    catch(PDOException $ex) {
+
+    } catch(PDOException $ex) {
         die("Failed to run query");
     }
 
@@ -169,8 +157,8 @@ if(!empty($_POST))
             // Execute the query to create the user
             $stmt = $db->prepare($query);
             $result = $stmt->execute($query_params);
-        }
-        catch(PDOException $ex) {
+
+        } catch(PDOException $ex) {
             $error++;
         }
 

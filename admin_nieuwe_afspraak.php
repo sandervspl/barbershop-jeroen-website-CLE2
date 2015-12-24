@@ -46,10 +46,7 @@ if(isset($_SESSION['user'])) {
         <div class="white-background">
             <div id="account-wrapper-wide">
                 <div id="account-text">
-                    <p class="header-text">Opties</p>
-                    <a href="admin_afspraken_kalender.php">Afspraken Kalender</a><br />
-                    <a href="admin_nieuwe_afspraak.php">Voeg Afspraak Toe</a><br />
-                    <a href="logout.php">Uitloggen</a>
+                    <p class="header-text">Afspraak Toevoegen</p>
                 </div>
             </div>
         </div>

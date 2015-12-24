@@ -3,6 +3,12 @@ if(!isset($_SESSION)) {
     session_start();
 }
 
+// not logged in users shouldn't have access to this page
+if(empty($_SESSION['user'])) {
+    header("Location: login.php");
+    die("Redirecting to login.php");
+}
+
 require_once "nlDate.php";
 require_once "connect.php";
 ?>
@@ -69,6 +75,8 @@ require_once "connect.php";
                     // see if we succeeded or not
                     $re = (mysqli_affected_rows($db) > 0) ? true : false;
 
+                    mysqli_close($db);
+
                     // if not, redirect to error page
                     if (!$re) {
                         header("Location: mijn_afspraken.php?p=2&a=0");
@@ -122,7 +130,10 @@ require_once "connect.php";
 
                             <p class="header-text">Afspraak verwijderen</p>
                             <div class="delete-appointment-wrapper">
-                                <p>Weet je zeker dat je deze afspraak wilt verwijderen?</p> <br/>
+                                <p>Weet je zeker dat je deze afspraak wilt verwijderen?</p>
+                                <br/>
+
+                                <div class="divider-light"></div>
 
                                 <div class="header-text-small appointment-title">Datum:</div>
                                 <div class="header-text-small appointment-value"><?= $date ?></div>
@@ -137,18 +148,22 @@ require_once "connect.php";
                                 <div class="header-text-small appointment-value"><?= $appointment[3] ?></div>
                                 <br />
 
+                                <div class="divider-light"></div>
+
                                 <a href="mijn_afspraken.php?p=3&a=<?=$id?>" class="button gegevens-form-button">Ja</a>
                                 <a href="mijn_afspraken.php" class="button gegevens-form-button">Nee</a>
                             </div>
                 <?php
                         }
-                    } else {
+                    } else if ($_GET['p'] != 3) {
                 ?>
                         <p class="header-text">Afspraak verwijderen</p>
                         <p>U bent niet gemachtigd om dit te doen.</p> <br />
                         <a href="mijn_afspraken.php">Ga terug naar Mijn Afspraken</a>
                 <?php
                     }
+
+                    mysqli_close($db);
                 } else {
                 ?>
 
@@ -175,6 +190,14 @@ require_once "connect.php";
                         );
 
                     $result = mysqli_query($db, $sql);
+                    $re = (mysqli_num_rows($result) > 0) ? true : false;
+
+                    if (!$re) {
+                        ?>
+                        <p>U heeft op dit moment geen afspraken staan.</p>
+                        <?php
+                    }
+
                     $appointments = [];
 
                     while($row = mysqli_fetch_assoc($result)) {

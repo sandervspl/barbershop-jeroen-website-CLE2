@@ -23,9 +23,14 @@ if(!isset($_SESSION)) {
 
 <section id="main-page">
     <p id="header-text-header">Oops!</p>
-    <img id="img-big" src="images/other/error.png">
-    <p class="header-text-lobster">Er is iets misgegaan.</p><br />
-    <p class="header-text-small"><a href="reserveer.php">Probeer opnieuw</a></p>
+    <div id="basic-wrapper">
+        <div class="white-background">
+            <img id="img-big" src="images/other/error.png">
+
+            <p class="header-text-lobster">Er is iets misgegaan.</p><br />
+            <p class="header-text-small"><a href="reserveer.php">Probeer opnieuw</a></p>
+        </div>
+    </div>
 </section>
 
 <footer>

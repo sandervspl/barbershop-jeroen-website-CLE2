@@ -1,20 +1,18 @@
 <?php
-
-// First we execute our common code to connection to the database and start the session
 require("common.php");
 
-// This variable will be used to re-display the user's username to them in the
-// login form if they fail to enter the correct password.  It is initialized here
-// to an empty value, which will be shown if the user has not submitted the form.
+if(isset($_SESSION['user'])) {
+    header("Location: private.php");
+    die("Redirecting to private.php");
+}
+
 $submitted_username = '';
 $failed = false;
 
 // This if statement checks to determine whether the login form has been submitted
-// If it has, then the login code is run, otherwise the form is displayed
 if(!empty($_POST))
 {
-    // This query retrieves the user's information from the database using
-    // their username.
+    // This query retrieves the user's information from the database using their username.
     $query = "
             SELECT
                 id,
@@ -22,7 +20,8 @@ if(!empty($_POST))
                 password,
                 salt,
                 email
-            FROM users
+            FROM
+                users
             WHERE
                 username = :username
         ";
@@ -32,41 +31,32 @@ if(!empty($_POST))
         ':username' => $_POST['username']
     );
 
-    try
-    {
+    try {
         // Execute the query against the database
         $stmt = $db->prepare($query);
         $result = $stmt->execute($query_params);
-    }
-    catch(PDOException $ex)
-    {
-        // Note: On a production website, you should not output $ex->getMessage().
-        // It may provide an attacker with helpful information about your code.
-        die("Failed to run query: " . $ex->getMessage());
+
+    } catch(PDOException $ex) {
+        header("Location: login.php");
+        die("Failed to run query");
     }
 
     // This variable tells us whether the user has successfully logged in or not.
-    // We initialize it to false, assuming they have not.
-    // If we determine that they have entered the right details, then we switch it to true.
     $login_ok = false;
 
-    // Retrieve the user data from the database.  If $row is false, then the username
-    // they entered is not registered.
+    // Retrieve the user data from the database.  If $row is false, then the username they entered is not registered.
     $row = $stmt->fetch();
-    if($row)
-    {
+    if($row) {
         // Using the password submitted by the user and the salt stored in the database,
         // we now check to see whether the passwords match by hashing the submitted password
         // and comparing it to the hashed version already stored in the database.
         $check_password = hash('sha256', $_POST['password'] . $row['salt']);
-        for($round = 0; $round < 65536; $round++)
-        {
+        for($round = 0; $round < 65536; $round++) {
             $check_password = hash('sha256', $check_password . $row['salt']);
         }
 
-        if($check_password === $row['password'])
-        {
-            // If they do, then we flip this to true
+        // If they do, then we flip this to true
+        if($check_password === $row['password']) {
             $login_ok = true;
         }
     }
@@ -75,22 +65,15 @@ if(!empty($_POST))
     // Otherwise, we display a login failed message and show the login form again
     if($login_ok)
     {
-        // Here I am preparing to store the $row array into the $_SESSION by
-        // removing the salt and password values from it.  Although $_SESSION is
-        // stored on the server-side, there is no reason to store sensitive values
-        // in it unless you have to.  Thus, it is best practice to remove these
-        // sensitive values first.
+        // remove sensitive data before storing them into a session array
         unset($row['salt']);
         unset($row['password']);
 
         // This stores the user's data into the session at the index 'user'.
-        // We will check this index on the private members-only page to determine whether
-        // or not the user is logged in.  We can also use it to retrieve
-        // the user's details.
         $_SESSION['user'] = $row;
 
-
-        // Redirect
+        // check if there is a redirect address available and lead the user back to that page
+        // if not, then redirect to private page
         $redirect = NULL;
         if($_POST['location'] != '') {
             $redirect = $_POST['location'];
@@ -107,7 +90,7 @@ if(!empty($_POST))
     }
     else
     {
-        // Tell the user they failed
+        // Tell the user the login failed
         $failed = true;
 
         // Show them their username again so all they have to do is enter a new
@@ -141,7 +124,7 @@ if(!empty($_POST))
             <div class="login-register-wrapper">
                 <form action="login.php" method="post">
                     <label for="username" class="input-text-small">Gebruikersnaam</label><br />
-                    <input type="text" id="username" class="textinput" name="username" value="<?php echo $submitted_username; ?>" />
+                    <input type="text" id="username" class="textinput" name="username" value="" />
                     <br /><br />
                     <label for="password" class="input-text-small">Wachtwoord</label><br />
                     <input type="password" id="password" class="textinput" name="password" value="" />

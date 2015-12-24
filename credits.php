@@ -34,6 +34,7 @@ if(!isset($_SESSION)) {
                 <p>Bohdan Burmich</p>
                 <p>Sagar Unagar</p>
                 <p>Jonathan D'Mello</p>
+                <p>Pham Thi Dieu Linh</p>
                 <p>Designify.me</p>
                 <p><a href="https://thenounproject.com/">The Noun Project</a></p>
                 <br />

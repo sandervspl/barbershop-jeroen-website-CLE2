@@ -210,7 +210,7 @@ $telefoon   = $gegevens['telefoon'];
                     <div id="account-text">
                         <span class="header-text-lobster"><?= htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?></span>
                         <br />
-                        <span><?= $voornaam . " " . $achternaam ?></span>
+                        <span class="capitalize"><?= $voornaam . " " . $achternaam ?></span>
                         <br /><br />
                         <label for="email" class="input-text">E-Mail</label><br />
                         <input id="email" type="text" name="email" value="<?php echo htmlentities($_SESSION['user']['email'], ENT_QUOTES, 'UTF-8'); ?>" />
@@ -222,7 +222,7 @@ $telefoon   = $gegevens['telefoon'];
 
                         <label for="password" class="input-text">Wachtwoord</label><br />
                         <input id="password" type="password" name="password" value="" /><br />
-                        <p>(laat leeg als je het wachtwoord niet wilt wijzigen)</p>
+                        <p class="small-text">(laat leeg als je het wachtwoord niet wilt wijzigen)</p>
                         <br />
 
                         <input type="submit" value="Bevestig" class="button" />

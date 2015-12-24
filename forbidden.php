@@ -19,11 +19,15 @@
 </header>
 
 <section id="main-page">
-    <p id="header-text-header">Account wijziging voltooid</p>
+    <p id="header-text-header">Verboden</p>
     <div id="basic-wrapper">
         <div class="white-background">
             <div class="inline-block text-only">
-                <a href="private.php">Klik hier om terug te gaan naar jouw account</a>
+                <img id="img-big" src="images/other/forbidden.png">
+                <br/><br/><br/>
+                <p>U bent niet gemachtigd deze pagina te bekijken.</p>
+                <br />
+                <a href="index.php">Klik hier om terug te gaan naar de hoofdpagina</a>
             </div>
         </div>
     </div>

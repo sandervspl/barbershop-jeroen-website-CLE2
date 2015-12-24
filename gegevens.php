@@ -151,7 +151,7 @@ if (isset($_POST['submit'])) {
                         <label class="input-text" for="phone">Telefoon</label><br/>
                         <input type="text" id="phone" class="textinput" name="phone" value="<?=$phone?>" />
 
-                        <input type="submit" name="submit" class="button" value="Afrekenen" />
+                        <input type="submit" name="submit" class="button" value="Reserveer" />
                     </div>
                 </div>
             </form>
