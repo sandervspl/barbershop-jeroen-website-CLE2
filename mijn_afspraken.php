@@ -31,7 +31,7 @@ require_once "connect.php";
 </header>
 
 <section id="main-page">
-    <p id="header-text-header">Mijn afspraken</p>
+    <p id="header-text-header">Mijn Afspraken</p>
     <div id="basic-wrapper">
         <div class="white-background">
             <div id="account-wrapper-wide">
@@ -150,8 +150,8 @@ require_once "connect.php";
 
                                 <div class="divider-light"></div>
 
-                                <a href="mijn_afspraken.php?p=3&a=<?=$id?>" class="button gegevens-form-button">Ja</a>
                                 <a href="mijn_afspraken.php" class="button gegevens-form-button">Nee</a>
+                                <a href="mijn_afspraken.php?p=3&a=<?=$id?>" class="button gegevens-form-button">Ja</a>
                             </div>
                 <?php
                         }

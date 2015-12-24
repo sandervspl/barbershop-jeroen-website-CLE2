@@ -188,10 +188,31 @@ if(!empty($_POST))
 
 <section id="main-page">
     <p id="header-text-header">Registreer</p>
-    <div id="basic-wrapper">
+
+    <div class="small-wrapper margin-r-5">
+        <div class="white-background">
+            <div class="register-wrapper register-text">
+                <div id="account-image">
+                    <img src="images/login/account.png">
+                </div>
+
+                <p>Een account aanmaken kent meerdere voordelen.</p>
+
+                <ul>
+                    <li>Reserveer makkelijk en snel!</li>
+                    <li>Je kunt al jouw afspraken bekijken en wijzigen</li>
+                    <li>Krijg als eerste te horen van onze acties</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="small-wrapper margin-l-5">
         <div class="white-background">
             <form action="register.php" method="post" onsubmit="return validateForm()">
-                <div class="login-register-wrapper">
+                <div class="register-wrapper">
+                    <p class="header-text-lobster">Gegevens</p>
+
                         <label for="username" class="input-text-small">Gebruikersnaam</label>
                         <input id="username" type="text" name="username" value="<?=$username?>" onblur="validateUsername(id)" />
                         <div id="usernameError" class="small-text error-text error-text-wrapper" style="visibility: hidden;">Gebruik alleen letters, - of _</div>
@@ -208,8 +229,6 @@ if(!empty($_POST))
                         <label for="achternaam" class="input-text-small">Achternaam</label>
                         <input id="achternaam" type="text" name="achternaam" value="<?=$achternaam?>" onblur="validateNaam(id)" />
                         <div id="achternaamError" class="small-text error-text error-text-wrapper" style="visibility: hidden;">Gebruik alleen letters, - of '</div>
-                </div>
-                <div class="login-register-wrapper">
 
                         <label for="email" class="input-text-small">E-Mail</label>
                         <input id="email" type="text" name="email" value="<?=$email?>" onblur="validateEmail(id)" />

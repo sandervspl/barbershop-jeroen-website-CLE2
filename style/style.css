@@ -139,6 +139,13 @@ footer {
     display: block;
 }
 
+.margin-r-5 {
+    margin-right: 5px !important;
+}
+.margin-l-5 {
+    margin-left: 5px !important;
+}
+
 .divider {
     margin: 50px auto 50px auto;
     width: 50%;
@@ -692,9 +699,9 @@ td {
     border-spacing: 0;
 }
 
-.calendartoday {
+    .calendartoday {
     /*background: rgba(142, 142, 142, 0.25);*/
-    background-color: rgba(159, 116, 94, 0.28);
+    background-color: rgba(187, 187, 187, 0.26);
 }
 
 .calendarday, .calendardate, .calendardateblocked, .calendardate-sun-mon {
@@ -1355,7 +1362,7 @@ input[type="submit"] {
 input[type="text"], input[type="email"], input[type="password"] {
     background-color: transparent;
     font-family: "Open Sans", serif;
-    font-size: 17px;
+    font-size: 14px;
     width: 100%;
     height: 25px;
     margin-bottom: 10px;
@@ -1368,7 +1375,7 @@ input[type="text"], input[type="email"], input[type="password"] {
 
 .input-text {
     font-family: Nunito, serif;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 input[type="submit"]:active, input[type="submit"]:focus {
@@ -1813,8 +1820,60 @@ div#over-ons-barbers p.header-text-big {
                         */
 /*********************/
 
-.login-register-wrapper {
+.small-wrapper {
+    width: 37.5%;
+    display: inline-block;
+    margin: auto;
+}
+
+.register-wrapper {
+    width: 55%;
+    margin: auto 20px auto 20px;
+    text-align: left;
+    vertical-align: top;
+    display: inline-block;
+}
+
+.register-text {
     /*background-color: green;*/
+    margin: auto;
+    width: 95%;
+    text-align: center;
+    font-size: 14px;
+    line-height: 25px;
+}
+
+.register-wrapper.register-text  div#account-image {
+    margin: auto;
+}
+
+.register-wrapper.register-text ul {
+    width: 75%;
+    text-align: left;
+    list-style: square !important;
+}
+
+.register-wrapper.register-text ul li {
+    display: block;
+    width: 100%;
+    margin: 10px auto 0;
+    list-style: square !important;
+}
+
+.register-wrapper p.header-text-lobster {
+    margin-bottom: 50px;
+}
+
+
+form .register-wrapper input {
+    margin-bottom: 0;
+}
+
+.register-wrapper div.small-text.error-text.error-text-wrapper {
+    padding-top: 2px;
+}
+
+.login-register-wrapper {
     width: 25%;
     margin: auto 20px auto 20px;
     text-align: left;
@@ -1853,7 +1912,7 @@ form div.login-register-wrapper label {
 
 #register-button {
     margin: 20px auto 0;
-    width: 25%;
+    width: 40%;
 }
 
 form .login-register-wrapper .small-text {
@@ -1915,15 +1974,7 @@ form .login-register-wrapper .small-text {
                      */
 /*********************/
 
-/*#account-text p {*/
-    /*padding: 0;*/
-    /*font-family: Nunito, serif;*/
-    /*font-size: 10px;*/
-    /*text-align: center;*/
-/*}*/
-
 #account-image, #account-text {
-    /*background-color: yellow;*/
     display: inline-block;
 }
 
