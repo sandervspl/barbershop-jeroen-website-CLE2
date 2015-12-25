@@ -38,7 +38,7 @@ if (isset($_POST['submit'])) {
     <p id="header-text-header">Bevestig Afspraak</p>
 <div id="wrapper">
     <div id="summary-wrapper">
-        <p class="header-text">Bestelling</p>
+        <p class="header-text">Reservering</p>
 
         <div id="summary-wrapper-text">
             <div id="summary-barbername-wrapper">
@@ -131,7 +131,7 @@ if (isset($_POST['submit'])) {
                 </div>
             </div>
 
-            <p class="header-text-small">of</p>
+            <p class="header-text-small of">of</p>
 
             <form id="mainForm" action="#" method="post">
                 <div class="gegevens">

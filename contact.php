@@ -18,6 +18,8 @@ if(!isset($_SESSION)) {
 <!--    GOOGLE MAPS API-->
     <script src="https://maps.googleapis.com/maps/api/js"></script>
     <script>
+        var infowindow;
+
         function initMap() {
             var myLatLng = {lat: 51.819129, lng: 4.643368};
 
@@ -36,6 +38,10 @@ if(!isset($_SESSION)) {
                 map: map,
                 title: 'Classics Barbershop Jeroen'
             });
+
+            infowindow = new google.maps.InfoWindow();
+            infowindow.setContent("<p>Classics Barbershop Jeroen</p>");
+            infowindow.open(map, marker);
         }
         google.maps.event.addDomListener(window, 'load', initMap);
     </script>

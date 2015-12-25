@@ -36,6 +36,8 @@ if (!isset($_POST['submit'])) {
     <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Droid+Serif:700' rel='stylesheet' type='text/css'>
+    <script src="scripts/jquery-1.11.3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
         window.sessionStorage.cut = 0;
         window.sessionStorage.time = 0;
@@ -61,16 +63,16 @@ if (!isset($_POST['submit'])) {
                     <div id="cuts">
                     <p class="header-text">Knipbeurt</p>
                     <input id="hair" type="radio" name="cut" value="haar" onclick="cutSelect(this)" />
-                    <label class="trans hair" for="hair" onclick="cutSelect(this)"></label>
+                    <label class="trans hair" for="hair" onmouseover="nhpup.popup('Alleen haar')"></label>
 
                     <input id="beard" type="radio" name="cut" value="baard" onclick="cutSelect(this)" />
-                    <label class="trans beard" for="beard"></label>
+                    <label class="trans beard" for="beard" onmouseover="nhpup.popup('Alleen baard')"></label>
 
                     <input id="moustache" type="radio" name="cut" value="snor" onclick="cutSelect(this)" />
-                    <label class="trans moustache" for="moustache"></label>
+                    <label class="trans moustache" for="moustache" onmouseover="nhpup.popup('Alleen snor')"></label>
 
                     <input id="all" type="radio" name="cut" value="alles" onclick="cutSelect(this)" />
-                    <label class="trans all" for="all"></label>
+                    <label class="trans all" for="all" onmouseover="nhpup.popup('Haar & baard')"></label>
                     </div>
                 </div>
 
@@ -98,6 +100,7 @@ if (!isset($_POST['submit'])) {
     <?php require_once "footer.php" ?>
 </footer>
 
+<script src="scripts/popup.js"></script>
 <script src="scripts/select.js"></script>
 <script>lockButton("bookButton")</script>
 </body>
