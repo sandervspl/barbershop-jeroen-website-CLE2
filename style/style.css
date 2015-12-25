@@ -236,6 +236,12 @@ footer {
     margin: auto;
 }
 
+    @media only screen and (max-width: 480px) {
+        #basic-wrapper {
+            width: 95%;
+        }
+    }
+
 .small-text {
     padding-top: 10px;
     font-family: Nunito, serif;
@@ -302,15 +308,12 @@ footer {
 /*********************/
 
 a#login-button, a#nav-login-button {
-    /*background-color: yellow;*/
     display: inline-block;
 }
 
 #navigation-background {
     width: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    /*background-color: rgba(253, 243, 211, 0.9);*/
-    /*border-top: 1px solid black;*/
     position: relative;
     vertical-align: top;
 }
@@ -384,9 +387,9 @@ nav a {
     top: 20px;
 }
 
-    @media only screen and (max-width: 450px) {
+    @media only screen and (max-width: 480px) {
         #header-text-header {
-            font-size: 40px;
+            display: none;
         }
     }
 
@@ -595,7 +598,7 @@ section#main-page div#summary-header div.white-background {
     color: black;
 }
 
-    @media only screen and (max-width: 450px) {
+    @media only screen and (max-width: 480px) {
         .header-text {
             font-size: 35px;
         }
@@ -606,6 +609,12 @@ section#main-page div#summary-header div.white-background {
     font-size: 50px;
     color: black;
 }
+
+    @media only screen and (max-width: 480px) {
+        .header-text-lobster {
+            font-size: 35px;
+        }
+    }
 
 p.header-text {
     margin: 0;
@@ -1177,7 +1186,7 @@ div.month-name {
         }
 
         #summary-header .header-text th, .barber-name {
-            font-size: 15px;
+            font-size: 17px;
         }
 
         #cut-time-text {
@@ -1745,6 +1754,11 @@ div#over-ons-barbers p.header-text-big {
     }
 
     @media only screen and (max-width: 480px) {
+        .navigation-left {
+            text-align: left;
+            padding-left: 5px;
+        }
+
         #over-ons {
             width: 95%;
         }
@@ -1795,11 +1809,6 @@ div#over-ons-barbers p.header-text-big {
 
         .navigation-container {
             line-height: 27px;
-        }
-
-        .navigation-left {
-            text-align: left;
-            padding-left: 5px;
         }
 
         #main-page p.header-text {
@@ -2035,6 +2044,62 @@ form .login-register-wrapper .small-text {
 .delete-appointment-wrapper a.button.gegevens-form-button {
     margin-top: 25px;
 }
+
+    @media only screen and (max-width: 1024px) {
+        #account-image.calendar-img {
+            display: none;
+        }
+
+        #account-wrapper-wide.mijn-afspraken #account-text {
+            text-align: center;
+            margin: auto;
+        }
+    }
+
+    @media only screen and (max-width: 800px) {
+        #account-image {
+            display: none;
+        }
+    }
+
+    @media only screen and (max-width: 480px) {
+        #account-image {
+            display: none;
+        }
+        #account-image img {
+            width: 100px;
+            height: 100px;
+        }
+
+        #account-text, #account-text div {
+            font-size: 15px;
+            line-height: 18px;
+        }
+    }
+
+    @media only screen and (max-width: 320px) {
+        #account-wrapper-wide {
+            width: 100%;
+        }
+
+        #account-image {
+            margin: auto 5px;
+        }
+
+        #account-wrapper-wide.mijn-afspraken #account-text {
+            width: 100%;
+        }
+
+        #account-text div {
+            font-size: 12px;
+            line-height: 18px;
+            width: 42.5%;
+        }
+
+        .verwijder-afspraak {
+            margin: auto;
+        }
+    }
 
 /*********************/
 /*

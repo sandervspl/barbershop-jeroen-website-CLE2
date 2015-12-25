@@ -231,7 +231,7 @@ if(!empty($_POST))
                         <div id="achternaamError" class="small-text error-text error-text-wrapper" style="visibility: hidden;">Gebruik alleen letters, - of '</div>
 
                         <label for="email" class="input-text-small">E-Mail</label>
-                        <input id="email" type="text" name="email" value="<?=$email?>" onblur="validateEmail(id)" />
+                        <input id="email" type="email" name="email" value="<?=$email?>" onblur="validateEmail(id)" />
                         <div id="emailError" class="small-text error-text error-text-wrapper" style="visibility: hidden;">Voer een geldig e-mail adres in</div>
                         <?php if ($emailExists) { ?>
                             <span id="emailAlreadyInDBError" class="small-text error-text" style="display: block;">Er is al een gebruiker met dit e-mail adres</span>

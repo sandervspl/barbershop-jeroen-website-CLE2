@@ -19,10 +19,12 @@
 </header>
 
 <section id="main-page">
-    <p id="header-text-header">Account wijziging voltooid</p>
+    <p id="header-text-header">Wijzig Account</p>
     <div id="basic-wrapper">
         <div class="white-background">
             <div class="inline-block text-only">
+                <p>Account wijziging voltooid.</p>
+                <br />
                 <a href="private.php">Klik hier om terug te gaan naar jouw account</a>
             </div>
         </div>

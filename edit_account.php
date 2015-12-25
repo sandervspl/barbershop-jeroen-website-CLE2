@@ -213,7 +213,7 @@ $telefoon   = $gegevens['telefoon'];
                         <span class="capitalize"><?= $voornaam . " " . $achternaam ?></span>
                         <br /><br />
                         <label for="email" class="input-text">E-Mail</label><br />
-                        <input id="email" type="text" name="email" value="<?php echo htmlentities($_SESSION['user']['email'], ENT_QUOTES, 'UTF-8'); ?>" />
+                        <input id="email" type="email" name="email" value="<?php echo htmlentities($_SESSION['user']['email'], ENT_QUOTES, 'UTF-8'); ?>" />
                         <br /><br />
 
                         <label for="telefoon" class="input-text">Telefoon</label><br />

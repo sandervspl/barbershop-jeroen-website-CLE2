@@ -34,7 +34,7 @@ require_once "connect.php";
     <p id="header-text-header">Mijn Afspraken</p>
     <div id="basic-wrapper">
         <div class="white-background">
-            <div id="account-wrapper-wide">
+            <div id="account-wrapper-wide" class="mijn-afspraken">
                 <?php
                 if (isset($_GET['p']) && $_GET['p'] == 3 && isset($_GET['a'])) {
                     require("common.php");
@@ -167,7 +167,7 @@ require_once "connect.php";
                 } else {
                 ?>
 
-                <div id="account-image">
+                <div id="account-image" class="calendar-img">
                     <img src="images/login/calendar.png">
                 </div>
 
@@ -223,7 +223,7 @@ require_once "connect.php";
                         <br/><br />
 
 
-                        <div>
+                        <div class="verwijder-afspraak">
                             <a href="mijn_afspraken.php?p=1&a=<?=$id?>" class="">Verwijder afspraak</a>
                         </div>
                         <br/><br />
