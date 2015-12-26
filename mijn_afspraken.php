@@ -185,7 +185,7 @@ require_once "connect.php";
                     $row = mysqli_fetch_row($result);
                     $email = $row[0];
 
-                    $sql = sprintf("SELECT A.id, A.datum, A.tijd, A.knipbeurt, A.kapper FROM afspraken A WHERE A.email in (select B.email from users B where B.email='%s') ORDER BY A.datum",
+                    $sql = sprintf("SELECT A.id, A.datum, A.tijd, A.knipbeurt, A.kapper FROM afspraken A WHERE A.email in (select B.email from users B where B.email='%s') ORDER BY A.datum, A.tijd",
                                     mysqli_real_escape_string($db, $email)
                         );
 
