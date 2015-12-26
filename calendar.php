@@ -7,12 +7,12 @@ require_once "nlDate.php";
 
 if (isset($_GET['month']) && isset($_GET['year'])) {
     $month = $_GET['month'];
-    $year = $_GET['year'];
-    $starting_day = "$year-$month-1";
+    $calendar_year = $_GET['year'];
+    $starting_day = "$calendar_year-$month-1";
     $time = strtotime($starting_day);
 } else {
     $month = date("m", $time);
-    $year =  date("Y", $time);
+    $calendar_year =  date("Y", $time);
 }
 ?>
 <!DOCTYPE HTML>
@@ -94,7 +94,7 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
             $weekday = date("D", mktime(0,0,0, date("m",$time), date("d",$time)+$counter, date("y",$time)));    // Mon-Sun
             $weekday_f =  date("l", mktime(0,0,0, date("m",$time), date("d",$time)+$counter, date("y",$time))); // Monday-Sunday
             $monthname = date("F", $time);                                                                      // January-December
-            $date = date("Y-") . date("m-", $time) . $day;                                                      // YYYY-MM-DD
+            $date = $calendar_year . "-" . date("m-", $time) . $day;                                                      // YYYY-MM-DD
 
             $weekday_f = "'" . $weekday_f . "'";
             $monthname = "'" . $monthname . "'";
@@ -151,7 +151,7 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
                 } else { ?>
                     <td class="calendardate cut-selector <?=$todayclass?>">
                         <div class="divBox">
-                            <input type="radio" id="<?=$date?>" class="date-radio" name="date" value="<?=$date?>" onclick="onDateClick(<?=$day?>, <?=$weekday_f?>, <?=$monthname?>, <?=$month?>, <?=$year?>)" />
+                            <input type="radio" id="<?=$date?>" class="date-radio" name="date" value="<?=$date?>" onclick="onDateClick(<?=$day?>, <?=$weekday_f?>, <?=$monthname?>, <?=$month?>, <?=$calendar_year?>)" />
                             <label for="<?=$date?>"> <?=$day?> </label>
                         </div>
                     </td> <?php
@@ -192,7 +192,7 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
                         } else { ?>
                             <td class="calendardate cut-selector <?=$todayclass?>">
                                 <div class="divBox">
-                                    <input type="radio" id="<?=$date?>" class="date-radio" name="date" value="<?=$date?>" onclick="onDateClick(<?=$day?>, <?=$weekday_f?>, <?=$monthname?>, <?=$month?>, <?=$year?>)" />
+                                    <input type="radio" id="<?=$date?>" class="date-radio" name="date" value="<?=$date?>" onclick="onDateClick(<?=$day?>, <?=$weekday_f?>, <?=$monthname?>, <?=$month?>, <?=$calendar_year?>)" />
                                     <label for="<?=$date?>"> <?=$day?> </label>
                                 </div>
                             </td> <?php

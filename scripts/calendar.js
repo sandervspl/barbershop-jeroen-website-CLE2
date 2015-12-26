@@ -27,6 +27,7 @@ function loadCalendar(m, y) {
 
 function getMonth(m) {
     var month = new Array(13);
+    month[0] = "undefined";
     month[1] = "Januari";
     month[2] = "Februari";
     month[3] = "Maart";

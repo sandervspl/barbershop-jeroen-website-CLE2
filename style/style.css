@@ -567,13 +567,8 @@ div form#mainForm div.cut-selector div.white-background {
 .cut-selector input:active +.trans {
     opacity: 1;
 }
-div.cut-selector div#cuts input:checked +.trans {
-    -webkit-filter: none;
-    -moz-filter: none;
-    filter: none;
-}
-
-div.cut-selector div#barbers input:checked +.trans {
+div.cut-selector div#cuts input:checked +.trans,
+div.cut-selector div#barbers input:checked +.trans{
     -webkit-filter: none;
     -moz-filter: none;
     filter: none;
@@ -584,18 +579,20 @@ div.cut-selector div#barbers input:checked +.trans {
     background-size:contain;
     background-repeat:no-repeat;
     display:inline-block;
+
     -webkit-transition: all 100ms ease-in;
     -moz-transition: all 100ms ease-in;
     transition: all 100ms ease-in;
+
     -webkit-filter: brightness(1.8) grayscale(1) opacity(.25);
     -moz-filter: brightness(1.8) grayscale(1) opacity(.25);
     filter: brightness(1.8) grayscale(1) opacity(.25);
 }
 
 .trans:hover {
-    -webkit-filter: brightness(1.2) grayscale(.5) opacity(1);
-    -moz-filter: brightness(1.2) grayscale(.5) opacity(1);
-    filter: brightness(1.2) grayscale(.5) opacity(1);
+    -webkit-filter: brightness(1.2) grayscale(.5) opacity(0.60);
+    -moz-filter: brightness(1.2) grayscale(.5) opacity(0.60);
+    filter: brightness(1.2) grayscale(.5) opacity(0.60);
 }
 
 .cut-selector .white-background {

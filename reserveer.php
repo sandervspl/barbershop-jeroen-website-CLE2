@@ -36,15 +36,14 @@ if (!isset($_POST['submit'])) {
     <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Droid+Serif:700' rel='stylesheet' type='text/css'>
-    <script src="scripts/jquery-1.11.3.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
         window.sessionStorage.cut = 0;
         window.sessionStorage.time = 0;
         window.sessionStorage.end_time = 0;
         window.sessionStorage.cut_time = 0;
-        window.sessionStorage.cut_month = 0;
-        window.sessionStorage.cut_monthday = 0;
+        window.sessionStorage.month = 0;
+        window.sessionStorage.monthday = 0;
         window.sessionStorage.barber = 0;
     </script>
 </head>
@@ -85,7 +84,7 @@ if (!isset($_POST['submit'])) {
                         <label class="trans barber-selection" for="Jeroen">Jeroen</label>
 
                         <input id="Juno" type="radio" name="barber" value="Juno" onclick="barberSelection(this)" />
-                        <label class="trans barber-selection" for="Juno">Juno</label>
+                        <label class="trans barber-selection" for="Juno" onmouseover="nhpup.popup('Alleen di, do & za')">Juno</label>
 
                         <p class="small-text">Laat leeg als je geen voorkeur hebt.</p>
                     </div>

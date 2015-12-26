@@ -8,24 +8,30 @@ if(!isset($_SESSION)) {
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-    <title>Classic Barbershop Jeroen</title>
+    <title>Classics Barbershop Jeroen</title>
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
 
 <?php
+require_once "nlDate.php";
+
+$monthname = date("F");
 
 if (isset($_GET['month']) && isset($_GET['year']) && isset($_GET['day'])) {
     $day = $_GET['day'];
     $month = $_GET['month'];
     $year = intval($_GET['year']);
+
+    $d = strtotime("$year-$month-$day");
+
+    $monthname = nlDate(date("F", $d));
 } else {
     $day = date("d");
     $month = date("m");
     $year = date("Y");
 }
 
-$monthname = date("F");
 $date = $year."-".$month."-".$day;
 $hour = 9;
 $end_hour = 17;
@@ -39,7 +45,6 @@ if ($_SESSION['barber'] !== '') {
 } else {
     $barber = "leeg";
 }
-
 
 if ($dayname === "Thu") {
     $hour = 11;
@@ -202,7 +207,7 @@ for ($i = 0; $i <= $end_hour; $i++) {
             <script src="scripts/select.js"></script>
             <script type="text/javascript">lockButton("time-button-taken")</script>
 
-            <p class="<?=$class_p?>"><?= $time2 ?></p>
+            <p class="<?=$class_p?>"><?=$time2?></p>
         </div>
     </div>
     <?php
