@@ -22,6 +22,31 @@ if (isset($_SESSION['user']['username'])) {
 
     $db = mysqli_connect($host, $user, $pw, $database) or die('Error: ' . mysqli_connect_error());
 
+//    $sql = "SELECT
+//              voornaam, achternaam, email, telefoon
+//            FROM
+//              users
+//            WHERE
+//              username = ?
+//            ";
+//
+//    if ($stmt = $db->prepare($sql)) {
+//        $stmt->bind_param('ssss', $voornaam, $achternaam, $email, $phone);
+//
+//        $stmt->execute();
+//
+//        // bind result variables
+//        $stmt->bind_result($curpoints);
+//
+//        while ($stmt->fetch()) {
+//            $newpoints = $curpoints += $points;
+//        }
+//
+//        $stmt->close();
+//    } else {
+//        die("Error: 1");
+//    }
+
     $sql = sprintf("SELECT voornaam, achternaam, email, telefoon FROM users WHERE username='%s'",
         $_SESSION['user']['username']);
 

@@ -114,7 +114,7 @@ if(!empty($_POST))
     }
 
 
-
+    // no errors so we can continue and run the query
     if (!$error) {
         $query = "
                 INSERT INTO users (
@@ -214,7 +214,7 @@ if(!empty($_POST))
                     <p class="header-text-lobster">Gegevens</p>
 
                         <label for="username" class="input-text-small">Gebruikersnaam</label>
-                        <input id="username" type="text" name="username" value="<?=$username?>" onblur="validateUsername(id)" />
+                        <input id="username" type="text" name="username" value="<?=$username?>" onblur="validateUsername(id)" autofocus="autofocus" />
                         <div id="usernameError" class="small-text error-text error-text-wrapper" style="visibility: hidden;">Gebruik alleen letters, - of _</div>
                         <?php if ($usernameExists) { ?>
                             <span id="usernameAlreadyInDBError" class="small-text error-text" style="display: block;">Er is al een gebruiker met deze naam</span>

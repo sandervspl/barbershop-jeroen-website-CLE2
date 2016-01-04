@@ -32,7 +32,7 @@ if(isset($_SESSION['user'])) {
     <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:700' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
@@ -48,7 +48,7 @@ if(isset($_SESSION['user'])) {
                 <div id="account-text">
                     <p class="header-text">Opties</p>
                     <a href="admin_afspraken_kalender.php">Afspraken Kalender</a><br />
-                    <a href="admin_nieuwe_afspraak.php">Voeg Afspraak Toe</a><br />
+<!--                    <a href="admin_nieuwe_afspraak.php">Voeg Afspraak Toe</a><br />-->
                     <a href="logout.php">Uitloggen</a>
                 </div>
             </div>

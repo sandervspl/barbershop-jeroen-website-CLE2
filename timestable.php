@@ -6,11 +6,6 @@ if(!isset($_SESSION)) {
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-    <title>Classics Barbershop Jeroen</title>
-    <link rel="stylesheet" href="style/style.css">
-</head>
 <body>
 
 <?php
@@ -170,7 +165,7 @@ for ($i = 0; $i <= $end_hour; $i++) {
 
     if ($hour < 12 && !$didMorningHeader) { ?>
         <div id="morning-header">
-            <p class="header-text">Ochtend</p>
+            <p class="o-m-a-header">Ochtend</p>
         </div>
         <div class="times-container-day white-background">
         <?php
@@ -180,7 +175,7 @@ for ($i = 0; $i <= $end_hour; $i++) {
     if ($hour > 11 && $hour < 18 && !$didAfternoonHeader) { ?>
         </div>
         <div id="afternoon-header">
-            <p class="header-text">Middag</p>
+            <p class="o-m-a-header">Middag</p>
         </div>
         <div class="times-container-day white-background">
         <?php
@@ -190,7 +185,7 @@ for ($i = 0; $i <= $end_hour; $i++) {
     if ($hour > 18 && !$didEveningHeader) { ?>
         </div>
         <div id="evening-header">
-            <p class="header-text">Avond</p>
+            <p class="o-m-a-header">Avond</p>
         </div>
         <div class="times-container-day white-background">
         <?php

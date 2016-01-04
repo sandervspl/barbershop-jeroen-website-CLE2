@@ -58,25 +58,25 @@ $monthname = nlDate(date("F", $time));
 <section id="main-page">
     <p id="header-text-header">Dag & Tijd</p>
     <div id="summary-header">
-    <div class="white-background">
-        <table class="header-text">
-            <tr>
-                <th>Wat</th>
-                <th>Tijdsduur</th>
-                <th>Wie</th>
-            </tr>
-            <tr>
-                <td><img id="cut" class="hair-beard-img" src="images/index/no-hair-no-beard.png"></td>
-                <td><img id="cut-time" class="hair-beard-img" src="images/booking/timer_clear.png"><p id="cut-time-text">0min</p></td>
-                <td><span class="barber-name"><?=$_SESSION['barber']?></span></td>
-                <script src="scripts/select.js"></script>
-                <script type="text/javascript">
-                    cutSelected();
-                    barberSelected();
-                </script>
-            </tr>
-        </table>
-    </div>
+        <div class="white-background">
+            <table class="header-text">
+                <tr>
+                    <th>Wat</th>
+                    <th>Tijdsduur</th>
+                    <th>Wie</th>
+                </tr>
+                <tr>
+                    <td><img id="cut" class="hair-beard-img" src="images/index/no-hair-no-beard.png"></td>
+                    <td><img id="cut-time" class="hair-beard-img" src="images/booking/timer_clear.png"><p id="cut-time-text">0min</p></td>
+                    <td><span class="barber-name"><?=$_SESSION['barber']?></span></td>
+                    <script src="scripts/select.js"></script>
+                    <script type="text/javascript">
+                        cutSelected();
+                        barberSelected();
+                    </script>
+                </tr>
+            </table>
+        </div>
     </div>
 
     <!--  month name above calendar  -->
@@ -88,11 +88,13 @@ $monthname = nlDate(date("F", $time));
             <img id="calendar-arrow" src="images/booking/calendar_right.png" onclick="nextMonth(this, <?=$month?>, <?=$year?>)">
             </div>
     </div>
+
     <form name="datetime" method="post">
 
-    <!--  calendar  -->
+        <!--  calendar  -->
         <div id="calendar-wrapper">
             <div class="white-background">
+
                 <div id="calendar-table"><span class="header-text"></span></div>
                 <script src="scripts/calendar.js"></script>
                 <script type="text/javascript">
@@ -101,17 +103,17 @@ $monthname = nlDate(date("F", $time));
             </div>
         </div>
 
-    <!--  clicked date from calendar  -->
-    <section id="date-and-time">
-        <span id="date-and-time-header" class="header-text"></span>
+        <!--  clicked date from calendar  -->
+        <section id="date-and-time">
+            <span id="date-and-time-header" class="header-text"></span>
 
-        <!--  contains all times from that day  -->
-        <div id="date-and-time-times-container">
+            <!--  contains all times from that day  -->
+            <div id="date-and-time-times-container">
 
-            <!--  all times here come from timestable.php via AJAX code in calendar.js  -->
-            <div id="times-table"></div>
-        </div>
-    </section>
+                <!--  all times here come from timestable.php via AJAX code in calendar.js  -->
+                <div id="times-table"></div>
+            </div>
+        </section>
     </form>
 </section>
 

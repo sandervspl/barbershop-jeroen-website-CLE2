@@ -124,7 +124,7 @@ if(!empty($_POST))
             <div class="login-register-wrapper">
                 <form action="login.php" method="post">
                     <label for="username" class="input-text-small">Gebruikersnaam</label><br />
-                    <input type="text" id="username" class="textinput" name="username" value="" />
+                    <input type="text" id="username" class="textinput" name="username" value="" autofocus="autofocus" />
                     <br /><br />
                     <label for="password" class="input-text-small">Wachtwoord</label><br />
                     <input type="password" id="password" class="textinput" name="password" value="" />

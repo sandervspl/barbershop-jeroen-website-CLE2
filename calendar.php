@@ -17,11 +17,6 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Classic Barbershop Jeroen</title>
-    <link rel="stylesheet" href="style/style.css">
-</head>
 <body>
 <table id="calendar">
     <tr class="calendarday">

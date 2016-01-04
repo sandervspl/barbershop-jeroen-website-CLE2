@@ -121,11 +121,10 @@ footer {
     }
 
 .white-background {
-    /*background-color: rgba(255, 255, 255, 0.50);*/
     background-color: rgba(255, 255, 255, 0.75);
     height: auto;
     width: auto;
-    padding: 15px 0;
+    padding: 27px 0;
 
     -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.15);
     -moz-box-shadow: 2px 2px 2px rgba(0,0,0 .15);
@@ -163,6 +162,12 @@ footer {
 }
 .margin-l-5 {
     margin-left: 5px !important;
+}
+.margin-t-10 {
+    margin-top: 10px !important;
+}
+.no-margin {
+    margin: 0 !important;
 }
 
 .divider {
@@ -219,26 +224,23 @@ footer {
     outline: 0;
 }
 
-    .button:enabled:active {
-        vertical-align: top;
-        padding: 8px 13px 6px;
-    }
+    /*.button:enabled:active {*/
+        /*vertical-align: top;*/
+        /*padding: 2px 0 0 2px;*/
+    /*}*/
 
     .button:hover:enabled, a.button:hover {
         text-decoration: none;
         -webkit-filter: brightness(1.8) grayscale(1) opacity(.70);
         -moz-filter: brightness(1.8) grayscale(1) opacity(.70);
         filter: brightness(1.8) grayscale(1) opacity(.70);
+
         transition: 0.1s;
     }
 
 .button:disabled {
     background-color: #747474;
     border: 1px solid #747474;
-}
-
-.button-delete {
-
 }
 
 .barber-name {
@@ -332,7 +334,7 @@ a#login-button, a#nav-login-button {
 
 #navigation-background {
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.75);
     position: relative;
     vertical-align: top;
 }
@@ -559,11 +561,6 @@ section ul li a {
     user-select: none;
 }
 
-div form#mainForm div.cut-selector div.white-background {
-    padding-top: 27px;
-    padding-bottom: 27px;
- }
-
 .cut-selector input:active +.trans {
     opacity: 1;
 }
@@ -768,12 +765,10 @@ td {
 }
 
     .calendardate .divBox:hover {
-        /*background-color: white;*/
         background-color: rgba(159, 116, 94, 0.50);
     }
 
     .date-radio:checked + label {
-        /*background-color: white;*/
         background-color: rgba(159, 116, 94, 0.50);
     }
 
@@ -849,14 +844,12 @@ td {
 }
 
     .times-container:hover .time-button {
-        /*color: white;*/
         text-decoration: none;
         color: rgba(0, 0, 0, 0.3);
         transition: 0.15s;
     }
 
     .times-container:hover > img.times-icon {
-        /*color: white;*/
         text-decoration: none;
         -webkit-filter: brightness(1.8) grayscale(1) opacity(.3);
         -moz-filter: brightness(1.8) grayscale(1) opacity(.3);
@@ -959,7 +952,7 @@ span#date-and-time-header {
     padding-bottom: 5px;
 }
 
-#date-and-time-times-container p.header-text {
+.o-m-a-header {
     text-align: left;
     text-transform: capitalize;
     font-family: Lobster, serif;
@@ -1016,6 +1009,12 @@ div.month-name {
     bottom: 0;
     right: 50px;
 }
+
+    #calendar-arrow:hover {
+        -webkit-filter: brightness(1.8) grayscale(1) opacity(.70);
+        -moz-filter: brightness(1.8) grayscale(1) opacity(.70);
+        filter: brightness(1.8) grayscale(1) opacity(.70);
+    }
 
     #calendar-arrow:active {
         padding: 2px 2px 2px;
@@ -1192,9 +1191,9 @@ div.month-name {
             margin-bottom: 20px;
         }
 
-        div#times-table div#morning-header p.header-text,
-        div#times-table div#afternoon-header p.header-text,
-        div#times-table div#evening-header p.header-text {
+        div#times-table div#morning-header p.o-m-a-header,
+        div#times-table div#afternoon-header p.o-m-a-header,
+        div#times-table div#evening-header p.o-m-a-header {
             font-size: 1.875em;
         }
     }
@@ -1420,6 +1419,8 @@ input[type="submit"].button:active, input[type="submit"].button:focus {
 input[type="submit"].button {
     margin: 0;
 }
+
+
 
     @media only screen and (max-width: 1000px) {
         #wrapper {
@@ -1940,6 +1941,7 @@ form div.login-register-wrapper label {
 }
 
 #register-button {
+    font-size: 1.2em;
     margin: 20px auto 0;
     width: 40%;
 }
@@ -2179,6 +2181,156 @@ form .login-register-wrapper .small-text {
     font-family: "Open Sans",serif;
     color: black;
 }
+
+
+
+
+
+
+/*********************/
+/*
+         ADMIN
+                        */
+/*********************/
+
+.admin-wrapper-wide {
+    /*background-color: green;*/
+    width: 95%;
+    margin: auto auto 20px;
+}
+
+#admin-kalender-times {
+    text-align: left;
+}
+
+#admin-kalender-times #morning-header,
+#admin-kalender-times #afternoon-header,
+#admin-kalender-times #evening-header {
+    width: auto;
+}
+
+#admin-kalender-times .times-container-day {
+    /*background-color: green;*/
+    padding-top: 20px;
+    padding-left: 0;
+    width: 100%;
+    text-align: left;
+}
+
+.admin-times-container {
+    width: auto;
+    display: inline-block;
+    margin-right: 30px;
+    margin-bottom: 50px;
+    /*border-bottom: 1px solid rgba(0, 0, 0, 0.1);*/
+    padding-bottom: 5px;
+}
+
+.admin-times-container div {
+    position: relative;
+    float: left;
+}
+
+.admin-times-container div .time-button {
+    cursor: default;
+}
+
+.admin-times-container div:hover {
+    cursor: default;
+}
+
+.admin-times-container div p.time-button.small-text {
+    font-size: 0.9375em;
+    float: left;
+}
+
+.admin-times-container div p.time-button {
+    margin: auto auto auto 5px;
+    font-family: Nunito,serif;
+    font-size: 1.875em;
+    float: left;
+}
+
+.admin-time-appointment-info {
+    width: 100%;
+    height: 60px;
+    clear: left;
+    margin-top: 10px;
+    padding-top: 5px;
+    text-align: right;
+    line-height: 1.5em;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.choose-barber {
+    font-size: 1.5em;
+    line-height: 1.5em;
+}
+
+#admin-kalender-times #morning-header {
+    margin-top: 20px;
+}
+
+.admin-kalender-header {
+    margin-bottom: 55px !important;
+}
+
+.admin-barber-name {
+    font-family: Lobster, serif;
+    font-size: 3.5em;
+}
+
+#admin-add-appointment-wrapper {
+    width: 42%;
+    margin: auto;
+}
+
+form#admin-add-appointment-form input#voornaam.admin-va-input,
+form#admin-add-appointment-form input#achternaam.admin-va-input {
+    width: inherit;
+}
+
+label#voornaam-label {
+    max-width: 150px;
+    margin-right: 5px;
+}
+
+label#achternaam-label {
+    max-width: 150px;
+}
+
+#knipbeurt-form-element {
+    text-align: left;
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.admin-radio {
+    margin-right: 5px;
+}
+
+.admin-radio-txt {
+    font-family: "Open Sans", serif;
+}
+
+#submit-form-element {
+    margin: auto;
+    width: 150px;
+}
+
+.admin-add-appointment-time {
+    font-family: "Open Sans", serif;
+    font-size: 1.75em;
+}
+
+#kapper-form-element {
+    display: inline-block;
+    text-align: right;
+    width: 150px;
+    vertical-align: top;
+}
+
 
 
 /*********************/
