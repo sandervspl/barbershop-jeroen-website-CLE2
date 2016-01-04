@@ -41,17 +41,12 @@ if(isset($_SESSION['user'])) {
 </header>
 
 <section id="main-page">
-    <p id="header-text-header">Admin Pagina</p>
+    <p id="header-text-header">Kalender</p>
     <div id="basic-wrapper">
         <div class="white-background">
             <div id="account-wrapper-wide">
-                <div id="account-text">
-                    <p class="header-text">Opties</p>
-                    <a href="admin_afspraken.php">Afspraken</a><br />
-                    <a href="admin_nieuwe_afspraak_kalender.php">Voeg Afspraak Toe</a><br />
-                    <br />
-                    <a href="logout.php">Uitloggen</a>
-                </div>
+                VOEG KALENDER TOE <br />
+                KLIK GAAT NAAR ADMIN_NIEUWE_AFSPRAAK
             </div>
         </div>
     </div>

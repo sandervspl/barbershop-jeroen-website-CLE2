@@ -59,7 +59,7 @@ if(isset($_SESSION['user'])) {
 </header>
 
 <section id="main-page">
-    <p id="header-text-header">Kalender</p>
+    <p id="header-text-header">Afspraken</p>
     <div id="basic-wrapper">
         <div class="white-background">
             <?php
@@ -70,8 +70,8 @@ if(isset($_SESSION['user'])) {
             </div>
 
             <section id="basic-wrapper" class="choose-barber">
-                <a href="admin_afspraken_kalender.php?p=1">Jeroen</a> <br />
-                <a href="admin_afspraken_kalender.php?p=2">Juno</a> <br />
+                <a href="admin_afspraken.php?p=1">Jeroen</a> <br />
+                <a href="admin_afspraken.php?p=2">Juno</a> <br />
             </section>
 
             <?php
@@ -188,15 +188,16 @@ if(isset($_SESSION['user'])) {
                     ?>
 
                     <div id=<?= $time1 ?> class="admin-times-container">
+                        <div class="admin-times-time-container">
                         <img id=<?= $time1 ?> class="times-icon" src="images/booking/timer_clear2.png"/>
+                            <div>
+                                <p class="time-button"><?= $time1 ?></p>
+                                <br/>
+                                <script src="scripts/select.js"></script>
+                                <script type="text/javascript">lockButton("time-button-taken")</script>
 
-                        <div>
-                            <p class="time-button"><?= $time1 ?></p>
-                            <br/>
-                            <script src="scripts/select.js"></script>
-                            <script type="text/javascript">lockButton("time-button-taken")</script>
-
-                            <p class="time-button small-text"><?= $time2 ?></p>
+                                <p class="time-button small-text"><?= $time2 ?></p>
+                            </div>
                         </div>
 
                         <div class="admin-time-appointment-info">
@@ -204,18 +205,18 @@ if(isset($_SESSION['user'])) {
                             $db = mysqli_connect($host, $user, $pw, $database) or die('Error: ' . mysqli_connect_error());
 
                             $sql = "SELECT
-                                          voornaam,
-                                          achternaam,
-                                          knipbeurt
-                                        FROM
-                                          afspraken
-                                        WHERE
-                                          tijd = ?
-                                        AND
-                                          datum = ?
-                                        AND
-                                          kapper = ?
-                                        ";
+                                      voornaam,
+                                      achternaam,
+                                      knipbeurt
+                                    FROM
+                                      afspraken
+                                    WHERE
+                                      tijd = ?
+                                    AND
+                                      datum = ?
+                                    AND
+                                      kapper = ?
+                                    ";
 
                             if ($stmt = $db->prepare($sql)) {
                                 $stmt->bind_param('sss', $time1, $date, $barber);
@@ -228,7 +229,7 @@ if(isset($_SESSION['user'])) {
 
                                     while ($stmt->fetch()) { ?>
                                         <p><?= $vnaam . " " . $anaam ?></p>
-                                        <p><?= $cut ?></p> <?php
+                                        <p><?= ucfirst($cut) ?></p> <?php
                                     }
                                 } else { ?>
                                     <p><a href="admin_nieuwe_afspraak.php?t=<?=$time1?>&tt=<?=$time2?>&d=<?=$date?>&k=<?=$barber?>">Voeg afspraak toe</a></p> <?php

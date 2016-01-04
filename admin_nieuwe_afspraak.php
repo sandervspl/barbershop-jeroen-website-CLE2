@@ -115,9 +115,9 @@ if (isset($_POST['admin-add-appointment-button'])) {
 
                     if ($stmt2->execute()) {
                         if ($kapper === "Jeroen") {
-                            header("Location: admin_afspraken_kalender.php?p=1");
+                            header("Location: admin_afspraken.php?p=1");
                         } else {
-                            header("Location: admin_afspraken_kalender.php?p=2");
+                            header("Location: admin_afspraken.php?p=2");
                         }
                     } else {
                         die("error: 2");
@@ -192,10 +192,10 @@ if (isset($_POST['admin-add-appointment-button'])) {
                         <fieldset>
                             <legend class="input-text">Naam</legend>
                             <label id="voornaam-label" class="input-text">
-                                <input type="text" id="voornaam" class="admin-va-input" name="voornaam" autofocus="autofocus" value="<?=$voornaam?>">
+                                <input type="text" id="voornaam" class="admin-va-input" name="voornaam" autofocus="autofocus" placeholder="Voornaam" value="<?=$voornaam?>">
                             </label>
                             <label id="achternaam-label" class="input-text">
-                                <input type="text" id="achternaam" class="admin-va-input" name="achternaam" value="<?=$achternaam?>">
+                                <input type="text" id="achternaam" class="admin-va-input" name="achternaam" placeholder="Achternaam" value="<?=$achternaam?>">
                             </label>
                         </fieldset>
                     </div>
@@ -205,7 +205,7 @@ if (isset($_POST['admin-add-appointment-button'])) {
                     <div id="telefoon-form-element">
                         <p class="input-text">Telefoon</p>
                         <label id="telefoon-label" class="input-text">
-                            <input type="text" id="telefoon" class="" name="telefoon" value="<?=$telefoon?>">
+                            <input type="text" id="telefoon" class="" name="telefoon" placeholder="Telefoonnummer" value="<?=$telefoon?>">
                         </label>
                     </div>
 
