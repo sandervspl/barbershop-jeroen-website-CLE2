@@ -1,8 +1,10 @@
 TODO LIST
 
 - Afspraken die verlopen zijn op inactief zetten (nieuwe kolom in afspraken table)
-- Afspraken lijst pagina voor Jeroen maken
 - Registreer pagina afmaken
 - Vervang of verplaats de witte Header met het logo erin - neemt teveel plek in
 - Database voor dagen dat ze dicht zijn, plus pagina waar ze dit kunnen invoeren (per kapper)
+- Verlopen tijden blokkeren werkt niet meer ??? (doe dit met mktime, strtotime etc. vergelijk time())
 
+
+$day < $curday && $curmonth === $month

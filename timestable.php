@@ -48,6 +48,10 @@ if ($dayname === "Thu") {
     $end_hour = 15;
 }
 
+
+
+
+// loop start
 for ($i = 0; $i <= $end_hour; $i++) {
     if ($i % 2 == 0) {
         if ($i > 0) {
@@ -120,7 +124,7 @@ for ($i = 0; $i <= $end_hour; $i++) {
     else if ($_SESSION['barber'] === 'geenvoorkeur') {
         $starting_day = "$year-$month-$day";
         $time = strtotime($starting_day);
-        $weekday = date("D", mktime(0,0,0, date("m",$time), date("d",$time), date("y",$time)));
+        $weekday = date("D", mktime(0,0,0, $time, $time, $time));
 
         if ($weekday === "Tue" || $weekday === "Thu" || $weekday === "Sat") {
             $barber = "Jeroen";
@@ -135,14 +139,10 @@ for ($i = 0; $i <= $end_hour; $i++) {
     }
 
     // if today is chosen and we are past current time, we disable the option
-    $curtime = localtime(time(), true);
-    if ($date === date("Y-m-d") && $curtime['tm_hour'] >= $hour) {
+    $curtime = time();
+    $buttontime = mktime($hour, $m, 0, $month, $day, $year);
+    if ($curtime >= $buttontime) {
         $taken = true;
-    }
-
-    // there are some weird interactions with current hour and we need this exception for it
-    if ($date === date("Y-m-d") && $curtime['tm_hour'] === $hour && $curtime['tm_min'] < $m) {
-        $taken = false;
     }
 
     if ($taken) {

@@ -11,7 +11,7 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
     $starting_day = "$calendar_year-$month-1";
     $time = strtotime($starting_day);
 } else {
-    $month = date("m", $time);
+    $month = date("n", $time);
     $calendar_year =  date("Y", $time);
 }
 ?>
@@ -89,7 +89,7 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
             $weekday = date("D", mktime(0,0,0, date("m",$time), date("d",$time)+$counter, date("y",$time)));    // Mon-Sun
             $weekday_f =  date("l", mktime(0,0,0, date("m",$time), date("d",$time)+$counter, date("y",$time))); // Monday-Sunday
             $monthname = date("F", $time);                                                                      // January-December
-            $date = $calendar_year . "-" . date("m-", $time) . $day;                                                      // YYYY-MM-DD
+            $date = $calendar_year . "-" . date("n-", $time) . $day;                                            // YYYY-MM-DD
 
             $weekday_f = "'" . $weekday_f . "'";
             $monthname = "'" . $monthname . "'";
@@ -99,7 +99,7 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
             $monthname = nlDate($monthname);
 
             $curday = date("d");
-            $curmonth = date("m");
+            $curmonth = date("n");
             $curdate = date("Y-m-d");
 
             if ($date === $curdate) {
@@ -136,7 +136,7 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
                 }
 
                 // it will always miss day 1 on first row if this is not here. TODO: fix this
-                if ($day < $curday && $curmonth === $month || isFeestdag($day, $month) || $weekday === "Mon" || $weekday === "Sun" ||
+                if (($day < $curday && $curmonth === $month) || isFeestdag($day, $month) || $weekday === "Mon" || $weekday === "Sun" ||
                     ($_SESSION['barber'] === "Juno" && ($weekday === "Mon" || $weekday === "Wed" || $weekday === "Fri"))) { ?>
                     <td class="calendardateblocked <?=$todayclass?>">
                         <div class="divBox">
@@ -177,7 +177,7 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
                     // if not we fill our cells with current month data
                 } else {
                     if (!$doNextMonth) {
-                        if ($day < $curday && $curmonth === $month || isFeestdag($day, $month) || $weekday === "Mon" || $weekday === "Sun" ||
+                        if (($day < $curday && $curmonth === $month) || isFeestdag($day, $month) || $weekday === "Mon" || $weekday === "Sun" ||
                             ($_SESSION['barber'] === "Juno" && ($weekday === "Mon" || $weekday === "Wed" || $weekday === "Fri"))) { ?>
                             <td class="calendardateblocked <?=$todayclass?>">
                                 <div class="divBox">

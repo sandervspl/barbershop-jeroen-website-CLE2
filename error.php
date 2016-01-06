@@ -28,7 +28,7 @@ if(!isset($_SESSION)) {
             <img id="img-big" src="images/other/error.png">
 
             <p class="header-text-lobster">Er is iets misgegaan.</p><br />
-            <p class="header-text-small"><a href="reserveer.php">Probeer opnieuw</a></p>
+            <p><a href="reserveer.php">Probeer opnieuw</a></p>
         </div>
     </div>
 </section>
