@@ -207,6 +207,24 @@ if(!empty($_POST))
     die("Redirecting to login.php");
 }
 
+
+$db =  mysqli_connect($host, $user, $pw, $database) or die('Error: '.mysqli_connect_error());
+
+$sql = sprintf("SELECT level FROM users WHERE username='%s'",
+    $_SESSION['user']['username']);
+
+$result = mysqli_query($db, $sql);
+$re = mysqli_fetch_row($result);
+
+// if user level is not 1 (admin) then redirect
+if ($re[0] != 1) {
+    $isAdmin = false;
+} else {
+    $isAdmin = true;
+}
+
+mysqli_close($db);
+
 ?>
 <!DOCTYPE HTML>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -237,7 +255,17 @@ if(!empty($_POST))
                 </div>
 
                 <div id="account-text">
-                    <a href="mijn_afspraken.php">Mijn Afspraken</a><br />
+<?php
+                    if ($isAdmin) {
+?>
+                    <a href="admin.php">Admin Pagina</a><br/>
+<?php
+                    } else {
+?>
+                    <a href="mijn_afspraken.php">Mijn Afspraken</a><br/>
+<?php
+                    }
+?>
                     <a href="edit_account.php">Wijzig Account</a><br />
                     <br />
                     <a href="logout.php">Uitloggen</a>

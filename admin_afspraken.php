@@ -19,7 +19,7 @@ if(isset($_SESSION['user'])) {
 
     mysqli_close($db);
 
-    if (isset($_GET['month']) && isset($_GET['year']) && isset($_GET['day'])) {
+    if (isset($_GET['day']) && isset($_GET['month']) && isset($_GET['year'])) {
         $day = $_GET['day'];
         $month = $_GET['month'];
         $year = intval($_GET['year']);
@@ -58,13 +58,14 @@ if(isset($_SESSION['user'])) {
     <?php require_once "header.php" ?>
 </header>
 
+<?php
+    if (!isset($_GET['p'])) {
+?>
 <section id="main-page">
     <p id="header-text-header">Afspraken</p>
+
     <div id="basic-wrapper">
         <div class="white-background">
-            <?php
-            if (!isset($_GET['p'])) { ?>
-
             <div id="account-text">
                 <p class="header-text">Kies Kapper</p>
             </div>
@@ -73,16 +74,22 @@ if(isset($_SESSION['user'])) {
                 <a href="admin_afspraken.php?p=1">Jeroen</a> <br />
                 <a href="admin_afspraken.php?p=2">Juno</a> <br />
             </section>
+        </div>
+    </div>
+</section>
+<?php
+    } else {
+        if ($_GET['p'] == 1) {
+            $barber = "Jeroen";
+        } else {
+            $barber = "Juno";
+        }
+?>
+<section id="main-page">
+    <p id="header-text-header">Afspraken</p>
 
-            <?php
-            } else {
-                if ($_GET['p'] == 1) {
-                    $barber = "Jeroen";
-                } else {
-                    $barber = "Juno";
-                }
-            ?>
-
+    <div id="basic-wrapper">
+        <div class="white-background">
             <div id="account-text">
                 <p class="header-text admin-kalender-header"><?= nldate(date("l j F Y")) ?></p>
 
@@ -92,8 +99,8 @@ if(isset($_SESSION['user'])) {
 
         <div class="white-background margin-t-10">
             <div class="admin-wrapper-wide">
-            <section id="admin-kalender-times">
-                <?php
+                <div id="admin-kalender-times">
+<?php
                 $monthname = date("F");
 
                 $hour = 9;
@@ -111,152 +118,176 @@ if(isset($_SESSION['user'])) {
                 }
 
 
-                for ($i = 0;
-                     $i <= $end_hour;
-                     $i++) {
-                if ($i % 2 == 0) {
-                    if ($i > 0) {
-                        $hour++;
+
+                // loop start
+                for ($i = 0; $i <= $end_hour; $i++) {
+                    if ($i % 2 == 0) {
+                        if ($i > 0) {
+                            $hour++;
+                        }
+
+                        $m = "00";
                     }
 
-                    $m = "00";
-                }
+                    if ($i % 2) {
+                        $m = "30";
+                    }
 
-                if ($i % 2) {
-                    $m = "30";
-                }
+                    if ($hour < 10) {
+                        $u = "0" . $hour;
+                    } else {
+                        $u = $hour;
+                    }
 
-                if ($hour < 10) {
-                    $u = "0" . $hour;
-                } else {
-                    $u = $hour;
-                }
+                    $time1 = $u . ":" . $m;
+                    if ($m === "30") {
+                        $uu = $u + 1;
+                        $mm = "00";
+                    } else {
+                        $uu = $u;
+                        $mm = "30";
+                    }
+                    $time2 = $uu . ":" . $mm;
 
-                $time1 = $u . ":" . $m;
-                if ($m === "30") {
-                    $uu = $u + 1;
-                    $mm = "00";
-                } else {
-                    $uu = $u;
-                    $mm = "30";
-                }
-                $time2 = $uu . ":" . $mm;
+                    // lunch break
+                    if ($hour === 13) {
+                        continue;
+                    }
 
-                // lunch break
-                if ($hour === 13) {
-                    continue;
-                }
+                    if ($hour < 12 && !$didMorningHeader) {
+?>
+                    <div id="morning-header">
+                        <p class="o-m-a-header">Ochtend</p>
+                    </div>
 
-                if ($hour < 12 && !$didMorningHeader) {
-                ?>
-                <div id="morning-header">
-                    <p class="o-m-a-header">Ochtend</p>
-                </div>
+                    <div class="times-container-day">
+<?php
+                        $didMorningHeader = true;
+                    }
 
-            <div class="times-container-day">
-            <?php
-            $didMorningHeader = true;
-            }
+                    if ($hour > 11 && $hour < 18 && !$didAfternoonHeader) {
+?>
+                    </div>
 
-            if ($hour > 11 && $hour < 18 && !$didAfternoonHeader) {
-            ?>
-            </div>
+                        <div id="afternoon-header">
+                            <p class="o-m-a-header">Middag</p>
+                        </div>
 
-                <div id="afternoon-header">
-                    <p class="o-m-a-header">Middag</p>
-                </div>
+                    <div class="times-container-day">
+<?php
+                        $didAfternoonHeader = true;
+                    }
 
-            <div class="times-container-day">
-            <?php
-            $didAfternoonHeader = true;
-            }
+                    if ($hour > 18 && !$didEveningHeader) {
+?>
+                    </div>
 
-            if ($hour > 18 && !$didEveningHeader) {
-            ?>
-            </div>
+                    <div id="evening-header">
+                        <p class="o-m-a-header">Avond</p>
+                    </div>
 
-                <div id="evening-header">
-                    <p class="o-m-a-header">Avond</p>
-                </div>
-
-                <div class="times-container-day">
-                    <?php
-                    $didEveningHeader = true;
+                    <div class="times-container-day">
+<?php
+                        $didEveningHeader = true;
                     }
 
                     $mn = "\"" . $monthname . "\"";
-                    ?>
 
-                    <div id=<?= $time1 ?> class="admin-times-container">
-                        <div class="admin-times-time-container">
-                        <img id=<?= $time1 ?> class="times-icon" src="images/booking/timer_clear2.png"/>
-                            <div>
-                                <p class="time-button"><?= $time1 ?></p>
-                                <br/>
-                                <script src="scripts/select.js"></script>
-                                <script type="text/javascript">lockButton("time-button-taken")</script>
+                    $curtime   = time();
+                    $starttime = mktime($u, $m, 0, $month, $day, $year);
+                    $endtime   = mktime($uu, $mm, 0, $month, $day, $year);
 
-                                <p class="time-button small-text"><?= $time2 ?></p>
+                    if ($curtime >= $starttime && $curtime < $endtime) {
+                        $isCurrentTimeSlot = "admin-times-container-current";
+                    } else {
+                        $isCurrentTimeSlot = "";
+                    }
+?>
+                        <div id=<?= $time1 ?> class="admin-times-container <?=$isCurrentTimeSlot?>">
+                            <div class="admin-times-time-container">
+                                <img id=<?= $time1 ?> class="times-icon" src="images/booking/timer_clear2.png"/>
+
+                                <div>
+                                    <p class="time-button"><?= $time1 ?></p>
+                                    <br/>
+                                    <script src="scripts/select.js"></script>
+                                    <script type="text/javascript">lockButton("time-button-taken")</script>
+
+                                    <p class="time-button small-text"><?= $time2 ?></p>
+                                </div>
+                            </div>
+
+                            <div class="admin-time-appointment-info">
+<?php
+                    $db = mysqli_connect($host, $user, $pw, $database) or die('Error: ' . mysqli_connect_error());
+
+                    $sql = "SELECT
+                              voornaam,
+                              achternaam,
+                              knipbeurt
+                            FROM
+                              afspraken
+                            WHERE
+                              tijd = ?
+                            AND
+                              datum = ?
+                            AND
+                              kapper = ?
+                            ";
+
+                    if ($stmt = $db->prepare($sql)) {
+                        $stmt->bind_param('sss', $time1, $date, $barber);
+
+                        $stmt->execute();
+                        $stmt->store_result();
+
+                        if ($stmt->num_rows > 0) {
+                            $stmt->bind_result($vnaam, $anaam, $cut);
+
+                            while ($stmt->fetch()) { ?>
+                                <p><?= $vnaam . " " . $anaam ?></p>
+                                <p><?= ucfirst($cut) ?></p> <?php
+                            }
+                        } else {
+                            // if today is chosen and we are past current time, we disable the option
+                            $curtime = time();
+                            $timeslot = mktime($hour, $m, 0, $month, $day, $year);
+                            if ($curtime >= $timeslot) {
+?>
+                                <p></p>
+<?php
+                            } else {
+?>
+                                <p>
+                                    <a href="admin_nieuwe_afspraak.php?t=<?= $time1 ?>&tt=<?= $time2 ?>&d=<?= $date ?>&k=<?= $barber ?>">Voeg afspraak toe</a>
+                                </p>
+<?php
+                            }
+                        }
+
+                        $stmt->close();
+                    } else {
+                        die("Error: 1");
+                    }
+?>
                             </div>
                         </div>
+<?php
+                }
 
-                        <div class="admin-time-appointment-info">
-                            <?php
-                            $db = mysqli_connect($host, $user, $pw, $database) or die('Error: ' . mysqli_connect_error());
-
-                            $sql = "SELECT
-                                      voornaam,
-                                      achternaam,
-                                      knipbeurt
-                                    FROM
-                                      afspraken
-                                    WHERE
-                                      tijd = ?
-                                    AND
-                                      datum = ?
-                                    AND
-                                      kapper = ?
-                                    ";
-
-                            if ($stmt = $db->prepare($sql)) {
-                                $stmt->bind_param('sss', $time1, $date, $barber);
-
-                                $stmt->execute();
-                                $stmt->store_result();
-
-                                if ($stmt->num_rows > 0) {
-                                    $stmt->bind_result($vnaam, $anaam, $cut);
-
-                                    while ($stmt->fetch()) { ?>
-                                        <p><?= $vnaam . " " . $anaam ?></p>
-                                        <p><?= ucfirst($cut) ?></p> <?php
-                                    }
-                                } else { ?>
-                                    <p><a href="admin_nieuwe_afspraak.php?t=<?=$time1?>&tt=<?=$time2?>&d=<?=$date?>&k=<?=$barber?>">Voeg afspraak toe</a></p> <?php
-                                }
-
-                                $stmt->close();
-                            } else {
-                                die("Error: 1");
-                            }
-                            ?>
-                        </div>
-                    </div>
-                    <?php
-                    }
-
-                    if ($didEveningHeader) {
-                    ?>
-                </div>
-            <?php
-            }
-            }
+                if ($didEveningHeader) {
 ?>
-            </section>
+                </div>
+<?php
+                }
+?>
             </div>
         </div>
     </div>
 </section>
+<?php
+    }
+?>
 
 <footer>
     <?php require_once "footer.php" ?>
