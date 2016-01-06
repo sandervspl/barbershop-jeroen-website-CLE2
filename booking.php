@@ -85,8 +85,8 @@ $monthname = nlDate(date("F", $time));
             <span id="calendar-header-text" class="header-text"><?= $monthname; ?></span>
         </div>
         <div id="month-arrow-helper">
-            <img id="calendar-arrow" src="images/booking/calendar_right.png" onclick="nextMonth(this, <?=$month?>, <?=$year?>)">
-            </div>
+            <img id="calendar-arrow" src="images/booking/calendar_right.png" onclick="nextMonth(this, <?=$month?>, <?=$year?>, 0)">
+        </div>
     </div>
 
     <form name="datetime" method="post">

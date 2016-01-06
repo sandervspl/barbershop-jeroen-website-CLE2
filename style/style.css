@@ -718,7 +718,6 @@ td {
 /*********************/
 
 #calendar-wrapper {
-    height: 150px;
 }
 
 #calendar {
@@ -950,7 +949,7 @@ span#date-and-time-header {
     color: #000000;
     display: block;
     width: 71%;
-    margin: 100px auto 35px auto;
+    margin: 50px auto 35px auto;
     padding-top: 10px;
     padding-bottom: 5px;
 }
@@ -2345,9 +2344,55 @@ label#achternaam-label {
     text-align: left;
 }
 
+.admin-month-name {
+    width: 100% !important;
+    border-top: none !important;
+    margin: auto !important;
+}
+
+.admin-calendar-wrapper {
+    width: 81%;
+    margin: auto;
+}
+
+.admin-calendar {
+    width: 100% !important;
+}
+
+.admin-calendar-header-text {
+    left: 0 !important;
+}
+
+.admin-calendar-arrow {
+    right: 0 !important;
+}
 
 
 
 
+/*********************/
+/*
+         MISC
+                        */
+/*********************/
 
+/*confirmation page "tot dan"*/
+div.bedankt.inline-block p:nth-child(3) {
+    font-family: Lobster, serif;
+    font-size: 1.875em;
+}
 
+.bedankt {
+    vertical-align: top;
+    margin: auto auto auto 15px;
+}
+
+#img-big {
+    width: 250px;
+    height: 250px;
+    position: relative;
+}
+
+.text-only p {
+    top: 0;
+}

@@ -85,10 +85,11 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
          * To complete the calendar and not have gaps, we fill these in with the next month's dates until we are on Monday.
          */
         do {
-            $day = date("d", mktime(0,0,0, date("m",$time), date("d",$time)+$counter, date("y",$time)));        // 01-31
-            $weekday = date("D", mktime(0,0,0, date("m",$time), date("d",$time)+$counter, date("y",$time)));    // Mon-Sun
-            $weekday_f =  date("l", mktime(0,0,0, date("m",$time), date("d",$time)+$counter, date("y",$time))); // Monday-Sunday
+            $day =       date("d", mktime(0,0,0, date("m",$time), date("d",$time)+$counter, date("y",$time)));  // 01-31
+            $weekday =   date("D", mktime(0,0,0, date("m",$time), date("d",$time)+$counter, date("y",$time)));  // Mon-Sun
+            $weekday_f = date("l", mktime(0,0,0, date("m",$time), date("d",$time)+$counter, date("y",$time)));  // Monday-Sunday
             $monthname = date("F", $time);                                                                      // January-December
+
             $date = $calendar_year . "-" . date("n-", $time) . $day;                                            // YYYY-MM-DD
 
             $weekday_f = "'" . $weekday_f . "'";
@@ -114,7 +115,7 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
 
                 // count backwards until we have a day that is a monday
                 do {
-                    $prevMonthDay = date("d", mktime(0,0,0, date("m",$time), date("d",$time)-$i, date("y",$time)));
+                    $prevMonthDay =     date("d", mktime(0,0,0, date("m",$time), date("d",$time)-$i, date("y",$time)));
                     $prevMonthWeekDay = date("D", mktime(0,0,0, date("m",$time), date("d",$time)-$i, date("y",$time)));
                     $prevMonthDayArray[] = $prevMonthDay;
 
@@ -146,7 +147,7 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
                 } else { ?>
                     <td class="calendardate cut-selector <?=$todayclass?>">
                         <div class="divBox">
-                            <input type="radio" id="<?=$date?>" class="date-radio" name="date" value="<?=$date?>" onclick="onDateClick(<?=$day?>, <?=$weekday_f?>, <?=$monthname?>, <?=$month?>, <?=$calendar_year?>)" />
+                            <input type="radio" id="<?=$date?>" class="date-radio" name="date" value="<?=$date?>" onclick="onDateClick(<?=$day?>, <?=$weekday_f?>, <?=$monthname?>, <?=$month?>, <?=$calendar_year?>, 0)" />
                             <label for="<?=$date?>"> <?=$day?> </label>
                         </div>
                     </td> <?php
@@ -187,7 +188,7 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
                         } else { ?>
                             <td class="calendardate cut-selector <?=$todayclass?>">
                                 <div class="divBox">
-                                    <input type="radio" id="<?=$date?>" class="date-radio" name="date" value="<?=$date?>" onclick="onDateClick(<?=$day?>, <?=$weekday_f?>, <?=$monthname?>, <?=$month?>, <?=$calendar_year?>)" />
+                                    <input type="radio" id="<?=$date?>" class="date-radio" name="date" value="<?=$date?>" onclick="onDateClick(<?=$day?>, <?=$weekday_f?>, <?=$monthname?>, <?=$month?>, <?=$calendar_year?>, 0)" />
                                     <label for="<?=$date?>"> <?=$day?> </label>
                                 </div>
                             </td> <?php

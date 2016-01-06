@@ -2,7 +2,7 @@
  * Created by Sandervspl on 12/3/15.
  */
 
-function loadCalendar(m, y) {
+function loadCalendar(m, y, admin) {
     var xmlhttp;
 
     document.getElementById("calendar-table").innerHTML = "<img class=\"loading-gif\" src=\"http://www.jasonkenison.com/uploads/blog/loading.gif\" />";
@@ -20,7 +20,12 @@ function loadCalendar(m, y) {
         }
     };
 
-    var url = "calendar.php?month=" + m + "&year=" + y;
+    if (admin) {
+        // TODO add file
+        // var url = admin_calendar.php?month=" + m + "&year=" + y;
+    } else {
+        var url = "calendar.php?month=" + m + "&year=" + y;
+    }
     xmlhttp.open("GET", url, true);
     xmlhttp.send();
 }
@@ -43,7 +48,7 @@ function getMonth(m) {
     return month[m];
 }
 
-function nextMonth(sender, m, y) {
+function nextMonth(sender, m, y, admin) {
     if (sender.src.includes("images/booking/calendar_left.png")) {
         sender.setAttribute('src', 'images/booking/calendar_right.png');
     } else {
@@ -58,11 +63,15 @@ function nextMonth(sender, m, y) {
 
     window.document.getElementById('calendar-header-text').innerHTML = getMonth(m);
 
-    loadCalendar(m, y);
+    if (admin) {
+        // TODO: load admin calendar file
+    } else {
+        loadCalendar(m, y, 0);
+    }
 }
 
 //change time information from date without reloading page (AJAX)
-function showTimes(date, d, m, y) {
+function showTimes(date, d, m, y, admin) {
     if (date == "") {
         document.getElementById("times-table").innerHTML = "";
     } else {
@@ -84,19 +93,24 @@ function showTimes(date, d, m, y) {
             }
         };
 
-        var url = "timestable.php?day=" + d + "&month=" + m + "&year=" + y;
+        var url = "timestable.php?day=" + d + "&month=" + m + "&year=" + y + "&a=" + admin;
         xmlhttp.open("GET", url, true);
         xmlhttp.send();
     }
 }
 
-function onDateClick(d, da, mo, m, y) {
+function onDateClick(d, da, mo, m, y, admin) {
     // don't load timetable if it's already showing
     if (window.sessionStorage.currentDayTimes != d) {
         window.sessionStorage.currentDayTimes = d;
 
         date = d + "_" + m + "_" + y;
-        showTimes(date, d, m, y);
+
+        if (admin) {
+            showTimes(date, d, m, y, 1);
+        } else {
+            showTimes(date, d, m, y, 0);
+        }
 
         window.document.getElementById('date-and-time-header').innerHTML = "<p class='header-text-small'>" + da + "</p>" + d + " " + mo + " " + y;
         window.document.getElementById('date-and-time-header').style.borderBottom = "1px solid black";

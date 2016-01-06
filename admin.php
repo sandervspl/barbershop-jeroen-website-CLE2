@@ -1,22 +1,15 @@
 <?php
 require("common.php");
+require_once("admincheck.php");
 
 if(isset($_SESSION['user'])) {
-    $db =  mysqli_connect($host, $user, $pw, $database) or die('Error: '.mysqli_connect_error());
 
-    $sql = sprintf("SELECT level FROM users WHERE username='%s'",
-        $_SESSION['user']['username']);
-
-    $result = mysqli_query($db, $sql);
-    $re = mysqli_fetch_row($result);
-
-    // if user level is not 1 (admin) then redirect
-    if ($re[0] != 1) {
+    // level check
+    $isAdmin = isAdmin();
+    if (!$isAdmin) {
         header("Location: forbidden.php");
         die("Redirecting to forbidden.php");
     }
-
-    mysqli_close($db);
 } else {
     header("Location: forbidden.php");
     die("Redirecting to forbidden.php");

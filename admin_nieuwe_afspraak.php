@@ -1,23 +1,16 @@
 <?php
 require("common.php");
 require_once("nlDate.php");
+require_once("admincheck.php");
 
 if(isset($_SESSION['user'])) {
-    $db =  mysqli_connect($host, $user, $pw, $database) or die('Error: '.mysqli_connect_error());
 
-    $sql = sprintf("SELECT level FROM users WHERE username='%s'",
-        $_SESSION['user']['username']);
-
-    $result = mysqli_query($db, $sql);
-    $re = mysqli_fetch_row($result);
-
-    // if user level is not 1 (admin) then redirect
-    if ($re[0] != 1) {
+    // level check
+    $isAdmin = isAdmin();
+    if (!$isAdmin) {
         header("Location: forbidden.php");
         die("Redirecting to forbidden.php");
     }
-
-    mysqli_close($db);
 } else {
     header("Location: forbidden.php");
     die("Redirecting to forbidden.php");
@@ -79,8 +72,6 @@ if (isset($_POST['admin-add-appointment-button'])) {
 
 
     if ($ok) {
-        // database connection information
-        require_once "connect.php";
         $db = mysqli_connect($host, $user, $pw, $database) or die('Error: ' . mysqli_connect_error());
 
         $sql = "SELECT
@@ -114,11 +105,7 @@ if (isset($_POST['admin-add-appointment-button'])) {
                     $stmt2->bind_param('sssssss', $voornaam, $achternaam, $datum, $tijd, $cut, $kapper, $telefoon);
 
                     if ($stmt2->execute()) {
-                        if ($kapper === "Jeroen") {
-                            header("Location: admin_afspraken.php?p=1");
-                        } else {
-                            header("Location: admin_afspraken.php?p=2");
-                        }
+                        header("Location: admin_nieuwe_afspraak.php?p=3");
                     } else {
                         die("error: 2");
                     }
@@ -156,8 +143,29 @@ if (isset($_POST['admin-add-appointment-button'])) {
     <?php require_once "header.php" ?>
 </header>
 
+<?php
+if (isset($_GET['p']) && $_GET['p'] == 3) {
+?>
+<section id="main-page">
+    <p id="header-text-header">Reservering Compleet</p>
+    <div id="basic-wrapper">
+        <div class="white-background">
+            <img id="img-big" class="inline-block" src="images/confirmation/chair.png">
+            <div class="bedankt inline-block">
+                <p class="header-text-big">Reservering compleet!</p>
+                <br />
+                <p><a href="admin.php">Terug naar admin pagina</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+<?php
+} else {
+?>
+
 <section id="main-page">
     <p id="header-text-header">Afspraak Toevoegen</p>
+
     <div id="basic-wrapper">
         <div class="white-background">
             <div id="account-text">
@@ -165,7 +173,7 @@ if (isset($_POST['admin-add-appointment-button'])) {
                     <?php if (isset($_GET['d'])) {
                         $date = strtotime($_GET['d']);
 
-                        echo nldate(date("l j F Y"));
+                        echo nldate(date("l j F Y", $date));
                     } ?>
                 </p>
 
@@ -192,48 +200,53 @@ if (isset($_POST['admin-add-appointment-button'])) {
                         <fieldset>
                             <legend class="input-text">Naam</legend>
                             <label id="voornaam-label" class="input-text">
-                                <input type="text" id="voornaam" class="admin-va-input" name="voornaam" autofocus="autofocus" placeholder="Voornaam" value="<?=$voornaam?>">
+                                <input type="text" id="voornaam" class="admin-va-input" name="voornaam"
+                                       autofocus="autofocus" placeholder="Voornaam" value="<?= $voornaam ?>">
                             </label>
                             <label id="achternaam-label" class="input-text">
-                                <input type="text" id="achternaam" class="admin-va-input" name="achternaam" placeholder="Achternaam" value="<?=$achternaam?>">
+                                <input type="text" id="achternaam" class="admin-va-input" name="achternaam"
+                                       placeholder="Achternaam" value="<?= $achternaam ?>">
                             </label>
                         </fieldset>
                     </div>
 
-                    <br />
+                    <br/>
 
                     <div id="telefoon-form-element">
                         <p class="input-text">Telefoon</p>
                         <label id="telefoon-label" class="input-text">
-                            <input type="text" id="telefoon" class="" name="telefoon" placeholder="Telefoonnummer" value="<?=$telefoon?>">
+                            <input type="text" id="telefoon" class="" name="telefoon" placeholder="Telefoonnummer"
+                                   value="<?= $telefoon ?>">
                         </label>
                     </div>
 
-                    <br />
+                    <br/>
 
                     <div id="knipbeurt-form-element">
                         <p class="input-text">Knipbeurt</p>
                         <label id="admin-radio-hair" class="input-text">
-                            <input id="admin-radio-hair" class="admin-radio" type="radio" name="cut" value="haar" />
-                            <span class="admin-radio-txt">Haar</span><br />
+                            <input id="admin-radio-hair" class="admin-radio" type="radio" name="cut" value="haar"/>
+                            <span class="admin-radio-txt">Haar</span><br/>
                         </label>
                         <label id="admin-radio-beard" class="input-text">
-                            <input id="admin-radio-beard" class="admin-radio" type="radio" name="cut" value="baard" />
-                            <span class="admin-radio-txt">Baard</span><br />
+                            <input id="admin-radio-beard" class="admin-radio" type="radio" name="cut" value="baard"/>
+                            <span class="admin-radio-txt">Baard</span><br/>
                         </label>
                         <label id="admin-radio-moustache" class="input-text">
-                            <input id="admin-radio-moustache" class="admin-radio" type="radio" name="cut" value="snor" />
-                            <span class="admin-radio-txt">Snor</span><br />
+                            <input id="admin-radio-moustache" class="admin-radio" type="radio" name="cut" value="snor"/>
+                            <span class="admin-radio-txt">Snor</span><br/>
                         </label>
                         <label id="admin-radio-all" class="input-text">
-                            <input id="admin-radio-all" class="admin-radio" type="radio" name="cut" value="alles" />
-                            <span class="admin-radio-txt">Alles</span><br />
+                            <input id="admin-radio-all" class="admin-radio" type="radio" name="cut" value="alles"/>
+                            <span class="admin-radio-txt">Alles</span><br/>
                         </label>
                     </div>
 
                     <div id="submit-form-element">
-                        <button id="admin-add-appointment-button" type="submit" name="admin-add-appointment-button" class="button" value="<?=$_GET['d']?>|<?=$_GET['t']?>|<?=$_GET['k']?>"> Reserveer </button>
-                        <br />
+                        <button id="admin-add-appointment-button" type="submit" name="admin-add-appointment-button"
+                                class="button" value="<?= $_GET['d'] ?>|<?= $_GET['t'] ?>|<?= $_GET['k'] ?>"> Reserveer
+                        </button>
+                        <br/>
                     </div>
                 </form>
             </div>
@@ -242,7 +255,11 @@ if (isset($_POST['admin-add-appointment-button'])) {
 </section>
 
 <footer>
-    <?php require_once "footer.php" ?>
+<?php
+}
+
+require_once "footer.php"
+?>
 </footer>
 </body>
 </html>

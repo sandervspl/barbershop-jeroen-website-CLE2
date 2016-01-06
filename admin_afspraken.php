@@ -1,23 +1,16 @@
 <?php
 require("common.php");
 require_once("nlDate.php");
+require_once("admincheck.php");
 
 if(isset($_SESSION['user'])) {
-    $db =  mysqli_connect($host, $user, $pw, $database) or die('Error: '.mysqli_connect_error());
 
-    $sql = sprintf("SELECT level FROM users WHERE username='%s'",
-        $_SESSION['user']['username']);
-
-    $result = mysqli_query($db, $sql);
-    $re = mysqli_fetch_row($result);
-
-    // if user level is not 1 (admin) then redirect
-    if ($re[0] != 1) {
+    // level check
+    $isAdmin = isAdmin();
+    if (!$isAdmin) {
         header("Location: forbidden.php");
         die("Redirecting to forbidden.php");
     }
-
-    mysqli_close($db);
 
     if (isset($_GET['day']) && isset($_GET['month']) && isset($_GET['year'])) {
         $day = $_GET['day'];
@@ -249,7 +242,7 @@ if(isset($_SESSION['user'])) {
                                 <p><?= ucfirst($cut) ?></p> <?php
                             }
                         } else {
-                            // if today is chosen and we are past current time, we disable the option
+                            // if we are past current time, we disable the option
                             $curtime = time();
                             $timeslot = mktime($hour, $m, 0, $month, $day, $year);
                             if ($curtime >= $timeslot) {

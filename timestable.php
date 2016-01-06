@@ -3,14 +3,16 @@ if(!isset($_SESSION)) {
     session_start();
 }
 
+require_once "admincheck.php";
+require_once "nlDate.php";
+require_once "connect.php";
+require_once "admincheck.php";
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
 <body>
 
 <?php
-require_once "nlDate.php";
-
 $monthname = date("F");
 
 if (isset($_GET['month']) && isset($_GET['year']) && isset($_GET['day'])) {
@@ -87,7 +89,6 @@ for ($i = 0; $i <= $end_hour; $i++) {
     }
 
     // database connection information
-    require_once "connect.php";
     $db =  mysqli_connect($host, $user, $pw, $database) or die('Error: '.mysqli_connect_error());
 
     $sql = sprintf("SELECT kapper FROM afspraken WHERE datum = '%s' AND tijd = '%s'",
@@ -163,6 +164,15 @@ for ($i = 0; $i <= $end_hour; $i++) {
         $isDisabled = "";
     }
 
+    // admin check
+    $isAdmin = false;
+
+    if (isset($_GET['a']) && $_GET['a'] == 1) {
+        if (isAdmin()) {
+            $isAdmin = true;
+        }
+    }
+
     if ($hour < 12 && !$didMorningHeader) { ?>
         <div id="morning-header">
             <p class="o-m-a-header">Ochtend</p>
@@ -195,17 +205,49 @@ for ($i = 0; $i <= $end_hour; $i++) {
     $mn = "\"" . $monthname . "\"";
     ?>
 
-    <div id=<?=$time1?> class=<?=$class_d?> onclick='onTimeClick(<?=$func1?>, <?=$func2?>, <?=$mn?>)'>
-        <img id=<?=$time1?> class="<?=$class_i?>" src=<?=$img_src?> />
-        <div>
-            <button id="<?=$time1?>" type="submit" name="timestablebutton" class="<?=$class_p?>" value="<?=$time1?>|<?=$barber?>" <?=$isDisabled?>><?= $time1 ?></button><br />
-            <script src="scripts/select.js"></script>
-            <script type="text/javascript">lockButton("time-button-taken")</script>
-
-            <p class="<?=$class_p?>"><?=$time2?></p>
-        </div>
-    </div>
     <?php
+    if ($isAdmin) {
+        if (!$taken) {
+    ?>
+        <a href="admin_nieuwe_afspraak.php?t=<?= $time1 ?>&tt=<?= $time2 ?>&d=<?= $date ?>&k=<?= $barber ?>">
+    <?php
+        }
+    ?>
+            <div id=<?= $time1 ?> class=<?= $class_d ?>>
+                <img id=<?= $time1 ?> class="<?= $class_i ?>" src=<?= $img_src ?>>
+
+                <div>
+                    <p id="<?= $time1 ?>" class="<?= $class_p ?>"><?= $time1 ?></p>
+                    <br/>
+                    <script src="scripts/select.js"></script>
+                    <script type="text/javascript">lockButton("time-button-taken")</script>
+
+                    <p class="<?= $class_p ?>"><?= $time2 ?></p>
+                </div>
+            </div>
+    <?php
+        if (!$taken) {
+    ?>
+            </a>
+    <?php
+        }
+    } else {
+        ?>
+        <div id=<?= $time1 ?> class=<?= $class_d ?> onclick='onTimeClick(<?= $func1 ?>, <?= $func2 ?>, <?= $mn ?>)'>
+            <img id=<?= $time1 ?> class="<?= $class_i ?>" src=<?= $img_src ?>>
+
+            <div>
+                <button id="<?= $time1 ?>" type="submit" name="timestablebutton" class="<?= $class_p ?>"
+                        value="<?= $time1 ?>|<?= $barber ?>" <?= $isDisabled ?>><?= $time1 ?></button>
+                <br/>
+                <script src="scripts/select.js"></script>
+                <script type="text/javascript">lockButton("time-button-taken")</script>
+
+                <p class="<?= $class_p ?>"><?= $time2 ?></p>
+            </div>
+        </div>
+        <?php
+    }
 }
 
 if ($didEveningHeader) {
