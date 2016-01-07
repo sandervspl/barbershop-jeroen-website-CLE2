@@ -922,7 +922,8 @@ td {
     cursor: default;
 }
 
-.times-container div p:last-child, .times-container-taken div p:last-child {
+.times-container div p:last-child,
+.times-container-taken div p:last-child {
     font-size: 0.9375em;
     float: left;
 }
@@ -2252,6 +2253,9 @@ form .login-register-wrapper .small-text {
     margin-right: 20px;
     padding: 5px 5px 40px;
 }
+    .admin-times-container:hover {
+        background-color: rgba(229, 224, 206, 0.66);
+    }
 
 .admin-times-container div {
     position: relative;
@@ -2262,21 +2266,26 @@ form .login-register-wrapper .small-text {
     cursor: default;
 }
 
-.admin-times-container div:hover {
-    cursor: default;
-}
-
-.admin-times-container div p.time-button.small-text {
-    font-size: 0.9375em;
-    float: left;
-    padding-left: 5px;
-}
+    .admin-times-container div:hover {
+        cursor: default;
+    }
 
 .admin-times-container div p.time-button {
     margin: auto;
     font-family: Nunito,serif;
     font-size: 1.875em;
     float: left;
+}
+
+.admin-times-container div p.time-button-taken {
+    margin: auto;
+    font-family: Nunito,serif;
+    font-size: 1.875em;
+    float: left;
+}
+
+.small-text-time {
+    font-size: 0.9375em !important;
 }
 
 .admin-time-appointment-info {
@@ -2390,6 +2399,14 @@ label#achternaam-label {
 .admin-select-barber {
     text-align: center;
 }
+
+.time-user-info-past {
+    color: #b2b2b2;
+    text-decoration: line-through;
+}
+
+
+
 
 
 /*********************/

@@ -203,18 +203,32 @@ if(isset($_SESSION['user'])) {
                     } else {
                         $isCurrentTimeSlot = "";
                     }
+
+                    if ($curtime > $starttime && $isCurrentTimeSlot === "") {
+                        $isPast = true;
+                    } else {
+                        $isPast = false;
+                    }
+
+                    if ($isPast) {
+                        $class_p = "time-button-taken";
+                        $class_i = "times-icon-taken";
+                        $class_txt = "time-user-info-past";
+                        $img_src = "images/booking/timer_clear2-taken.png";
+                    } else {
+                        $class_p = "time-button";
+                        $class_i = "times-icon";
+                        $class_txt = "";
+                        $img_src = "images/booking/timer_clear2.png";
+                    }
 ?>
-                        <div id=<?= $time1 ?> class="admin-times-container <?=$isCurrentTimeSlot?>">
+                        <div id="<?=$time1?>" class="admin-times-container <?=$isCurrentTimeSlot?>" onmouseover="timesContainerHover(this.id);" onmouseout="timesContainerOut(this.id)">
                             <div class="admin-times-time-container">
-                                <img id=<?= $time1 ?> class="times-icon" src="images/booking/timer_clear2.png"/>
+                                <img id=<?= $time1 ?> class="<?=$class_i?>" src=<?=$img_src?>>
 
                                 <div>
-                                    <p class="time-button"><?= $time1 ?></p>
-                                    <br/>
-                                    <script src="scripts/select.js"></script>
-                                    <script type="text/javascript">lockButton("time-button-taken")</script>
-
-                                    <p class="time-button small-text"><?= $time2 ?></p>
+                                    <p class="<?=$class_p?>"><?= $time1 ?></p><br/>
+                                    <p class="<?=$class_p?> small-text-time"><?= $time2 ?></p>
                                 </div>
                             </div>
 
@@ -246,17 +260,20 @@ if(isset($_SESSION['user'])) {
                             $stmt->bind_result($vnaam, $anaam, $cut);
 
                             while ($stmt->fetch()) { ?>
-                                <p><?= $vnaam . " " . $anaam ?></p>
-                                <p><?= ucfirst($cut) ?></p> <?php
+                                <p id="p.<?=$time1?>" class="<?=$class_txt?>"><?= $vnaam . " " . $anaam ?></p>
+                                <p id="pp.<?=$time1?>" class="<?=$class_txt?>"><?= ucfirst($cut) ?></p> <?php
                             }
                         } else {
                             // if we are past current time, we disable the option
                             $curtime = time();
                             $timeslot = mktime($hour, $m, 0, $month, $day, $year);
                             if ($curtime >= $timeslot) {
+
+                                // no link to add appointment
 ?>
                                 <p></p>
 <?php
+                                // link to add appointment
                             } else {
 ?>
                                 <p>
@@ -290,6 +307,7 @@ if(isset($_SESSION['user'])) {
     }
 ?>
 
+<script src="scripts/admin.js"></script>
 <footer>
     <?php require_once "footer.php" ?>
 </footer>

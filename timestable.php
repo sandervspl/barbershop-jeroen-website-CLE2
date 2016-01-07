@@ -213,8 +213,8 @@ for ($i = 0; $i <= $end_hour; $i++) {
     <?php
         }
     ?>
-            <div id=<?= $time1 ?> class=<?= $class_d ?>>
-                <img id=<?= $time1 ?> class="<?= $class_i ?>" src=<?= $img_src ?>>
+            <div id="<?= $time1 ?>" class="<?= $class_d ?>">
+                <img id="<?= $time1 ?>" class="<?= $class_i ?>" src="<?= $img_src ?>">
 
                 <div>
                     <p id="<?= $time1 ?>" class="<?= $class_p ?>"><?= $time1 ?></p>
@@ -233,8 +233,8 @@ for ($i = 0; $i <= $end_hour; $i++) {
         }
     } else {
         ?>
-        <div id=<?= $time1 ?> class=<?= $class_d ?> onclick='onTimeClick(<?= $func1 ?>, <?= $func2 ?>, <?= $mn ?>)'>
-            <img id=<?= $time1 ?> class="<?= $class_i ?>" src=<?= $img_src ?>>
+        <div id="<?= $time1 ?>" class="<?= $class_d ?>" onclick='onTimeClick(<?= $func1 ?>, <?= $func2 ?>, <?= $mn ?>)'>
+            <img id="<?= $time1 ?>" class="<?= $class_i ?>" src="<?= $img_src ?>">
 
             <div>
                 <button id="<?= $time1 ?>" type="submit" name="timestablebutton" class="<?= $class_p ?>"
