@@ -19,14 +19,28 @@ if(isset($_SESSION['user'])) {
         $month = $_GET['month'];
         $year  = $_GET['year'];
     } else {
-        $month = date("m");
+        $month = date("n");
         $year  = date("Y");
+    }
+
+    // next month button variables
+    $prevyear  = $year;
+    $prevmonth = $month - 1;
+    $nextyear  = $year;
+    $nextmonth = $month + 1;
+
+    if ($prevmonth < 1) {
+        $prevmonth = 12;
+        $prevyear--;
+    }
+
+    if ($nextmonth > 12) {
+        $nextmonth = 1;
+        $nextyear++;
     }
 
     $starting_day = "$year-$month-1";
     $time = strtotime($starting_day);
-
-    $monthname = nlDate(date("F", $time));
 } else {
     header("Location: forbidden.php");
     die("Redirecting to forbidden.php");
@@ -43,6 +57,7 @@ if(isset($_SESSION['user'])) {
     <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Droid+Serif:700' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 <body>
 
@@ -56,6 +71,10 @@ if (!isset($_GET['p'])) {
 <section id="main-page">
     <p id="header-text-header">Kalender</p>
     <div id="basic-wrapper">
+        <div class="ta-left">
+            <a href="admin.php">< admin pagina</a>
+        </div>
+
         <div class="white-background">
             <div id="account-text">
                 <p class="header-text">Kies Kapper</p>
@@ -72,8 +91,12 @@ if (!isset($_GET['p'])) {
 } else {
     if ($_GET['p'] == 1) {
         $barber = "Jeroen";
+        $_SESSION['barber'] = "Jeroen";
+        $p = 1;
     } else {
         $barber = "Juno";
+        $_SESSION['barber'] = "Juno";
+        $p = 2;
     }
 ?>
 
@@ -83,9 +106,14 @@ if (!isset($_GET['p'])) {
     <form name="calendar-form" method="post">
 
     <div id="basic-wrapper">
+        <div class="ta-left">
+            <a href="admin.php">< admin pagina</a>
+        </div>
+
         <div class="white-background">
-            <div id="account-text">
-                <p class="header-text admin-barber-name"><?= $barber ?></p>
+            <div id="account-text" class="ta-center">
+                <p class="header-text admin-barber-name"><?= $barber ?></p><br />
+                <a href="admin_nieuwe_afspraak_kalender.php" class="admin-select-barber">Andere kapper</a>
             </div>
         </div>
 
@@ -95,10 +123,15 @@ if (!isset($_GET['p'])) {
         <div class="admin-calendar-wrapper">
             <div class="month-name admin-month-name">
                 <div id="admin-month-name-header-helper">
-                    <span id="calendar-header-text" class="header-text admin-calendar-header-text"><?= $monthname; ?></span>
+                    <span id="calendar-header-text" class="header-text admin-calendar-header-text"><?= nlDate(date("F Y", $time)) ?></span>
                 </div>
                 <div id="month-arrow-helper">
-                    <img id="calendar-arrow" class="admin-calendar-arrow" src="images/booking/calendar_right.png" onclick="nextMonth(this, <?=$month?>, <?=$year?>, 1)">
+                    <a href="<?=$_SERVER['PHP_SELF']."?p=$p&month=$prevmonth&year=$prevyear"?>">
+                        <img src="images/booking/calendar_left.png" id="calendar-arrow-left" onmouseover="nhpup.popup('Vorige maand')">
+                    </a>
+                    <a href="<?=$_SERVER['PHP_SELF']."?p=$p&month=$nextmonth&year=$nextyear"?>">
+                        <img src="images/booking/calendar_right.png" id="calendar-arrow" class="admin-calendar-arrow" onmouseover="nhpup.popup('Volgende maand')">
+                    </a>
                 </div>
             </div>
 
@@ -155,7 +188,7 @@ if (!isset($_GET['p'])) {
 
                     // huidige dag & maand
                     $curday = date("d");
-                    $curmonth = date("m");
+                    $curmonth = date("n");
                     $curdate = date("Y-m-d");
 
                     if ($date === $curdate) {
@@ -321,6 +354,7 @@ if (!isset($_GET['p'])) {
 ?>
 </footer>
 
+<script src="scripts/popup.js"></script>
 <script src="scripts/calendar.js"></script>
 </body>
 </html>

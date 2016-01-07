@@ -31,8 +31,6 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
     $starting_day = $year ."-". $month ."-". "01";
     $time = strtotime($starting_day);
 }
-
-$monthname = nlDate(date("F", $time));
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -45,6 +43,7 @@ $monthname = nlDate(date("F", $time));
     <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
         window.sessionStorage.currentDayTimes = 0;
     </script>
@@ -82,10 +81,10 @@ $monthname = nlDate(date("F", $time));
     <!--  month name above calendar  -->
     <div class="month-name">
         <div id="month-name-header-helper">
-            <span id="calendar-header-text" class="header-text"><?= $monthname; ?></span>
+            <span id="calendar-header-text" class="header-text"><?= nlDate(date("F", $time)); ?></span>
         </div>
         <div id="month-arrow-helper">
-            <img id="calendar-arrow" src="images/booking/calendar_right.png" onclick="nextMonth(this, <?=$month?>, <?=$year?>, 0)">
+            <img id="calendar-arrow" src="images/booking/calendar_right.png" onclick="nextMonth(this, <?=$month?>, <?=$year?>, 0)" onmouseover="nhpup.popup('Andere maand')">
         </div>
     </div>
 
@@ -121,6 +120,7 @@ $monthname = nlDate(date("F", $time));
     <?php require_once "footer.php" ?>
 </footer>
 
+<script src="scripts/popup.js"></script>
 <script src="scripts/calendar.js"></script>
 <script src="scripts/select.js"></script>
 </body>

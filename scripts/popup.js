@@ -56,7 +56,7 @@ nhpup = {
     {
         // Call nudge to avoid edge overflow. Important tweak: x+10, because if
         //  the popup is where the mouse is, the hoverOver/hoverOut events flicker
-        var x_y = this.nudge(x - 75, y + 70);
+        var x_y = this.nudge(x - 75, y + 30);
         // remember: the popup is still hidden
         this.pup.css('top', x_y[1] + 'px')
             .css('left', x_y[0] + 'px');

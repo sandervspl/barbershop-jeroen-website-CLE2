@@ -58,6 +58,10 @@ if(isset($_SESSION['user'])) {
     <p id="header-text-header">Afspraken</p>
 
     <div id="basic-wrapper">
+        <div class="ta-left">
+            <a href="admin.php">< admin pagina</a>
+        </div>
+
         <div class="white-background">
             <div id="account-text">
                 <p class="header-text">Kies Kapper</p>
@@ -82,6 +86,10 @@ if(isset($_SESSION['user'])) {
     <p id="header-text-header">Afspraken</p>
 
     <div id="basic-wrapper">
+        <div class="ta-left">
+            <a href="admin.php">< admin pagina</a>
+        </div>
+
         <div class="white-background">
             <div id="account-text">
                 <p class="header-text admin-kalender-header"><?= nldate(date("l j F Y")) ?></p>
