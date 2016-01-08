@@ -209,7 +209,7 @@ for ($i = 0; $i <= $end_hour; $i++) {
     if ($isAdmin) {
         if (!$taken) {
     ?>
-        <a href="admin_nieuwe_afspraak.php?t=<?= $time1 ?>&tt=<?= $time2 ?>&d=<?= $date ?>&k=<?= $barber ?>">
+        <a id="admin-kalender-times-link" href="admin_nieuwe_afspraak.php?t=<?= $time1 ?>&tt=<?= $time2 ?>&d=<?= $date ?>&k=<?= $barber ?>">
     <?php
         }
     ?>

@@ -222,9 +222,9 @@ if(isset($_SESSION['user'])) {
                         $img_src = "images/booking/timer_clear2.png";
                     }
 ?>
-                        <div id="<?=$time1?>" class="admin-times-container <?=$isCurrentTimeSlot?>" onmouseover="timesContainerHover(this.id);" onmouseout="timesContainerOut(this.id)">
+                        <div id="<?=$time1?>|<?=$img_src?>" class="admin-times-container <?=$isCurrentTimeSlot?>" onmouseover="timesContainerHover(this.id);" onmouseout="timesContainerOut(this.id)">
                             <div class="admin-times-time-container">
-                                <img id="<?= $time1 ?>" class="<?=$class_i?>" src="<?=$img_src?>">
+                                <img id="<?= $time1 ?>" class="admin-times-img <?=$class_i?>" src="<?=$img_src?>">
 
                                 <div>
                                     <p class="<?=$class_p?>"><?= $time1 ?></p><br/>
@@ -260,8 +260,8 @@ if(isset($_SESSION['user'])) {
                             $stmt->bind_result($vnaam, $anaam, $cut);
 
                             while ($stmt->fetch()) { ?>
-                                <p id="p.<?=$time1?>" class="<?=$class_txt?>"><?= $vnaam . " " . $anaam ?></p>
-                                <p id="pp.<?=$time1?>" class="<?=$class_txt?>"><?= ucfirst($cut) ?></p> <?php
+                                <p class="<?=$class_txt?>"><?= $vnaam . " " . $anaam ?></p>
+                                <p class="<?=$class_txt?>"><?= ucfirst($cut) ?></p> <?php
                             }
                         } else {
                             // if we are past current time, we disable the option
