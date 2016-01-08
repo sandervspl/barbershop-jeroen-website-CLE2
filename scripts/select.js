@@ -2,6 +2,42 @@
  * Created by Sandervspl on 12/2/15.
  */
 
+function userInfoHover(sender) {
+    document.getElementById(sender).style.backgroundColor = "rgba(0, 0, 0, 0.064)";
+
+    var list1 = document.getElementById(sender).getElementsByClassName("header-text-small appointment-title appointment-past");
+    var list2 = document.getElementById(sender).getElementsByClassName("header-text-small appointment-value appointment-past");
+
+    for (var i = 0; i < list1.length; i++) {
+        list1[i].style.textDecoration = "none";
+        list1[i].style.color = "black";
+    }
+
+    for (i = 0; i < list2.length; i++) {
+        list2[i].style.textDecoration = "none";
+        list2[i].style.color = "black";
+    }
+}
+
+function userInfoOut(sender) {
+    document.getElementById(sender).style.backgroundColor = "rgba(0, 0, 0, 0.024)";
+
+    var list1 = document.getElementById(sender).getElementsByClassName("header-text-small appointment-title appointment-past");
+    var list2 = document.getElementById(sender).getElementsByClassName("header-text-small appointment-value appointment-past");
+
+    for (var i = 0; i < list1.length; i++) {
+        list1[i].style.textDecoration = "line-through";
+        list1[i].style.color = "#b2b2b2";
+    }
+
+    for (i = 0; i < list2.length; i++) {
+        list2[i].style.textDecoration = "line-through";
+        list2[i].style.color = "#b2b2b2";
+    }
+}
+
+
+
 function lockButton(id) {
     if (window.document.getElementById(id)) {
         window.document.getElementById(id).disabled = true;
@@ -15,6 +51,8 @@ function unlockButton() {
         }
     }
 }
+
+
 
 function cutSelect(sender) {
     window.sessionStorage.cut = sender.id;

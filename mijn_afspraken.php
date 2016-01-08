@@ -235,100 +235,199 @@ require_once "connect.php";
                     $stmt->close();
 
 
-                    
+
                     // start preparing our apps list
-                    $sql = sprintf("SELECT email FROM users WHERE username='%s'",
-                                    mysqli_real_escape_string($db, $_SESSION['user']['username']));
+                    $sql = "SELECT
+                              email
+                            FROM
+                              users
+                            WHERE
+                              username = ?
+                           ";
 
-                    $result = mysqli_query($db, $sql);
-                    $row = mysqli_fetch_row($result);
-                    $email = $row[0];
+                    if ($stmt3 = $db->prepare($sql)) {
+                        $stmt3->bind_param('s', $_SESSION['user']['username']);
 
-                    $sql = sprintf("SELECT
-                                      A.id, A.datum, A.tijd, A.knipbeurt, A.kapper
-                                    FROM
-                                      afspraken A
-                                    WHERE
-                                      A.email
-                                    IN (
-                                        select
-                                          B.email
-                                        from
-                                          users B
-                                        where
-                                          B.email = '%s'
-                                    )
-                                    ORDER BY
-                                      A.datum DESC, A.tijd ASC
-                                   ",
-                                    mysqli_real_escape_string($db, $email)
-                        );
+                        if ($stmt3->execute()) {
+                            $stmt3->store_result();
+                            $stmt3->bind_result($em);
 
-                    $result = mysqli_query($db, $sql);
-                    $re = (mysqli_num_rows($result) > 0) ? true : false;
-
-                    if (!$re) {
-                        ?>
-                        <p>U heeft op dit moment geen afspraken staan.</p>
-                        <?php
-                    }
-
-                    $appointments = [];
-
-                    while($row = mysqli_fetch_assoc($result)) {
-                        $appointments[] = $row;
-                    }
-
-                    foreach ($appointments as $appointment) {
-                        $id = $appointment['id'];
-                        $originalDate = $appointment['datum'];
-                        $date = nlDate(date("l j F", strtotime($originalDate)));
-
-                        $aptime = explode(":", $appointment['tijd']);
-                        $hour = $aptime[0];
-                        $min  = $aptime[1];
-
-                        $apdate = explode("-", $appointment['datum']);
-                        $day   = $apdate[2];
-                        $month = $apdate[1];
-                        $year  = $apdate[0];
-
-                        $starttime = mktime($hour, $min, 0, $month, $day, $year);
-
-                        if ($curtime > $starttime) {
-                            $isPast = "appointment-past";
-                        } else {
-                            $isPast = "";
+                            while ($stmt3->fetch()) {
+                                $email = $em;
+                            }
                         }
-                        ?>
-                        <div class="header-text-small appointment-title <?=$isPast?>">Datum: </div>
-                        <div class="header-text-small appointment-value <?=$isPast?>"><?= $date ?></div>
-                        <br />
-                        <div class="header-text-small appointment-title <?=$isPast?>">Tijd: </div>
-                        <div class="header-text-small appointment-value <?=$isPast?>"><?= $appointment['tijd'] ?></div>
-                        <br />
-                        <div class="header-text-small appointment-title <?=$isPast?>">Knipbeurt: </div>
-                        <div class="header-text-small appointment-value <?=$isPast?>"><?= $appointment['knipbeurt'] ?></div>
-                        <br />
-                        <div class="header-text-small appointment-title <?=$isPast?>">Kapper: </div>
-                        <div class="header-text-small appointment-value <?=$isPast?>"><?= $appointment['kapper'] ?></div>
-                        <br/><br />
-
-
-                        <div class="verwijder-afspraak">
-                            <a href="mijn_afspraken.php?p=1&a=<?=$id?>" class="">Verwijder afspraak</a>
-                        </div>
-                        <br/><br />
-
-                        <div class="divider-light"></div>
-                        <?php
                     }
+                    $stmt3->close();
                     ?>
+
+                    <div class="user-appointments-list">
+                        <p class="o-m-a-header appointments-header-text">Huidige afspraken</p>
+
+                    <?php
+                    // start by showing apps in ascending order that are now or in the future
+                    $sql = "SELECT
+                              A.id, A.datum, A.tijd, A.knipbeurt, A.kapper
+                            FROM
+                              afspraken A
+                            WHERE
+                              A.email
+                            IN (
+                                select
+                                  B.email
+                                from
+                                  users B
+                                where
+                                  B.email = ?
+                            )
+                            AND
+                              datum >= ?
+                            ORDER BY
+                              A.datum ASC, A.tijd ASC
+                           ";
+
+                    if ($stmt4 = $db->prepare($sql)) {
+                        $stmt4->bind_param('ss', $email, $curdate);
+
+                        if ($stmt4->execute()) {
+                            $stmt4->store_result();
+                            $stmt4->bind_result($id, $originalDate, $tijd, $knipbeurt, $kapper);
+
+                            while ($stmt4->fetch()) {
+                                $date = nlDate(date("l j F", strtotime($originalDate)));
+
+                                $aptime = explode(":", $tijd);
+                                $hour = $aptime[0];
+                                $min = $aptime[1];
+
+                                $apdate = explode("-", $originalDate);
+                                $day = $apdate[2];
+                                $month = $apdate[1];
+                                $year = $apdate[0];
+
+                                $starttime = mktime($hour, $min, 0, $month, $day, $year);
+
+                                if ($curtime > $starttime) {
+                                    $isPast = "appointment-past";
+                                } else {
+                                    $isPast = "";
+                                }
+                                ?>
+                                <div id="<?=$id?>" class="appointment-info" onmouseover="userInfoHover(this.id)" onmouseout="userInfoOut(this.id)">
+                                    <div class="header-text-small appointment-title <?= $isPast ?>">Datum:</div>
+                                    <div class="header-text-small appointment-value <?= $isPast ?>"><?= $date ?></div>
+                                    <br/>
+                                    <div class="header-text-small appointment-title <?= $isPast ?>">Tijd:</div>
+                                    <div class="header-text-small appointment-value <?= $isPast ?>"><?= $tijd ?></div>
+                                    <br/>
+                                    <div class="header-text-small appointment-title <?= $isPast ?>">Knipbeurt:</div>
+                                    <div class="header-text-small appointment-value <?= $isPast ?>"><?= $knipbeurt ?></div>
+                                    <br/>
+                                    <div class="header-text-small appointment-title <?= $isPast ?>">Kapper:</div>
+                                    <div class="header-text-small appointment-value <?= $isPast ?>"><?= $kapper ?></div>
+                                    <br/>
+
+                                    <div class="verwijder-afspraak">
+                                        <a href="mijn_afspraken.php?p=1&a=<?= $id ?>" class="">Verwijder afspraak</a>
+                                    </div>
+                                </div>
+                                <br />
+                                <br />
+                                <?php
+                            }
+                        } else {
+                            ?>
+                            <p>U heeft op dit moment geen afspraken staan.</p>
+                            <?php
+                        }
+                    }
+                    $stmt4->close();
+
+                    ?>
+                    </div>
+
+                    <div class="user-appointments-list">
+                        <p class="o-m-a-header appointments-header-text">Oude afspraken</p>
+
+                    <?php
+
+                    // now we show a list of past apps in desc order
+                    $sql = "SELECT
+                              A.id, A.datum, A.tijd, A.knipbeurt, A.kapper
+                            FROM
+                              afspraken A
+                            WHERE
+                              A.email
+                            IN (
+                                select
+                                  B.email
+                                from
+                                  users B
+                                where
+                                  B.email = ?
+                            )
+                            AND
+                              datum < ?
+                            ORDER BY
+                              A.datum DESC, A.tijd ASC
+                           ";
+
+                    if ($stmt5 = $db->prepare($sql)) {
+                        $stmt5->bind_param('ss', $email, $curdate);
+
+                        if ($stmt5->execute()) {
+                            $stmt5->store_result();
+                            $stmt5->bind_result($id, $originalDate, $tijd, $knipbeurt, $kapper);
+
+                            while ($stmt5->fetch()) {
+                                $date = nlDate(date("l j F", strtotime($originalDate)));
+
+                                $aptime = explode(":", $tijd);
+                                $hour = $aptime[0];
+                                $min = $aptime[1];
+
+                                $apdate = explode("-", $originalDate);
+                                $day = $apdate[2];
+                                $month = $apdate[1];
+                                $year = $apdate[0];
+
+                                $starttime = mktime($hour, $min, 0, $month, $day, $year);
+                                ?>
+                                <div id="<?=$id?>" class="appointment-info" onmouseover="userInfoHover(this.id)" onmouseout="userInfoOut(this.id)">
+                                    <div class="header-text-small appointment-title appointment-past">Datum:</div>
+                                    <div class="header-text-small appointment-value appointment-past"><?= $date ?></div>
+                                    <br/>
+                                    <div class="header-text-small appointment-title appointment-past">Tijd:</div>
+                                    <div class="header-text-small appointment-value appointment-past"><?= $tijd ?></div>
+                                    <br/>
+                                    <div class="header-text-small appointment-title appointment-past">Knipbeurt:</div>
+                                    <div class="header-text-small appointment-value appointment-past"><?= $knipbeurt ?></div>
+                                    <br/>
+                                    <div class="header-text-small appointment-title appointment-past">Kapper:</div>
+                                    <div class="header-text-small appointment-value appointment-past"><?= $kapper ?></div>
+                                    <br/>
+
+                                    <div class="verwijder-afspraak">
+                                        <a href="mijn_afspraken.php?p=1&a=<?= $id ?>" class="">Verwijder afspraak</a>
+                                    </div>
+                                </div>
+                                <br />
+                                <br />
+                                <?php
+                            }
+                        } else {
+                            ?>
+                            <p>Er zijn geen oude afspraken gevonden.</p>
+                            <?php
+                        }
+                    }
+                    $stmt5->close();
+                    ?>
+                    </div>
                 </div>
 
                 <?php
-                mysqli_close($db);
                 }
+                mysqli_close($db);
                 ?>
                 <br /><br />
             </div>
@@ -336,6 +435,7 @@ require_once "connect.php";
     </div>
 </section>
 
+<script src="scripts/select.js"></script>
 <footer>
     <?php require_once "footer.php" ?>
 </footer>
