@@ -9,8 +9,51 @@ if(empty($_SESSION['user'])) {
     die("Redirecting to login.php");
 }
 
-require_once "nlDate.php";
+require("common.php");
 require_once "connect.php";
+require_once "nlDate.php";
+
+
+
+function checkValidUser() {
+    $host     = 'localhost';
+    $user     = 'root';
+    $pw       = '';
+    $database = 'website';
+
+    $db = mysqli_connect($host, $user, $pw, $database);
+
+    $sql = "SELECT
+      voornaam, achternaam, email
+    FROM
+      users
+    WHERE
+      username = ?
+   ";
+
+    if ($stmt = $db->prepare($sql)) {
+        $stmt->bind_param('s', $_SESSION['user']['username']);
+
+        if ($stmt->execute()) {
+            $stmt->store_result();
+            $stmt->bind_result($fetch_voornaam, $fetch_achternaam, $fetch_email);
+
+            while($stmt->fetch()) {
+                $voornaam   = $fetch_voornaam;
+                $achternaam = $fetch_achternaam;
+                $email      = $fetch_email;
+
+                $stmt->close();
+                return array($voornaam, $achternaam, $email);
+            }
+        } else {
+            $stmt->close();
+            return 0;
+        }
+    }
+
+    return 0;
+}
 ?>
 <!DOCTYPE HTML>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -41,52 +84,104 @@ require_once "connect.php";
         <div class="white-background">
             <div id="account-wrapper-wide" class="mijn-afspraken">
                 <?php
-                if (isset($_GET['p']) && $_GET['p'] == 3 && isset($_GET['a'])) {
-                    require("common.php");
 
+                /*
+                 *
+                 * AFSPRAAK VERWIJDEREN
+                 *      UITVOERING
+                 *
+                 */
+
+                if (isset($_GET['p']) && $_GET['p'] == 3 && isset($_GET['a'])) {
                     $db = mysqli_connect($host, $user, $pw, $database);
 
-                    // check again if we are actually allowed to do this
-                    $sql = sprintf("SELECT voornaam, achternaam, email FROM users WHERE username='%s'",
-                        mysqli_real_escape_string($db, $_SESSION['user']['username']));
+                    // get user info
+                    $voornaam   = '';
+                    $achternaam = '';
+                    $email      = '';
 
-                    $result = mysqli_query($db, $sql);
-                    $userinfo = mysqli_fetch_row($result);
+                    $sql = "SELECT
+                              voornaam, achternaam, email
+                            FROM
+                              users
+                            WHERE
+                              username = ?
+                           ";
 
+                    if ($stmt = $db->prepare($sql)) {
+                        $stmt->bind_param('s', $_SESSION['user']['username']);
+
+                        if ($stmt->execute()) {
+                            $stmt->store_result();
+                            $stmt->bind_result($fetch_voornaam, $fetch_achternaam, $fetch_email);
+
+                            while($stmt->fetch()) {
+                                $voornaam   = $fetch_voornaam;
+                                $achternaam = $fetch_achternaam;
+                                $email      = $fetch_email;
+                            }
+                        } else {
+                            header("Location: mijn_afspraken.php?p=2&a=0&e=1");
+                            die("Redirecting to mijn_afspraken.php?p=2&a=0&e=1");
+                        }
+                    }
+                    $stmt->close();
+
+                    // get ID from url
                     $id = $_GET['a'];
 
-                    $sql = sprintf("SELECT * FROM afspraken WHERE voornaam='%s' AND achternaam='%s' AND email='%s' AND id='%s'",
-                        mysqli_real_escape_string($db, $userinfo[0]),
-                        mysqli_real_escape_string($db, $userinfo[1]),
-                        mysqli_real_escape_string($db, $userinfo[2]),
-                        $id);
+                    // collect information from this appointment with this user's info
+                    $sql = "SELECT
+                              *
+                            FROM
+                              afspraken
+                            WHERE
+                              voornaam = ?
+                            AND
+                              achternaam = ?
+                            AND
+                              email = ?
+                            AND
+                              id = ?
+                           ";
 
-                    $result = mysqli_query($db, $sql);
-                    $r = (mysqli_num_rows($result) > 0) ? true : false;
+                    if ($stmt = $db->prepare($sql)) {
+                        $stmt->bind_param('sssi', $voornaam, $achternaam, $email, $id);
 
-                    // if we are not allowed then go to error page
-                    if (!$r) {
-                        header("Location: mijn_afspraken.php?p=2&a=0");
-                        die("Redirecting to mijn_afspraken.php?p=2&a=0");
+                        if ($stmt->execute()) {
+                            $stmt->store_result();
+
+                            // something went wrong, redirect
+                            if ($stmt->num_rows <= 0) {
+                                header("Location: mijn_afspraken.php?p=2&a=0&e=2");
+                                die("Redirecting to mijn_afspraken.php?p=2&a=0&e=2");
+                            }
+                        }
                     }
+                    $stmt->close();
 
-                    // prepare delete statement
-                    $sql = sprintf("DELETE FROM afspraken WHERE id='%s'",
-                        mysqli_real_escape_string($db, $id));
+                    // prepare delete statement and execute
+                    $sql = "DELETE FROM
+                              afspraken
+                            WHERE
+                              id = ?
+                           ";
 
-                    // execute it
-                    mysqli_query($db, $sql);
+                    if ($stmt = $db->prepare($sql)) {
+                        $stmt->bind_param('s', $id);
 
-                    // see if we succeeded or not
-                    $re = (mysqli_affected_rows($db) > 0) ? true : false;
+                        if ($stmt->execute()) {
+
+                            // something went wrong, redirect
+                            if ($stmt->affected_rows <= 0) {
+                                header("Location: mijn_afspraken.php?p=2&a=0&e=3");
+                                die("Redirecting to mijn_afspraken.php?p=2&a=0&e=3");
+                            }
+                        }
+                    }
+                    $stmt->close();
 
                     mysqli_close($db);
-
-                    // if not, redirect to error page
-                    if (!$re) {
-                        header("Location: mijn_afspraken.php?p=2&a=0");
-                        die("Redirecting to mijn_afspraken.php?p=2&a=0");
-                    }
                 ?>
                     <p class="header-text">Afspraak verwijderen</p>
                     <p>Afspraak succesvol verwijderd.</p> <br />
@@ -94,72 +189,131 @@ require_once "connect.php";
                 <?php
                 }
 
+
+                /*
+                 *
+                 * AFSPRAAK VERWIJDEREN
+                 *    CONFIRMATION
+                 *
+                 */
+
+
                 if (isset($_GET['p']) && isset($_GET['a'])) {
                     $db = mysqli_connect($host, $user, $pw, $database);
 
-                    $sql = sprintf("SELECT voornaam, achternaam, email FROM users WHERE username='%s'",
-                        mysqli_real_escape_string($db, $_SESSION['user']['username']));
+                    // get user info
+                    $voornaam   = '';
+                    $achternaam = '';
+                    $email      = '';
 
-                    $result = mysqli_query($db, $sql);
-                    $userinfo = mysqli_fetch_row($result);
+                    $sql = "SELECT
+                              voornaam, achternaam, email
+                            FROM
+                              users
+                            WHERE
+                              username = ?
+                           ";
 
+                    if ($stmt = $db->prepare($sql)) {
+                        $stmt->bind_param('s', $_SESSION['user']['username']);
+
+                        if ($stmt->execute()) {
+                            $stmt->store_result();
+                            $stmt->bind_result($fetch_voornaam, $fetch_achternaam, $fetch_email);
+
+                            while($stmt->fetch()) {
+                                $voornaam   = $fetch_voornaam;
+                                $achternaam = $fetch_achternaam;
+                                $email      = $fetch_email;
+                            }
+                        } else {
+                            header("Location: mijn_afspraken.php?p=2&a=0&e=1");
+                            die("Redirecting to mijn_afspraken.php?p=2&a=0&e=1");
+                        }
+                    }
+                    $stmt->close();
+
+                    // get ID from url
                     $id = $_GET['a'];
 
-                    $sql = sprintf("SELECT * FROM afspraken WHERE voornaam='%s' AND achternaam='%s' AND email='%s' AND id='%s'",
-                        mysqli_real_escape_string($db, $userinfo[0]),
-                        mysqli_real_escape_string($db, $userinfo[1]),
-                        mysqli_real_escape_string($db, $userinfo[2]),
-                        $id);
-
-                    $result = mysqli_query($db, $sql);
-                    $r = (mysqli_num_rows($result) > 0) ? true : false;
-
                     // only continue if we are allowed to delete this appointment
-                    if ($r && $_GET['p'] == 1) {
-                        $db = mysqli_connect($host, $user, $pw, $database);
+                    if ($_GET['p'] == 1) {
+                        $sql = "SELECT
+                                  voornaam, achternaam, datum, tijd, knipbeurt, kapper
+                                FROM
+                                  afspraken
+                                WHERE
+                                  voornaam = ?
+                                AND
+                                  achternaam = ?
+                                AND
+                                  email = ?
+                                AND
+                                  id = ?
+                               ";
 
-                        $sql = sprintf("SELECT datum, tijd, knipbeurt, kapper FROM afspraken WHERE id='%s'",
-                        mysqli_real_escape_string($db, $id));
+                        if ($stmt = $db->prepare($sql)) {
+                            $stmt->bind_param('sssi', $voornaam, $achternaam, $email, $id);
 
-                        $result = mysqli_query($db, $sql);
+                            if ($stmt->execute()) {
+                                $stmt->store_result();
+                                $stmt->bind_result($fetch_voornaam, $fetch_achternaam, $fetch_datum, $fetch_tijd, $fetch_knipbeurt, $fetch_kapper);
 
-                        // if appointment is not found then redirect to error page
-                        if (!$result) {
-                            header("Location: mijn_afspraken.php?p=2&a=0");
-                        } else {
-                            $appointment = mysqli_fetch_row($result);
+                                if ($stmt->num_rows > 0) {
+                                    while ($stmt->fetch()) {
+                                        $originalDate = $fetch_datum;
+                                        $date = nlDate(date("l j F", strtotime($originalDate)));
 
-                            $originalDate = $appointment[0];
-                            $date = nlDate(date("l j F", strtotime($originalDate)));
-                            ?>
+                                        ?>
 
-                            <p class="header-text">Afspraak verwijderen</p>
-                            <div class="delete-appointment-wrapper">
-                                <p>Weet je zeker dat je deze afspraak wilt verwijderen?</p>
-                                <br/>
+                                        <p class="header-text">Afspraak verwijderen</p>
+                                        <div class="delete-appointment-wrapper">
+                                            <p>Weet je zeker dat je deze afspraak wilt verwijderen?</p>
+                                            <br/>
 
-                                <div class="divider-light"></div>
+                                            <div class="divider-light"></div>
 
-                                <div class="header-text-small appointment-title">Datum:</div>
-                                <div class="header-text-small appointment-value"><?= $date ?></div>
-                                <br/>
-                                <div class="header-text-small appointment-title">Tijd:</div>
-                                <div class="header-text-small appointment-value"><?= $appointment[1] ?></div>
-                                <br/>
-                                <div class="header-text-small appointment-title">Knipbeurt:</div>
-                                <div class="header-text-small appointment-value"><?= $appointment[2] ?></div>
-                                <br/>
-                                <div class="header-text-small appointment-title">Kapper:</div>
-                                <div class="header-text-small appointment-value"><?= $appointment[3] ?></div>
-                                <br />
+                                            <div class="header-text-small appointment-title">Naam:</div>
+                                            <div class="header-text-small appointment-value"><?= ucfirst($fetch_achternaam . " " . $fetch_achternaam) ?></div>
+                                            <br/>
+                                            <div class="header-text-small appointment-title">Datum:</div>
+                                            <div class="header-text-small appointment-value"><?= $date ?></div>
+                                            <br/>
+                                            <div class="header-text-small appointment-title">Tijd:</div>
+                                            <div class="header-text-small appointment-value"><?= $fetch_tijd ?></div>
+                                            <br/>
+                                            <div class="header-text-small appointment-title">Knipbeurt:</div>
+                                            <div class="header-text-small appointment-value"><?= $fetch_knipbeurt ?></div>
+                                            <br/>
+                                            <div class="header-text-small appointment-title">Kapper:</div>
+                                            <div class="header-text-small appointment-value"><?= $fetch_kapper ?></div>
+                                            <br />
 
-                                <div class="divider-light"></div>
+                                            <div class="divider-light"></div>
 
-                                <a href="mijn_afspraken.php" class="button gegevens-form-button">Nee</a>
-                                <a href="mijn_afspraken.php?p=3&a=<?=$id?>" class="button gegevens-form-button">Ja</a>
-                            </div>
-                <?php
+                                            <a href="mijn_afspraken.php" class="button gegevens-form-button">Nee</a>
+                                            <a href="mijn_afspraken.php?p=3&a=<?=$id?>" class="button gegevens-form-button">Ja</a>
+                                        </div>
+
+                                        <?php
+                                    }
+                                } else {
+                                    // something went wrong
+                                    header("Location: mijn_afspraken.php?p=2&a=0&e=5");
+                                    die("Redirecting to mijn_afspraken.php?p=2&a=0&e=5");
+                                }
+                            }
                         }
+                        $stmt->close();
+
+
+                    /*
+                     *
+                     * AFSPRAAK VERWIJDEREN
+                     *      MAG NIET
+                     *
+                     */
+
                     } else if ($_GET['p'] != 3) {
                 ?>
                         <p class="header-text">Afspraak verwijderen</p>
@@ -169,6 +323,15 @@ require_once "connect.php";
                     }
 
                     mysqli_close($db);
+
+
+                    /*
+                     *
+                     *
+                     * AFSPRAAK LIJST
+                     *
+                     *
+                     */
                 } else {
                 ?>
 
@@ -427,7 +590,6 @@ require_once "connect.php";
 
                 <?php
                 }
-                mysqli_close($db);
                 ?>
                 <br /><br />
             </div>
