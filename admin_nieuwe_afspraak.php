@@ -75,18 +75,18 @@ if (isset($_POST['admin-add-appointment-button'])) {
         $db = mysqli_connect($host, $user, $pw, $database) or die('Error: ' . mysqli_connect_error());
 
         $sql = "SELECT
-              voornaam,
-              achternaam,
-              knipbeurt
-            FROM
-              afspraken
-            WHERE
-              tijd = ?
-            AND
-              datum = ?
-            AND
-              kapper = ?
-            ";
+                  voornaam,
+                  achternaam,
+                  knipbeurt
+                FROM
+                  afspraken
+                WHERE
+                  tijd = ?
+                AND
+                  datum = ?
+                AND
+                  kapper = ?
+                ";
 
         if ($stmt = $db->prepare($sql)) {
             $stmt->bind_param('sss', $tijd, $datum, $kapper);

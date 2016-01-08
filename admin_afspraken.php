@@ -224,7 +224,7 @@ if(isset($_SESSION['user'])) {
 ?>
                         <div id="<?=$time1?>" class="admin-times-container <?=$isCurrentTimeSlot?>" onmouseover="timesContainerHover(this.id);" onmouseout="timesContainerOut(this.id)">
                             <div class="admin-times-time-container">
-                                <img id=<?= $time1 ?> class="<?=$class_i?>" src=<?=$img_src?>>
+                                <img id="<?= $time1 ?>" class="<?=$class_i?>" src="<?=$img_src?>">
 
                                 <div>
                                     <p class="<?=$class_p?>"><?= $time1 ?></p><br/>

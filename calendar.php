@@ -101,7 +101,7 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
 
             $curday = date("d");
             $curmonth = date("n");
-            $curdate = date("Y-m-d");
+            $curdate = date("Y-n-d");
 
             if ($date === $curdate) {
                 $todayclass = "calendartoday";

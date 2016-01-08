@@ -78,12 +78,13 @@ footer {
     color: white;
     font-size: 0.95em;
     text-align: center;
+    line-height: 1.2em;
 
     -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.15);
     -moz-box-shadow: 2px 2px 2px rgba(0,0,0 .15);
     box-shadow: 2px 2px 2px rgba(0,0,0, .15);
 
-    font-family: Nunito, serif;
+    font-family: "Open Sans", serif;
 }
 
 #main-page {
@@ -970,7 +971,7 @@ div.month-name {
     margin: 45px auto auto auto;
     border-top: 1px solid black;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .month-name .header-text {
@@ -980,7 +981,7 @@ div.month-name {
     margin: 25px auto 0 auto;
     position: absolute;
     left: 50px;
-    top: -10px;
+    top: 0;
 }
 
 #month-name-header-helper {
@@ -2089,6 +2090,11 @@ form .login-register-wrapper .small-text {
 
 .delete-appointment-wrapper a.button.gegevens-form-button {
     margin-top: 25px;
+}
+
+.appointment-past {
+    color: #b2b2b2;
+    text-decoration: line-through;
 }
 
     @media only screen and (max-width: 1024px) {

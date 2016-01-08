@@ -198,8 +198,13 @@ $telefoon   = $gegevens['telefoon'];
 </header>
 
 <section id="main-page">
-    <p id="header-text-header">Wijzig Account</p>
     <div id="basic-wrapper">
+        <p id="header-text-header">Wijzig Account</p>
+
+        <div class="ta-left">
+            <a href="private.php">< opties</a>
+        </div>
+
         <div class="white-background">
             <div id="account-wrapper-wide">
                 <form id="edit-account-form" action="edit_account.php" method="post">

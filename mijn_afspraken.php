@@ -31,8 +31,13 @@ require_once "connect.php";
 </header>
 
 <section id="main-page">
-    <p id="header-text-header">Mijn Afspraken</p>
     <div id="basic-wrapper">
+        <p id="header-text-header">Mijn Afspraken</p>
+
+        <div class="ta-left">
+            <a href="private.php">< opties</a>
+        </div>
+
         <div class="white-background">
             <div id="account-wrapper-wide" class="mijn-afspraken">
                 <?php
@@ -178,6 +183,60 @@ require_once "connect.php";
                     <?php
                     $db = mysqli_connect($host, $user, $pw, $database);
 
+                    // look for all apps that are in the past and not set as done
+                    $curtime = time();
+                    $curdate = date("Y-m-d");
+
+                    $sql = "SELECT
+                              voltooid,
+                              datum
+                            FROM
+                              afspraken
+                            WHERE
+                              voltooid = 0
+                            AND
+                              datum < ?
+                           ";
+
+                    if ($stmt = $db->prepare($sql)) {
+                        $stmt->bind_param('s', $curdate);
+
+                        if($stmt->execute()) {
+                            $stmt->store_result();
+
+                            while($stmt->fetch()) {
+                                $stmt->bind_result($voltooid, $date2);
+
+                                $date3 = strtotime($date2);
+
+                                if ($date3 < $curtime) {
+
+                                    // update every app that is not set as done yet
+                                    $sql = "UPDATE
+                                              afspraken
+                                            SET
+                                              voltooid = 1
+                                            WHERE
+                                              datum < ?
+                                            AND
+                                              voltooid = 0
+                                           ";
+
+                                    if ($stmt2 = $db->prepare($sql)) {
+                                        $stmt2->bind_param('s', $curdate);
+
+                                        $stmt2->execute();
+                                        $stmt2->close();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    $stmt->close();
+
+
+                    
+                    // start preparing our apps list
                     $sql = sprintf("SELECT email FROM users WHERE username='%s'",
                                     mysqli_real_escape_string($db, $_SESSION['user']['username']));
 
@@ -185,7 +244,23 @@ require_once "connect.php";
                     $row = mysqli_fetch_row($result);
                     $email = $row[0];
 
-                    $sql = sprintf("SELECT A.id, A.datum, A.tijd, A.knipbeurt, A.kapper FROM afspraken A WHERE A.email in (select B.email from users B where B.email='%s') ORDER BY A.datum, A.tijd",
+                    $sql = sprintf("SELECT
+                                      A.id, A.datum, A.tijd, A.knipbeurt, A.kapper
+                                    FROM
+                                      afspraken A
+                                    WHERE
+                                      A.email
+                                    IN (
+                                        select
+                                          B.email
+                                        from
+                                          users B
+                                        where
+                                          B.email = '%s'
+                                    )
+                                    ORDER BY
+                                      A.datum DESC, A.tijd ASC
+                                   ",
                                     mysqli_real_escape_string($db, $email)
                         );
 
@@ -208,18 +283,35 @@ require_once "connect.php";
                         $id = $appointment['id'];
                         $originalDate = $appointment['datum'];
                         $date = nlDate(date("l j F", strtotime($originalDate)));
+
+                        $aptime = explode(":", $appointment['tijd']);
+                        $hour = $aptime[0];
+                        $min  = $aptime[1];
+
+                        $apdate = explode("-", $appointment['datum']);
+                        $day   = $apdate[2];
+                        $month = $apdate[1];
+                        $year  = $apdate[0];
+
+                        $starttime = mktime($hour, $min, 0, $month, $day, $year);
+
+                        if ($curtime > $starttime) {
+                            $isPast = "appointment-past";
+                        } else {
+                            $isPast = "";
+                        }
                         ?>
-                        <div class="header-text-small appointment-title">Datum: </div>
-                        <div class="header-text-small appointment-value"><?= $date ?></div>
+                        <div class="header-text-small appointment-title <?=$isPast?>">Datum: </div>
+                        <div class="header-text-small appointment-value <?=$isPast?>"><?= $date ?></div>
                         <br />
-                        <div class="header-text-small appointment-title">Tijd: </div>
-                        <div class="header-text-small appointment-value"><?= $appointment['tijd'] ?></div>
+                        <div class="header-text-small appointment-title <?=$isPast?>">Tijd: </div>
+                        <div class="header-text-small appointment-value <?=$isPast?>"><?= $appointment['tijd'] ?></div>
                         <br />
-                        <div class="header-text-small appointment-title">Knipbeurt: </div>
-                        <div class="header-text-small appointment-value"><?= $appointment['knipbeurt'] ?></div>
+                        <div class="header-text-small appointment-title <?=$isPast?>">Knipbeurt: </div>
+                        <div class="header-text-small appointment-value <?=$isPast?>"><?= $appointment['knipbeurt'] ?></div>
                         <br />
-                        <div class="header-text-small appointment-title">Kapper: </div>
-                        <div class="header-text-small appointment-value"><?= $appointment['kapper'] ?></div>
+                        <div class="header-text-small appointment-title <?=$isPast?>">Kapper: </div>
+                        <div class="header-text-small appointment-value <?=$isPast?>"><?= $appointment['kapper'] ?></div>
                         <br/><br />
 
 

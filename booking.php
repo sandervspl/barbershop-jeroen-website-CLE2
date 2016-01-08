@@ -88,7 +88,7 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
         </div>
     </div>
 
-    <form name="datetime" method="post">
+    <form id="datetime-form" name="datetime" method="post">
 
         <!--  calendar  -->
         <div id="calendar-wrapper">
