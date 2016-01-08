@@ -15,7 +15,7 @@ require_once "nlDate.php";
 
 
 
-function checkValidUser() {
+function getUserInfo() {
     $host     = 'localhost';
     $user     = 'root';
     $pw       = '';
@@ -44,7 +44,11 @@ function checkValidUser() {
                 $email      = $fetch_email;
 
                 $stmt->close();
-                return array($voornaam, $achternaam, $email);
+                return array(
+                    'voornaam' => $voornaam,
+                    'achternaam' => $achternaam,
+                    'email' => $email
+                );
             }
         } else {
             $stmt->close();
@@ -95,37 +99,8 @@ function checkValidUser() {
                 if (isset($_GET['p']) && $_GET['p'] == 3 && isset($_GET['a'])) {
                     $db = mysqli_connect($host, $user, $pw, $database);
 
-                    // get user info
-                    $voornaam   = '';
-                    $achternaam = '';
-                    $email      = '';
-
-                    $sql = "SELECT
-                              voornaam, achternaam, email
-                            FROM
-                              users
-                            WHERE
-                              username = ?
-                           ";
-
-                    if ($stmt = $db->prepare($sql)) {
-                        $stmt->bind_param('s', $_SESSION['user']['username']);
-
-                        if ($stmt->execute()) {
-                            $stmt->store_result();
-                            $stmt->bind_result($fetch_voornaam, $fetch_achternaam, $fetch_email);
-
-                            while($stmt->fetch()) {
-                                $voornaam   = $fetch_voornaam;
-                                $achternaam = $fetch_achternaam;
-                                $email      = $fetch_email;
-                            }
-                        } else {
-                            header("Location: mijn_afspraken.php?p=2&a=0&e=1");
-                            die("Redirecting to mijn_afspraken.php?p=2&a=0&e=1");
-                        }
-                    }
-                    $stmt->close();
+                    // get user's info
+                    $userInfo = getUserInfo();
 
                     // get ID from url
                     $id = $_GET['a'];
@@ -146,7 +121,7 @@ function checkValidUser() {
                            ";
 
                     if ($stmt = $db->prepare($sql)) {
-                        $stmt->bind_param('sssi', $voornaam, $achternaam, $email, $id);
+                        $stmt->bind_param('sssi', $userInfo['voornaam'], $userInfo['achternaam'], $userInfo['email'], $id);
 
                         if ($stmt->execute()) {
                             $stmt->store_result();
@@ -199,45 +174,15 @@ function checkValidUser() {
 
 
                 if (isset($_GET['p']) && isset($_GET['a'])) {
-                    $db = mysqli_connect($host, $user, $pw, $database);
-
-                    // get user info
-                    $voornaam   = '';
-                    $achternaam = '';
-                    $email      = '';
-
-                    $sql = "SELECT
-                              voornaam, achternaam, email
-                            FROM
-                              users
-                            WHERE
-                              username = ?
-                           ";
-
-                    if ($stmt = $db->prepare($sql)) {
-                        $stmt->bind_param('s', $_SESSION['user']['username']);
-
-                        if ($stmt->execute()) {
-                            $stmt->store_result();
-                            $stmt->bind_result($fetch_voornaam, $fetch_achternaam, $fetch_email);
-
-                            while($stmt->fetch()) {
-                                $voornaam   = $fetch_voornaam;
-                                $achternaam = $fetch_achternaam;
-                                $email      = $fetch_email;
-                            }
-                        } else {
-                            header("Location: mijn_afspraken.php?p=2&a=0&e=1");
-                            die("Redirecting to mijn_afspraken.php?p=2&a=0&e=1");
-                        }
-                    }
-                    $stmt->close();
-
-                    // get ID from url
-                    $id = $_GET['a'];
-
-                    // only continue if we are allowed to delete this appointment
                     if ($_GET['p'] == 1) {
+                        $db = mysqli_connect($host, $user, $pw, $database);
+
+                        // get user's info
+                        $userInfo = getUserInfo();
+
+                        // get ID from url
+                        $id = $_GET['a'];
+
                         $sql = "SELECT
                                   voornaam, achternaam, datum, tijd, knipbeurt, kapper
                                 FROM
@@ -253,7 +198,7 @@ function checkValidUser() {
                                ";
 
                         if ($stmt = $db->prepare($sql)) {
-                            $stmt->bind_param('sssi', $voornaam, $achternaam, $email, $id);
+                            $stmt->bind_param('sssi', $userInfo['voornaam'], $userInfo['achternaam'], $userInfo['email'], $id);
 
                             if ($stmt->execute()) {
                                 $stmt->store_result();
@@ -274,7 +219,7 @@ function checkValidUser() {
                                             <div class="divider-light"></div>
 
                                             <div class="header-text-small appointment-title">Naam:</div>
-                                            <div class="header-text-small appointment-value"><?= ucfirst($fetch_achternaam . " " . $fetch_achternaam) ?></div>
+                                            <div class="header-text-small appointment-value"><?= ucfirst($fetch_voornaam . " " . $fetch_achternaam) ?></div>
                                             <br/>
                                             <div class="header-text-small appointment-title">Datum:</div>
                                             <div class="header-text-small appointment-value"><?= $date ?></div>
@@ -305,7 +250,7 @@ function checkValidUser() {
                             }
                         }
                         $stmt->close();
-
+                        mysqli_close($db);
 
                     /*
                      *
@@ -313,7 +258,6 @@ function checkValidUser() {
                      *      MAG NIET
                      *
                      */
-
                     } else if ($_GET['p'] != 3) {
                 ?>
                         <p class="header-text">Afspraak verwijderen</p>
@@ -321,8 +265,6 @@ function checkValidUser() {
                         <a href="mijn_afspraken.php">Ga terug naar Mijn Afspraken</a>
                 <?php
                     }
-
-                    mysqli_close($db);
 
 
                     /*
@@ -532,6 +474,8 @@ function checkValidUser() {
                               datum < ?
                             ORDER BY
                               A.datum DESC, A.tijd ASC
+                            LIMIT
+                              3
                            ";
 
                     if ($stmt5 = $db->prepare($sql)) {
