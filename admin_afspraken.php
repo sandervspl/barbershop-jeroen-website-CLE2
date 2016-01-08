@@ -83,23 +83,26 @@ if(isset($_SESSION['user'])) {
         }
 ?>
 <section id="main-page">
-    <p id="header-text-header">Afspraken</p>
+    <p id="header-text-header" class="margin-b-100">Afspraken</p>
 
     <div id="basic-wrapper">
         <div class="ta-left">
-            <a href="admin.php">< admin pagina</a>
+            <a href="admin_afspraken.php">< andere kapper</a>
+        </div>
+
+<!--        <div class="white-background">-->
+<!--        </div>-->
+
+        <div class="admin-barber-name-wrapper ta-left">
+            <p class="header-text admin-barber-name"><?= $barber ?></p>
         </div>
 
         <div class="white-background">
             <div id="account-text">
                 <p class="header-text admin-kalender-header"><?= nldate(date("l j F Y")) ?></p>
-
-                <p class="header-text admin-barber-name"><?= $barber ?></p>
             </div>
-        </div>
 
-        <div class="white-background margin-t-10">
-            <div class="admin-wrapper-wide">
+            <div class="admin-wrapper-wide margin-t-40">
                 <div id="admin-kalender-times">
 <?php
                 $monthname = date("F");
@@ -157,7 +160,7 @@ if(isset($_SESSION['user'])) {
 
                     if ($hour < 12 && !$didMorningHeader) {
 ?>
-                    <div id="morning-header">
+                    <div class="o-m-a-header-wrapper">
                         <p class="o-m-a-header">Ochtend</p>
                     </div>
 
@@ -170,9 +173,9 @@ if(isset($_SESSION['user'])) {
 ?>
                     </div>
 
-                        <div id="afternoon-header">
-                            <p class="o-m-a-header">Middag</p>
-                        </div>
+                    <div class="o-m-a-header-wrapper">
+                        <p class="o-m-a-header">Middag</p>
+                    </div>
 
                     <div class="times-container-day">
 <?php
@@ -183,7 +186,7 @@ if(isset($_SESSION['user'])) {
 ?>
                     </div>
 
-                    <div id="evening-header">
+                    <div class="o-m-a-header-wrapper">
                         <p class="o-m-a-header">Avond</p>
                     </div>
 

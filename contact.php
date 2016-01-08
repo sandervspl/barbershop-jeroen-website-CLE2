@@ -54,6 +54,7 @@ if(!isset($_SESSION)) {
 
 <section id="main-page">
     <p id="header-text-header">Contact</p>
+
     <div id="contactpage-text-wrapper">
         <div class="white-background">
         <div id="contact-wrapper">

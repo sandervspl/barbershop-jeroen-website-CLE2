@@ -90,7 +90,7 @@ footer {
 #main-page {
     width: 80%;
     height: auto;
-    min-height: 650px;
+    min-height: 100%;
     max-width: 1024px;
     margin: 30px auto;
     padding: 30px 15px;
@@ -166,6 +166,12 @@ footer {
 }
 .margin-t-10 {
     margin-top: 10px !important;
+}
+.margin-t-40 {
+    margin-top: 40px !important;
+}
+.margin-b-100 {
+    margin-bottom: 100px !important;
 }
 .no-margin {
     margin: 0 !important;
@@ -963,6 +969,15 @@ span#date-and-time-header {
     font-size: 2.8125em;
     color: #5d4437;
     margin: 0 auto 0 auto;
+    border-bottom: 1px solid #5d4437;
+}
+
+.o-m-a-header-wrapper {
+    height: auto;
+    width: 100%;
+    margin-right: 15px;
+    float: left;
+    clear: left;
 }
 
 div.month-name {
@@ -2344,13 +2359,21 @@ form .login-register-wrapper .small-text {
 }
 
 .admin-kalender-header {
-    margin-bottom: 55px !important;
+    margin-top: 20px !important;
+    margin-bottom: 0 !important;
+}
+
+.admin-barber-name-wrapper {
+    position: relative;
 }
 
 .admin-barber-name {
     font-family: Lobster, serif;
-    font-size: 3.5em;
-    margin-bottom: 0 !important;
+    font-size: 4.5em;
+    margin: 0 !important;
+    position: absolute;
+    bottom: -9px;
+    right: 70px;
 }
 
 #admin-add-appointment-wrapper {
