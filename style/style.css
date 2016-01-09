@@ -969,7 +969,6 @@ span#date-and-time-header {
     font-size: 2.8125em;
     color: #5d4437;
     margin: 0 auto 0 auto;
-    border-bottom: 1px solid #5d4437;
 }
 
 .o-m-a-header-wrapper {
@@ -2133,6 +2132,16 @@ form .login-register-wrapper .small-text {
     text-align: right;
 }
 
+.cur-past-appointments-header {
+    text-align: left;
+    text-transform: capitalize;
+    font-family: Lobster, serif;
+    font-size: 1.8125em;
+    color: #5d4437;
+    margin: 0 auto 20px auto;
+    border-bottom: 1px solid #5d4437;
+}
+
     @media only screen and (max-width: 1024px) {
         #account-image.calendar-img {
             display: none;
@@ -2367,7 +2376,13 @@ form .login-register-wrapper .small-text {
     position: relative;
 }
 
-.admin-barber-name {
+.admin-barber-name-calendar {
+    font-family: Lobster, serif;
+    font-size: 4.5em;
+    margin: 0 !important;
+}
+
+.admin-barber-name-appointments {
     font-family: Lobster, serif;
     font-size: 4.5em;
     margin: 0 !important;

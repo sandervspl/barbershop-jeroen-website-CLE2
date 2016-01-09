@@ -112,7 +112,7 @@ if (!isset($_GET['p'])) {
 
         <div class="white-background">
             <div id="account-text" class="ta-center">
-                <p class="header-text admin-barber-name"><?= $barber ?></p><br />
+                <p class="header-text admin-barber-name-calendar"><?= $barber ?></p><br />
                 <a href="admin_nieuwe_afspraak_kalender.php" class="admin-select-barber">Andere kapper</a>
             </div>
         </div>

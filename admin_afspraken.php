@@ -94,7 +94,7 @@ if(isset($_SESSION['user'])) {
 <!--        </div>-->
 
         <div class="admin-barber-name-wrapper ta-left">
-            <p class="header-text admin-barber-name"><?= $barber ?></p>
+            <p class="header-text admin-barber-name-appointments"><?= $barber ?></p>
         </div>
 
         <div class="white-background">

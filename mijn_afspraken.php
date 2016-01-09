@@ -366,7 +366,7 @@ function getUserInfo() {
                     ?>
 
                     <div class="user-appointments-list">
-                        <p class="o-m-a-header appointments-header-text">Huidige afspraken</p>
+                        <p class="cur-past-appointments-header appointments-header-text">Huidige afspraken</p>
 
                     <?php
                     // start by showing apps in ascending order that are now or in the future
@@ -451,7 +451,7 @@ function getUserInfo() {
                     </div>
 
                     <div class="user-appointments-list">
-                        <p class="o-m-a-header appointments-header-text">Oude afspraken</p>
+                        <p class="cur-past-appointments-header appointments-header-text">Oude afspraken</p>
 
                     <?php
 
