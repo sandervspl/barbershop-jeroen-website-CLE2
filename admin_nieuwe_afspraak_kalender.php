@@ -80,6 +80,9 @@ if (!isset($_GET['p'])) {
                 <p class="header-text">Kies Kapper</p>
             </div>
 
+            <div class="divider-light"></div>
+            <br />
+
             <section id="basic-wrapper" class="choose-barber">
                 <a href="admin_nieuwe_afspraak_kalender.php?p=1">Jeroen</a> <br />
                 <a href="admin_nieuwe_afspraak_kalender.php?p=2">Juno</a> <br />
@@ -101,23 +104,32 @@ if (!isset($_GET['p'])) {
 ?>
 
 <section id="main-page">
-    <p id="header-text-header">Kalender</p>
+    <p id="header-text-header" class="margin-b-100">Kalender</p>
 
     <form name="calendar-form" method="post">
 
     <div id="basic-wrapper">
+<!--        <div class="ta-left">-->
+<!--            <a href="admin.php">< admin pagina</a>-->
+<!--        </div>-->
+
+<!--        <div class="white-background">-->
+<!--            <div id="account-text" class="ta-center">-->
+<!--                <p class="header-text admin-barber-name-calendar">--><?//= $barber ?><!--</p><br />-->
+<!--                <a href="admin_nieuwe_afspraak_kalender.php" class="admin-select-barber">Andere kapper</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!---->
+<!--        <br />-->
+
+
         <div class="ta-left">
-            <a href="admin.php">< admin pagina</a>
+            <a href="admin_afspraken.php">< andere kapper</a>
         </div>
 
-        <div class="white-background">
-            <div id="account-text" class="ta-center">
-                <p class="header-text admin-barber-name-calendar"><?= $barber ?></p><br />
-                <a href="admin_nieuwe_afspraak_kalender.php" class="admin-select-barber">Andere kapper</a>
-            </div>
+        <div class="admin-barber-name-wrapper ta-left">
+            <p class="header-text admin-barber-name-appointments"><?= $barber ?></p>
         </div>
-
-        <br />
 
         <div class="white-background">
         <div class="admin-calendar-wrapper">

@@ -67,6 +67,9 @@ if(isset($_SESSION['user'])) {
                 <p class="header-text">Kies Kapper</p>
             </div>
 
+            <div class="divider-light"></div>
+            <br />
+
             <section id="basic-wrapper" class="choose-barber">
                 <a href="admin_afspraken.php?p=1">Jeroen</a> <br />
                 <a href="admin_afspraken.php?p=2">Juno</a> <br />
@@ -90,9 +93,6 @@ if(isset($_SESSION['user'])) {
             <a href="admin_afspraken.php">< andere kapper</a>
         </div>
 
-<!--        <div class="white-background">-->
-<!--        </div>-->
-
         <div class="admin-barber-name-wrapper ta-left">
             <p class="header-text admin-barber-name-appointments"><?= $barber ?></p>
         </div>
@@ -101,6 +101,8 @@ if(isset($_SESSION['user'])) {
             <div id="account-text">
                 <p class="header-text admin-kalender-header"><?= nldate(date("l j F Y")) ?></p>
             </div>
+
+            <div class="divider-light margin-t-40"></div>
 
             <div class="admin-wrapper-wide margin-t-40">
                 <div id="admin-kalender-times">

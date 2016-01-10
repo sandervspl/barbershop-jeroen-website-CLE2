@@ -4,6 +4,7 @@ if(!isset($_SESSION)) {
 }
 
 require_once "nlDate.php";
+require_once "admincheck.php";
 
 if (isset($_GET['month']) && isset($_GET['year'])) {
     $month = $_GET['month'];
@@ -137,7 +138,7 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
                     if ($stmt->execute()) {
                         $stmt->store_result();
 
-                        if ($stmt->num_rows > 0) {
+                        if ($stmt->num_rows > 0 && !isAdmin()) {
                             $hasAppointmentOnDate = true;
                         }
                     }

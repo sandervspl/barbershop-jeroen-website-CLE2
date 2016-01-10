@@ -40,6 +40,7 @@ if(isset($_SESSION['user'])) {
             <div id="account-wrapper-wide">
                 <div id="account-text">
                     <p class="header-text">Opties</p>
+
                     <a href="admin_afspraken.php">Afspraken</a><br />
                     <a href="admin_nieuwe_afspraak_kalender.php">Voeg Afspraak Toe</a><br />
                     <br />

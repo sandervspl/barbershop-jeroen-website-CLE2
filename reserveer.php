@@ -60,19 +60,23 @@ if (!isset($_POST['submit'])) {
             <div class="cut-selector">
                 <div class="white-background">
                     <div id="cuts">
-                    <p class="header-text">Knipbeurt</p>
-                    <input id="hair" type="radio" name="cut" value="haar" onclick="cutSelect(this)" />
-                    <label class="trans hair" for="hair" onmouseover="nhpup.popup('Alleen haar <br/> €18,-')"></label>
+                        <p class="header-text">Knipbeurt</p>
 
-                    <input id="beard" type="radio" name="cut" value="baard" onclick="cutSelect(this)" />
-                    <label class="trans beard" for="beard" onmouseover="nhpup.popup('Alleen baard <br/> €12,-')"></label>
+                        <div class="divider-light"></div>
+                        <br />
 
-                    <input id="moustache" type="radio" name="cut" value="snor" onclick="cutSelect(this)" />
-                    <label class="trans moustache" for="moustache" onmouseover="nhpup.popup('Alleen snor <br/> €12,-')"></label>
+                        <input id="hair" type="radio" name="cut" value="haar" onclick="cutSelect(this)" />
+                        <label class="trans hair" for="hair" onmouseover="nhpup.popup('Alleen haar <br/> €18,-')"></label>
 
-                    <input id="all" type="radio" name="cut" value="alles" onclick="cutSelect(this)" />
-                    <label class="trans all" for="all" onmouseover="nhpup.popup('Haar & baard <br/> €25,-')"></label>
-                    </div>
+                        <input id="beard" type="radio" name="cut" value="baard" onclick="cutSelect(this)" />
+                        <label class="trans beard" for="beard" onmouseover="nhpup.popup('Alleen baard <br/> €12,-')"></label>
+
+                        <input id="moustache" type="radio" name="cut" value="snor" onclick="cutSelect(this)" />
+                        <label class="trans moustache" for="moustache" onmouseover="nhpup.popup('Alleen snor <br/> €12,-')"></label>
+
+                        <input id="all" type="radio" name="cut" value="alles" onclick="cutSelect(this)" />
+                        <label class="trans all" for="all" onmouseover="nhpup.popup('Haar & baard <br/> €25,-')"></label>
+                        </div>
                 </div>
 
                 <div class="divider"></div>
@@ -80,6 +84,10 @@ if (!isset($_POST['submit'])) {
                 <div class="white-background">
                     <div id="barbers">
                         <p class="header-text">Kapper</p>
+
+                        <div class="divider-light"></div>
+                        <br />
+
                         <input id="Jeroen" type="radio" name="barber" value="Jeroen" onclick="barberSelection(this)" />
                         <label class="trans barber-selection" for="Jeroen">Jeroen</label>
 

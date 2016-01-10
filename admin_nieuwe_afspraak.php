@@ -167,6 +167,10 @@ if (isset($_GET['p']) && $_GET['p'] == 3) {
     <p id="header-text-header">Afspraak Toevoegen</p>
 
     <div id="basic-wrapper">
+        <div class="ta-left">
+            <a href="admin.php">< admin pagina</a>
+        </div>
+
         <div class="white-background">
             <div id="account-text">
                 <p class="header-text">
@@ -193,6 +197,9 @@ if (isset($_GET['p']) && $_GET['p'] == 3) {
                     } ?>
                 </p>
             </div>
+
+            <div class="divider-light"></div>
+            <br />
 
             <div id="admin-add-appointment-wrapper">
                 <form id="admin-add-appointment-form" name="admin-add-appointment-form" method="post">

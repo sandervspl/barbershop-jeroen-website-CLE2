@@ -40,7 +40,7 @@ body {
 }
 
 a {
-    font-family: Nunito, serif;
+    font-family: "Open Sans", serif;
     color: #8e675d;
     text-decoration: none;
 }
@@ -414,7 +414,7 @@ nav a {
 #header-text-header {
     font-family: Lobster, serif;
     font-size: 3.125em;
-    margin: -10px auto 75px auto;
+    margin: -10px auto 100px auto;
     border-bottom: 1px solid black;
     width: 80%;
     position: relative;
@@ -2068,7 +2068,7 @@ form .login-register-wrapper .small-text {
     line-height: 25px;
 }
 
-#account-text > a {
+#account-text a, .choose-barber a {
     line-height: 25px;
 }
 
@@ -2372,7 +2372,7 @@ form .login-register-wrapper .small-text {
 }
 
 .admin-kalender-header {
-    margin-top: 20px !important;
+    margin-top: 40px !important;
     margin-bottom: 0 !important;
 }
 
