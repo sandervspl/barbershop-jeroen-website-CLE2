@@ -71,7 +71,7 @@ function nextMonth(sender, m, y, admin) {
 }
 
 //change time information from date without reloading page (AJAX)
-function showTimes(date, d, m, y, admin) {
+function showTimes(date, d, m, y) {
     if (date == "") {
         document.getElementById("times-table").innerHTML = "";
     } else {
@@ -93,24 +93,73 @@ function showTimes(date, d, m, y, admin) {
             }
         };
 
-        var url = "timestable.php?day=" + d + "&month=" + m + "&year=" + y + "&a=" + admin;
+        var url = "timestable.php?day=" + d + "&month=" + m + "&year=" + y + "&a=";
+
         xmlhttp.open("GET", url, true);
         xmlhttp.send();
     }
 }
 
-function onDateClick(d, da, mo, m, y, admin) {
+//change time information from date without reloading page (AJAX)
+function showTimesAdminCalendar(date, d, m, y, p) {
+    if (date == "") {
+        document.getElementById("times-table").innerHTML = "";
+    } else {
+        var xmlhttp;
+
+        document.getElementById("main-page").style.minHeight = "1200px";
+        document.getElementById("times-table").innerHTML = '<img class="loading-gif" src="http://www.jasonkenison.com/uploads/blog/loading.gif" />';
+
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("times-table").innerHTML = xmlhttp.responseText;
+            }
+        };
+
+
+        var url = "admin_afspraken_clean.php?p=" + p + "&day=" + d + "&month=" + m + "&year=" + y;
+
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+    }
+}
+
+
+
+function onDateClick(d, da, mo, m, y) {
     // don't load timetable if it's already showing
     if (window.sessionStorage.currentDayTimes != d) {
         window.sessionStorage.currentDayTimes = d;
 
         date = d + "_" + m + "_" + y;
 
-        if (admin) {
-            showTimes(date, d, m, y, 1);
-        } else {
-            showTimes(date, d, m, y, 0);
-        }
+        showTimes(date, d, m, y);
+
+        window.document.getElementById('date-and-time-header').innerHTML = "<p class='header-text-small'>" + da + "</p>" + d + " " + mo + " " + y;
+        window.document.getElementById('date-and-time-header').style.borderBottom = "1px solid black";
+
+        b = window.document.getElementById('date-and-time-times-container');
+        b.style.height = "auto";
+
+        window.sessionStorage.monthday = d;
+    }
+}
+
+function onDateClickAdminCalendar(d, da, mo, m, y, p) {
+    // don't load timetable if it's already showing
+    if (window.sessionStorage.currentDayTimes != d) {
+        window.sessionStorage.currentDayTimes = d;
+
+        date = d + "_" + m + "_" + y;
+
+        showTimesAdminCalendar(date, d, m, y, p);
 
         window.document.getElementById('date-and-time-header').innerHTML = "<p class='header-text-small'>" + da + "</p>" + d + " " + mo + " " + y;
         window.document.getElementById('date-and-time-header').style.borderBottom = "1px solid black";

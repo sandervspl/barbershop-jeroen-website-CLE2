@@ -43,6 +43,7 @@ a {
     font-family: "Open Sans", serif;
     color: #8e675d;
     text-decoration: none;
+    font-size: 1em;
 }
 
     a:hover, a p:hover {
@@ -973,6 +974,7 @@ span#date-and-time-header {
     font-size: 2.8125em;
     color: #5d4437;
     margin: 0 auto 0 auto;
+    border-bottom: 1px solid #5d4437;
 }
 
 .o-m-a-header-wrapper {

@@ -124,7 +124,7 @@ if (!isset($_GET['p'])) {
 
 
         <div class="ta-left">
-            <a href="admin_afspraken.php">< andere kapper</a>
+            <a href="admin_nieuwe_afspraak_kalender.php">< andere kapper</a>
         </div>
 
         <div class="admin-barber-name-wrapper ta-left">
@@ -258,7 +258,7 @@ if (!isset($_GET['p'])) {
                         } else { ?>
                             <td class="calendardate cut-selector <?=$todayclass?>">
                                 <div class="divBox">
-                                    <input type="radio" id="<?= $date ?>" class="date-radio" name="date" value="<?= $date ?>" onclick="onDateClick(<?=$day?>, <?=$weekday_f?>, <?=$monthname?>, <?=$month?>, <?=$year?>, 1)"/>
+                                    <input type="radio" id="<?= $date ?>" class="date-radio" name="date" value="<?= $date ?>" onclick="onDateClickAdminCalendar(<?=$day?>, <?=$weekday_f?>, <?=$monthname?>, <?=$month?>, <?=$year?>, <?=$_GET['p']?>)">
                                     <label for="<?= $date ?>"> <?= $day ?> </label>
                                 </div>
                             </td> <?php
@@ -301,7 +301,7 @@ if (!isset($_GET['p'])) {
                             } else { ?>
                                 <td class="calendardate cut-selector <?=$todayclass?>">
                                     <div class="divBox">
-                                        <input type="radio" id="<?= $date ?>" class="date-radio" name="date" value="<?= $date ?>" onclick="onDateClick(<?=$day?>, <?=$weekday_f?>, <?=$monthname?>, <?=$month?>, <?=$year?>, 1)"/>
+                                        <input type="radio" id="<?= $date ?>" class="date-radio" name="date" value="<?= $date ?>" onclick="onDateClickAdminCalendar(<?=$day?>, <?=$weekday_f?>, <?=$monthname?>, <?=$month?>, <?=$year?>, <?=$_GET['p']?>)">
                                         <label for="<?= $date ?>"> <?= $day ?> </label>
                                     </div>
                                 </td> <?php

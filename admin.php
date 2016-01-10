@@ -41,8 +41,7 @@ if(isset($_SESSION['user'])) {
                 <div id="account-text">
                     <p class="header-text">Opties</p>
 
-                    <a href="admin_afspraken.php">Afspraken</a><br />
-                    <a href="admin_nieuwe_afspraak_kalender.php">Voeg Afspraak Toe</a><br />
+                    <a href="admin_nieuwe_afspraak_kalender.php">Afspraken kalender</a><br />
                     <br />
                     <a href="logout.php">Uitloggen</a>
                 </div>

@@ -27,6 +27,7 @@ if(isset($_SESSION['user'])) {
     }
 
     $date = $year."-".$month."-".$day;
+    $datetime = strtotime($date);
 
 } else {
     header("Location: forbidden.php");
@@ -99,7 +100,7 @@ if(isset($_SESSION['user'])) {
 
         <div class="white-background">
             <div id="account-text">
-                <p class="header-text admin-kalender-header"><?= nldate(date("l j F Y")) ?></p>
+                <p class="header-text admin-kalender-header"><?= nldate(date("l j F Y"), $datetime) ?></p>
             </div>
 
             <div class="divider-light margin-t-40"></div>
