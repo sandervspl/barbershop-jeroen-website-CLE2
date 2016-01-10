@@ -15,18 +15,28 @@ function isAdmin()
 
     $db = mysqli_connect($host, $user, $pw, $database) or die('Error: ' . mysqli_connect_error());
 
-    $sql = sprintf("SELECT level FROM users WHERE username='%s'", $_SESSION['user']['username']);
+    $sql = "SELECT
+              level
+            FROM
+              users
+            WHERE
+              username = ?
+           ";
 
-    $result = mysqli_query($db, $sql);
-    $re = mysqli_fetch_row($result);
+    $lvl = 0;
+    if ($stmt = $db->prepare($sql)) {
+        $stmt->bind_param('s', $_SESSION['user']['username']);
 
-    if ($re[0] != 1) {
-        $result = false;
-    } else {
-        $result = true;
+        if ($stmt->execute()) {
+            $stmt->store_result();
+            $stmt->bind_result($userlevel);
+
+            while ($stmt->fetch()) {
+                $lvl = $userlevel;
+            }
+        }
     }
-
     mysqli_close($db);
 
-    return $result;
+    return $lvl;
 }

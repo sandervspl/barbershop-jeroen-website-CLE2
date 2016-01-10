@@ -109,6 +109,52 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
                 $todayclass = "";
             }
 
+            // check if logged in user already has a appointment on this day
+            $hasAppointmentOnDate = false;
+
+            if (isset($_SESSION['user']) && isset($_SESSION['user']['email'])) {
+                require_once "connect.php";
+
+                $db = mysqli_connect($host, $user, $pw, $database) or die('Error: ' . mysqli_connect_error());
+
+                $sql = "SELECT
+                          1
+                        FROM
+                          afspraken
+                        WHERE
+                          email = ?
+                        AND
+                          datum >= ?
+                        AND
+                          datum = ?
+                        LIMIT
+                          1
+                       ";
+
+                if ($stmt = $db->prepare($sql)) {
+                    $stmt->bind_param('sss', $_SESSION['user']['email'], $curdate, $date);
+
+                    if ($stmt->execute()) {
+                        $stmt->store_result();
+
+                        if ($stmt->num_rows > 0) {
+                            $hasAppointmentOnDate = true;
+                        }
+                    }
+
+                    $stmt->close();
+                }
+                mysqli_close($db);
+            }
+
+            if ($hasAppointmentOnDate) {
+                $filledclass = "calendar-user-has-appointment";
+                $filledhover = "nhpup.popup('Je hebt hier al een afspraak')";
+            } else {
+                $filledclass = "";
+                $filledhover = "";
+            }
+
             // previous month days
             if ($day === "01" && $weekday !== "Mon" && !$endPrevMonth) {
                 $i = 1;
@@ -137,9 +183,13 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
                 }
 
                 // it will always miss day 1 on first row if this is not here. TODO: fix this
-                if (($day < $curday && $curmonth === $month) || isFeestdag($day, $month) || $weekday === "Mon" || $weekday === "Sun" ||
-                    ($_SESSION['barber'] === "Juno" && ($weekday === "Mon" || $weekday === "Wed" || $weekday === "Fri"))) { ?>
-                    <td class="calendardateblocked <?=$todayclass?>">
+                if (($day < $curday && $curmonth === $month) ||
+                     isFeestdag($day, $month) ||
+                     $weekday === "Mon" || $weekday === "Sun" ||
+                     ($_SESSION['barber'] === "Juno" && ($weekday === "Mon" || $weekday === "Wed" || $weekday === "Fri") ||
+                     $hasAppointmentOnDate)
+                ) { ?>
+                    <td class="calendardateblocked <?=$todayclass?> <?=$filledclass?>" onmouseover="<?=$filledhover?>">
                         <div class="divBox">
                             <span> <?=$day?> </span>
                         </div>
@@ -178,9 +228,12 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
                     // if not we fill our cells with current month data
                 } else {
                     if (!$doNextMonth) {
-                        if (($day < $curday && $curmonth === $month) || isFeestdag($day, $month) || $weekday === "Mon" || $weekday === "Sun" ||
-                            ($_SESSION['barber'] === "Juno" && ($weekday === "Mon" || $weekday === "Wed" || $weekday === "Fri"))) { ?>
-                            <td class="calendardateblocked <?=$todayclass?>">
+                        if (($day < $curday && $curmonth === $month) ||
+                            isFeestdag($day, $month) || $weekday === "Mon" || $weekday === "Sun" ||
+                            ($_SESSION['barber'] === "Juno" && ($weekday === "Mon" || $weekday === "Wed" || $weekday === "Fri") ||
+                            $hasAppointmentOnDate)
+                        ) { ?>
+                            <td class="calendardateblocked <?=$todayclass?> <?=$filledclass?>" onmouseover="<?=$filledhover?>">
                                 <div class="divBox">
                                     <span> <?=$day?> </span>
                                 </div>

@@ -76,7 +76,7 @@ footer {
     border: 1px solid rgba(0, 0, 0, 0.37);
     background-color: rgba(119, 119, 119, 0.75);
     color: white;
-    font-size: 0.95em;
+    font-size: 0.75em;
     text-align: center;
     line-height: 1.2em;
 
@@ -734,9 +734,13 @@ td {
     border-spacing: 0;
 }
 
-    .calendartoday {
+.calendartoday {
     /*background: rgba(142, 142, 142, 0.25);*/
-    background-color: rgba(187, 187, 187, 0.26);
+    background-color: rgba(187, 187, 187, 0.35);
+}
+
+.calendar-user-has-appointment {
+    background-color: rgba(187, 21, 24, 0.55);
 }
 
 .calendarday, .calendardate, .calendardateblocked, .calendardate-sun-mon {
