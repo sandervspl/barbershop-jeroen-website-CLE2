@@ -735,15 +735,15 @@ td {
 }
 
 .calendartoday {
-    /*background: rgba(142, 142, 142, 0.25);*/
     background-color: rgba(187, 187, 187, 0.35);
 }
 
 .calendar-user-has-appointment {
-    background-color: rgba(187, 21, 24, 0.55);
+    border-bottom: 1px solid rgb(254, 27, 34);
 }
 
-.calendarday, .calendardate, .calendardateblocked, .calendardate-sun-mon {
+.calendarday, .calendardate, .calendardateblocked, .calendardate-sun-mon, .calendar-user-has-appointment {
+    cursor: default;
     font-family: Nunito, serif;
 }
 
