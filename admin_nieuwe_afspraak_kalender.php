@@ -352,7 +352,7 @@ if (!isset($_GET['p'])) {
 ?>
 </footer>
 
-<script src="scripts/popup.js"></script>
+<script src="scripts/admin.js"></script>
 <script src="scripts/calendar.js"></script>
 </body>
 </html>
