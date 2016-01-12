@@ -136,20 +136,20 @@ if (isset($_POST['submit'])) {
             <form id="mainForm" action="#" method="post">
                 <div class="gegevens">
                     <div class="white-background">
-                        <label class="input-text" for="voornaam">Voornaam</label><br />
+                        <label class="input-text" for="voornaam">Voornaam *</label><br />
                         <input type="text" id="voornaam" class="textinput" name="voornaam" autofocus="autofocus" value="<?=htmlentities($voornaam)?>" />
                         <br />
 
-                        <label class="input-text" for="achternaam">Achternaam</label><br />
+                        <label class="input-text" for="achternaam">Achternaam *</label><br />
                         <input type="text" id="achternaam" class="textinput" name="achternaam" value="<?=htmlentities($achternaam)?>" />
                         <br />
 
-                        <label class="input-text" for="email">E-Mail</label><br/>
+                        <label class="input-text" for="email">E-Mail *</label><br/>
                         <input type="email" id="email" class="textinput" name="email" value="<?=htmlentities($email)?>" />
                         <br />
 
-                        <label class="input-text" for="phone">Telefoon</label><br/>
-                        <input type="text" id="phone" class="textinput" name="phone" value="<?=htmlentities($phone)?>" />
+                        <label class="input-text" for="phone">Telefoon *</label><br/>
+                        <input type="text" id="phone" class="textinput" name="phone" placeholder="01234567890" value="<?=htmlentities($phone)?>" />
 
                         <input type="submit" name="submit" class="button" value="Reserveer" />
                     </div>

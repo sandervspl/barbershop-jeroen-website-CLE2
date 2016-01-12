@@ -12,7 +12,12 @@ if(!isset($_SESSION)) {
 <nav id="navigation-background">
     <div class="navigation-container">
         <div class="navigation-left">
-            <ul>
+            <a href="index.php">
+                <img src="images/other/bblogo.png">
+            </a>
+        </div>
+        <div class="navigation-center">
+            <ul class="navigation-list">
                 <li><a href="index.php">Over Ons</a></li>
                 <li><a href="contact.php">Contact</a></li>
                 <li><a href="reserveer.php">Reserveer</a></li>

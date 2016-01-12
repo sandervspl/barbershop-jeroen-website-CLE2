@@ -106,7 +106,7 @@ if ($_GET['p'] == 1) {
                 if ($hour < 12 && !$didMorningHeader) {
                 ?>
                 <div class="o-m-a-header-wrapper">
-                    <p class="o-m-a-header">Ochtend</p>
+                    <p class="admin-o-m-a-header">Ochtend</p>
                 </div>
 
             <div class="times-container-day">
@@ -119,7 +119,7 @@ if ($_GET['p'] == 1) {
             </div>
 
                 <div class="o-m-a-header-wrapper">
-                    <p class="o-m-a-header">Middag</p>
+                    <p class="admin-o-m-a-header">Middag</p>
                 </div>
 
             <div class="times-container-day">
@@ -132,7 +132,7 @@ if ($_GET['p'] == 1) {
             </div>
 
                 <div class="o-m-a-header-wrapper">
-                    <p class="o-m-a-header">Avond</p>
+                    <p class="admin-o-m-a-header">Avond</p>
                 </div>
 
                 <div class="times-container-day">

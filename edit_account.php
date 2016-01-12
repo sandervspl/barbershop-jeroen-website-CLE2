@@ -159,7 +159,6 @@ if(!empty($_POST))
 
 // database connection information
 require_once "connect.php";
-
 $db =  mysqli_connect($host, $user, $pw, $database) or die('Error: '.mysqli_connect_error());
 
 $sql = sprintf("SELECT voornaam, achternaam, telefoon FROM users WHERE username='%s'",

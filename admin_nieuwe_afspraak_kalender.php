@@ -109,20 +109,6 @@ if (!isset($_GET['p'])) {
     <form name="calendar-form" method="post">
 
     <div id="basic-wrapper">
-<!--        <div class="ta-left">-->
-<!--            <a href="admin.php">< admin pagina</a>-->
-<!--        </div>-->
-
-<!--        <div class="white-background">-->
-<!--            <div id="account-text" class="ta-center">-->
-<!--                <p class="header-text admin-barber-name-calendar">--><?//= $barber ?><!--</p><br />-->
-<!--                <a href="admin_nieuwe_afspraak_kalender.php" class="admin-select-barber">Andere kapper</a>-->
-<!--            </div>-->
-<!--        </div>-->
-<!---->
-<!--        <br />-->
-
-
         <div class="ta-left">
             <a href="admin_nieuwe_afspraak_kalender.php">< andere kapper</a>
         </div>
