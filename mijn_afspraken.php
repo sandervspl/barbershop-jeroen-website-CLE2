@@ -21,6 +21,11 @@ function getUserInfo() {
     $pw       = '';
     $database = 'website';
 
+//    $host     = 'localhost';
+//    $user     = '0832970';
+//    $pw       = 'voonaeci';
+//    $database = '0832970';
+
     $db = mysqli_connect($host, $user, $pw, $database);
 
     $sql = "SELECT

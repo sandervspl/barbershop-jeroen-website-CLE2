@@ -94,14 +94,12 @@ footer {
     max-width: 1024px;
     margin: 30px auto;
     padding: 30px 15px;
-    /*background-color: rgba(253, 243, 211, 0.99);*/
-    /*background-color: rgba(229, 217, 177, 0.99);*/
     background-color: rgba(229, 224, 206, 0.99);
     text-align: center;
 
-    -moz-box-shadow: 5px 5px 5px #888888;
-    -webkit-box-shadow: 5px 5px 5px #888888;
-    box-shadow: 5px 5px 5px #888888;
+    -webkit-box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 4px 4px 4px rgba(0, 0, 0 .15);
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, .15);
 }
 
     @media only screen and (max-width: 750px) {
@@ -345,6 +343,10 @@ a#login-button, a#nav-login-button {
     background-color: rgba(255, 255, 255, 1);
     position: relative;
     vertical-align: top;
+
+    -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.85);
+    -moz-box-shadow: 0 0 4px rgba(0,0,0 .85);
+    box-shadow: 0 0 4px rgba(0,0,0, .85);
 }
 
     @media only screen and (max-width: 750px) {
@@ -371,7 +373,7 @@ a#login-button, a#nav-login-button {
 }
 
 .navigation-left a > img {
-    width: 118px;
+    width: 168px;
     height: 40px;
 }
 

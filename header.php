@@ -6,14 +6,11 @@ if(!isset($_SESSION)) {
 <!DOCTYPE HTML>
 <html lang="en">
 <body>
-<!--<div id="main-header">-->
-<!--    <a href="index.php"><img src="images/other/bblogo.png" id="header-logo"></a>-->
-<!--</div>-->
 <nav id="navigation-background">
     <div class="navigation-container">
         <div class="navigation-left">
             <a href="index.php">
-                <img src="images/other/bblogo.png">
+                <img src="images/other/bblogo-v-l.png">
             </a>
         </div>
         <div class="navigation-center">
