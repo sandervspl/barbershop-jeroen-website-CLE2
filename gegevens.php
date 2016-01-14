@@ -5,7 +5,55 @@ if(!isset($_SESSION)) {
 
 if (!isset($_SESSION['cut']) || !isset($_SESSION['date']) || !isset($_SESSION['time'])) {
     header("Location: reserveer.php");
+    die("Redirecting");
 }
+
+// check if user already has an appointment at this time
+// if they are not logged in then the calendar will not block dates
+// logging in at this page will allow them to make an appointment anyway
+if (isset($_SESSION['user']) && isset($_SESSION['user']['email'])) {
+    require_once "connect.php";
+
+    $db = mysqli_connect($host, $user, $pw, $database) or die('Error: ' . mysqli_connect_error());
+    $hasAppointmentOnDate = false;
+
+    $sql = "SELECT
+              *
+            FROM
+              afspraken
+            WHERE
+              email = ?
+            AND
+              datum >= ?
+            AND
+              datum = ?
+            LIMIT
+              1
+           ";
+
+    if ($stmt = $db->prepare($sql)) {
+        $stmt->bind_param('sss', $_SESSION['user']['email'], date("Y-m-d"), $_SESSION['date']);
+
+        if ($stmt->execute()) {
+            $stmt->store_result();
+
+            if ($stmt->affected_rows > 0) {
+                $hasAppointmentOnDate = true;
+            }
+        }
+        $stmt->close();
+    }
+    mysqli_close($db);
+
+    // redirect
+    if ($hasAppointmentOnDate) {
+        $_SESSION['error'] = "hasAppointmentOnDate";
+
+        header("Location: booking.php");
+        die("Redirecting");
+    }
+}
+
 
 $voornaam = '';
 $achternaam = '';

@@ -57,6 +57,18 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
 <section id="main-page">
     <p id="header-text-header">Dag & Tijd</p>
     <div id="summary-header">
+
+        <?php
+        if (isset($_SESSION['error']) && $_SESSION['error'] === "hasAppointmentOnDate") {
+            ?>
+            <p class="error-text">Kies een andere datum.</p>
+            <br />
+            <?php
+        }
+
+        unset($_SESSION['error']);
+        ?>
+
         <div class="white-background">
             <table class="header-text">
                 <tr>
