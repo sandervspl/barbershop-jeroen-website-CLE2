@@ -116,15 +116,6 @@ function cutSelected() {
     }
 }
 
-// insert saved barber name chosen by user
-function barberSelected() {
-    if (window.sessionStorage.barber != 0) {
-        window.document.querySelector('.barber-name').innerHTML = window.sessionStorage.barber;
-    } else {
-        window.document.querySelector('.barber-name').innerHTML = "Geen voorkeur";
-    }
-}
-
 // insert saved time chosen by user
 function timeSelected() {
     window.document.querySelector('#chosen-time').innerHTML = window.sessionStorage.time;

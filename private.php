@@ -266,7 +266,7 @@ mysqli_close($db);
 <?php
                     }
 ?>
-                    <a href="edit_account.php">Wijzig Account</a><br />
+                    <a href="edit_account.php">Wijzig Gegevens</a><br />
                     <br />
                     <a href="logout.php">Uitloggen</a>
                 </div>

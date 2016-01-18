@@ -198,7 +198,7 @@ $telefoon   = $gegevens['telefoon'];
 
 <section id="main-page">
     <div id="basic-wrapper">
-        <p id="header-text-header">Wijzig Account</p>
+        <p id="header-text-header">Wijzig Gegevens</p>
 
         <div class="ta-left">
             <a href="private.php">< opties</a>

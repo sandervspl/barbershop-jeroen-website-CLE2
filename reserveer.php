@@ -15,13 +15,12 @@ if (!isset($_POST['submit'])) {
         if (isset($_POST['barber'])) {
             $_SESSION['barber'] = $_POST['barber'];
         } else {
-            $_SESSION['barber'] = 'geenvoorkeur';
+            $_SESSION['barber'] = 'geen voorkeur';
         }
 
         $_SESSION['cut'] = $_POST['cut'];
 
-        $url = "booking.php";
-        header("location: $url");
+        header("location: booking.php");
     }
 }
 ?>

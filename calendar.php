@@ -110,8 +110,8 @@ function isFeestdag($day, $month) {
 
             // info for date click
             // these need to be surrounded by '' otherwise they will not get correctly passed into the onclick JS function
-            $weekday_f = "'" . date("l", $time) . "'";  // Monday-Sunday
-            $monthname = "'" . date("F", $time) . "'";  // January-December
+            $weekday_f = "'" . nldate(date("l", $time)) . "'";  // Monday-Sunday
+            $monthname = "'" . nldate(date("F", $time)) . "'";  // January-December
 
 
         // check if this date is current date

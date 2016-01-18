@@ -112,7 +112,7 @@ for ($i = 0; $i <= $end_hour; $i++) {
         }
 
         // if we have no preference but only one of the barbers has an appointment at this time, the second barber is selected
-        if ($_SESSION['barber'] === 'geenvoorkeur') {
+        if ($_SESSION['barber'] === 'geen voorkeur') {
             if ($row[0] === "Jeroen") {
                 $barber = "Juno";
             } else {
@@ -122,7 +122,7 @@ for ($i = 0; $i <= $end_hour; $i++) {
     }
 
     // if no barber has an appointment at this time we random one if it's not Tue, Thu or Sat.
-    else if ($_SESSION['barber'] === 'geenvoorkeur') {
+    else if ($_SESSION['barber'] === 'geen voorkeur') {
         $starting_day = "$year-$month-$day";
         $time = strtotime($starting_day);
         $weekday = date("D", mktime(0,0,0, $time, $time, $time));

@@ -29,12 +29,12 @@ function getUserInfo() {
     $db = mysqli_connect($host, $user, $pw, $database);
 
     $sql = "SELECT
-      voornaam, achternaam, email
-    FROM
-      users
-    WHERE
-      username = ?
-   ";
+              voornaam, achternaam, email
+            FROM
+              users
+            WHERE
+              username = ?
+           ";
 
     if ($stmt = $db->prepare($sql)) {
         $stmt->bind_param('s', $_SESSION['user']['username']);

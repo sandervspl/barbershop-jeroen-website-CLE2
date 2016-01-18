@@ -336,6 +336,7 @@ footer {
 
 a#login-button, a#nav-login-button {
     display: inline-block;
+    /*max-width: ;*/
 }
 
 #navigation-background {
@@ -2431,7 +2432,6 @@ form#admin-add-appointment-form input#achternaam.admin-va-input {
 
 label#voornaam-label {
     max-width: 150px;
-    margin-right: 5px;
 }
 
 label#achternaam-label {
