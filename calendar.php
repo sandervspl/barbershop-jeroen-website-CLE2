@@ -114,7 +114,7 @@ function isFeestdag($day, $month) {
             $monthname = "'" . nldate(date("F", $time)) . "'";  // January-December
 
 
-        // check if this date is current date
+            // check if this date is current date
             $date    = date("Y-m-d", $time);
             $curdate = date("Y-m-d");
 
@@ -209,7 +209,7 @@ function isFeestdag($day, $month) {
                 <td class="calendardate cut-selector <?=$todayclass?>">
                     <div class="divBox">
                         <input type="radio" id="<?=$date?>" class="date-radio" name="date" value="<?=$date?>" onclick="onDateClick(<?=$day?>, <?=$weekday_f?>, <?=$monthname?>, <?=$month?>, <?=$year?>, 0)" />
-                        <label for="<?=$date?>"> <?=$day?> </label>
+                        <label for="<?=$date?>"> <?= $day ?> </label>
                     </div>
                 </td>
                 <?php

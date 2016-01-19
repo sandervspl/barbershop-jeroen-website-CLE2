@@ -134,6 +134,8 @@ if (!isset($_GET['p'])) {
                 </div>
             </div>
 
+
+
             <table id="calendar" class="admin-calendar">
                 <tr class="calendarday">
                     <th>Ma</th>
@@ -145,183 +147,93 @@ if (!isset($_GET['p'])) {
                     <th>Zo</th>
                 </tr>
                 <tr>
+
                     <?php
+                    // grab weekday (Mon - Sun) of current time
+                    $weekday = date("D", $time);
 
-                    $endMonth = false;
-                    $endPrevMonth = false;
-                    $doNextMonth = false;
-                    $prevDay = -1;
-                    $counter = 0;
+                    // create array which we later go through in reverse to put in table
+                    $prevmontharray = [];
 
-                    // start building up the calendar table row, filling them with the days of the month
-                    /*
-                     * HOW IT WORKS:
-                     * First we check if the first day of the month starts on a Monday
-                     * If this is not the case, we count backwards until we do find Monday
-                     * This way the calendar always has the correct day filled in the correct column
-                     * 01(-12-2015) is a Tuesday for example, so we have to fill in the monday with 30(-11-2015)
-                     * When Monday is found, we fill these previous month days into their cells (td)
-                     * When that is done the current month can get filled in
-                     * Every Monday we make a new table row (tr)
-                     * When we go one day further and it becomes day 01 and one of the previous days was 28,29,30 or 31 we know
-                     * we are at the end of our current month.
-                     * To complete the calendar and not have gaps, we fill these in with the next month's dates until we are on Monday.
-                     */
-                    do {
-
-                    // geef dag weer die we nodig hebben. We beginnen bij dag 1 van de gegeven maand & jaar en tellen met $counter op elke loop
-                    $day =       date("d", mktime(0, 0, 0, date("m", $time), date("d", $time) + $counter, date("y", $time))); // 01-31
-                    $weekday =   date("D", mktime(0, 0, 0, date("m", $time), date("d", $time) + $counter, date("y", $time))); // Mon-Sun
-                    $weekday_f = date("l", mktime(0,0,0, date("m",$time), date("d",$time)+$counter, date("y",$time)));        // Monday-Sunday
-                    $monthname = date("F", $time);                                                                            // January-December
-
-                    $weekday_f = "'" . $weekday_f . "'";
-                    $monthname = "'" . $monthname . "'";
-
-                    // translate to Dutch
-                    $weekday_f = nlDate($weekday_f);
-                    $monthname = nlDate($monthname);
-
-                    // vorm een datum. Dit wordt bijv. 2016-01-01
-                    $date = $year . "-" . date("m-", $time) . $day;                                                   // YYYY-MM-DD
-
-                    // huidige dag & maand
-                    $curday = date("d");
-                    $curmonth = date("n");
-                    $curdate = date("Y-m-d");
-
-                    if ($date === $curdate) {
-                        $todayclass = "calendartoday";
-                    } else {
-                        $todayclass = "";
+                    // look for first monday in the past starting from current time
+                    while ($weekday !== "Mon") {
+                        $time = strtotime("-1 day", $time);
+                        $prevmontharray[] = date("d", $time);
+                        $weekday = date("D", $time);
                     }
 
-                    // niet elke maand begint netjes op een maandag
-                    // 1 januari 2016 begint op een vrijdag, dus we moeten maandag t/m donderdag vullen met dagen van december 2015
-                    if ($day === "01" && $weekday !== "Mon" && !$endPrevMonth) {
-                        $i = 1;
-
-                        // loop en tel af tot we een dag vinden dat een maandag is
-                        do {
-                            // zet dag data in variabelen. We tellen de dag af met $i per loop
-                            $prevMonthDay = date("d", mktime(0, 0, 0, date("m", $time), date("d", $time) - $i, date("y", $time)));
-                            $prevMonthWeekDay = date("D", mktime(0, 0, 0, date("m", $time), date("d", $time) - $i, date("y", $time)));
-
-                            // zet deze data in een array, deze gebruiken we later om onze td's te vullen
-                            $prevMonthDayArray[] = $prevMonthDay;
-
-                            // tel $i op. Volgende loop moeten we naar 2 dagen geleden kijken. Daarna naar 3 dagen geleden etc.
-                            $i++;
-
-                            // Als we een maandag vinden of we loopen meer dan een 7 dagen dan kan deze do-while-loop stoppen.
-                            if ($i > 7 || $prevMonthWeekDay === "Mon") {
-                                $endPrevMonth = true;
-                            }
-                        } while (!$endPrevMonth);
-
-                        // loop door de array heen en vul een td met de data
-                        // we telden net wel achteruit. Voor 1 januari was 31 december, en daarvoor 30 december, etc.
-                        $prevMonthDays = count($prevMonthDayArray) - 1;
-
-                        // de for loop begint dus bij ons voorbeeld bij $i = 4 (Do, Wo, Di, Ma moeten gevuld worden met december dagen)
-                        // we tellen af tot we bij nul zijn
-                        for ($i = $prevMonthDays; $i >= 0; $i--) { ?>
-                            <td class="calendardateblocked <?=$todayclass?>">
-                                <div class="divBox">
-                                    <span> <?= $prevMonthDayArray[$i] ?> </span>
-                                </div>
-                            </td> <?php
-                        }
-
-                        // vul de eerste dag van onze gegeven maand is
-                        // als de dag al geweest is dan blokkeren we hem
-                        // geef het een radio button zodat erop geklikt kan worden en je de gekozen dag kan invoeren met een form
-                        if ($day < $curday && $curmonth === $month) { ?>
-                            <td class="calendardateblocked <?=$todayclass?>">
-                                <div class="divBox">
-                                    <span> <?= $day ?> </span>
-                                </div>
-                            </td> <?php
-                        } else { ?>
-                            <td class="calendardate cut-selector <?=$todayclass?>">
-                                <div class="divBox">
-                                    <input type="radio" id="<?= $date ?>" class="date-radio" name="date" value="<?= $date ?>" onclick="onDateClickAdminCalendar(<?=$day?>, <?=$weekday_f?>, <?=$monthname?>, <?=$month?>, <?=$year?>, <?=$_GET['p']?>)">
-                                    <label for="<?= $date ?>"> <?= $day ?> </label>
-                                </div>
-                            </td> <?php
-                        }
-
-
-                        // nu gaan we verder met de rest van de gegeven maand (02 tot 28 / 31)
-                    } else {
-
-                    // als we bij een maandag zijn beginnen we een nieuwe tr
-                    if ($endPrevMonth && $weekday === "Mon") { ?>
-                </tr>
-                <tr> <?php
+                    // go through array in reverse to fill table
+                    for ($i = (count($prevmontharray)-1); $i >= 0; $i--) { ?>
+                        <td class="calendardateblocked">
+                            <div class="divBox">
+                                <span> <?= $prevmontharray[$i] ?> </span>
+                            </div>
+                        </td>
+                        <?php
                     }
 
-                    // als de maand ook werkelijk begint op maandag dan moeten we ff zeggen dat we geen informatie van de vorige maand
-                    // hebben ingevoerd. We zijn dus zogenaamd "klaar" met het invoeren van data van vorige maand
-                    if (!$endPrevMonth) {
-                        $endPrevMonth = true;
-                    }
 
-                    // als de dag van de huidige loop 01 is en de vorige 28,29,30 of 31 was dan zit de loop te tellen in de volgende maand
-                    // als deze dag geen maandag is dan is het tijd om data van de volgende maand in onze kalender te stoppen
-                    if ($day === "01" && ($prevDay === "31" || $prevDay === "30" || $prevDay === "29" || $prevDay === "28")) {
-                        if ($weekday !== "Mon") {
-                            $doNextMonth = true;
+                    // reset time to first day of chosen month
+                    $time    = strtotime($starting_day);
+                    $day     = date("d", $time);
+                    $weekday = date("D", $time);
+                    $daysinmonth = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+
+                    // **************************************
+                    // loop through our current month
+                    //
+                    for ($i = 0; $i < $daysinmonth; $i++) {
+
+                        // info for date click
+                        // these need to be surrounded by '' otherwise they will not get correctly passed into the onclick JS function
+                        $weekday_f = "'" . nldate(date("l", $time)) . "'";  // Monday-Sunday
+                        $monthname = "'" . nldate(date("F", $time)) . "'";  // January-December
+
+                        // check if this date is current date
+                        $date    = date("Y-m-d", $time);
+                        $curdate = date("Y-m-d");
+
+                        if ($date === $curdate) {
+                            $todayclass = "calendartoday";
                         } else {
-                            $endMonth = true;
+                            $todayclass = "";
                         }
 
-                        // als dat allemaal niet het geval is, zitten we nog in de gegeven maand en vullen we data hiervan in
-                    } else {
-                        if (!$doNextMonth) {
-                            if ($day < $curday && $curmonth === $month) { ?>
-                                <td class="calendardateblocked <?=$todayclass?>">
-                                    <div class="divBox">
-                                        <span> <?= $day ?> </span>
-                                    </div>
-                                </td> <?php
-                            } else { ?>
-                                <td class="calendardate cut-selector <?=$todayclass?>">
-                                    <div class="divBox">
-                                        <input type="radio" id="<?= $date ?>" class="date-radio" name="date" value="<?= $date ?>" onclick="onDateClickAdminCalendar(<?=$day?>, <?=$weekday_f?>, <?=$monthname?>, <?=$month?>, <?=$year?>, <?=$_GET['p']?>)">
-                                        <label for="<?= $date ?>"> <?= $day ?> </label>
-                                    </div>
-                                </td> <?php
-                            }
+                        // every monday we need to start a new table row
+                        if ($weekday === "Mon") { ?>
+                    </tr>
+                    <tr>
+                        <?php
                         }
+                        ?>
+                        <td class="calendardate cut-selector <?=$todayclass?>">
+                            <div class="divBox">
+                                <input type="radio" id="<?= $date ?>" class="date-radio" name="date" value="<?= $date ?>" onclick="onDateClickAdminCalendar(<?=$day?>, <?=$weekday_f?>, <?=$monthname?>, <?=$month?>, <?=$year?>, <?=$_GET['p']?>)">
+                                <label for="<?= $date ?>"> <?= $day ?> </label>
+                            </div>
+                        </td>
+                        <?php
+
+                        // go up one day
+                        $time    = strtotime("+1 day", $time);
+                        $day     = date("d", $time);
+                        $weekday = date("D", $time);
                     }
 
-                    // als we in de volgende maand zitten te tellen dan moeten we data invoeren tot we bij de eerstvolgende maandag zijn
-                    if ($doNextMonth) {
-                        if ($weekday === "Mon") {
-                            $doNextMonth = false;
-                            $endMonth = true;
-                        } else { ?>
-                            <td class="calendardateblocked <?=$todayclass?>">
-                                <div class="divBox">
-                                    <span> <?= $day ?> </span>
-                                </div>
-                            </td> <?php
-                        }
-                    }
-                    }
+                    // fill the calender with next month data if this month does not end on a sunday
+                    while ($weekday !== "Mon") {
+                        ?>
+                        <td class="calendardateblocked <?=$todayclass?>">
+                            <div class="divBox">
+                                <span> <?= $day ?> </span>
+                            </div>
+                        </td>
+                        <?php
 
-                    // optellen van de dag als we de gegeven maand aan het invullen zijn
-                    if ($endPrevMonth) {
-                        $prevDay = $day;
-                        $counter++;
-
-                        // loop escaper
-                        if ($counter > 100) {
-                            $endMonth = true;
-                        }
+                        $time    = strtotime("+1 day", $time);
+                        $day     = date("d", $time);
+                        $weekday = date("D", $time);
                     }
-                    }while (!$endMonth);
                     ?>
                 </tr>
             </table>
