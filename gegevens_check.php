@@ -136,7 +136,7 @@ if ($ok) {
     $db = mysqli_connect($host, $user, $pw, $database) or die('Error: '.mysqli_connect_error());
 
     $sql = "INSERT INTO
-              afspraken (
+            afspraken (
                 voornaam,
                 achternaam,
                 datum,
@@ -146,14 +146,14 @@ if ($ok) {
                 email,
                 telefoon
             ) VALUES (
-              ?,
-              ?,
-              ?,
-              ?,
-              ?,
-              ?,
-              ?,
-              ?
+                ?,
+                ?,
+                ?,
+                ?,
+                ?,
+                ?,
+                ?,
+                ?
             )
         ";
 

@@ -3,7 +3,7 @@
  */
 
 function validateUsername(id) {
-    var regex = /[A-Za-z -_]$/;
+    var regex = /[A-Za-z-_]$/;
 
     if (regex.test(document.getElementById(id).value)) {
         document.getElementById(id).style.background = '#ccffcc';
@@ -19,7 +19,7 @@ function validateUsername(id) {
 }
 
 function validateNaam(id) {
-    var regex = /[A-Za-z -']$/;
+    var regex = /[A-Za-z-']$/;
 
     if (regex.test(document.getElementById(id).value)) {
         document.getElementById(id).style.background = '#ccffcc';

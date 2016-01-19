@@ -57,23 +57,19 @@ if(!empty($_POST))
 
     // We will use this SQL query to see whether the username entered by the
     // user is already in use.
-    // :username is a special token, we will substitute a real value in its place when
-    // we execute the query.
-    $query = "SELECT 1 FROM users WHERE username = :username";
+    $query = "SELECT
+                1
+              FROM
+                users
+              WHERE
+                username = :username
+              ";
 
-    // This contains the definitions for any special tokens that we place in
-    // our SQL query.  In this case, we are defining a value for the token
-    // :username.  It is possible to insert $_POST['username'] directly into
-    // your $query string; however doing so is very insecure and opens your
-    // code up to SQL injection exploits.  Using tokens prevents this.
-    // For more information on SQL injections, see Wikipedia:
-    // http://en.wikipedia.org/wiki/SQL_Injection
     $query_params = array(
         ':username' => $_POST['username']
     );
 
     try {
-        // These two statements run the query against your database table.
         $stmt = $db->prepare($query);
         $result = $stmt->execute($query_params);
 
@@ -91,7 +87,13 @@ if(!empty($_POST))
 
     // Now we perform the same type of check for the email address, in order
     // to ensure that it is unique.
-    $query = "SELECT 1 FROM users WHERE email = :email";
+    $query = "SELECT
+                1
+              FROM
+                users
+              WHERE
+                email = :email
+              ";
 
     $query_params = array(
         ':email' => $_POST['email']
@@ -116,8 +118,7 @@ if(!empty($_POST))
 
     // no errors so we can continue and run the query
     if (!$error) {
-        $query = "
-                INSERT INTO users (
+        $query = "INSERT INTO users (
                     username,
                     password,
                     salt,
@@ -134,7 +135,7 @@ if(!empty($_POST))
                     :achternaam,
                     :telefoon
                 )
-            ";
+               ";
 
         $salt = dechex(mt_rand(0, 2147483647)) . dechex(mt_rand(0, 2147483647));
         $password = hash('sha256', $_POST['password'] . $salt);
@@ -227,14 +228,14 @@ if(!empty($_POST))
                         <label for="voornaam" class="input-text-small">
                         <span>Voornaam</span>
                         <input id="voornaam" type="text" name="voornaam" value="<?=$voornaam?>" onblur="validateNaam(id)" />
-                        <div id="voornaamError" class="small-text error-text error-text-wrapper" style="visibility: hidden;">Gebruik alleen letters, - of '</div>
                         </label>
+                        <div id="voornaamError" class="small-text error-text error-text-wrapper" style="visibility: hidden;">Gebruik alleen letters, - of '</div>
 
                         <label for="achternaam" class="input-text-small">
                         <span>Achternaam</span>
                         <input id="achternaam" type="text" name="achternaam" value="<?=$achternaam?>" onblur="validateNaam(id)" />
-                        <div id="achternaamError" class="small-text error-text error-text-wrapper" style="visibility: hidden;">Gebruik alleen letters, - of '</div>
                         </label>
+                        <div id="achternaamError" class="small-text error-text error-text-wrapper" style="visibility: hidden;">Gebruik alleen letters, - of '</div>
 
                         <label for="email" class="input-text-small">
                         <span>E-Mail</span>
@@ -250,14 +251,14 @@ if(!empty($_POST))
                         <label for="telefoon" class="input-text-small">
                         <span>Telefoon</span>
                         <input id="telefoon" type="text" name="telefoon" value="<?=$telefoon?>" onblur="validateTelefoon(id)" />
-                        <div id="telefoonError" class="small-text error-text error-text-wrapper" style="visibility: hidden;">Voer een geldig telefoonnummer in</div>
                         </label>
+                        <div id="telefoonError" class="small-text error-text error-text-wrapper" style="visibility: hidden;">Voer een geldig telefoonnummer in</div>
 
                         <label for="password" class="input-text-small">
                         <span>Wachtwoord</span>
                         <input id="password" type="password" name="password" value="" onblur="validatePassword(id)" />
-                        <div id="passwordError" class="small-text error-text error-text-wrapper" style="visibility: hidden;">Minimaal 5 en maximaal 24 letters, nummers, of speciale karakters</div>
                         </label>
+                        <div id="passwordError" class="small-text error-text error-text-wrapper" style="visibility: hidden;">Minimaal 5 en maximaal 24 letters, nummers, of speciale karakters</div>
                 </div>
                 <input type="submit" id="register-button" class="button" value="Registreer" />
             </form>
