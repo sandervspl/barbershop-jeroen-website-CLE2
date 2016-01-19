@@ -3,6 +3,10 @@ if(!isset($_SESSION)) {
     session_start();
 }
 
+// database connection information
+require_once "connect.php";
+require_once "User.php";
+
 $barber = '';
 $date = '';
 $time = '';
@@ -17,30 +21,19 @@ $ok = true;
 // prioritize login session's data for name, e-mail and phone
 if (isset($_SESSION['user']['username'])) {
 
-    // database connection information
-    require_once "connect.php";
+    $user_ = new User;
 
-    $db = mysqli_connect($host, $user, $pw, $database) or die('Error: ' . mysqli_connect_error());
+    $userInfo = $user_->getBasicUserInfo();
 
-    $sql = sprintf("SELECT voornaam, achternaam, email, telefoon FROM users WHERE username='%s'",
-        $_SESSION['user']['username']);
-
-    $result = mysqli_query($db, $sql);
-    $gegevens = [];
-
-    while ($row = mysqli_fetch_assoc($result)) {
-        $gegevens = $row;
+    if ($userInfo == 0) {
+        $ok = false;
+    } else {
+        $voornaam   = $userInfo['voornaam'];
+        $achternaam = $userInfo['achternaam'];
+        $email      = $userInfo['email'];
+        $phone      = $userInfo['telefoon'];
     }
-
-    $voornaam   = $gegevens['voornaam'];
-    $achternaam = $gegevens['achternaam'];
-    $email      = $gegevens['email'];
-    $phone      = $gegevens['telefoon'];
-
-    mysqli_close($db);
-
 } else {
-
     if (!isset($_POST['voornaam']) || $_POST['voornaam'] === '') {
         $ok = false;
         echo "Error: VOORNAAM variable is not set. ";
@@ -107,48 +100,85 @@ if (!isset($_SESSION['cut']) || $_SESSION['cut'] === '') {
 }
 
 
-// database connection information
-require_once "connect.php";
-
 $db =  mysqli_connect($host, $user, $pw, $database) or die('Error: '.mysqli_connect_error());
 
-$sql = sprintf("SELECT * FROM afspraken WHERE datum='%s' AND tijd='%s' AND kapper='%s'",
-    mysqli_real_escape_string($db, $_SESSION['date']),
-    mysqli_real_escape_string($db, $_SESSION['time']),
-    mysqli_real_escape_string($db, $_SESSION['barber']));
-$result = mysqli_query($db, $sql);
+$sql = "SELECT
+          1
+        FROM
+          afspraken
+        WHERE
+          datum = ?
+        AND
+          tijd = ?
+        AND
+          kapper = ?
+       ";
 
-if (mysqli_num_rows($result) > 0) {
-    $ok = false;
-    echo "<br /> Error: Appointment already exists.";
+if ($stmt = $db->prepare($sql)) {
+    $stmt->bind_param('sss', $_SESSION['date'], $_SESSION['time'], $_SESSION['barber']);
+
+    if ($stmt->execute()) {
+        $stmt->store_result();
+
+        if ($stmt->num_rows > 0) {
+            $ok = false;
+        }
+    }
+
+    $stmt->close();
 }
 
 mysqli_close($db);
+
 
 if ($ok) {
     // add to db
     $db = mysqli_connect($host, $user, $pw, $database) or die('Error: '.mysqli_connect_error());
 
-    $sql = sprintf("INSERT INTO afspraken (voornaam, achternaam, datum, tijd, knipbeurt, kapper, email, telefoon)
-                    VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
-                    mysqli_real_escape_string($db, $voornaam),
-                    mysqli_real_escape_string($db, $achternaam),
-                    mysqli_real_escape_string($db, $date),
-                    mysqli_real_escape_string($db, $time),
-                    mysqli_real_escape_string($db, $cut),
-                    mysqli_real_escape_string($db, $barber),
-                    mysqli_real_escape_string($db, $email),
-                    mysqli_real_escape_string($db, $phone)
-    );
-    $result = mysqli_query($db, $sql);
+    $sql = "INSERT INTO
+              afspraken (
+                voornaam,
+                achternaam,
+                datum,
+                tijd,
+                knipbeurt,
+                kapper,
+                email,
+                telefoon
+            ) VALUES (
+              ?,
+              ?,
+              ?,
+              ?,
+              ?,
+              ?,
+              ?,
+              ?
+            )
+        ";
+
+
+    if ($stmt = $db->prepare($sql)) {
+        $stmt->bind_param('ssssssss', $voornaam, $achternaam, $date, $time, $cut, $barber, $email, $phone);
+
+        if ($stmt->execute()) {
+            $stmt->store_result();
+
+            // if nothing happened we go to error page
+            if ($stmt->affected_rows <= 0) {
+                header("Location: error.php");
+                die("Redirecting");
+            }
+        }
+
+        $stmt->close();
+    }
+
     mysqli_close($db);
 
-    if ($result) {
-        // go to next page (thanks for your reservation etc.)
-        header("location: confirmation.php");
-    } else {
-        header("location: error.php");
-    }
+    // if we reach this it was a success and we go to the 'thank you' page
+    header("location: confirmation.php");
+    die("Redirecting");
 }
 ?>
 <!DOCTYPE HTML>

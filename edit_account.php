@@ -2,6 +2,7 @@
 
 // First we execute our common code to connection to the database and start the session
 require("common.php");
+require_once("User.php");
 
 // At the top of the page we check to see whether the user is logged in or not
 if(empty($_SESSION['user']))
@@ -30,13 +31,13 @@ if(!empty($_POST))
     if($_POST['email'] != $_SESSION['user']['email'])
     {
         // Define our SQL query
-        $query = "
-                SELECT
+        $query = "SELECT
                     1
-                FROM users
-                WHERE
+                  FROM
+                    users
+                  WHERE
                     email = :email
-            ";
+                 ";
 
         // Define our query parameter values
         $query_params = array(
@@ -98,12 +99,12 @@ if(!empty($_POST))
     }
 
 
-    $query = "
-            UPDATE users
-            SET
-                email = :email
-                , telefoon = :telefoon
-        ";
+    $query = "UPDATE
+                users
+              SET
+                email = :email,
+                telefoon = :telefoon
+             ";
 
     // If the user is changing their password, then we extend the SQL query
     // to include the password and salt columns and parameter tokens too.
@@ -156,28 +157,16 @@ if(!empty($_POST))
     exit();
 }
 
+// grab user info so we can put it in the fields
+$user_ = new User;
 
-// database connection information
-require_once "connect.php";
-$db =  mysqli_connect($host, $user, $pw, $database) or die('Error: '.mysqli_connect_error());
+$userInfo = $user_->getBasicUserInfo();
 
-$sql = sprintf("SELECT voornaam, achternaam, telefoon FROM users WHERE username='%s'",
-    $_SESSION['user']['username']);
+$voornaam   = $userInfo['voornaam'];
+$achternaam = $userInfo['achternaam'];
+$telefoon   = $userInfo['telefoon'];
+$email      = $userInfo['email'];
 
-$result = mysqli_query($db, $sql);
-$gegevens = [];
-$voornaam = '';
-$achternaam = '';
-$email = '';
-$telefoon = '';
-
-while($row = mysqli_fetch_assoc($result)) {
-    $gegevens = $row;
-}
-
-$voornaam   = $gegevens['voornaam'];
-$achternaam = $gegevens['achternaam'];
-$telefoon   = $gegevens['telefoon'];
 ?>
 <!DOCTYPE HTML>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -214,10 +203,12 @@ $telefoon   = $gegevens['telefoon'];
                     <div id="account-text">
                         <span class="header-text-lobster"><?= htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?></span>
                         <br />
+
                         <span class="capitalize"><?= htmlentities($voornaam) . " " . htmlentities($achternaam) ?></span>
                         <br /><br />
+
                         <label for="email" class="input-text">E-Mail</label><br />
-                        <input id="email" type="email" name="email" value="<?php echo htmlentities($_SESSION['user']['email'], ENT_QUOTES, 'UTF-8'); ?>" />
+                        <input id="email" type="email" name="email" value="<?php echo htmlentities($email); ?>" />
                         <br /><br />
 
                         <label for="telefoon" class="input-text">Telefoon</label><br />

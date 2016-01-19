@@ -1,12 +1,13 @@
 <?php
 require("common.php");
 require_once("nlDate.php");
-require_once("admincheck.php");
+require_once("User.php");
 
 if(isset($_SESSION['user'])) {
+    $user_ = new User;
 
     // level check
-    $isAdmin = isAdmin();
+    $isAdmin = $user_->getUserLvl();
     if (!$isAdmin) {
         header("Location: forbidden.php");
         die("Redirecting to forbidden.php");
@@ -91,33 +92,33 @@ if (isset($_POST['admin-add-appointment-button'])) {
         if ($stmt = $db->prepare($sql)) {
             $stmt->bind_param('sss', $tijd, $datum, $kapper);
 
-            $stmt->execute();
-            $stmt->store_result();
+            if ($stmt->execute()) {
+                $stmt->store_result();
 
-            if ($stmt->num_rows == 0) {
-                $sql = "INSERT INTO
+                if ($stmt->num_rows == 0) {
+                    $sql = "INSERT INTO
                       afspraken (voornaam, achternaam, datum, tijd, knipbeurt, kapper, telefoon)
                     VALUES
                       (?, ?, ?, ?, ?, ?, ?)
                     ";
 
-                if ($stmt2 = $db->prepare($sql)) {
-                    $stmt2->bind_param('sssssss', $voornaam, $achternaam, $datum, $tijd, $cut, $kapper, $telefoon);
+                    if ($stmt2 = $db->prepare($sql)) {
+                        $stmt2->bind_param('sssssss', $voornaam, $achternaam, $datum, $tijd, $cut, $kapper, $telefoon);
 
-                    if ($stmt2->execute()) {
-                        header("Location: admin_nieuwe_afspraak.php?p=3");
-                    } else {
-                        die("error: 2");
+                        if ($stmt2->execute()) {
+                            header("Location: admin_nieuwe_afspraak.php?p=3");
+                        } else {
+                            die("error: 2");
+                        }
+
+                        $stmt2->close();
+                        die("Redirecting to afspraken kalender");
                     }
-
-                    $stmt2->close();
-                    die("Redirecting to afspraken kalender");
+                } else {
+                    $ok = false;
+                    echo "<br /> Error: Appointment already exists.";
                 }
-            } else {
-                $ok = false;
-                echo "<br /> Error: Appointment already exists.";
             }
-
             $stmt->close();
         } else {
             die("Error: 1");

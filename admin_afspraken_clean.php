@@ -1,12 +1,13 @@
 <?php
 require("common.php");
 require_once("nlDate.php");
-require_once("admincheck.php");
+require_once("User.php");
 
 if(isset($_SESSION['user'])) {
+    $user_ = new User;
 
     // level check
-    $isAdmin = isAdmin();
+    $isAdmin = $user_->getUserLvl();
     if (!$isAdmin) {
         header("Location: forbidden.php");
         die("Redirecting to forbidden.php");
@@ -185,18 +186,18 @@ if ($_GET['p'] == 1) {
                             $db = mysqli_connect($host, $user, $pw, $database) or die('Error: ' . mysqli_connect_error());
 
                             $sql = "SELECT
-                      voornaam,
-                      achternaam,
-                      knipbeurt
-                    FROM
-                      afspraken
-                    WHERE
-                      tijd = ?
-                    AND
-                      datum = ?
-                    AND
-                      kapper = ?
-                    ";
+                                      voornaam,
+                                      achternaam,
+                                      knipbeurt
+                                    FROM
+                                      afspraken
+                                    WHERE
+                                      tijd = ?
+                                    AND
+                                      datum = ?
+                                    AND
+                                      kapper = ?
+                                    ";
 
                             if ($stmt = $db->prepare($sql)) {
                                 $stmt->bind_param('sss', $time1, $date, $barber);

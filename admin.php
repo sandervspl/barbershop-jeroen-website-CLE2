@@ -1,11 +1,12 @@
 <?php
 require("common.php");
-require_once("admincheck.php");
+require_once("User.php");
 
 if(isset($_SESSION['user'])) {
+    $user_ = new User;
 
     // level check
-    $isAdmin = isAdmin();
+    $isAdmin = $user_->getUserLvl();
     if (!$isAdmin) {
         header("Location: forbidden.php");
         die("Redirecting to forbidden.php");

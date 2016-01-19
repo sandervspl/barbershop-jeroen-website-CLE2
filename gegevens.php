@@ -3,6 +3,10 @@ if(!isset($_SESSION)) {
     session_start();
 }
 
+// database connection information
+require_once "connect.php";
+require_once "User.php";
+
 if (!isset($_SESSION['cut']) || !isset($_SESSION['date']) || !isset($_SESSION['time'])) {
     header("Location: reserveer.php");
     die("Redirecting");
@@ -115,31 +119,19 @@ if (isset($_POST['submit'])) {
 
     <?php
     if (isset($_SESSION['user']['username'])) {
-        // database connection information
-        require_once "connect.php";
+        $user_ = new User;
 
-        $db =  mysqli_connect($host, $user, $pw, $database) or die('Error: '.mysqli_connect_error());
+        $userInfo = $user_->getBasicUserInfo();
 
-        $sql = sprintf("SELECT voornaam, achternaam, email, telefoon FROM users WHERE username='%s'",
-                        $_SESSION['user']['username']);
-
-        $result = mysqli_query($db, $sql);
-        $gegevens = [];
-        $voornaam = '';
-        $achternaam = '';
-        $email = '';
-        $telefoon = '';
-
-        while($row = mysqli_fetch_assoc($result)) {
-            $gegevens = $row;
+        if ($userInfo == 0) {
+            $ok = false;
+        } else {
+            $voornaam   = $userInfo['voornaam'];
+            $achternaam = $userInfo['achternaam'];
+            $email      = $userInfo['email'];
+            $telefoon   = $userInfo['telefoon'];
         }
 
-        $voornaam   = $gegevens['voornaam'];
-        $achternaam = $gegevens['achternaam'];
-        $email      = $gegevens['email'];
-        $telefoon   = $gegevens['telefoon'];
-
-        mysqli_close($db);
         ?>
         <section id="gegevens-form">
             <div class="white-background">

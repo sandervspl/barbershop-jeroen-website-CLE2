@@ -2,6 +2,7 @@
 
 // First we execute our common code to connection to the database and start the session
 require("common.php");
+require_once("User.php");
 
 // At the top of the page we check to see whether the user is logged in or not
 if(empty($_SESSION['user']))
@@ -208,22 +209,10 @@ if(!empty($_POST))
 }
 
 
-$db =  mysqli_connect($host, $user, $pw, $database) or die('Error: '.mysqli_connect_error());
+$user_ = new User;
 
-$sql = sprintf("SELECT level FROM users WHERE username='%s'",
-    $_SESSION['user']['username']);
-
-$result = mysqli_query($db, $sql);
-$re = mysqli_fetch_row($result);
-
-// if user level is not 1 (admin) then redirect
-if ($re[0] != 1) {
-    $isAdmin = false;
-} else {
-    $isAdmin = true;
-}
-
-mysqli_close($db);
+// level check
+$isAdmin = $user_->getUserLvl();
 
 ?>
 <!DOCTYPE HTML>
@@ -258,11 +247,11 @@ mysqli_close($db);
 <?php
                     if ($isAdmin) {
 ?>
-                    <a href="admin.php">Admin Pagina</a><br/>
+                        <a href="admin.php">Admin Pagina</a><br/>
 <?php
                     } else {
 ?>
-                    <a href="mijn_afspraken.php">Mijn Afspraken</a><br/>
+                        <a href="mijn_afspraken.php">Mijn Afspraken</a><br/>
 <?php
                     }
 ?>
