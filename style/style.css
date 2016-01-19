@@ -1921,6 +1921,7 @@ div#over-ons-barbers p.header-text-big {
 .small-wrapper {
     width: 37.5%;
     display: inline-block;
+    vertical-align: top;
     margin: auto;
 }
 
@@ -1928,12 +1929,10 @@ div#over-ons-barbers p.header-text-big {
     width: 55%;
     margin: auto 20px auto 20px;
     text-align: left;
-    vertical-align: top;
     display: inline-block;
 }
 
 .register-text {
-    /*background-color: green;*/
     margin: auto;
     width: 95%;
     text-align: center;

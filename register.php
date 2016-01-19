@@ -215,48 +215,48 @@ if(!empty($_POST))
                     <p class="header-text-lobster ta-center">Gegevens</p>
 
                         <label for="username" class="input-text-small">
-                        <span>Gebruikersnaam</span>
-                        <input id="username" type="text" name="username" value="<?=$username?>" onblur="validateUsername(id)" autofocus="autofocus" />
+                            <span>Gebruikersnaam</span>
+                            <input id="username" type="text" name="username" value="<?=$username?>" onblur="validateUsername(id)" autofocus="autofocus" />
+                        </label>
                         <div id="usernameError" class="small-text error-text error-text-wrapper" style="visibility: hidden;">Gebruik alleen letters, - of _</div>
                         <?php if ($usernameExists) { ?>
                             <span id="usernameAlreadyInDBError" class="small-text error-text" style="display: block;">Er is al een gebruiker met deze naam</span>
                             <script src="scripts/validation.js"></script>
                             <script type="text/javascript"> setInputFalse("username"); </script>
                         <?php } ?>
-                        </label>
 
                         <label for="voornaam" class="input-text-small">
-                        <span>Voornaam</span>
-                        <input id="voornaam" type="text" name="voornaam" value="<?=$voornaam?>" onblur="validateNaam(id)" />
+                            <span>Voornaam</span>
+                            <input id="voornaam" type="text" name="voornaam" value="<?=$voornaam?>" onblur="validateNaam(id)" />
                         </label>
                         <div id="voornaamError" class="small-text error-text error-text-wrapper" style="visibility: hidden;">Gebruik alleen letters, - of '</div>
 
                         <label for="achternaam" class="input-text-small">
-                        <span>Achternaam</span>
-                        <input id="achternaam" type="text" name="achternaam" value="<?=$achternaam?>" onblur="validateNaam(id)" />
+                            <span>Achternaam</span>
+                            <input id="achternaam" type="text" name="achternaam" value="<?=$achternaam?>" onblur="validateNaam(id)" />
                         </label>
                         <div id="achternaamError" class="small-text error-text error-text-wrapper" style="visibility: hidden;">Gebruik alleen letters, - of '</div>
 
                         <label for="email" class="input-text-small">
-                        <span>E-Mail</span>
-                        <input id="email" type="email" name="email" value="<?=$email?>" onblur="validateEmail(id)" />
+                            <span>E-Mail</span>
+                            <input id="email" type="email" name="email" value="<?=$email?>" onblur="validateEmail(id)" />
+                        </label>
                         <div id="emailError" class="small-text error-text error-text-wrapper" style="visibility: hidden;">Voer een geldig e-mail adres in</div>
                         <?php if ($emailExists) { ?>
                             <span id="emailAlreadyInDBError" class="small-text error-text" style="display: block;">Er is al een gebruiker met dit e-mail adres</span>
                             <script src="scripts/validation.js"></script>
                             <script type="text/javascript"> setInputFalse("email"); </script>
                         <?php } ?>
-                        </label>
 
                         <label for="telefoon" class="input-text-small">
-                        <span>Telefoon</span>
-                        <input id="telefoon" type="text" name="telefoon" value="<?=$telefoon?>" onblur="validateTelefoon(id)" />
+                            <span>Telefoon</span>
+                            <input id="telefoon" type="text" name="telefoon" value="<?=$telefoon?>" onblur="validateTelefoon(id)" />
                         </label>
                         <div id="telefoonError" class="small-text error-text error-text-wrapper" style="visibility: hidden;">Voer een geldig telefoonnummer in</div>
 
                         <label for="password" class="input-text-small">
-                        <span>Wachtwoord</span>
-                        <input id="password" type="password" name="password" value="" onblur="validatePassword(id)" />
+                            <span>Wachtwoord</span>
+                            <input id="password" type="password" name="password" value="" onblur="validatePassword(id)" />
                         </label>
                         <div id="passwordError" class="small-text error-text error-text-wrapper" style="visibility: hidden;">Minimaal 5 en maximaal 24 letters, nummers, of speciale karakters</div>
                 </div>
