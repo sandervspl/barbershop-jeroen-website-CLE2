@@ -59,10 +59,10 @@ if (isset($_SESSION['user']) && isset($_SESSION['user']['email'])) {
 }
 
 
-$voornaam = '';
-$achternaam = '';
-$phone = '';
-$email = '';
+$firstname = '';
+$lastname  = '';
+$phone     = '';
+$email     = '';
 
 if (isset($_POST['submit'])) {
     require_once "gegevens_check.php";
@@ -126,10 +126,10 @@ if (isset($_POST['submit'])) {
         if ($userInfo == 0) {
             $ok = false;
         } else {
-            $voornaam   = $userInfo['voornaam'];
-            $achternaam = $userInfo['achternaam'];
-            $email      = $userInfo['email'];
-            $telefoon   = $userInfo['telefoon'];
+            $firstname = $userInfo['voornaam'];
+            $lastname  = $userInfo['achternaam'];
+            $email     = $userInfo['email'];
+            $phone     = $userInfo['telefoon'];
         }
 
         ?>
@@ -139,7 +139,7 @@ if (isset($_POST['submit'])) {
                     <table>
                         <tr>
                             <td>Naam</td>
-                            <td class="capitalize"><?= htmlentities($voornaam) . " " . htmlentities($achternaam) ?></td>
+                            <td class="capitalize"><?= htmlentities($firstname) . " " . htmlentities($lastname) ?></td>
                         </tr>
                         <tr>
                             <td>E-Mail</td>
@@ -147,7 +147,7 @@ if (isset($_POST['submit'])) {
                         </tr>
                         <tr>
                             <td>Telefoon</td>
-                            <td><?= $telefoon ?></td>
+                            <td><?= $phone ?></td>
                         </tr>
                     </table>
                     <br />
@@ -177,11 +177,11 @@ if (isset($_POST['submit'])) {
                 <div class="gegevens">
                     <div class="white-background">
                         <label class="input-text" for="voornaam">Voornaam *</label><br />
-                        <input type="text" id="voornaam" class="textinput" name="voornaam" autofocus="autofocus" value="<?=htmlentities($voornaam)?>" />
+                        <input type="text" id="voornaam" class="textinput" name="voornaam" autofocus="autofocus" value="<?=htmlentities($firstname)?>" />
                         <br />
 
                         <label class="input-text" for="achternaam">Achternaam *</label><br />
-                        <input type="text" id="achternaam" class="textinput" name="achternaam" value="<?=htmlentities($achternaam)?>" />
+                        <input type="text" id="achternaam" class="textinput" name="achternaam" value="<?=htmlentities($lastname)?>" />
                         <br />
 
                         <label class="input-text" for="email">E-Mail *</label><br/>

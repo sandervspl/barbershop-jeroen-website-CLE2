@@ -4,7 +4,6 @@ if(!isset($_SESSION)) {
 }
 
 require_once "nlDate.php";
-require_once "admincheck.php";
 
 if (isset($_GET['month']) && isset($_GET['year'])) {
     $month = $_GET['month'];

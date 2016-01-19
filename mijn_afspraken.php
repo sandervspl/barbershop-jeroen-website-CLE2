@@ -12,57 +12,10 @@ if(empty($_SESSION['user'])) {
 require("common.php");
 require_once "connect.php";
 require_once "nlDate.php";
+require_once "User.php";
 
+$user_ = new User;
 
-
-function getUserInfo() {
-    $host     = 'localhost';
-    $user     = 'root';
-    $pw       = '';
-    $database = 'website';
-
-//    $host     = 'localhost';
-//    $user     = '0832970';
-//    $pw       = 'voonaeci';
-//    $database = '0832970';
-
-    $db = mysqli_connect($host, $user, $pw, $database);
-
-    $sql = "SELECT
-              voornaam, achternaam, email
-            FROM
-              users
-            WHERE
-              username = ?
-           ";
-
-    if ($stmt = $db->prepare($sql)) {
-        $stmt->bind_param('s', $_SESSION['user']['username']);
-
-        if ($stmt->execute()) {
-            $stmt->store_result();
-            $stmt->bind_result($fetch_voornaam, $fetch_achternaam, $fetch_email);
-
-            while($stmt->fetch()) {
-                $voornaam   = $fetch_voornaam;
-                $achternaam = $fetch_achternaam;
-                $email      = $fetch_email;
-
-                $stmt->close();
-                return array(
-                    'voornaam' => $voornaam,
-                    'achternaam' => $achternaam,
-                    'email' => $email
-                );
-            }
-        } else {
-            $stmt->close();
-            return 0;
-        }
-    }
-
-    return 0;
-}
 ?>
 <!DOCTYPE HTML>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -105,7 +58,7 @@ function getUserInfo() {
                     $db = mysqli_connect($host, $user, $pw, $database);
 
                     // get user's info
-                    $userInfo = getUserInfo();
+                    $userInfo = $user_->getBasicUserInfo();
 
                     // get ID from url
                     $id = $_GET['a'];
@@ -183,7 +136,7 @@ function getUserInfo() {
                         $db = mysqli_connect($host, $user, $pw, $database);
 
                         // get user's info
-                        $userInfo = getUserInfo();
+                        $userInfo = $user_->getBasicUserInfo();
 
                         // get ID from url
                         $id = $_GET['a'];

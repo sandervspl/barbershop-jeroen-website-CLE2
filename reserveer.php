@@ -36,15 +36,6 @@ if (!isset($_POST['submit'])) {
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Droid+Serif:700' rel='stylesheet' type='text/css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script>
-        window.sessionStorage.cut = 0;
-        window.sessionStorage.time = 0;
-        window.sessionStorage.end_time = 0;
-        window.sessionStorage.cut_time = 0;
-        window.sessionStorage.month = 0;
-        window.sessionStorage.monthday = 0;
-        window.sessionStorage.barber = 0;
-    </script>
 </head>
 <body>
 

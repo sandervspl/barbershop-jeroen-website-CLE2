@@ -3,10 +3,9 @@ if(!isset($_SESSION)) {
     session_start();
 }
 
-require_once "admincheck.php";
+require_once "User.php";
 require_once "nlDate.php";
 require_once "connect.php";
-require_once "admincheck.php";
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -164,13 +163,13 @@ for ($i = 0; $i <= $end_hour; $i++) {
         $isDisabled = "";
     }
 
+
     // admin check
     $isAdmin = false;
 
     if (isset($_GET['a']) && $_GET['a'] == 1) {
-        if (isAdmin()) {
-            $isAdmin = true;
-        }
+        $user_ = new User;
+        $isAdmin = $user_->getUserLvl();
     }
 
     if ($hour < 12 && !$didMorningHeader) { ?>
@@ -207,8 +206,7 @@ for ($i = 0; $i <= $end_hour; $i++) {
 
     <?php
     if ($isAdmin) {
-        if (!$taken) {
-    ?>
+        if (!$taken) { ?>
         <a id="admin-kalender-times-link" href="admin_nieuwe_afspraak.php?t=<?= $time1 ?>&tt=<?= $time2 ?>&d=<?= $date ?>&k=<?= $barber ?>">
     <?php
         }

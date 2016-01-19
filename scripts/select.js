@@ -24,7 +24,7 @@ function userInfoOut(sender) {
 
     var divList = list1.concat(list2);
 
-    for (i = 0; i < divList.length; i++) {
+    for (var i = 0; i < divList.length; i++) {
         divList[i].style.textDecoration = "line-through";
         divList[i].style.color = "#b2b2b2";
     }
@@ -57,6 +57,8 @@ function cutSelect(sender) {
 function barberSelection(sender) {
     window.sessionStorage.barber = sender.id;
 }
+
+
 
 // insert chosen cut type chosen by user
 function cutSelected() {
@@ -133,16 +135,4 @@ function checkBookButton() {
     } else {
         window.location.href = 'booking.php';
     }
-}
-
-
-
-
-// getters
-function getBarber() {
-    return window.sessionStorage.barber;
-}
-
-function getTime() {
-    return window.sessionStorage.time;
 }
