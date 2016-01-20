@@ -397,9 +397,13 @@ $user_ = new User;
                                 <br />
                                 <?php
                             }
+
+                            if ($stmt4->num_rows <= 0) { ?>
+                                <p>U heeft op dit moment geen afspraken staan.</p><br /> <?php
+                            }
                         } else {
                             ?>
-                            <p>U heeft op dit moment geen afspraken staan.</p>
+                            <p>U heeft op dit moment geen afspraken staan.</p><br />
                             <?php
                         }
                     }
@@ -479,9 +483,13 @@ $user_ = new User;
                                 <br />
                                 <?php
                             }
+
+                            if ($stmt5->num_rows <= 0) { ?>
+                                <p>Er zijn geen oude afspraken gevonden.</p><br /> <?php
+                            }
                         } else {
                             ?>
-                            <p>Er zijn geen oude afspraken gevonden.</p>
+                            <p>Er zijn geen oude afspraken gevonden.</p><br />
                             <?php
                         }
                     }
