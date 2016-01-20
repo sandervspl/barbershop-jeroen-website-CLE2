@@ -189,7 +189,8 @@ if ($_GET['p'] == 1) {
                                       id,
                                       voornaam,
                                       achternaam,
-                                      knipbeurt
+                                      knipbeurt,
+                                      telefoon
                                     FROM
                                       afspraken
                                     WHERE
@@ -207,13 +208,13 @@ if ($_GET['p'] == 1) {
                                 $stmt->store_result();
 
                                 if ($stmt->num_rows > 0) {
-                                    $stmt->bind_result($fid, $fvnaam, $fanaam, $fcut);
+                                    $stmt->bind_result($fid, $fvnaam, $fanaam, $fcut, $fphone);
 
                                     while ($stmt->fetch()) { ?>
                                         <p class="<?=$class_txt?>"><?= ucfirst($fvnaam) . " " . ucfirst($fanaam) ?></p>
                                         <p class="<?=$class_txt?>"><?= ucfirst($fcut) ?></p>
-                                        <br />
-                                        <p><a href="admin_verwijder_afspraak.php?id=<?=$fid?>&p=1">Verwijder afspraak</a> </p><?php
+                                        <p class="<?=$class_txt?>"><?= $fphone ?></p>
+                                        <p class="small-text"><a href="admin_verwijder_afspraak.php?id=<?=$fid?>&p=1">Verwijder afspraak</a> </p><?php
                                     }
                                 } else {
                                     // if we are past current time, we disable the option

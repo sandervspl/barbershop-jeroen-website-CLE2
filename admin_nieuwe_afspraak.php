@@ -148,14 +148,14 @@ if (isset($_POST['admin-add-appointment-button'])) {
 if (isset($_GET['p']) && $_GET['p'] == 3) {
 ?>
 <section id="main-page">
-    <p id="header-text-header">Reservering Compleet</p>
+    <p id="header-text-header">Reservering</p>
     <div id="basic-wrapper">
         <div class="white-background">
             <img id="img-big" class="inline-block" src="images/confirmation/chair.png">
             <div class="bedankt inline-block">
                 <p class="header-text-big">Reservering compleet!</p>
                 <br />
-                <p><a href="admin.php">Terug naar admin pagina</a></p>
+                <p><a href="admin_nieuwe_afspraak_kalender.php">Terug naar afspraak kalender</a></p>
             </div>
         </div>
     </div>

@@ -196,7 +196,7 @@ if (isset($_GET['p']) && $_GET['p'] == 2) {
 
     <p class="header-text">Afspraak verwijderen</p>
     <p>Afspraak succesvol verwijderd.</p> <br />
-    <a href="mijn_afspraken.php">Ga terug naar Afspraken Kalender</a>
+    <a href="admin_nieuwe_afspraak_kalender.php">Ga terug naar afspraken kalender</a>
     <?php
 }
 ?>
