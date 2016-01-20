@@ -6,12 +6,16 @@ if(!isset($_SESSION)) {
 require_once "User.php";
 require_once "nlDate.php";
 require_once "connect.php";
+require_once "Barbers.php";
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
 <body>
 
 <?php
+$Jeroen_ = new Jeroen();
+$Juno_   = new Juno();
+
 $monthname = date("F");
 
 if (isset($_GET['month']) && isset($_GET['year']) && isset($_GET['day'])) {
@@ -126,8 +130,29 @@ for ($i = 0; $i <= $end_hour; $i++) {
         $time = strtotime($starting_day);
         $weekday = date("D", mktime(0,0,0, $time, $time, $time));
 
-        if ($weekday === "Tue" || $weekday === "Thu" || $weekday === "Sat") {
-            $barber = "Jeroen";
+
+        $allBarbersAvailable = true;
+        $jeroenAvailable = true;
+        $junoAvailable   = true;
+
+        if (!$Jeroen_->isAvailable($weekday)) {
+            $allBarbersAvailable = false;
+            $jeroenAvailable = false;
+        }
+
+        if (!$Juno_->isAvailable($weekday)) {
+            $allBarbersAvailable = false;
+            $junoAvailable = false;
+        }
+
+        if (!$allBarbersAvailable) {
+            if (!$jeroenAvailable) {
+                $barber = "juno";
+            }
+
+            if (!$junoAvailable) {
+                $barber = "Jeroen";
+            }
         } else {
             $b = rand(0, 2);
             if ($b) {

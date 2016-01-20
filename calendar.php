@@ -4,6 +4,7 @@ if(!isset($_SESSION)) {
 }
 
 require_once "nlDate.php";
+require_once "Barbers.php";
 
 if (isset($_GET['month']) && isset($_GET['year'])) {
     $month = $_GET['month'];
@@ -100,6 +101,10 @@ function isFeestdag($day, $month) {
         $daysinmonth = cal_days_in_month(CAL_GREGORIAN, $month, $year);
 
 
+        // setup objects so we can gather information from the barbers
+        $Jeroen_ = new Jeroen();
+        $Juno_   = new Juno();
+
 
         // **************************************
         // loop through our current month
@@ -175,16 +180,33 @@ function isFeestdag($day, $month) {
             $curday = date("d");
             $curmonth = date("n");
 
+
+            // check availability of barbers
+            $isAvailable = true;
+
+            if ($_SESSION['barber'] == "Juno") {
+                $isAvailable = $Juno_->isAvailable($weekday);
+            }
+
+            if ($_SESSION['barber'] == "Jeroen") {
+                $isAvailable = $Jeroen_->isAvailable($weekday);
+            }
+
+            // if chosen barber is not available
+            if (!$isAvailable) {
+                $blocked = true;
+            }
+
+            // if day is in the past
             if (($day < $curday && $curmonth === $month))
                 $blocked = true;
 
+            // if it's a holiday
             if (isFeestdag($day, $month))
                 $blocked = true;
 
+            // if it's a monday or sunday
             if ($weekday === "Mon" || $weekday === "Sun")
-                $blocked = true;
-
-            if ($_SESSION['barber'] === "Juno" && ($weekday === "Mon" || $weekday === "Wed" || $weekday === "Fri"))
                 $blocked = true;
 
 

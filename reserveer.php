@@ -66,7 +66,7 @@ if (!isset($_POST['submit'])) {
 
                         <input id="all" type="radio" name="cut" value="alles" onclick="cutSelect(this)" />
                         <label class="trans all" for="all" onmouseover="nhpup.popup('Haar & baard <br/> €25,-')"></label>
-                        </div>
+                    </div>
                 </div>
 
                 <div class="divider"></div>

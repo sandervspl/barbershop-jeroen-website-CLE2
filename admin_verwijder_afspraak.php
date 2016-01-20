@@ -24,7 +24,7 @@ require_once "nlDate.php";
 
 <section id="main-page">
     <div id="basic-wrapper">
-        <p id="header-text-header">Mijn Afspraken</p>
+        <p id="header-text-header">Afspraak</p>
 
         <div class="ta-left">
             <a href="private.php">< opties</a>
