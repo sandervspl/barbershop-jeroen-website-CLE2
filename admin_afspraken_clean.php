@@ -186,6 +186,7 @@ if ($_GET['p'] == 1) {
                             $db = mysqli_connect($host, $user, $pw, $database) or die('Error: ' . mysqli_connect_error());
 
                             $sql = "SELECT
+                                      id,
                                       voornaam,
                                       achternaam,
                                       knipbeurt
@@ -206,11 +207,13 @@ if ($_GET['p'] == 1) {
                                 $stmt->store_result();
 
                                 if ($stmt->num_rows > 0) {
-                                    $stmt->bind_result($vnaam, $anaam, $cut);
+                                    $stmt->bind_result($fid, $fvnaam, $fanaam, $fcut);
 
                                     while ($stmt->fetch()) { ?>
-                                        <p class="<?=$class_txt?>"><?= $vnaam . " " . $anaam ?></p>
-                                        <p class="<?=$class_txt?>"><?= ucfirst($cut) ?></p> <?php
+                                        <p class="<?=$class_txt?>"><?= ucfirst($fvnaam) . " " . ucfirst($fanaam) ?></p>
+                                        <p class="<?=$class_txt?>"><?= ucfirst($fcut) ?></p>
+                                        <br />
+                                        <p><a href="admin_verwijder_afspraak.php?id=<?=$fid?>&p=1">Verwijder afspraak</a> </p><?php
                                     }
                                 } else {
                                     // if we are past current time, we disable the option
