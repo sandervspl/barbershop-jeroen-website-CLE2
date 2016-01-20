@@ -27,7 +27,7 @@ require_once "nlDate.php";
         <p id="header-text-header">Afspraak</p>
 
         <div class="ta-left">
-            <a href="private.php">< opties</a>
+            <a href="admin_nieuwe_afspraak_kalender.php?p=<?=$p?>">< Afspraken Kalender</a>
         </div>
 
         <div class="white-background">
@@ -112,7 +112,7 @@ if (isset($_GET['p']) && $_GET['p'] == 1) {
 
                         <div class="divider-light"></div>
 
-                        <a href="admin_nieuwe_afspraak_kalender.php" class="button gegevens-form-button">Nee</a>
+                        <a href="admin_nieuwe_afspraak_kalender.php?p=<?=$_GET['b']?>" class="button gegevens-form-button">Nee</a>
                         <a href="admin_verwijder_afspraak.php?id=<?=$id?>&p=2" class="button gegevens-form-button">Ja</a>
                     </div>
 

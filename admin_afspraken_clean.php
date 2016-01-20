@@ -214,7 +214,7 @@ if ($_GET['p'] == 1) {
                                         <p class="<?=$class_txt?>"><?= ucfirst($fvnaam) . " " . ucfirst($fanaam) ?></p>
                                         <p class="<?=$class_txt?>"><?= ucfirst($fcut) ?></p>
                                         <p class="<?=$class_txt?>"><?= $fphone ?></p>
-                                        <p class="small-text"><a href="admin_verwijder_afspraak.php?id=<?=$fid?>&p=1">Verwijder afspraak</a> </p><?php
+                                        <p class="small-text"><a href="admin_verwijder_afspraak.php?id=<?=$fid?>&p=1&b=<?=$_GET['p']?>">Verwijder afspraak</a> </p><?php
                                     }
                                 } else {
                                     // if we are past current time, we disable the option
