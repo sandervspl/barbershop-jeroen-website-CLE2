@@ -1,5 +1,5 @@
 <?php
-require("common.php");
+require_once "common.php";
 
 // logged in users shouldn't have access to this page
 if(isset($_SESSION['user'])) {

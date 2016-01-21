@@ -1,5 +1,5 @@
 <?php
-require("common.php");
+require_once "common.php";
 
 if(isset($_SESSION['user'])) {
     header("Location: private.php");
@@ -15,11 +15,7 @@ if(!empty($_POST))
     // This query retrieves the user's information from the database using their username.
     $query = "
             SELECT
-                id,
-                username,
-                password,
-                salt,
-                email
+                *
             FROM
                 users
             WHERE

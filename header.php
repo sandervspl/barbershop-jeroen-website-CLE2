@@ -21,11 +21,13 @@ if(!isset($_SESSION)) {
             </ul>
         </div>
         <div class="navigation-right">
-            <?php if (isset($_SESSION['user']['username'])) { ?>
-                <a href="private.php" id="nav-login-button">[<?= htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?>]</a>
-            <?php } else { ?>
-                <a href="login.php?location=<?=urlencode($_SERVER['REQUEST_URI'])?>" id="nav-login-button">Login</a>
-            <?php } ?>
+            <?php
+            // show user name instead if LOGIN if logged in
+            if (isset($_SESSION['user']['username'])) { ?>
+                <a href="private.php" id="nav-login-button">[<?= htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?>]</a> <?php
+            } else { ?>
+                <a href="login.php?location=<?=urlencode($_SERVER['REQUEST_URI'])?>" id="nav-login-button">Login</a> <?php
+            } ?>
         </div>
     </div>
 </nav>

@@ -1,17 +1,13 @@
 <?php
 
 // First we execute our common code to connection to the database and start the session
-require("common.php");
-require_once("User.php");
+require_once "common.php";
 
 // At the top of the page we check to see whether the user is logged in or not
 if(empty($_SESSION['user']))
 {
     // If they are not, we redirect them to the login page.
     header("Location: login.php");
-
-    // Remember that this die statement is absolutely critical.  Without it,
-    // people can view your members-only content without logging in.
     die("Redirecting to login.php");
 }
 
@@ -52,8 +48,6 @@ if(!empty($_POST))
         }
         catch(PDOException $ex)
         {
-            // Note: On a production website, you should not output $ex->getMessage().
-            // It may provide an attacker with helpful information about your code.
             die("Failed to run query: " . $ex->getMessage());
         }
 
@@ -158,14 +152,10 @@ if(!empty($_POST))
 }
 
 // grab user info so we can put it in the fields
-$user_ = new User;
-
-$userInfo = $user_->getBasicUserInfo();
-
-$voornaam   = $userInfo['voornaam'];
-$achternaam = $userInfo['achternaam'];
-$telefoon   = $userInfo['telefoon'];
-$email      = $userInfo['email'];
+$voornaam   = $_SESSION['user']['voornaam'];
+$achternaam = $_SESSION['user']['achternaam'];
+$telefoon   = $_SESSION['user']['telefoon'];
+$email      = $_SESSION['user']['email'];
 
 ?>
 <!DOCTYPE HTML>

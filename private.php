@@ -1,8 +1,7 @@
 <?php
 
 // First we execute our common code to connection to the database and start the session
-require("common.php");
-require_once("User.php");
+require "common.php";
 
 // At the top of the page we check to see whether the user is logged in or not
 if(empty($_SESSION['user']))
@@ -171,10 +170,8 @@ if(!empty($_POST))
 }
 
 
-$user_ = new User;
-
 // level check
-$isAdmin = $user_->getUserLvl();
+$isAdmin = $_SESSION['user']['level'];
 
 ?>
 <!DOCTYPE HTML>

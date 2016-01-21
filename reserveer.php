@@ -1,5 +1,3 @@
-<!--TODO: veranderd tijdsduur iconen (niet duidelijk, vooral niet bij 1 uur lang)-->
-
 <?php
 if(!isset($_SESSION)) {
     session_start();
@@ -21,6 +19,7 @@ if (!isset($_POST['submit'])) {
         $_SESSION['cut'] = $_POST['cut'];
 
         header("location: booking.php");
+        die("redirecting");
     }
 }
 ?>

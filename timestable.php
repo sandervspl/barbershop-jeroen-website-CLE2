@@ -3,7 +3,6 @@ if(!isset($_SESSION)) {
     session_start();
 }
 
-require_once "User.php";
 require_once "nlDate.php";
 require_once "connect.php";
 require_once "Barbers.php";
@@ -190,12 +189,7 @@ for ($i = 0; $i <= $end_hour; $i++) {
 
 
     // admin check
-    $isAdmin = false;
-
-    if (isset($_GET['a']) && $_GET['a'] == 1) {
-        $user_ = new User;
-        $isAdmin = $user_->getUserLvl();
-    }
+    $isAdmin = $_SESSION['user']['level'];
 
     if ($hour < 12 && !$didMorningHeader) { ?>
         <div id="morning-header">

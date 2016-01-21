@@ -9,12 +9,9 @@ if(empty($_SESSION['user'])) {
     die("Redirecting to login.php");
 }
 
-require("common.php");
+require_once "common.php";
 require_once "connect.php";
 require_once "nlDate.php";
-require_once "User.php";
-
-$user_ = new User;
 
 ?>
 <!DOCTYPE HTML>
@@ -57,9 +54,6 @@ $user_ = new User;
                 if (isset($_GET['p']) && $_GET['p'] == 3 && isset($_GET['a'])) {
                     $db = mysqli_connect($host, $user, $pw, $database);
 
-                    // get user's info
-                    $userInfo = $user_->getBasicUserInfo();
-
                     // get ID from url
                     $id = $_GET['a'];
 
@@ -79,7 +73,7 @@ $user_ = new User;
                            ";
 
                     if ($stmt = $db->prepare($sql)) {
-                        $stmt->bind_param('sssi', $userInfo['voornaam'], $userInfo['achternaam'], $userInfo['email'], $id);
+                        $stmt->bind_param('sssi', $_SESSION['user']['voornaam'], $_SESSION['user']['achternaam'], $_SESSION['user']['email'], $id);
 
                         if ($stmt->execute()) {
                             $stmt->store_result();
@@ -135,9 +129,6 @@ $user_ = new User;
                     if ($_GET['p'] == 1) {
                         $db = mysqli_connect($host, $user, $pw, $database);
 
-                        // get user's info
-                        $userInfo = $user_->getBasicUserInfo();
-
                         // get ID from url
                         $id = $_GET['a'];
 
@@ -156,7 +147,7 @@ $user_ = new User;
                                ";
 
                         if ($stmt = $db->prepare($sql)) {
-                            $stmt->bind_param('sssi', $userInfo['voornaam'], $userInfo['achternaam'], $userInfo['email'], $id);
+                            $stmt->bind_param('sssi', $_SESSION['user']['voornaam'], $_SESSION['user']['achternaam'], $_SESSION['user']['email'], $id);
 
                             if ($stmt->execute()) {
                                 $stmt->store_result();
@@ -294,8 +285,9 @@ $user_ = new User;
                                 }
                             }
                         }
+
+                        $stmt->close();
                     }
-                    $stmt->close();
 
 
 
@@ -308,19 +300,21 @@ $user_ = new User;
                               username = ?
                            ";
 
-                    if ($stmt3 = $db->prepare($sql)) {
-                        $stmt3->bind_param('s', $_SESSION['user']['username']);
+                    if ($stmt = $db->prepare($sql)) {
+                        $stmt->bind_param('s', $_SESSION['user']['username']);
 
-                        if ($stmt3->execute()) {
-                            $stmt3->store_result();
-                            $stmt3->bind_result($em);
+                        if ($stmt->execute()) {
+                            $stmt->store_result();
+                            $stmt->bind_result($em);
 
-                            while ($stmt3->fetch()) {
+                            while ($stmt->fetch()) {
                                 $email = $em;
                             }
                         }
+
+                        $stmt->close();
                     }
-                    $stmt3->close();
+
                     ?>
 
                     <div class="user-appointments-list">
@@ -348,14 +342,14 @@ $user_ = new User;
                               A.datum ASC, A.tijd ASC
                            ";
 
-                    if ($stmt4 = $db->prepare($sql)) {
-                        $stmt4->bind_param('ss', $email, $curdate);
+                    if ($stmt = $db->prepare($sql)) {
+                        $stmt->bind_param('ss', $email, $curdate);
 
-                        if ($stmt4->execute()) {
-                            $stmt4->store_result();
-                            $stmt4->bind_result($id, $originalDate, $tijd, $knipbeurt, $kapper);
+                        if ($stmt->execute()) {
+                            $stmt->store_result();
+                            $stmt->bind_result($id, $originalDate, $tijd, $knipbeurt, $kapper);
 
-                            while ($stmt4->fetch()) {
+                            while ($stmt->fetch()) {
                                 $date = nlDate(date("l j F", strtotime($originalDate)));
 
                                 $aptime = explode(":", $tijd);
@@ -398,7 +392,7 @@ $user_ = new User;
                                 <?php
                             }
 
-                            if ($stmt4->num_rows <= 0) { ?>
+                            if ($stmt->num_rows <= 0) { ?>
                                 <p>U heeft op dit moment geen afspraken staan.</p><br /> <?php
                             }
                         } else {
@@ -406,8 +400,9 @@ $user_ = new User;
                             <p>U heeft op dit moment geen afspraken staan.</p><br />
                             <?php
                         }
+
+                        $stmt->close();
                     }
-                    $stmt4->close();
 
                     ?>
                     </div>
@@ -440,14 +435,14 @@ $user_ = new User;
                               3
                            ";
 
-                    if ($stmt5 = $db->prepare($sql)) {
-                        $stmt5->bind_param('ss', $email, $curdate);
+                    if ($stmt = $db->prepare($sql)) {
+                        $stmt->bind_param('ss', $email, $curdate);
 
-                        if ($stmt5->execute()) {
-                            $stmt5->store_result();
-                            $stmt5->bind_result($id, $originalDate, $tijd, $knipbeurt, $kapper);
+                        if ($stmt->execute()) {
+                            $stmt->store_result();
+                            $stmt->bind_result($id, $originalDate, $tijd, $knipbeurt, $kapper);
 
-                            while ($stmt5->fetch()) {
+                            while ($stmt->fetch()) {
                                 $date = nlDate(date("l j F", strtotime($originalDate)));
 
                                 $aptime = explode(":", $tijd);
@@ -484,7 +479,7 @@ $user_ = new User;
                                 <?php
                             }
 
-                            if ($stmt5->num_rows <= 0) { ?>
+                            if ($stmt->num_rows <= 0) { ?>
                                 <p>Er zijn geen oude afspraken gevonden.</p><br /> <?php
                             }
                         } else {
@@ -492,8 +487,9 @@ $user_ = new User;
                             <p>Er zijn geen oude afspraken gevonden.</p><br />
                             <?php
                         }
+
+                        $stmt->close();
                     }
-                    $stmt5->close();
                     ?>
                     </div>
                 </div>
@@ -501,6 +497,7 @@ $user_ = new User;
                 <?php
                 }
                 ?>
+
                 <br /><br />
             </div>
         </div>

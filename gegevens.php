@@ -5,7 +5,6 @@ if(!isset($_SESSION)) {
 
 // database connection information
 require_once "connect.php";
-require_once "User.php";
 
 if (!isset($_SESSION['cut']) || !isset($_SESSION['date']) || !isset($_SESSION['time'])) {
     header("Location: reserveer.php");
@@ -15,10 +14,12 @@ if (!isset($_SESSION['cut']) || !isset($_SESSION['date']) || !isset($_SESSION['t
 // check if user already has an appointment at this time
 // if they are not logged in then the calendar will not block dates
 // logging in at this page will allow them to make an appointment anyway
+// and we need to prevent that
 if (isset($_SESSION['user']) && isset($_SESSION['user']['email'])) {
     require_once "connect.php";
 
     $db = mysqli_connect($host, $user, $pw, $database) or die('Error: ' . mysqli_connect_error());
+
     $hasAppointmentOnDate = false;
 
     $sql = "SELECT
@@ -118,19 +119,11 @@ if (isset($_POST['submit'])) {
     </div>
 
     <?php
-    if (isset($_SESSION['user']['username'])) {
-        $user_ = new User;
-
-        $userInfo = $user_->getBasicUserInfo();
-
-        if ($userInfo == 0) {
-            $ok = false;
-        } else {
-            $firstname = $userInfo['voornaam'];
-            $lastname  = $userInfo['achternaam'];
-            $email     = $userInfo['email'];
-            $phone     = $userInfo['telefoon'];
-        }
+    if (isset($_SESSION['user'])) {
+        $firstname = $_SESSION['user']['voornaam'];
+        $lastname  = $_SESSION['user']['achternaam'];
+        $email     = $_SESSION['user']['email'];
+        $phone     = $_SESSION['user']['telefoon'];
 
         ?>
         <section id="gegevens-form">

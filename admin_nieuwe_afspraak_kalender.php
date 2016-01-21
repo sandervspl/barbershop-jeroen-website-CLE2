@@ -1,51 +1,53 @@
 <?php
-require("common.php");
+require_once "common.php";
 require_once "nlDate.php";
-require_once "User.php";
+
+
+// level check -- only admins can enter this page
+$canEnterPage = false;
 
 if(isset($_SESSION['user'])) {
-    $user_ = new User;
-
-    // level check
-    $isAdmin = $user_->getUserLvl();
-    if (!$isAdmin) {
-        header("Location: forbidden.php");
-        die("Redirecting to forbidden.php");
+    if ($_SESSION['user']['level'] == 1) {
+        $canEnterPage = true;
     }
+}
 
-    // in de URL kan je een maand en jaar zetten wat vervolgens in de kalender tevoorschijn komt
-    // bijv: calendar_clean.php?month=1&year=2016 laat januari 2016 zien
-    // als er niks in de URL staat dan pakken we de huidige maand & jaar
-    if (isset($_GET['month']) && isset($_GET['year'])) {
-        $month = $_GET['month'];
-        $year  = $_GET['year'];
-    } else {
-        $month = date("n");
-        $year  = date("Y");
-    }
-
-    // next month button variables
-    $prevyear  = $year;
-    $prevmonth = $month - 1;
-    $nextyear  = $year;
-    $nextmonth = $month + 1;
-
-    if ($prevmonth < 1) {
-        $prevmonth = 12;
-        $prevyear--;
-    }
-
-    if ($nextmonth > 12) {
-        $nextmonth = 1;
-        $nextyear++;
-    }
-
-    $starting_day = "$year-$month-1";
-    $time = strtotime($starting_day);
-} else {
+// redirect forbidden users
+if (!$canEnterPage) {
     header("Location: forbidden.php");
     die("Redirecting to forbidden.php");
 }
+
+// in de URL kan je een maand en jaar zetten wat vervolgens in de kalender tevoorschijn komt
+// bijv: calendar_clean.php?month=1&year=2016 laat januari 2016 zien
+// als er niks in de URL staat dan pakken we de huidige maand & jaar
+if (isset($_GET['month']) && isset($_GET['year'])) {
+    $month = $_GET['month'];
+    $year  = $_GET['year'];
+} else {
+    $month = date("n");
+    $year  = date("Y");
+}
+
+// next month button variables
+$prevyear  = $year;
+$prevmonth = $month - 1;
+$nextyear  = $year;
+$nextmonth = $month + 1;
+
+if ($prevmonth < 1) {
+    $prevmonth = 12;
+    $prevyear--;
+}
+
+if ($nextmonth > 12) {
+    $nextmonth = 1;
+    $nextyear++;
+}
+
+$starting_day = "$year-$month-1";
+$time = strtotime($starting_day);
+
 ?>
 <!DOCTYPE HTML>
 <html lang="en" xmlns="http://www.w3.org/1999/html">

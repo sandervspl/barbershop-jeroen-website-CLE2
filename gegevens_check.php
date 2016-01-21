@@ -5,7 +5,6 @@ if(!isset($_SESSION)) {
 
 // database connection information
 require_once "connect.php";
-require_once "User.php";
 
 $barber = '';
 $date = '';
@@ -19,24 +18,15 @@ $phone = '';
 $ok = true;
 
 // prioritize login session's data for name, e-mail and phone
-if (isset($_SESSION['user']['username'])) {
+if (isset($_SESSION['user'])) {
+    $firstname = $_SESSION['user']['voornaam'];
+    $lastname  = $_SESSION['user']['achternaam'];
+    $email     = $_SESSION['user']['email'];
+    $phone     = $_SESSION['user']['telefoon'];
 
-    $user_ = new User;
-
-    $userInfo = $user_->getBasicUserInfo();
-
-    if ($userInfo == 0) {
-        $ok = false;
-    } else {
-        $voornaam   = $userInfo['voornaam'];
-        $achternaam = $userInfo['achternaam'];
-        $email      = $userInfo['email'];
-        $phone      = $userInfo['telefoon'];
-    }
 } else {
     if (!isset($_POST['voornaam']) || $_POST['voornaam'] === '') {
         $ok = false;
-        echo "Error: VOORNAAM variable is not set. ";
     } else {
         $voornaam = $_POST['voornaam'];
     }
@@ -102,6 +92,9 @@ if (!isset($_SESSION['cut']) || $_SESSION['cut'] === '') {
 
 $db =  mysqli_connect($host, $user, $pw, $database) or die('Error: '.mysqli_connect_error());
 
+
+// check if this appointment exists
+// if so then we bail
 $sql = "SELECT
           1
         FROM
@@ -131,8 +124,9 @@ if ($stmt = $db->prepare($sql)) {
 mysqli_close($db);
 
 
+
+// add to db if there is nothing wrong
 if ($ok) {
-    // add to db
     $db = mysqli_connect($host, $user, $pw, $database) or die('Error: '.mysqli_connect_error());
 
     $sql = "INSERT INTO

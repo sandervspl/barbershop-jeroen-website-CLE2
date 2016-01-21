@@ -1,18 +1,20 @@
 <?php
-require("common.php");
-require_once("nlDate.php");
-require_once("User.php");
+require_once "common.php";
+require_once "nlDate.php";
+
+
+$canEnterPage = false;
 
 if(isset($_SESSION['user'])) {
-    $user_ = new User;
 
-    // level check
-    $isAdmin = $user_->getUserLvl();
-    if (!$isAdmin) {
-        header("Location: forbidden.php");
-        die("Redirecting to forbidden.php");
+    // level check -- only admins can enter this page
+    if ($_SESSION['user']['level'] == 1) {
+        $canEnterPage = true;
     }
-} else {
+}
+
+// redirect forbidden users
+if (!$canEnterPage) {
     header("Location: forbidden.php");
     die("Redirecting to forbidden.php");
 }

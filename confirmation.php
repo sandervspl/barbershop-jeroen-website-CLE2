@@ -3,6 +3,8 @@ if(!isset($_SESSION)) {
     session_start();
 }
 
+// check if everything is set correctly, if not then we bail
+$ok = true;
 require_once "session_variables_check.php";
 
 if (!$ok) {

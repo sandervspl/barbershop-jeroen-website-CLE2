@@ -1,7 +1,15 @@
 <?php
 require_once "common.php";
-require_once "User.php";
 require_once "nlDate.php";
+
+// level check -- only admins can enter this page
+$canEnterPage = false;
+
+if(isset($_SESSION['user'])) {
+    if ($_SESSION['user']['level'] == 1) {
+        $canEnterPage = true;
+    }
+}
 
 ?>
 <!DOCTYPE HTML>
@@ -34,16 +42,11 @@ require_once "nlDate.php";
             <div id="account-wrapper-wide" class="mijn-afspraken">
 
 <?php
-$user_ = new User;
-$isAdmin = $user_->getUserLvl();
-
-// redirect if not admin or no id is set
-if (!$isAdmin || !isset($_GET['id'])) {
+// redirect if no id is set
+if (!isset($_GET['id'])) {
     header("Location: index.php?e=5");
     die("Redirecting");
 }
-
-
 
 
 

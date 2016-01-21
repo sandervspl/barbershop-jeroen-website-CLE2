@@ -6,7 +6,6 @@
  * Time: 2:23 PM
  */
 
-$ok = true;
 if (!isset($_SESSION['barber']) || $_SESSION['barber'] === '') {
     $ok = false;
 }
