@@ -162,6 +162,8 @@ if (!isset($_GET['p'])) {
                         $weekday = date("D", $time);
                     }
 
+
+
                     // go through array in reverse to fill table
                     for ($i = (count($prevmontharray)-1); $i >= 0; $i--) { ?>
                         <td class="calendardateblocked">
@@ -173,11 +175,15 @@ if (!isset($_GET['p'])) {
                     }
 
 
+
                     // reset time to first day of chosen month
                     $time    = strtotime($starting_day);
                     $day     = date("d", $time);
                     $weekday = date("D", $time);
                     $daysinmonth = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+
+
+
 
                     // **************************************
                     // loop through our current month
@@ -219,6 +225,9 @@ if (!isset($_GET['p'])) {
                         $day     = date("d", $time);
                         $weekday = date("D", $time);
                     }
+
+
+
 
                     // fill the calender with next month data if this month does not end on a sunday
                     while ($weekday !== "Mon") {

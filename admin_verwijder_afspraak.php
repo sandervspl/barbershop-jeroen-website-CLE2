@@ -47,12 +47,12 @@ if (!$isAdmin || !isset($_GET['id'])) {
 
 
 
-/*
- *
- * AFSPRAAK VERWIJDEREN
- *    CONFIRMATION
- *
- */
+        /*
+         *
+         * AFSPRAAK VERWIJDEREN
+         *    CONFIRMATION
+         *
+         */
 
 if (isset($_GET['p']) && $_GET['p'] == 1) {
     $db = mysqli_connect($host, $user, $pw, $database);
@@ -134,11 +134,11 @@ if (isset($_GET['p']) && $_GET['p'] == 1) {
 
 
 
-/*
- *
- * AFSPRAAK VERWIJDEREN
- *
- */
+        /*
+         *
+         * AFSPRAAK VERWIJDEREN
+         *
+         */
 
 if (isset($_GET['p']) && $_GET['p'] == 2) {
     $db = mysqli_connect($host, $user, $pw, $database);

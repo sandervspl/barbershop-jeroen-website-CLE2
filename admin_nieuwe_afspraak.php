@@ -175,16 +175,20 @@ if (isset($_GET['p']) && $_GET['p'] == 3) {
         <div class="white-background">
             <div id="account-text">
                 <p class="header-text">
-                    <?php if (isset($_GET['d'])) {
+                    <?php
+                    // print date on page
+                    if (isset($_GET['d'])) {
                         $date = strtotime($_GET['d']);
 
-                        echo nldate(date("l j F Y", $date));
+                        echo nldate(date("l j F Y", $date));    // E.G. Thursday 19 January 2016
                     } ?>
                 </p>
 
                 <p class="header-text no-margin admin-add-appointment-time">
-                    <?php if (isset($_GET['t']) && isset($_GET['tt'])) {
-                        echo $_GET['t'] . " - " . $_GET['tt'];
+                    <?php
+                    // print times on page
+                    if (isset($_GET['t']) && isset($_GET['tt'])) {
+                        echo $_GET['t'] . " - " . $_GET['tt'];  // E.G. 14:30 - 15:00
                     } ?>
                 </p>
             </div>
@@ -193,7 +197,9 @@ if (isset($_GET['p']) && $_GET['p'] == 3) {
         <div class="white-background margin-t-10">
             <div id="account-text">
                 <p class="header-text">
-                    <?php if (isset($_GET['k'])) {
+                    <?php
+                    // print barber name on page
+                    if (isset($_GET['k'])) {
                         echo $_GET['k'];
                     } ?>
                 </p>
