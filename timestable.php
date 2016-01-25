@@ -189,7 +189,11 @@ for ($i = 0; $i <= $end_hour; $i++) {
 
 
     // admin check
-    $isAdmin = $_SESSION['user']['level'];
+    $isAdmin = false;
+
+    if (isset($_SESSION['user'])) {
+        $isAdmin = $_SESSION['user']['level'];
+    }
 
     if ($hour < 12 && !$didMorningHeader) { ?>
         <div id="morning-header">
